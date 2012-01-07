@@ -1,0 +1,2 @@
+# Disable all files with .local ending
+*.local
