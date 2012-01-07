@@ -1,2 +1,11 @@
 # Disable all files with .local ending
 *.local
+
+# Disable all java files
+*.class
+sources/bin
+
+
+# Disable all eclipse like files
+*.settings/
+*.metadata/
