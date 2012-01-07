@@ -3,7 +3,7 @@
 
 # Disable all java files
 *.class
-sources/bin
+sources/FunctionGenerator/bin
 
 
 # Disable all eclipse like files
