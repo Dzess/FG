@@ -135,6 +135,10 @@ public class PointsTableModel extends AbstractTableModel {
 		rows.remove(row);
 		fireTableRowsDeleted(row, row);
 	}
+	
+	public void addRow(HashMap<Integer, Number> row){
+		rows.add(row);
+	}
 
 	public String getColumnName(int col) {
 		if (col < captions.size())

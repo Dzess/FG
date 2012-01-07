@@ -1,0 +1,1 @@
+To see the functions generated for those values look at the top directory resoures/samples

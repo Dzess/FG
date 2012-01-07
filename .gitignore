@@ -9,3 +9,4 @@ sources/FunctionGenerator/bin
 # Disable all eclipse like files
 *.settings/
 *.metadata/
+runtime-EclipseApplication/
