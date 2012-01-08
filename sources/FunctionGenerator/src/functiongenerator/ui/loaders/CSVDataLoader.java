@@ -1,4 +1,4 @@
-package functiongenerator.loaders;
+package functiongenerator.ui.loaders;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,9 +18,9 @@ import functiongenerator.ui.PointsTableModel;
  * @author Piotr Jessa
  * 
  */
-public class CSVLoader implements ILoader {
+public class CSVDataLoader implements IDataLoader {
 
-	public CSVLoader(){
+	public CSVDataLoader(){
 		
 	}
 	

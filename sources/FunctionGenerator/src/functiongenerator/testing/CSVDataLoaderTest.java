@@ -8,17 +8,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import functiongenerator.loaders.CSVLoader;
 import functiongenerator.ui.PointsTableModel;
+import functiongenerator.ui.loaders.CSVDataLoader;
 
 /**
  * Integration level. Works against file system.
  * @author Piotr Jessa
  *
  */
-public class CSVLoaderTest {
+public class CSVDataLoaderTest {
 
-	private CSVLoader loader;
+	private CSVDataLoader loader;
 	private File file;
 	private PointsTableModel result;
 
@@ -32,7 +32,7 @@ public class CSVLoaderTest {
 	
 	@Before
 	public void set_up() {
-		loader = new CSVLoader();
+		loader = new CSVDataLoader();
 	}
 
 	@Test(expected = FileNotFoundException.class)

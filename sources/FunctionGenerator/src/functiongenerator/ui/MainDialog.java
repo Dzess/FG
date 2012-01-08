@@ -38,8 +38,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
-import functiongenerator.loaders.CSVLoader;
-import functiongenerator.loaders.ILoader;
+import functiongenerator.ui.loaders.CSVDataLoader;
+import functiongenerator.ui.loaders.IDataLoader;
 
 public class MainDialog extends JDialog implements ActionListener {
 
@@ -74,7 +74,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	private ButtonGroup groupProblemType = null; // @jve:decl-index=0:visual-constraint=""
 	private JButton buttonLoad = null;
 	private JButton buttonSave = null;
-	private ILoader loader = new CSVLoader();
+	private IDataLoader loader = new CSVDataLoader();
 
 	/**
 	 * If true, the dialog was successively closed by OK button.

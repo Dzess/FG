@@ -36,6 +36,8 @@ public class Engine {
 
 	private List<Number[]> points = new ArrayList<Number[]>();
 	private List<Class<?>> operations = new ArrayList<Class<?>>();
+	
+	// FIXME: those data should be quite the visible ones ?
 	private int popSize = 200;
 	private int generations = 50;
 	private int maxTreeDepth = 7;
