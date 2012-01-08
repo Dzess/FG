@@ -11,3 +11,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
  tools.jar
 Bundle-Vendor: Tomasz Pawlak
+Import-Package: org.apache.commons.logging

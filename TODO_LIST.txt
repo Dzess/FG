@@ -9,11 +9,14 @@ plugin do eclipse'a) , na razie wszystko jest zrobione doœæ sztampowo przy u¿yci
 4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...)
 5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. 
 6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka (mo¿na to napisaæ) DONE.
-7. Poprawiæ pojawianie siê kropki dziesiêtnej podczas edycji backspace'em -> epicki bug w samym SWINGu.
+7. Poprawiæ pojawianie siê kropki dziesiêtnej podczas edycji backspace'em -> epicki bug w samym SWINGu. WORKAROUNDed poprzez wy³¹czenie przycisku backspace.
 8. Hits X -> Hits X/Y (o co tutaj chodzi?)
 9. Znikanie g³ównego okienka -> to nie jest doœæ istotny problem (ca³oœæ zosta³a napisana na dialogu, wiêc mo¿na zrobic 
 szybki workaround, albo napisaæ poprawnie)
-10. Stopieñ integracji z Eclipsem jest doœæ s³aby (vide ¿aden), moim zdaniem to jest najwiêszky mankament tego softu. Przedyskutowaæ to z dr.
+10. Stopieñ integracji z Eclipsem jest doœæ s³aby (vide ¿aden), moim zdaniem to jest najwiêszky mankament tego softu. Przedyskutowaæ to z DR.
+	- update site, by sie przyda³
+	- hosting kodu a nie paczka z 7z
+	- mo¿e jakis bardziej  programmer like interface (odrywanie ³apek od klawiatury strasznie boli)
 11. Dodanie terminala typu "liczba int" albo "liczba int z zakresu" - ingerencja w wewnêtrzn¹ czêœæ systemu, hmmm tough.
 
 	
