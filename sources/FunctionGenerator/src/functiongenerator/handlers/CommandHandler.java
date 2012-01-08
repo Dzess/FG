@@ -3,7 +3,6 @@ package functiongenerator.handlers;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

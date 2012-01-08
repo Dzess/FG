@@ -9,6 +9,8 @@ import functiongenerator.gp.data.DoubleData;
 
 public class RealRegressionProblem extends AbstractRegressionProblem {
 
+	private static final long serialVersionUID = 1L;
+
 	public RealRegressionProblem() {
 		super();
 		output = new DoubleData();
@@ -49,6 +51,9 @@ public class RealRegressionProblem extends AbstractRegressionProblem {
 			f.setStandardizedFitness(state, fitness);
 			f.hits = hits;
 			ind.evaluated = true;
+			
+			// actually following the specification of GPProblem description
+			stack.reset();
 		}
 	}
 

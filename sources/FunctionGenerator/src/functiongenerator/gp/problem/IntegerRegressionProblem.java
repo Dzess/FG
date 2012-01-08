@@ -9,6 +9,8 @@ import functiongenerator.gp.data.IntegerData;
 
 public class IntegerRegressionProblem extends AbstractRegressionProblem {
 
+	private static final long serialVersionUID = 1L;
+
 	public IntegerRegressionProblem() {
 		super();
 		output = new IntegerData();
@@ -56,6 +58,9 @@ public class IntegerRegressionProblem extends AbstractRegressionProblem {
 			f.setStandardizedFitness(state, fitness);
 			f.hits = hits;
 			ind.evaluated = true;
+			
+			// actually following the specification of GPProblem description
+			stack.reset();
 		}
 	}
 }

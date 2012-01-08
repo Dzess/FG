@@ -1,18 +1,14 @@
 package functiongenerator.gp.problem;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import ec.EvolutionState;
-import ec.Individual;
 import ec.gp.GPData;
-import ec.gp.GPIndividual;
 import ec.gp.GPProblem;
-import ec.gp.koza.KozaFitness;
 import ec.simple.SimpleProblemForm;
-import functiongenerator.gp.data.DoubleData;
 
 public abstract class AbstractRegressionProblem extends GPProblem implements SimpleProblemForm {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Current X0.

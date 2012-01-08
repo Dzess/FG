@@ -4,7 +4,8 @@ Uwagi i proste TODOs zauwa¿one przez mnie.
 0. Napisaæ i przetestowaæ czytanie z pliku csv, refactor kodu MainDialog bo ta klasa jest zbyt spasiona. Wygenerowaæ dane przyk³adowe. DONE
 1. Napisaæ logging facility do projektu (¿eby logowa³ na abstrakcyjny interfejs, który potem z³apiemy na 
 plugin do eclipse'a) , na razie wszystko jest zrobione doœæ sztampowo przy u¿yciu sysout. To nie jest wcala takie proste jak do³¹czenie SLF4J...
-2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd. To akurat fajny feature.
+DONE by apache commons logging bundle Import Required !
+2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd. To akurat fajny feature, ale raczej jako propozycja.
 3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine.
 4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...)
 5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. 
@@ -17,6 +18,7 @@ szybki workaround, albo napisaæ poprawnie) DONE by workaround with loop.
 	- update site, by sie przyda³
 	- hosting kodu a nie paczka z 7z
 	- mo¿e jakis bardziej  programmer like interface (odrywanie ³apek od klawiatury strasznie boli)
+	- brakuje informacji o wersji ECJ !!!
 11. Dodanie terminala typu "liczba int" albo "liczba int z zakresu" - ingerencja w wewnêtrzn¹ czêœæ systemu, hmmm tough.
 
 	
