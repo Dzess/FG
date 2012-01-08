@@ -38,7 +38,7 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
+		
 		System.out.println("TRACE: " + logger.isTraceEnabled());
 		System.out.println("DEBUG: " + logger.isDebugEnabled());
 		System.out.println("INFO:  " + logger.isInfoEnabled());

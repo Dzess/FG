@@ -61,10 +61,13 @@ public class CommandHandler extends AbstractHandler {
 				progressDlg = null;
 				resultsDlg = null;
 				try {
+					
+					logger.info("Starting wizard");
 					mainDlg = new MainDialog(null);
 
 					while (true) {
-						logger.debug("Setting main dialog visible");
+						logger.info("Restarting wizard");
+						mainDlg.resetState();
 						mainDlg.setVisible(true);
 
 						if (mainDlg.getResult()) {
@@ -90,16 +93,16 @@ public class CommandHandler extends AbstractHandler {
 							if (code != null) { // not cancelled
 								resultsDlg = new ResultsDialog(null);
 								resultsDlg.setTemplate(code);
+								
+								// wait with return of main dialog
+								// till the result dialog is disposed
+								logger.debug("Waiting till the result window is disposed");
 								resultsDlg.setVisible(true);
 							}
 
-							// wait with return of main dialog
-							// till the result dialog is disposed
-							logger.debug("Waiting till the result window is disposed");
-
 						} else {
 							// break from the overall loop
-							logger.debug("Breaking from the loop");
+							logger.info("Finishing the wizard");
 							break;
 						}
 					}

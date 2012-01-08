@@ -312,24 +312,25 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (tablePoints == null) {
 			tablePoints = new JTable();
 			tablePoints.setCellSelectionEnabled(true);
-			tablePoints.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			tablePoints
+					.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			tablePoints.setModel(new PointsTableModel(Double.class));
 			tablePoints.putClientProperty("terminateEditOnFocusLost", true);
-			
+
 			tablePoints.addKeyListener(new KeyListener() {
-				
+
 				@Override
 				public void keyTyped(KeyEvent k) {
 				}
-				
+
 				@Override
 				public void keyReleased(KeyEvent k) {
 				}
-				
+
 				@Override
 				public void keyPressed(KeyEvent k) {
-					
-					if(k.getKeyCode() == 8){
+
+					if (k.getKeyCode() == 8) {
 						// FIXME: this is workaround about the problem
 						// backspace has known bug for swing,
 						// this is bugfix for now
@@ -795,5 +796,12 @@ public class MainDialog extends JDialog implements ActionListener {
 			buttonSave.addActionListener(this);
 		}
 		return buttonSave;
+	}
+
+	/**
+	 * Resets the internal state of the object to make it usable more than once.
+	 */
+	public void resetState() {
+		result = false;
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
