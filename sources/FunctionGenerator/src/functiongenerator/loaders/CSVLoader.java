@@ -3,8 +3,10 @@ package functiongenerator.loaders;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import functiongenerator.ui.PointsTableModel;
 
@@ -23,8 +25,7 @@ public class CSVLoader implements ILoader {
 	}
 	
 	@Override
-	public PointsTableModel loadFromFile(File file, Class<?> fieldType)
-			throws IOException {
+	public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException {
 
 		PointsTableModel model = new PointsTableModel(fieldType);
 
@@ -65,6 +66,26 @@ public class CSVLoader implements ILoader {
 			model.addX();
 
 		return model;
+	}
+
+	@Override
+	public void saveToFile(File file, PointsTableModel model) throws IOException {
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(file);
+
+			List<Number[]> rows = model.getRows();
+			for (Number[] row : rows) {
+				for (Number n : row) {
+					writer.write(n + ",");
+				}
+				writer.append('\n');
+			}
+
+		} finally {
+			if (writer != null)
+				writer.close();
+		}
 	}
 
 }

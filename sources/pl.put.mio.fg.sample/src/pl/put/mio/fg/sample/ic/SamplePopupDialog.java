@@ -12,6 +12,14 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 
 /**
  * Sample class for implementing the advanced popup dialog.
@@ -25,16 +33,14 @@ public class SamplePopupDialog extends PopupDialog {
 
 	private IWorkbenchWindow window;
 	protected Table table ;
+	private Text textFiled;
 	
-	public SamplePopupDialog(Shell parent, int shellStyle,
-			boolean takeFocusOnOpen, boolean persistBounds,
-			boolean showDialogMenu, boolean showPersistActions,
-			String titleText, String infoText) {
+	public SamplePopupDialog(Shell parent) {
 		super(parent, SWT.RESIZE, true, true, // persist size
 				false, // but not location
 				true, true, 
-				"Title Text",
-				"Info text");
+				"Function Generator",
+				"Enter command to get function running");
 		
 		this.table = new Table(parent, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 
@@ -43,6 +49,23 @@ public class SamplePopupDialog extends PopupDialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
+		composite.setLayout(new GridLayout(1, false));
+		
+		textFiled = new Text(composite, SWT.BORDER);
+		textFiled.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO: put the enter code getting here and retriving the
+			}
+		});
+		textFiled.setForeground(SWTResourceManager.getColor(211, 211, 211));
+		textFiled.setText("Please enter here ");
+		textFiled.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+		
+		List list = new List(composite, SWT.NONE);
+		list.setItems(new String[] {"Sample item 1"});
+		list.setBackground(SWTResourceManager.getColor(211, 211, 211));
+		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		
 		// TODO: put internal layout of the controls here
 		

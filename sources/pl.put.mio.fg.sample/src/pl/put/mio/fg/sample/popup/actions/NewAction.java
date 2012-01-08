@@ -12,7 +12,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import pl.put.mio.fg.sample.ic.SamplePopupDialog;
 
 /**
- * Action that goes with the 
+ * Action that goes with the samples.
  * @author Piotr Jessa
  *
  */
@@ -20,9 +20,6 @@ public class NewAction implements IObjectActionDelegate {
 	
 	private Shell shell;
 	private SamplePopupDialog control;
-	private IWorkbenchWindow window;
-	
-	
 	
 	/**
 	 * Constructor for Action1.
@@ -43,7 +40,7 @@ public class NewAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 
-	 control = new SamplePopupDialog(shell, 1, true, false, true, false, "Sample View", "Info Test alalalalalala");
+	 control = new SamplePopupDialog(shell);
 	 control.open();
 	}
 
