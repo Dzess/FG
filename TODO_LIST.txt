@@ -1,4 +1,4 @@
-0. Napisaæ i przetestowaæ czytanie z pliku csv. Wygenerowaæ dane przyk³adowe.
+0. Napisaæ i przetestowaæ czytanie z pliku csv. Wygenerowaæ dane przyk³adowe. DONE
 1. Napisaæ logging facility do projektu (¿eby logowa³ na abstrakcyjny interfejs, który potem z³apiemy na 
 plugin do eclipse'a)
 2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd.
