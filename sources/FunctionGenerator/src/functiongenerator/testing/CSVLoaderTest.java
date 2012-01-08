@@ -17,6 +17,10 @@ public class CSVLoaderTest {
 	private File file;
 	private PointsTableModel result;
 
+	static private String getLocation(String fileName){
+		return "resources\\" + fileName;
+	}
+	
 	@Before
 	public void set_up() {
 		loader = new CSVLoader();
@@ -24,13 +28,14 @@ public class CSVLoaderTest {
 
 	@Test(expected = FileNotFoundException.class)
 	public void test_loading_non_exitsting_file() throws IOException {
-		file = new File("some_none_existing_file");
+		file = new File(getLocation("some_none_existing_file"));
 		loader.loadFromFile(file, Integer.class);
 	}
 
 	@Test
 	public void test_loading_empty_file_should_pass() throws IOException {
-		file = new File("empty.csv");
+		file = new File(getLocation("empty.csv"));
+		System.out.println(file.getAbsolutePath());
 		result = loader.loadFromFile(file, Integer.class);
 		
 		Assert.assertEquals(0, result.getRowCount());
@@ -38,17 +43,17 @@ public class CSVLoaderTest {
 
 	@Test
 	public void test_loading_sample_0_file_integers() throws IOException {
-		file = new File("sample_0.csv");
+		file = new File(getLocation("sample_0.csv"));
 		result = loader.loadFromFile(file, Integer.class);
 		
-		Assert.assertEquals(4, result.getRowCount());
+		Assert.assertEquals(6, result.getRowCount());
 	}
 
 	@Test
 	public void test_loading_sample_0_file_doubles() throws IOException {
-		file = new File("sample_0.csv");
+		file = new File(getLocation("sample_0.csv"));
 		result = loader.loadFromFile(file, Double.class);
 		
-		Assert.assertEquals(4, result.getRowCount());
+		Assert.assertEquals(6, result.getRowCount());
 	}
 }

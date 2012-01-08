@@ -1,0 +1,8 @@
+0. Napisaæ i przetestowaæ czytanie z pliku csv. Wygenerowaæ dane przyk³adowe.
+1. Napisaæ logging facility do projektu (¿eby logowa³ na abstrakcyjny interfejs, który potem z³apiemy na 
+plugin do eclipse'a)
+2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd.
+3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine.
+4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest.
+5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor
+6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka
