@@ -81,7 +81,7 @@ public class CSVLoaderTest {
 	
 	@Test
 	public void test_loading_sample_2_file_two_Xes() throws IOException{
-		file = getFile("sample_2.cvs");
+		file = getFile("sample_2.csv");
 		result = loader.loadFromFile(file, Integer.class);
 		
 		Assert.assertEquals(6, result.getRowCount());

@@ -1,8 +1,19 @@
-0. Napisaæ i przetestowaæ czytanie z pliku csv. Wygenerowaæ dane przyk³adowe. DONE
+Uwagi i proste TODOs zauwa¿one przez mnie.
+
+!. Co to jest Class<?> - zamordowaæ !
+0. Napisaæ i przetestowaæ czytanie z pliku csv, refactor kodu MainDialog bo ta klasa jest zbyt spasiona. Wygenerowaæ dane przyk³adowe. DONE
 1. Napisaæ logging facility do projektu (¿eby logowa³ na abstrakcyjny interfejs, który potem z³apiemy na 
-plugin do eclipse'a)
-2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd.
+plugin do eclipse'a) , na razie wszystko jest zrobione doœæ sztampowo przy u¿yciu sysout. To nie jest wcala takie proste jak do³¹czenie SLF4J...
+2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd. To akurat fajny feature.
 3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine.
-4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest.
-5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor
-6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka
+4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...)
+5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. 
+6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka (mo¿na to napisaæ) DONE.
+7. Poprawiæ pojawianie siê kropki dziesiêtnej podczas edycji backspace'em -> epicki bug w samym SWINGu.
+8. Hits X -> Hits X/Y (o co tutaj chodzi?)
+9. Znikanie g³ównego okienka -> to nie jest doœæ istotny problem (ca³oœæ zosta³a napisana na dialogu, wiêc mo¿na zrobic 
+szybki workaround, albo napisaæ poprawnie)
+10. Stopieñ integracji z Eclipsem jest doœæ s³aby (vide ¿aden), moim zdaniem to jest najwiêszky mankament tego softu. Przedyskutowaæ to z dr.
+11. Dodanie terminala typu "liczba int" albo "liczba int z zakresu" - ingerencja w wewnêtrzn¹ czêœæ systemu, hmmm tough.
+
+	

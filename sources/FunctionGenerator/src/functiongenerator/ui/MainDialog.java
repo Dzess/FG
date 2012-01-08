@@ -9,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -32,6 +34,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
@@ -309,10 +312,32 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (tablePoints == null) {
 			tablePoints = new JTable();
 			tablePoints.setCellSelectionEnabled(true);
-			tablePoints
-					.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			tablePoints.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			tablePoints.setModel(new PointsTableModel(Double.class));
 			tablePoints.putClientProperty("terminateEditOnFocusLost", true);
+			
+			tablePoints.addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyTyped(KeyEvent k) {
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent k) {
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent k) {
+					
+					if(k.getKeyCode() == 8){
+						// FIXME: this is workaround about the problem
+						// backspace has known bug for swing,
+						// this is bugfix for now
+						System.out.println("Consuming the : " + k.getKeyCode());
+						k.consume();
+					}
+				}
+			});
 		}
 		return tablePoints;
 	}
