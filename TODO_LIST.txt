@@ -1,24 +1,30 @@
 Uwagi i proste TODOs zauwa¿one przez mnie.
 
-!. Co to jest Class<?> - zamordowaæ !
+
 0. Napisaæ i przetestowaæ czytanie z pliku csv, refactor kodu MainDialog bo ta klasa jest zbyt spasiona. Wygenerowaæ dane przyk³adowe. DONE
 1. Napisaæ logging facility do projektu (¿eby logowa³ na abstrakcyjny interfejs, który potem z³apiemy na 
 plugin do eclipse'a) , na razie wszystko jest zrobione doœæ sztampowo przy u¿yciu sysout. To nie jest wcala takie proste jak do³¹czenie SLF4J...
 DONE by apache commons logging bundle Import Required !
 2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd. To akurat fajny feature, ale raczej jako propozycja.
-3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine.
-4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...)
+3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine. DONE
+4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...) - propozycja -> INI
 5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. 
-6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka (mo¿na to napisaæ) DONE.
+6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka (mo¿na to napisaæ) DONE. czyli NIE
 7. Poprawiæ pojawianie siê kropki dziesiêtnej podczas edycji backspace'em -> epicki bug w samym SWINGu. WORKAROUNDed poprzez wy³¹czenie przycisku backspace.
-8. Hits X -> Hits X/Y (o co tutaj chodzi?)
+8. Hits X -> Hits X/Y (o co tutaj chodzi?), chodzi o w³aœciwoœæ Koza Fitness, ile GPIndividuals osi¹gnê³o idea solution ? 
+	- czyli punktów trafiliœmy i zapisaæ w kodzie
+	- MEAN SQUARE ERROR
 9. Znikanie g³ównego okienka -> to nie jest doœæ istotny problem (ca³oœæ zosta³a napisana na dialogu, wiêc mo¿na zrobic 
 szybki workaround, albo napisaæ poprawnie) DONE by workaround with loop.
 10. Stopieñ integracji z Eclipsem jest doœæ s³aby (vide ¿aden), moim zdaniem to jest najwiêszky mankament tego softu. Przedyskutowaæ to z DR.
-	- update site, by sie przyda³
-	- hosting kodu a nie paczka z 7z
-	- mo¿e jakis bardziej  programmer like interface (odrywanie ³apek od klawiatury strasznie boli)
-	- brakuje informacji o wersji ECJ !!!
-11. Dodanie terminala typu "liczba int" albo "liczba int z zakresu" - ingerencja w wewnêtrzn¹ czêœæ systemu, hmmm tough.
+	- update site, by sie przyda³ -> TAK
+	- hosting kodu a nie paczka z 7z -> NIE
+	- mo¿e jakis bardziej  programmer like interface (odrywanie ³apek od klawiatury strasznie boli) -> NIE
+	- brakuje informacji o wersji ECJ !!! -> wystawiæ w dokumentacji 
+11. Dodanie terminala typu "liczba int" albo "liczba int z zakresu" - ingerencja w wewnêtrzn¹ czêœæ systemu, hmmm tough:
+	- ¿e do zbioru GPNodes wpada do wyboru znaczna liczba nowych typów, ustawiaj¹cych -> dodaæ dodatkowe operations na podstawie
+	dostêpnych elementów.
+
+	
 
 	

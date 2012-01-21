@@ -317,28 +317,8 @@ public class MainDialog extends JDialog implements ActionListener {
 			tablePoints.setModel(new PointsTableModel(Double.class));
 			tablePoints.putClientProperty("terminateEditOnFocusLost", true);
 
-			tablePoints.addKeyListener(new KeyListener() {
-
-				@Override
-				public void keyTyped(KeyEvent k) {
-				}
-
-				@Override
-				public void keyReleased(KeyEvent k) {
-				}
-
-				@Override
-				public void keyPressed(KeyEvent k) {
-
-					if (k.getKeyCode() == 8) {
-						// FIXME: this is workaround about the problem
-						// backspace has known bug for swing,
-						// this is bugfix for now
-						System.out.println("Consuming the : " + k.getKeyCode());
-						k.consume();
-					}
-				}
-			});
+			// this key listener is very ugly work around for swing problems
+			tablePoints.addKeyListener(new JTableBackspaceFixListener());
 		}
 		return tablePoints;
 	}

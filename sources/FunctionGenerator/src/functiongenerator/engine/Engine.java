@@ -32,12 +32,27 @@ import functiongenerator.gp.problem.AbstractRegressionProblem;
 import functiongenerator.gp.problem.IntegerRegressionProblem;
 import functiongenerator.gp.problem.RealRegressionProblem;
 
+/**
+ * Responsible for running the GP algorithm. 
+ * 
+ * <br/>
+ * 
+ * TODO: describe more about the internal doings of this code
+ * 
+ * <h4>
+ * Default values:
+ * </h4>
+ * <ul> 
+ * 	<li> population size - 200 </li>
+ *  <li> max tree depth - 7 </li>
+ *  <li> generations - 50 </li>  
+ * </ul>
+ */
 public class Engine {
 
 	private List<Number[]> points = new ArrayList<Number[]>();
 	private List<Class<?>> operations = new ArrayList<Class<?>>();
 	
-	// FIXME: those data should be quite the visible ones ?
 	private int popSize = 200;
 	private int generations = 50;
 	private int maxTreeDepth = 7;
