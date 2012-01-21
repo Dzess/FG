@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -65,6 +66,19 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 		this.setTitle("Progress...");
 		this.setContentPane(getJContentPane());
 		this.setModal(false);
+		this.setWindowAtScreenCenter();
+	}
+	
+	private void setWindowAtScreenCenter() {
+
+		int widthWindow = this.getWidth();
+		int heightWindow = this.getHeight();
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int X = (screen.width / 2) - (widthWindow / 2); // Center horizontally.
+		int Y = (screen.height / 2) - (heightWindow / 2); // Center vertically.
+
+		this.setBounds(X, Y, widthWindow, heightWindow);
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -107,6 +108,20 @@ public class MainDialog extends JDialog implements ActionListener {
 		this.setTitle("Function Generator");
 		this.setContentPane(getJContentPane());
 		this.getGroupProblemType();
+
+		this.setWindowAtScreenCenter();
+	}
+
+	private void setWindowAtScreenCenter() {
+
+		int widthWindow = this.getWidth();
+		int heightWindow = this.getHeight();
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int X = (screen.width / 2) - (widthWindow / 2); // Center horizontally.
+		int Y = (screen.height / 2) - (heightWindow / 2); // Center vertically.
+
+		this.setBounds(X, Y, widthWindow, heightWindow);
 	}
 
 	/**

@@ -89,8 +89,21 @@ public class ResultsDialog extends JDialog implements ActionListener {
 		this.setTitle("Results");
 		this.setContentPane(getJContentPane());
 		this.setModal(true);
+		this.setWindowAtScreenCenter();
 	}
 
+	private void setWindowAtScreenCenter() {
+
+		int widthWindow = this.getWidth();
+		int heightWindow = this.getHeight();
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int X = (screen.width / 2) - (widthWindow / 2); // Center horizontally.
+		int Y = (screen.height / 2) - (heightWindow / 2); // Center vertically.
+
+		this.setBounds(X, Y, widthWindow, heightWindow);
+	}
+	
 	/**
 	 * This method initializes jContentPane
 	 * 

@@ -1,12 +1,12 @@
 Notatki z rozmowy.
 
-1. Problem z BACKSPACEM -> critical, ale podr¹¿yæ
+1. Problem z BACKSPACEM -> critical, ale podr¹¿yæ -> naprawione, ale nie da siê teraz usuwaæ elementów jeœli nie klikniemy na t¹ wartoœæ w œrodku, shift te¿ nie dzia³a.
 2. Logowanie + kontrola tego, czy bêdzie w eclipsie dzia³a³o.
 3. CSV , whitespacey, i œrednik ale lepiej nie ','. Uzale¿niæ od locle. Czyli my wczytujemy i my zapisujemy
 raczej nie jest nam potrzebna interoperacyjnoœæ.
 4. Zapisu formatu najlpiej do INI / XML / Properties. Init wymaga osobnej biblioteki ¿eby to napisaæ co wcale mo¿e nie byæ takie ³atwe.
-5. Ustawiaæ na œrodku okienko z resultDialog, z progressDialog tak¿e ustawiæ. 
-6. Exek w 'programowaniu generyczne' -> tam jest jakaœ wizualizacja
+5. Ustawiaæ na œrodku okienko z resultDialog, z progressDialog tak¿e ustawiæ. -> DONE
+6. Exek w 'programowaniu generyczne', tam jest jakaœ wizualizacja, no to jest major i major robota
 7. ograniczenie -> na 4 zmienne X jest w zupe³noœci wystarczaj¹ce...
 8. na terminale w postaci, ¿eby GPNode mog³obyæ liczb¹ lub liczb¹ z zakresu INT to chodzi o to,
 ¿eby funkcjonalnie by³o dostêpne z poziomiu okienka (w sensie wybieramy jakiœ element i potem jest on ewaluowany)
