@@ -167,7 +167,6 @@ public class Settings {
 		int result = 1;
 		result = prime * result + generations;
 		result = prime * result + maxTreeDepth;
-		result = prime * result + ((operations == null) ? 0 : operations.hashCode());
 		result = prime * result + popSize;
 		return result;
 	}
@@ -188,13 +187,6 @@ public class Settings {
 			return false;
 		}
 		if (maxTreeDepth != other.maxTreeDepth) {
-			return false;
-		}
-		if (operations == null) {
-			if (other.operations != null) {
-				return false;
-			}
-		} else if (!operations.equals(other.operations)) {
 			return false;
 		}
 		if (popSize != other.popSize) {
@@ -221,6 +213,11 @@ public class Settings {
 	}
 
 	public void setPopulationSize(int popSize) {
+
+		if (popSize < 1) {
+			throw new IllegalArgumentException("The value must be positive");
+		}
+
 		this.popSize = popSize;
 	}
 
@@ -229,6 +226,10 @@ public class Settings {
 	}
 
 	public void setGenerations(int generations) {
+		if (generations < 1) {
+			throw new IllegalArgumentException("The value must be positive");
+		}
+
 		this.generations = generations;
 	}
 
@@ -237,6 +238,9 @@ public class Settings {
 	}
 
 	public void setMaxTreeDepth(int maxTreeDepth) {
+		if (maxTreeDepth < 1) {
+			throw new IllegalArgumentException("The value must be positive");
+		}
 		this.maxTreeDepth = maxTreeDepth;
 	}
 }
