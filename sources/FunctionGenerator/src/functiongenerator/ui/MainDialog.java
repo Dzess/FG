@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -42,6 +43,8 @@ import javax.swing.text.NumberFormatter;
 import functiongenerator.core.Settings;
 import functiongenerator.ui.loaders.data.CSVDataLoader;
 import functiongenerator.ui.loaders.data.IDataLoader;
+import functiongenerator.ui.loaders.settings.INISettingsLoader;
+import functiongenerator.ui.loaders.settings.ISettingsLoader;
 
 import java.awt.Insets;
 
@@ -68,6 +71,7 @@ public class MainDialog extends JDialog implements ActionListener {
 
 	private boolean result = false;
 	private Settings settings;
+	private ISettingsLoader settingsLoader = new INISettingsLoader();
 
 	private JButton buttonAddX = null;
 	private JButton buttonRemoveX = null;
@@ -510,7 +514,7 @@ public class MainDialog extends JDialog implements ActionListener {
 			setVisible(false);
 		} else if (cmd.equals("Load")) {
 			try {
-				JFileChooser chooser = getFileChooser();
+				JFileChooser chooser = getFileChooser(".csv", "CSV files");
 				if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 
 					Class<?> fieldType = radioDouble.isSelected() ? Double.class : Integer.class;
@@ -523,7 +527,7 @@ public class MainDialog extends JDialog implements ActionListener {
 			}
 		} else if (cmd.equals("Save")) {
 			try {
-				JFileChooser chooser = getFileChooser();
+				JFileChooser chooser = getFileChooser(".csv", "CSV files");
 				if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 
 					PointsTableModel model = (PointsTableModel) tablePoints.getModel();
@@ -540,7 +544,7 @@ public class MainDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	private JFileChooser getFileChooser() {
+	private JFileChooser getFileChooser(final String sufix, final String description) {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new FileFilter() {
 
@@ -549,12 +553,12 @@ public class MainDialog extends JDialog implements ActionListener {
 				if (f.isDirectory())
 					return true;
 
-				return f.getAbsolutePath().toLowerCase().endsWith(".csv");
+				return f.getAbsolutePath().toLowerCase().endsWith(sufix);
 			}
 
 			@Override
 			public String getDescription() {
-				return "CSV files";
+				return description;
 			}
 		});
 		return chooser;
@@ -596,6 +600,30 @@ public class MainDialog extends JDialog implements ActionListener {
 		return textGenerations;
 	}
 
+	/**
+	 * Sets the {@linkplain Settings} object for the whole view. Synchronizes
+	 * what the controls are showing with the passed object
+	 * 
+	 * @param settings
+	 *            : the data that has to be set
+	 */
+	public void setSettings(Settings settings) {
+
+		// set the graphical things
+		textPopulationSize.setText(Integer.toString(settings.getPopSize()));
+		textGenerations.setText(Integer.toString(settings.getGenerations()));
+		textMaxDepth.setText(Integer.toString(settings.getMaxTreeDepth()));
+
+		this.settings = settings;
+	}
+
+	/**
+	 * Synchronizes the current state of controls with the backend
+	 * {@linkplain Settings} object.
+	 * 
+	 * @return up to date {@linkplain Settings} object
+	 * @throws Exception
+	 */
 	public Settings getSettings() throws Exception {
 
 		settings.setGenerations(getGenerations());
@@ -800,23 +828,74 @@ public class MainDialog extends JDialog implements ActionListener {
 			savePreferencesButton = new JButton("Save");
 			savePreferencesButton.setToolTipText("Saves the basic settings and functions into file");
 			savePreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			// trick to get the pseudo java closure right
+			final JDialog parent = this;
 			savePreferencesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// TODO: write the code saving preferences
+
+					try {
+						String sufix = ".ini";
+						JFileChooser chooser = getFileChooser(sufix, "INI files");
+						if (chooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
+
+							File file = chooser.getSelectedFile();
+							file = getFormattedFile(file, sufix);
+
+							settingsLoader.saveToFile(file, getSettings());
+						}
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					}
+
 				}
 			});
 		}
 		return savePreferencesButton;
 	}
 
+	/**
+	 * Adds the suffix to the filepath if file has no such suffix.
+	 */
+	private File getFormattedFile(File inputFile, String sufix) {
+
+		String path = inputFile.getAbsolutePath();
+		if (!path.toLowerCase().endsWith(sufix))
+			inputFile = new File(path + sufix);
+
+		return inputFile;
+	}
+
 	private JButton getLoadPreferencesButton() {
 		if (loadPreferencesButton == null) {
 			loadPreferencesButton = new JButton("Load");
+
+			// trick to get the pseudo java closure right
+			final JDialog parent = this;
 			loadPreferencesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// TODO: write the code for reading the preferences here
+
+					try {
+						String sufix = ".ini";
+						JFileChooser chooser = getFileChooser(sufix, "INI files");
+						if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
+
+							File file = chooser.getSelectedFile();
+							file = getFormattedFile(file, sufix);
+
+							Settings s = settingsLoader.loadFromFile(file);
+
+							// update the graphical elements
+							setSettings(s);
+
+						}
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					}
+
 				}
 			});
+
 			loadPreferencesButton.setToolTipText("Loads the basic settings and functions from file");
 			loadPreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
