@@ -9,13 +9,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import ec.util.ParameterDatabase;
-import functiongenerator.gp.data.DoubleData;
-import functiongenerator.gp.data.IntegerData;
-import functiongenerator.gp.functions.BinaryOperation;
-import functiongenerator.gp.functions.NullaryOperation;
-import functiongenerator.gp.functions.UnaryOperation;
-import functiongenerator.gp.problem.IntegerRegressionProblem;
-import functiongenerator.gp.problem.RealRegressionProblem;
+import functiongenerator.core.gp.data.DoubleData;
+import functiongenerator.core.gp.data.IntegerData;
+import functiongenerator.core.gp.functions.BinaryOperation;
+import functiongenerator.core.gp.functions.NullaryOperation;
+import functiongenerator.core.gp.functions.UnaryOperation;
+import functiongenerator.core.gp.problem.IntegerRegressionProblem;
+import functiongenerator.core.gp.problem.RealRegressionProblem;
 
 /**
  * Describes all the settings used for configuring the {@linkplain Engine}
@@ -117,7 +117,7 @@ public class Settings {
 
 			// set the number of X variables
 			for (int i = 0; i < numberOfXes; ++i) {
-				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.real.X" + i);
+				db.setProperty("gp.fs.0.func." + i, "functiongenerator.core.gp.functions.real.X" + i);
 				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
 			}
 		} else if (problemType == ProblemType.INTEGER) {
@@ -126,7 +126,8 @@ public class Settings {
 
 			// set the number of X variables
 			for (int i = 0; i < numberOfXes; ++i) {
-				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.integer.X" + i);
+				
+				db.setProperty("gp.fs.0.func." + i, "functiongenerator.core.gp.functions.integer.X" + i);
 				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
 			}
 		} else {

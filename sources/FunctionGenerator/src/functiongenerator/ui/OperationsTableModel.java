@@ -5,20 +5,20 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import functiongenerator.gp.functions.real.Add;
-import functiongenerator.gp.functions.real.Cos;
-import functiongenerator.gp.functions.real.Div;
-import functiongenerator.gp.functions.real.Exp;
-import functiongenerator.gp.functions.real.Log;
-import functiongenerator.gp.functions.real.Max;
-import functiongenerator.gp.functions.real.Min;
-import functiongenerator.gp.functions.real.Mul;
-import functiongenerator.gp.functions.real.Pow;
-import functiongenerator.gp.functions.real.ProtectedDiv;
-import functiongenerator.gp.functions.real.ProtectedLog;
-import functiongenerator.gp.functions.real.Sin;
-import functiongenerator.gp.functions.real.Sub;
-import functiongenerator.gp.functions.real.Value;
+import functiongenerator.core.gp.functions.real.Add;
+import functiongenerator.core.gp.functions.real.Cos;
+import functiongenerator.core.gp.functions.real.Div;
+import functiongenerator.core.gp.functions.real.Exp;
+import functiongenerator.core.gp.functions.real.Log;
+import functiongenerator.core.gp.functions.real.Max;
+import functiongenerator.core.gp.functions.real.Min;
+import functiongenerator.core.gp.functions.real.Mul;
+import functiongenerator.core.gp.functions.real.Pow;
+import functiongenerator.core.gp.functions.real.ProtectedDiv;
+import functiongenerator.core.gp.functions.real.ProtectedLog;
+import functiongenerator.core.gp.functions.real.Sin;
+import functiongenerator.core.gp.functions.real.Sub;
+import functiongenerator.core.gp.functions.real.Value;
 
 public class OperationsTableModel extends AbstractTableModel {
 
@@ -116,11 +116,11 @@ public class OperationsTableModel extends AbstractTableModel {
 	public static OperationsTableModel getInteger() {
 		OperationsTableModel model = new OperationsTableModel();
 
-		model.addRow(true, "Add", functiongenerator.gp.functions.integer.Add.class.getName(), "");
-		model.addRow(true, "Sub", functiongenerator.gp.functions.integer.Sub.class.getName(), "");
-		model.addRow(true, "Mul", functiongenerator.gp.functions.integer.Mul.class.getName(), "");
-		model.addRow(false, "Div", functiongenerator.gp.functions.integer.Div.class.getName(), "");
-		model.addRow(true, "ProtectedDiv", functiongenerator.gp.functions.integer.ProtectedDiv.class.getName(),
+		model.addRow(true, "Add", functiongenerator.core.gp.functions.integer.Add.class.getName(), "");
+		model.addRow(true, "Sub", functiongenerator.core.gp.functions.integer.Sub.class.getName(), "");
+		model.addRow(true, "Mul", functiongenerator.core.gp.functions.integer.Mul.class.getName(), "");
+		model.addRow(false, "Div", functiongenerator.core.gp.functions.integer.Div.class.getName(), "");
+		model.addRow(true, "ProtectedDiv", functiongenerator.core.gp.functions.integer.ProtectedDiv.class.getName(),
 				"Returns 0 when divisor is 0.");
 		// model.addRow(true, "Value",
 		// functiongenerator.gp.functions.integer.Value.class.getName(),
@@ -143,12 +143,12 @@ public class OperationsTableModel extends AbstractTableModel {
 		// model.addRow(true, "5",
 		// functiongenerator.gp.functions.integer.Five.class.getName(),
 		// "5, constant.");
-		model.addRow(false, "Min", functiongenerator.gp.functions.integer.Min.class.getName(), "");
-		model.addRow(false, "Max", functiongenerator.gp.functions.integer.Max.class.getName(), "");
-		model.addRow(false, "And", functiongenerator.gp.functions.integer.And.class.getName(), "Bitwise and.");
-		model.addRow(false, "Or", functiongenerator.gp.functions.integer.Or.class.getName(), "Bitwise or.");
-		model.addRow(false, "Xor", functiongenerator.gp.functions.integer.Xor.class.getName(), "Bitwise xor.");
-		model.addRow(false, "Not", functiongenerator.gp.functions.integer.Not.class.getName(), "Bitwise not.");
+		model.addRow(false, "Min", functiongenerator.core.gp.functions.integer.Min.class.getName(), "");
+		model.addRow(false, "Max", functiongenerator.core.gp.functions.integer.Max.class.getName(), "");
+		model.addRow(false, "And", functiongenerator.core.gp.functions.integer.And.class.getName(), "Bitwise and.");
+		model.addRow(false, "Or", functiongenerator.core.gp.functions.integer.Or.class.getName(), "Bitwise or.");
+		model.addRow(false, "Xor", functiongenerator.core.gp.functions.integer.Xor.class.getName(), "Bitwise xor.");
+		model.addRow(false, "Not", functiongenerator.core.gp.functions.integer.Not.class.getName(), "Bitwise not.");
 
 		return model;
 	}

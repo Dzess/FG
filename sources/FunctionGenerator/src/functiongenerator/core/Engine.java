@@ -19,18 +19,18 @@ import ec.simple.SimpleStatistics;
 import ec.util.Log;
 import ec.util.LogRestarter;
 import ec.util.ParameterDatabase;
-import functiongenerator.gp.data.DoubleData;
-import functiongenerator.gp.data.IntegerData;
-import functiongenerator.gp.functions.BinaryOperation;
-import functiongenerator.gp.functions.NullaryOperation;
-import functiongenerator.gp.functions.UnaryOperation;
-import functiongenerator.gp.functions.real.Max;
-import functiongenerator.gp.functions.real.Min;
-import functiongenerator.gp.functions.real.Pow;
-import functiongenerator.gp.functions.real.ProtectedDiv;
-import functiongenerator.gp.problem.AbstractRegressionProblem;
-import functiongenerator.gp.problem.IntegerRegressionProblem;
-import functiongenerator.gp.problem.RealRegressionProblem;
+import functiongenerator.core.gp.data.DoubleData;
+import functiongenerator.core.gp.data.IntegerData;
+import functiongenerator.core.gp.functions.BinaryOperation;
+import functiongenerator.core.gp.functions.NullaryOperation;
+import functiongenerator.core.gp.functions.UnaryOperation;
+import functiongenerator.core.gp.functions.real.Max;
+import functiongenerator.core.gp.functions.real.Min;
+import functiongenerator.core.gp.functions.real.Pow;
+import functiongenerator.core.gp.functions.real.ProtectedDiv;
+import functiongenerator.core.gp.problem.AbstractRegressionProblem;
+import functiongenerator.core.gp.problem.IntegerRegressionProblem;
+import functiongenerator.core.gp.problem.RealRegressionProblem;
 
 /**
  * Responsible for running the GP algorithm.
@@ -132,9 +132,9 @@ public class Engine {
 	private void processNode(StringBuilder builder, GPNode node) {
 		if (node instanceof BinaryOperation) {
 			if (node instanceof ProtectedDiv || node instanceof Pow || node instanceof Min || node instanceof Max
-					|| node instanceof functiongenerator.gp.functions.integer.ProtectedDiv
-					|| node instanceof functiongenerator.gp.functions.integer.Min
-					|| node instanceof functiongenerator.gp.functions.integer.Max) {
+					|| node instanceof functiongenerator.core.gp.functions.integer.ProtectedDiv
+					|| node instanceof functiongenerator.core.gp.functions.integer.Min
+					|| node instanceof functiongenerator.core.gp.functions.integer.Max) {
 				builder.append(node.toString());
 				builder.append('(');
 				processNode(builder, node.children[0]);
