@@ -9,21 +9,16 @@ import functiongenerator.gp.functions.real.Add;
 import functiongenerator.gp.functions.real.Cos;
 import functiongenerator.gp.functions.real.Div;
 import functiongenerator.gp.functions.real.Exp;
-import functiongenerator.gp.functions.real.Five;
-import functiongenerator.gp.functions.real.Four;
 import functiongenerator.gp.functions.real.Log;
 import functiongenerator.gp.functions.real.Max;
 import functiongenerator.gp.functions.real.Min;
 import functiongenerator.gp.functions.real.Mul;
-import functiongenerator.gp.functions.real.One;
 import functiongenerator.gp.functions.real.Pow;
 import functiongenerator.gp.functions.real.ProtectedDiv;
 import functiongenerator.gp.functions.real.ProtectedLog;
 import functiongenerator.gp.functions.real.Sin;
 import functiongenerator.gp.functions.real.Sub;
-import functiongenerator.gp.functions.real.Three;
-import functiongenerator.gp.functions.real.Two;
-import functiongenerator.gp.functions.real.Zero;
+import functiongenerator.gp.functions.real.Value;
 
 public class OperationsTableModel extends AbstractTableModel {
 
@@ -98,12 +93,13 @@ public class OperationsTableModel extends AbstractTableModel {
 		model.addRow(true, "Mul", Mul.class.getName(), "");
 		model.addRow(false, "Div", Div.class.getName(), "");
 		model.addRow(true, "ProtectedDiv", ProtectedDiv.class.getName(), "Returns 0 when divisor is 0.");
-		model.addRow(true, "0", Zero.class.getName(), "0, constant.");
-		model.addRow(true, "1", One.class.getName(), "1, constant.");
-		model.addRow(true, "2", Two.class.getName(), "2, constant.");
-		model.addRow(true, "3", Three.class.getName(), "3, constant.");
-		model.addRow(true, "4", Four.class.getName(), "4, constant.");
-		model.addRow(true, "5", Five.class.getName(), "5, constant.");
+//		model.addRow(true, "0", Zero.class.getName(), "0, constant.");
+//		model.addRow(true, "1", One.class.getName(), "1, constant.");
+//		model.addRow(true, "2", Two.class.getName(), "2, constant.");
+//		model.addRow(true, "3", Three.class.getName(), "3, constant.");
+//		model.addRow(true, "4", Four.class.getName(), "4, constant.");
+//		model.addRow(true, "5", Five.class.getName(), "5, constant.");
+		//model.addRow(true, "Value", Value.class.getName(), "Value defined as constant");
 		model.addRow(false, "Exp", Exp.class.getName(), "");
 		model.addRow(false, "Pow", Pow.class.getName(), "");
 		model.addRow(false, "Log", Log.class.getName(), "");
@@ -125,12 +121,13 @@ public class OperationsTableModel extends AbstractTableModel {
 		model.addRow(false, "Div", functiongenerator.gp.functions.integer.Div.class.getName(), "");
 		model.addRow(true, "ProtectedDiv", functiongenerator.gp.functions.integer.ProtectedDiv.class.getName(),
 				"Returns 0 when divisor is 0.");
-		model.addRow(true, "0", functiongenerator.gp.functions.integer.Zero.class.getName(), "0, constant.");
-		model.addRow(true, "1", functiongenerator.gp.functions.integer.One.class.getName(), "1, constant.");
-		model.addRow(true, "2", functiongenerator.gp.functions.integer.Two.class.getName(), "2, constant.");
-		model.addRow(true, "3", functiongenerator.gp.functions.integer.Three.class.getName(), "3, constant.");
-		model.addRow(true, "4", functiongenerator.gp.functions.integer.Four.class.getName(), "4, constant.");
-		model.addRow(true, "5", functiongenerator.gp.functions.integer.Five.class.getName(), "5, constant.");
+	//	model.addRow(true, "Value", functiongenerator.gp.functions.integer.Value.class.getName(), "Value defined as constant");
+//		model.addRow(true, "0", functiongenerator.gp.functions.integer.Zero.class.getName(), "0, constant.");
+//		model.addRow(true, "1", functiongenerator.gp.functions.integer.One.class.getName(), "1, constant.");
+//		model.addRow(true, "2", functiongenerator.gp.functions.integer.Two.class.getName(), "2, constant.");
+//		model.addRow(true, "3", functiongenerator.gp.functions.integer.Three.class.getName(), "3, constant.");
+//		model.addRow(true, "4", functiongenerator.gp.functions.integer.Four.class.getName(), "4, constant.");
+//		model.addRow(true, "5", functiongenerator.gp.functions.integer.Five.class.getName(), "5, constant.");
 		model.addRow(false, "Min", functiongenerator.gp.functions.integer.Min.class.getName(), "");
 		model.addRow(false, "Max", functiongenerator.gp.functions.integer.Max.class.getName(), "");
 		model.addRow(false, "And", functiongenerator.gp.functions.integer.And.class.getName(), "Bitwise and.");

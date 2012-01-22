@@ -1,4 +1,4 @@
-package functiongenerator.ui.loaders;
+package functiongenerator.ui.loaders.data;
 
 import java.io.BufferedReader;
 import java.io.File;

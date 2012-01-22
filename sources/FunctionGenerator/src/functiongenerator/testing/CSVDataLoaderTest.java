@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import functiongenerator.ui.PointsTableModel;
-import functiongenerator.ui.loaders.CSVDataLoader;
+import functiongenerator.ui.loaders.data.CSVDataLoader;
 
 /**
  * Integration level. Works against file system.

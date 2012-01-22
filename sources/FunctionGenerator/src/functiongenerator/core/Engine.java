@@ -1,4 +1,4 @@
-package functiongenerator.engine;
+package functiongenerator.core;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -33,36 +33,20 @@ import functiongenerator.gp.problem.IntegerRegressionProblem;
 import functiongenerator.gp.problem.RealRegressionProblem;
 
 /**
- * Responsible for running the GP algorithm. 
+ * Responsible for running the GP algorithm.
  * 
  * <br/>
  * 
  * TODO: describe more about the internal doings of this code
- * 
- * <h4>
- * Default values:
- * </h4>
- * <ul> 
- * 	<li> population size - 200 </li>
- *  <li> max tree depth - 7 </li>
- *  <li> generations - 50 </li>  
- * </ul>
  */
 public class Engine {
 
 	private List<Number[]> points = new ArrayList<Number[]>();
-	private List<Class<?>> operations = new ArrayList<Class<?>>();
-	
-	private int popSize = 200;
-	private int generations = 50;
-	private int maxTreeDepth = 7;
-	private ParameterDatabase parameters;
+
+	private Settings settings;
+
 	private List<IProgressListener> listeners = new ArrayList<IProgressListener>();
 	private volatile boolean cancel = false;
-
-	public Engine() throws FileNotFoundException, IOException {
-		parameters = new ParameterDatabase(Engine.class.getResourceAsStream("template.params"));
-	}
 
 	public List<Number[]> getPoints() {
 		return points;
@@ -72,38 +56,12 @@ public class Engine {
 		this.points = points;
 	}
 
-	public List<Class<?>> getOperations() {
-		return operations;
+	public Settings getSettings() {
+		return settings;
 	}
 
-	public void setOperations(List<Class<?>> operations) {
-		if (operations == null)
-			throw new IllegalArgumentException("operations");
-		this.operations = operations;
-	}
-
-	public int getPopSize() {
-		return popSize;
-	}
-
-	public void setPopulationSize(int popSize) {
-		this.popSize = popSize;
-	}
-
-	public int getGenerations() {
-		return generations;
-	}
-
-	public void setGenerations(int generations) {
-		this.generations = generations;
-	}
-
-	public int getMaxTreeDepth() {
-		return maxTreeDepth;
-	}
-
-	public void setMaxTreeDepth(int maxTreeDepth) {
-		this.maxTreeDepth = maxTreeDepth;
+	public void setSettings(Settings settings) {
+		this.settings = settings;
 	}
 
 	public void addListener(IProgressListener listener) {
@@ -116,14 +74,18 @@ public class Engine {
 
 	private void updateProgress(int currentGen, String output) {
 		for (IProgressListener listener : listeners) {
-			listener.update(((double) (currentGen * 100)) / (double) this.generations, output);
+			listener.update(((double) (currentGen * 100))
+					/ (double) this.getSettings().getGenerations(), output);
 		}
 	}
 
-	private String generateClassTemplate(String func, String comment) throws IOException {
+	private String generateClassTemplate(String func, String comment)
+			throws IOException {
 		try {
-			InputStream template = Engine.class.getResourceAsStream("ClassTemplate.java.tpl");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(template));
+			InputStream template = Engine.class
+					.getResourceAsStream("ClassTemplate.java.tpl");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					template));
 			StringBuilder builder = new StringBuilder();
 
 			for (String line; (line = reader.readLine()) != null;) {
@@ -133,14 +95,16 @@ public class Engine {
 
 			int idx = builder.indexOf("/*functionCode*/");
 			if (idx < 0)
-				throw new RuntimeException("/*functionCode*/ not found in class template!");
+				throw new RuntimeException(
+						"/*functionCode*/ not found in class template!");
 			builder.replace(idx, idx + "/*functionCode*/".length(), func);
 
 			idx = builder.indexOf("/*comment*/");
-			if(idx < 0)
-				throw new RuntimeException("/*comment*/ not found in class template!");
+			if (idx < 0)
+				throw new RuntimeException(
+						"/*comment*/ not found in class template!");
 			builder.replace(idx, idx + "/*comment*/".length(), comment);
-			
+
 			String type = points.get(0)[0] instanceof Double ? "double" : "int";
 
 			while ((idx = builder.indexOf("/*type*/")) >= 0) {
@@ -156,8 +120,10 @@ public class Engine {
 			argumentsBuilder.deleteCharAt(argumentsBuilder.length() - 1);
 			idx = builder.indexOf("/*arguments*/");
 			if (idx < 0)
-				throw new RuntimeException("/*arguments*/ not found in class template!");
-			builder.replace(idx, idx + "/*arguments*/".length(), argumentsBuilder.toString());
+				throw new RuntimeException(
+						"/*arguments*/ not found in class template!");
+			builder.replace(idx, idx + "/*arguments*/".length(),
+					argumentsBuilder.toString());
 
 			return builder.toString();
 		} catch (UnsupportedEncodingException ex) {
@@ -173,7 +139,10 @@ public class Engine {
 
 	private void processNode(StringBuilder builder, GPNode node) {
 		if (node instanceof BinaryOperation) {
-			if (node instanceof ProtectedDiv || node instanceof Pow || node instanceof Min || node instanceof Max
+			if (node instanceof ProtectedDiv
+					|| node instanceof Pow
+					|| node instanceof Min
+					|| node instanceof Max
 					|| node instanceof functiongenerator.gp.functions.integer.ProtectedDiv
 					|| node instanceof functiongenerator.gp.functions.integer.Min
 					|| node instanceof functiongenerator.gp.functions.integer.Max) {
@@ -200,58 +169,9 @@ public class Engine {
 		} else if (node instanceof NullaryOperation) {
 			builder.append(node.toString());
 		} else {
-			throw new RuntimeException("Unknown node type: " + node.getClass().getName());
+			throw new RuntimeException("Unknown node type: "
+					+ node.getClass().getName());
 		}
-	}
-
-	private ParameterDatabase initializeDB() {
-		ParameterDatabase db = (ParameterDatabase) parameters.clone();
-
-		int numX = points.get(0).length - 1;
-
-		// add function set
-		db.setProperty("gp.fs.0.size", "" + (operations.size() + numX));
-
-		if (points.get(0)[0] instanceof Double) {
-			db.setProperty("eval.problem", RealRegressionProblem.class.getName());
-			db.setProperty("eval.problem.data", DoubleData.class.getName());
-
-			for (int i = 0; i < numX; ++i) {
-				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.real.X" + i);
-				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
-			}
-		} else {
-			db.setProperty("eval.problem", IntegerRegressionProblem.class.getName());
-			db.setProperty("eval.problem.data", IntegerData.class.getName());
-
-			for (int i = 0; i < numX; ++i) {
-				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.integer.X" + i);
-				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
-			}
-		}
-
-		int count = operations.size();
-		for (int i = 0; i < count; ++i) {
-			Class<?> op = operations.get(i);
-			db.setProperty("gp.fs.0.func." + (i + numX), op.getName());
-			if (NullaryOperation.class.isAssignableFrom(op))
-				db.setProperty("gp.fs.0.func." + (i + numX) + ".nc", "nc0");
-			else if (UnaryOperation.class.isAssignableFrom(op))
-				db.setProperty("gp.fs.0.func." + (i + numX) + ".nc", "nc1");
-			else if (BinaryOperation.class.isAssignableFrom(op))
-				db.setProperty("gp.fs.0.func." + (i + numX) + ".nc", "nc2");
-		}
-
-		// set popSize and generations
-		db.setProperty("pop.subpop.0.size", "" + popSize);
-		db.setProperty("generations", "" + generations);
-		// and max tree depth
-		db.setProperty("gp.koza.xover.maxdepth", "" + maxTreeDepth);
-		db.setProperty("gp.koza.mutate.maxdepth", "" + maxTreeDepth);
-		db.setProperty("gp.koza.half.min-depth", "" + Math.min(2, maxTreeDepth));
-		db.setProperty("gp.koza.half.max-depth", "" + maxTreeDepth);
-
-		return db;
 	}
 
 	/**
@@ -263,12 +183,16 @@ public class Engine {
 	public String run() throws FileNotFoundException, IOException {
 		cancel = false;
 
-		EvolutionState state = Evolve.initialize(initializeDB(), 0);
+		// FIXME: get there setting the current type of problem
+		int numberOfXes = points.get(0).length - 1;
+		ProblemType type = ProblemType.DOUBLE;
+		ParameterDatabase db = getSettings().generateParameterDatabase(numberOfXes, type);
+		EvolutionState state = Evolve.initialize(db, 0);
 		state.startFresh();
 
 		AbstractRegressionProblem problem = (AbstractRegressionProblem) state.evaluator.p_problem;
 		problem.setPoints(points);
-		problem.setMaxTreeDepth(maxTreeDepth);
+		problem.setMaxTreeDepth(getSettings().getMaxTreeDepth());
 
 		StringWriter writer = new StringWriter();
 		StringBuffer buffer = writer.getBuffer();
@@ -294,9 +218,7 @@ public class Engine {
 			buffer.delete(0, buffer.length());
 		}
 
-		
-
-		if (cancel){
+		if (cancel) {
 			state.finish(result);
 			Evolve.cleanup(state);
 			return null;
@@ -304,11 +226,12 @@ public class Engine {
 
 		SimpleStatistics stat = (SimpleStatistics) state.statistics;
 		GPIndividual ind = (GPIndividual) stat.best_of_run[0];
-		String template = generateClassTemplate(translateTree(ind.trees[0]), ind.fitness.fitnessToStringForHumans());
-		
+		String template = generateClassTemplate(translateTree(ind.trees[0]),
+				ind.fitness.fitnessToStringForHumans());
+
 		state.finish(result);
 		Evolve.cleanup(state);
-		
+
 		return template;
 	}
 

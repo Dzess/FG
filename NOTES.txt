@@ -10,3 +10,5 @@ raczej nie jest nam potrzebna interoperacyjnoœæ.
 7. ograniczenie -> na 4 zmienne X jest w zupe³noœci wystarczaj¹ce...
 8. na terminale w postaci, ¿eby GPNode mog³obyæ liczb¹ lub liczb¹ z zakresu INT to chodzi o to,
 ¿eby funkcjonalnie by³o dostêpne z poziomiu okienka (w sensie wybieramy jakiœ element i potem jest on ewaluowany)
+(potrzeba metody fabrykuj¹cej nowe instancje klasy Value (operations przez swoje z³e zaprojektowanie (trzymamy informacje o klasach tworz¹cych a nie o
+obiektach -> to nie pozwala na stworzenie dobrych elementów) Inna sprawa, ¿e w samym ECJ ciê¿ko to trochê zrobiæ -> mo¿e warto to na póŸniej odstawiæ.

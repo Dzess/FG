@@ -8,7 +8,7 @@ DONE by apache commons logging bundle Import Required !
 2. Dodaæ wstrzykiwanie opcji jakie CSV ma byæ czytane (czy z ',' czy z ';') itd. To akurat fajny feature, ale raczej jako propozycja.
 3. Poklikaæ doœæ mocno ca³oœæ kodu i zobaczyæ co tutaj siê dzieje -> zw³aszcza namespace egnine. DONE
 4. Pomyœlec jak zrobiæ zapis konfiguracji tegó¿ co to jest. (XML ? JSON ? INI ? ...) - propozycja -> INI
-5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. 
+5. Pomyœleæ ( i napisaæ szybki PDE) do sprawdzenia mo¿liwoœci insertowania kodu w istniej¹cy edytor. Ogólnie to siê da. NIE
 6. QuickAccessDialog - to jest komponent do wyœwietlania takiego ³adnego ¿ó³tego okienka (mo¿na to napisaæ) DONE. czyli NIE
 7. Poprawiæ pojawianie siê kropki dziesiêtnej podczas edycji backspace'em -> epicki bug w samym SWINGu. WORKAROUNDed poprzez wy³¹czenie przycisku backspace.
 8. Hits X -> Hits X/Y (o co tutaj chodzi?), chodzi o w³aœciwoœæ Koza Fitness, ile GPIndividuals osi¹gnê³o idea solution ? 

@@ -18,8 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import functiongenerator.engine.Engine;
-import functiongenerator.engine.IProgressListener;
+import functiongenerator.core.Engine;
+import functiongenerator.core.IProgressListener;
 
 public class ProgressDialog extends JDialog implements IProgressListener, ActionListener {
 

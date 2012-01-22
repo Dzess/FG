@@ -39,8 +39,11 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
-import functiongenerator.ui.loaders.CSVDataLoader;
-import functiongenerator.ui.loaders.IDataLoader;
+import functiongenerator.core.Settings;
+import functiongenerator.ui.loaders.data.CSVDataLoader;
+import functiongenerator.ui.loaders.data.IDataLoader;
+
+import java.awt.Insets;
 
 public class MainDialog extends JDialog implements ActionListener {
 
@@ -64,6 +67,8 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JFormattedTextField textGenerations = null;
 
 	private boolean result = false;
+	private Settings settings;
+
 	private JButton buttonAddX = null;
 	private JButton buttonRemoveX = null;
 	private JLabel labelMaxDepth = null;
@@ -76,6 +81,9 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton buttonLoad = null;
 	private JButton buttonSave = null;
 	private IDataLoader loader = new CSVDataLoader();
+	private JButton savePreferencesButton;
+	private JButton loadPreferencesButton;
+	private JPanel panel;
 
 	/**
 	 * If true, the dialog was successively closed by OK button.
@@ -88,10 +96,14 @@ public class MainDialog extends JDialog implements ActionListener {
 
 	/**
 	 * @param owner
+	 * @throws IOException
+	 *             : when the template for the settings cannot be found.
 	 */
-	public MainDialog(Frame owner) {
+	public MainDialog(Frame owner) throws IOException {
 		super(owner, ModalityType.TOOLKIT_MODAL);
 		initialize();
+
+		settings = new Settings();
 	}
 
 	/**
@@ -100,7 +112,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(620, 600);
+		this.setSize(620, 681);
 		this.setMinimumSize(new Dimension(620, 500));
 		this.setResizable(true);
 		this.setModal(true);
@@ -170,49 +182,19 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	private JPanel getPanelSettings() {
 		if (panelSettings == null) {
-			GridBagConstraints gridBagConstraints22 = new GridBagConstraints();
-			gridBagConstraints22.fill = GridBagConstraints.VERTICAL;
-			gridBagConstraints22.gridy = 4;
-			gridBagConstraints22.weightx = 1.0;
-			gridBagConstraints22.gridx = 1;
-			gridBagConstraints22.anchor = GridBagConstraints.WEST;
-			gridBagConstraints22.ipadx = 480;
-			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
-			gridBagConstraints12.gridx = 0;
-			gridBagConstraints12.anchor = GridBagConstraints.WEST;
-			gridBagConstraints12.gridy = 4;
-			labelMaxDepth = new JLabel();
-			labelMaxDepth.setText("Max depth of tree:");
-			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
-			gridBagConstraints21.fill = GridBagConstraints.VERTICAL;
-			gridBagConstraints21.gridy = 3;
-			gridBagConstraints21.weightx = 1.0;
-			gridBagConstraints21.ipady = 0;
-			gridBagConstraints21.ipadx = 480;
-			gridBagConstraints21.anchor = GridBagConstraints.WEST;
-			gridBagConstraints21.gridx = 1;
 			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
-			gridBagConstraints11.fill = GridBagConstraints.VERTICAL;
+			gridBagConstraints11.insets = new Insets(0, 0, 5, 0);
+			gridBagConstraints11.fill = GridBagConstraints.BOTH;
 			gridBagConstraints11.gridx = 1;
 			gridBagConstraints11.gridy = 0;
 			gridBagConstraints11.ipadx = 480;
-			gridBagConstraints11.anchor = GridBagConstraints.WEST;
 			gridBagConstraints11.weightx = 1.0;
-			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
-			gridBagConstraints4.gridx = 0;
-			gridBagConstraints4.ipady = 4;
-			gridBagConstraints4.anchor = GridBagConstraints.WEST;
-			gridBagConstraints4.gridy = 3;
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.insets = new Insets(0, 0, 5, 5);
 			gridBagConstraints2.gridx = 0;
 			gridBagConstraints2.ipady = 4;
 			gridBagConstraints2.anchor = GridBagConstraints.WEST;
 			gridBagConstraints2.gridy = 0;
-			labelGenerations = new JLabel();
-			labelGenerations.setText("Number of generations:");
-			labelGenerations.setHorizontalAlignment(SwingConstants.LEFT);
-			labelGenerations.setHorizontalTextPosition(SwingConstants.LEFT);
-			labelGenerations.setName("labelGenerations");
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.fill = GridBagConstraints.VERTICAL;
 			gridBagConstraints.weightx = 1.0;
@@ -229,10 +211,48 @@ public class MainDialog extends JDialog implements ActionListener {
 							Font.BOLD, 12), new Color(51, 51, 51)));
 			panelSettings.add(labelPopulationSize, gridBagConstraints2);
 			panelSettings.add(getTextPopulationSize(), gridBagConstraints11);
+			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
+			gridBagConstraints4.insets = new Insets(0, 0, 5, 5);
+			gridBagConstraints4.gridx = 0;
+			gridBagConstraints4.ipady = 4;
+			gridBagConstraints4.anchor = GridBagConstraints.WEST;
+			gridBagConstraints4.gridy = 1;
+			labelGenerations = new JLabel();
+			labelGenerations.setText("Number of generations:");
+			labelGenerations.setHorizontalAlignment(SwingConstants.LEFT);
+			labelGenerations.setHorizontalTextPosition(SwingConstants.LEFT);
+			labelGenerations.setName("labelGenerations");
 			panelSettings.add(labelGenerations, gridBagConstraints4);
+			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
+			gridBagConstraints21.insets = new Insets(0, 0, 5, 0);
+			gridBagConstraints21.fill = GridBagConstraints.BOTH;
+			gridBagConstraints21.gridy = 1;
+			gridBagConstraints21.weightx = 1.0;
+			gridBagConstraints21.ipady = 0;
+			gridBagConstraints21.ipadx = 480;
+			gridBagConstraints21.gridx = 1;
 			panelSettings.add(getTextGenerations(), gridBagConstraints21);
+			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
+			gridBagConstraints12.insets = new Insets(0, 0, 5, 5);
+			gridBagConstraints12.gridx = 0;
+			gridBagConstraints12.anchor = GridBagConstraints.WEST;
+			gridBagConstraints12.gridy = 2;
+			labelMaxDepth = new JLabel();
+			labelMaxDepth.setText("Max depth of tree:");
 			panelSettings.add(labelMaxDepth, gridBagConstraints12);
+			GridBagConstraints gridBagConstraints22 = new GridBagConstraints();
+			gridBagConstraints22.insets = new Insets(0, 0, 5, 0);
+			gridBagConstraints22.fill = GridBagConstraints.BOTH;
+			gridBagConstraints22.gridy = 2;
+			gridBagConstraints22.weightx = 1.0;
+			gridBagConstraints22.gridx = 1;
+			gridBagConstraints22.ipadx = 480;
 			panelSettings.add(getTextMaxDepth(), gridBagConstraints22);
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 1;
+			gbc_panel.gridy = 3;
+			panelSettings.add(getPanel(), gbc_panel);
 		}
 		return panelSettings;
 	}
@@ -608,24 +628,30 @@ public class MainDialog extends JDialog implements ActionListener {
 		return textGenerations;
 	}
 
-	public int getPopulationSize() {
+	public Settings getSettings() throws Exception {
+
+		settings.setGenerations(getGenerations());
+		settings.setMaxTreeDepth(getMaxTreeDepth());
+		settings.setPopulationSize(getPopulationSize());
+
+		settings.setOperations(getOperations());
+
+		return settings;
+	}
+
+	private int getPopulationSize() {
 		return Integer.parseInt(textPopulationSize.getText());
 	}
 
-	public int getGenerations() {
+	private int getGenerations() {
 		return Integer.parseInt(textGenerations.getText());
 	}
 
-	public int getMaxTreeDepth() {
+	private int getMaxTreeDepth() {
 		return Integer.parseInt(textMaxDepth.getText());
 	}
 
-	public List<Number[]> getPoints() {
-		PointsTableModel model = (PointsTableModel) tablePoints.getModel();
-		return model.getRows();
-	}
-
-	public List<Class<?>> getOperations() throws ClassNotFoundException {
+	private List<Class<?>> getOperations() throws ClassNotFoundException {
 		List<Class<?>> operations = new ArrayList<Class<?>>();
 		OperationsTableModel model = (OperationsTableModel) tableOperations
 				.getModel();
@@ -633,6 +659,11 @@ public class MainDialog extends JDialog implements ActionListener {
 			operations.add(Class.forName(operation));
 		}
 		return operations;
+	}
+
+	public List<Number[]> getPoints() {
+		PointsTableModel model = (PointsTableModel) tablePoints.getModel();
+		return model.getRows();
 	}
 
 	/**
@@ -798,5 +829,45 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	public void resetState() {
 		result = false;
+	}
+
+	private JButton getSavePreferencesButton() {
+		if (savePreferencesButton == null) {
+			savePreferencesButton = new JButton("Save");
+			savePreferencesButton
+					.setToolTipText("Saves the basic settings and functions into file");
+			savePreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
+			savePreferencesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// TODO: write the code saving preferences
+				}
+			});
+		}
+		return savePreferencesButton;
+	}
+
+	private JButton getLoadPreferencesButton() {
+		if (loadPreferencesButton == null) {
+			loadPreferencesButton = new JButton("Load");
+			loadPreferencesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// TODO: write the code for reading the preferences here
+				}
+			});
+			loadPreferencesButton
+					.setToolTipText("Loads the basic settings and functions from file");
+			loadPreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		}
+		return loadPreferencesButton;
+	}
+
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+			panel.add(getSavePreferencesButton());
+			panel.add(getLoadPreferencesButton());
+		}
+		return panel;
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
