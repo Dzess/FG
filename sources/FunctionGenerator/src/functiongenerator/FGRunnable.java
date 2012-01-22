@@ -60,6 +60,9 @@ public class FGRunnable implements Runnable {
 			logger.info("Starting wizard");
 			mainDlg = new MainDialog(null);
 
+			// loop is used
+			// to maintain working even after the computations
+			// only way to exit from this loop is to hit cancel button or X in jDialog
 			while (true) {
 				logger.info("Restarting wizard");
 				mainDlg.resetState();
