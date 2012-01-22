@@ -31,8 +31,8 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	private JScrollPane textLogContainer = null;
 	private boolean result = true;
 	private Engine engine;
-	
-	public boolean getResult(){
+
+	public boolean getResult() {
 		return result;
 	}
 
@@ -68,7 +68,7 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 		this.setModal(false);
 		this.setWindowAtScreenCenter();
 	}
-	
+
 	private void setWindowAtScreenCenter() {
 
 		int widthWindow = this.getWidth();
@@ -98,9 +98,9 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	}
 
 	/**
-	 * This method initializes progressBar	
-	 * 	
-	 * @return javax.swing.JProgressBar	
+	 * This method initializes progressBar
+	 * 
+	 * @return javax.swing.JProgressBar
 	 */
 	private JProgressBar getProgressBar() {
 		if (progressBar == null) {
@@ -111,9 +111,9 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	}
 
 	/**
-	 * This method initializes textLog	
-	 * 	
-	 * @return javax.swing.JTextArea	
+	 * This method initializes textLog
+	 * 
+	 * @return javax.swing.JTextArea
 	 */
 	private JTextArea getTextLog() {
 		if (textLog == null) {
@@ -125,9 +125,9 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	}
 
 	/**
-	 * This method initializes buttonCancel	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes buttonCancel
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getButtonCancel() {
 		if (buttonCancel == null) {
@@ -140,9 +140,9 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	}
 
 	/**
-	 * This method initializes panelButtons	
-	 * 	
-	 * @return javax.swing.JPanel	
+	 * This method initializes panelButtons
+	 * 
+	 * @return javax.swing.JPanel
 	 */
 	private JPanel getPanelButtons() {
 		if (panelButtons == null) {
@@ -158,16 +158,16 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 
 	@Override
 	public void update(double done, String message) {
-		progressBar.setValue((int)done);
+		progressBar.setValue((int) done);
 		textLog.append(message);
 		JScrollBar scroll = textLogContainer.getVerticalScrollBar();
 		scroll.setValue(scroll.getMaximum());
 	}
 
 	/**
-	 * This method initializes textLogContainer	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * This method initializes textLogContainer
+	 * 
+	 * @return javax.swing.JScrollPane
 	 */
 	private JScrollPane getTextLogContainer() {
 		if (textLogContainer == null) {
@@ -180,11 +180,11 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Cancel")){
+		if (e.getActionCommand().equals("Cancel")) {
 			result = false;
 			engine.cancel();
 			this.setVisible(false);
 		}
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="10,10"
+} // @jve:decl-index=0:visual-constraint="10,10"

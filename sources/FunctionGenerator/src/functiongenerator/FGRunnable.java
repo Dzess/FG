@@ -101,8 +101,7 @@ public class FGRunnable implements Runnable {
 			}
 		} catch (Exception ex) {
 			if (window != null) {
-				MessageDialog.openError(window.getShell(), "FunctionGenerator",
-						ex.getLocalizedMessage());
+				MessageDialog.openError(window.getShell(), "FunctionGenerator", ex.getLocalizedMessage());
 			}
 			ex.printStackTrace();
 			logger.error(ex);

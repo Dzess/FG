@@ -442,8 +442,8 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 			matrix[idx][0] = random(matrix[idx][1], matrix[idx][2]);
 			matrix[idx][3] = random(yFrom);
 			matrix[idx][4] = random(yTo);
-			matrix[idx][5] = (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][2] - matrix[idx][1])
-					* (matrix[idx][4] - matrix[idx][3]) + matrix[idx][3];
+			matrix[idx][5] = (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][2] - matrix[idx][1]) * (matrix[idx][4] - matrix[idx][3])
+					+ matrix[idx][3];
 			++idx;
 			model.addRow();
 		}
@@ -454,8 +454,8 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 			matrix[idx][3] = random(yFrom);
 			matrix[idx][4] = random(yTo);
 			matrix[idx][5] = random(matrix[idx][3], matrix[idx][4]);
-			matrix[idx][0] = ((matrix[idx][5] - matrix[idx][3]) * (matrix[idx][2] - matrix[idx][1]))
-					/ (matrix[idx][4] - matrix[idx][3]) + matrix[idx][1];
+			matrix[idx][0] = ((matrix[idx][5] - matrix[idx][3]) * (matrix[idx][2] - matrix[idx][1])) / (matrix[idx][4] - matrix[idx][3])
+					+ matrix[idx][1];
 			++idx;
 			model.addRow();
 		}
@@ -467,8 +467,8 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 				matrix[idx][3] = random(yFrom);
 				matrix[idx][4] = random(yTo);
 				matrix[idx][5] = random(matrix[idx][3], matrix[idx][4]);
-				matrix[idx][1] = (-matrix[idx][5] * matrix[idx][2] + matrix[idx][3] * matrix[idx][2] + matrix[idx][0]
-						* matrix[idx][4] - matrix[idx][0] * matrix[idx][3])
+				matrix[idx][1] = (-matrix[idx][5] * matrix[idx][2] + matrix[idx][3] * matrix[idx][2] + matrix[idx][0] * matrix[idx][4] - matrix[idx][0]
+						* matrix[idx][3])
 						/ (-matrix[idx][5] + matrix[idx][3] + matrix[idx][4] - matrix[idx][3]);
 				++idx;
 				model.addRow();
@@ -482,8 +482,8 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 				matrix[idx][3] = random(yFrom);
 				matrix[idx][4] = random(yTo);
 				matrix[idx][5] = random(matrix[idx][3], matrix[idx][4]);
-				matrix[idx][2] = (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][5] - matrix[idx][3])
-						* (matrix[idx][4] - matrix[idx][3]) + matrix[idx][1];
+				matrix[idx][2] = (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][5] - matrix[idx][3]) * (matrix[idx][4] - matrix[idx][3])
+						+ matrix[idx][1];
 				++idx;
 				model.addRow();
 			}
@@ -496,8 +496,7 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 				matrix[idx][0] = random(matrix[idx][1], matrix[idx][2]);
 				matrix[idx][4] = random(yTo);
 				matrix[idx][5] = random(yFrom, matrix[idx][4]);
-				matrix[idx][3] = (matrix[idx][5] - (matrix[idx][0] - matrix[idx][1])
-						/ (matrix[idx][2] - matrix[idx][1]) * matrix[idx][4])
+				matrix[idx][3] = (matrix[idx][5] - (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][2] - matrix[idx][1]) * matrix[idx][4])
 						/ (1 - (matrix[idx][0] - matrix[idx][1]) / (matrix[idx][2] - matrix[idx][1]));
 				++idx;
 				model.addRow();
@@ -520,18 +519,14 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 		}
 
 		// verification
-		/*for (int i = 0; i < idx; ++i) {
-			if (Math.abs(matrix[i][5]
-					- ((matrix[i][0] - matrix[i][1]) / (matrix[i][2] - matrix[i][1]) * (matrix[i][4] - matrix[i][3]) + matrix[i][3])) >= 0.001) {
-				throw new RuntimeException("error in row "
-						+ i
-						+ " y="
-						+ matrix[i][5]
-						+ "  eq="
-						+ ((matrix[i][0] - matrix[i][1]) / (matrix[i][2] - matrix[i][1])
-								* (matrix[i][4] - matrix[i][3]) + matrix[i][3]));
-			}
-		}*/
+		/*
+		 * for (int i = 0; i < idx; ++i) { if (Math.abs(matrix[i][5] -
+		 * ((matrix[i][0] - matrix[i][1]) / (matrix[i][2] - matrix[i][1]) *
+		 * (matrix[i][4] - matrix[i][3]) + matrix[i][3])) >= 0.001) { throw new
+		 * RuntimeException("error in row " + i + " y=" + matrix[i][5] + "  eq="
+		 * + ((matrix[i][0] - matrix[i][1]) / (matrix[i][2] - matrix[i][1])
+		 * (matrix[i][4] - matrix[i][3]) + matrix[i][3])); } }
+		 */
 
 		int mapping = 1;
 		if (Double.isNaN(x0From)) {
@@ -588,10 +583,12 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 	}
 
 	/*
-	 * private int random(int min, int max) { int r = 0; if (min > max) { r = min; min = max; max = r; } if (min >
-	 * Integer.MIN_VALUE && max < Integer.MAX_VALUE) { r = rand.nextInt(max - min) + min; } else if (min >
-	 * Integer.MIN_VALUE) { r = min + rand.nextInt(100); } else if (max < Integer.MAX_VALUE) { r = max -
-	 * rand.nextInt(100); } else { r = rand.nextInt(101) - 50; } return r; }
+	 * private int random(int min, int max) { int r = 0; if (min > max) { r =
+	 * min; min = max; max = r; } if (min > Integer.MIN_VALUE && max <
+	 * Integer.MAX_VALUE) { r = rand.nextInt(max - min) + min; } else if (min >
+	 * Integer.MIN_VALUE) { r = min + rand.nextInt(100); } else if (max <
+	 * Integer.MAX_VALUE) { r = max - rand.nextInt(100); } else { r =
+	 * rand.nextInt(101) - 50; } return r; }
 	 */
 
 	private double random(double x) {
@@ -601,8 +598,8 @@ public class LinearScalingDialog extends JDialog implements ChangeListener, Acti
 	}
 
 	/*
-	 * private int random(int x) { if (x == Integer.MAX_VALUE || x == Integer.MIN_VALUE) return rand.nextInt(101) - 50;
-	 * return x; }
+	 * private int random(int x) { if (x == Integer.MAX_VALUE || x ==
+	 * Integer.MIN_VALUE) return rand.nextInt(101) - 50; return x; }
 	 */
 
 	@Override

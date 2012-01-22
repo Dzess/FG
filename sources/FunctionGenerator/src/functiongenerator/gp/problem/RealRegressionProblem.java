@@ -29,9 +29,12 @@ public class RealRegressionProblem extends AbstractRegressionProblem {
 
 				((GPIndividual) ind).trees[0].child.eval(state, threadnum, output, stack, ((GPIndividual) ind), this);
 
-				float error = (float) Math.pow(Y - ((DoubleData) output).Y, 2); // square error
+				float error = (float) Math.pow(Y - ((DoubleData) output).Y, 2); // square
+																				// error
 
-				if (error <= 0.0001f * Math.abs(Y)) // max error at 1% of expected value is treated as right value
+				if (error <= 0.0001f * Math.abs(Y)) // max error at 1% of
+													// expected value is treated
+													// as right value
 					++hits;
 				else
 					fitness += error;
@@ -51,7 +54,7 @@ public class RealRegressionProblem extends AbstractRegressionProblem {
 			f.setStandardizedFitness(state, fitness);
 			f.hits = hits;
 			ind.evaluated = true;
-			
+
 			// actually following the specification of GPProblem description
 			stack.reset();
 		}

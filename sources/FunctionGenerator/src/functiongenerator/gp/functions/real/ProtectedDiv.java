@@ -16,8 +16,7 @@ public class ProtectedDiv extends BinaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
 
 		double result;
 		DoubleData rd = ((DoubleData) (input));
@@ -26,7 +25,7 @@ public class ProtectedDiv extends BinaryOperation {
 		result = rd.Y;
 
 		children[1].eval(state, thread, input, stack, individual, problem);
-		if(rd.Y != 0)
+		if (rd.Y != 0)
 			rd.Y = result / rd.Y;
 	}
 

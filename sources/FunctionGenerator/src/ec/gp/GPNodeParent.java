@@ -2,10 +2,10 @@
   Copyright 2006 by Sean Luke
   Licensed under the Academic Free License version 3.0
   See the file "LICENSE" for more information
-*/
-
+ */
 
 package ec.gp;
+
 import ec.Prototype;
 
 /* 
@@ -16,13 +16,12 @@ import ec.Prototype;
  */
 
 /**
- * GPNodeParent is a Prototype which identifies objects which may
- * be parents of GPNodes, namely: GPTrees and GPNodes.
- *
+ * GPNodeParent is a Prototype which identifies objects which may be parents of
+ * GPNodes, namely: GPTrees and GPNodes.
+ * 
  * @author Sean Luke
- * @version 1.0 
+ * @version 1.0
  */
 
-public interface GPNodeParent
-    {
-    }
+public interface GPNodeParent {
+}

@@ -9,9 +9,10 @@ import functiongenerator.gp.data.DoubleData;
 import functiongenerator.gp.functions.NullaryOperation;
 
 /**
- * Represents any numeric value of type {@linkplain Double}. 
+ * Represents any numeric value of type {@linkplain Double}.
+ * 
  * @author Piotr Jessa
- *
+ * 
  */
 public class Value extends NullaryOperation {
 
@@ -27,8 +28,7 @@ public class Value extends NullaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input,
-			ADFStack stack, GPIndividual individual, Problem problem) {
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
 		DoubleData rd = ((DoubleData) (input));
 		rd.Y = value;
 	}

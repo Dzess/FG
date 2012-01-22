@@ -16,9 +16,8 @@ public class Pow extends BinaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
-		
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+
 		double result;
 		DoubleData rd = ((DoubleData) (input));
 
@@ -27,7 +26,7 @@ public class Pow extends BinaryOperation {
 
 		children[1].eval(state, thread, input, stack, individual, problem);
 		rd.Y = Math.pow(result, rd.Y);
-		
+
 	}
 
 }

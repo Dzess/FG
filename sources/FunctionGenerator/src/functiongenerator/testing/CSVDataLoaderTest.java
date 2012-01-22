@@ -13,8 +13,9 @@ import functiongenerator.ui.loaders.data.CSVDataLoader;
 
 /**
  * Integration level. Works against file system.
+ * 
  * @author Piotr Jessa
- *
+ * 
  */
 public class CSVDataLoaderTest {
 
@@ -22,14 +23,14 @@ public class CSVDataLoaderTest {
 	private File file;
 	private PointsTableModel result;
 
-	static private String getLocation(String fileName){
+	static private String getLocation(String fileName) {
 		return "resources\\" + fileName;
 	}
-	
-	static private File getFile(String fileName){
+
+	static private File getFile(String fileName) {
 		return new File(getLocation(fileName));
 	}
-	
+
 	@Before
 	public void set_up() {
 		loader = new CSVDataLoader();
@@ -45,24 +46,24 @@ public class CSVDataLoaderTest {
 	public void test_loading_empty_file_should_pass() throws IOException {
 		file = getFile("empty.csv");
 		result = loader.loadFromFile(file, Integer.class);
-		
+
 		Assert.assertEquals(0, result.getRowCount());
-		
-		// two columns are default value 
-		Assert.assertEquals(2,result.getColumnCount());
+
+		// two columns are default value
+		Assert.assertEquals(2, result.getColumnCount());
 	}
 
 	@Test
 	public void test_loading_sample_0_file_integers() throws IOException {
 		file = getFile("sample_0.csv");
 		result = loader.loadFromFile(file, Integer.class);
-		
+
 		Assert.assertEquals(6, result.getRowCount());
-		Assert.assertEquals(2,result.getColumnCount());
-		
-		for(Number[] a : result.getRows()){
+		Assert.assertEquals(2, result.getColumnCount());
+
+		for (Number[] a : result.getRows()) {
 			System.out.println("Line:");
-			for(Number n : a){
+			for (Number n : a) {
 				System.out.print(n);
 				System.out.print(" ");
 			}
@@ -74,18 +75,18 @@ public class CSVDataLoaderTest {
 	public void test_loading_sample_0_file_doubles() throws IOException {
 		file = getFile("sample_0.csv");
 		result = loader.loadFromFile(file, Double.class);
-		
+
 		Assert.assertEquals(6, result.getRowCount());
-		Assert.assertEquals(2,result.getColumnCount());
+		Assert.assertEquals(2, result.getColumnCount());
 	}
-	
+
 	@Test
-	public void test_loading_sample_2_file_two_Xes() throws IOException{
+	public void test_loading_sample_2_file_two_Xes() throws IOException {
 		file = getFile("sample_2.csv");
 		result = loader.loadFromFile(file, Integer.class);
-		
+
 		Assert.assertEquals(6, result.getRowCount());
-		Assert.assertEquals(3,result.getColumnCount());
-		
+		Assert.assertEquals(3, result.getColumnCount());
+
 	}
 }

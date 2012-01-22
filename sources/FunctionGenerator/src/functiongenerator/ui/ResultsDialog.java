@@ -103,7 +103,7 @@ public class ResultsDialog extends JDialog implements ActionListener {
 
 		this.setBounds(X, Y, widthWindow, heightWindow);
 	}
-	
+
 	/**
 	 * This method initializes jContentPane
 	 * 

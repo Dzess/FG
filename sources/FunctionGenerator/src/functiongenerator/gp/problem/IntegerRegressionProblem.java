@@ -29,13 +29,14 @@ public class IntegerRegressionProblem extends AbstractRegressionProblem {
 				int Y = (Integer) point[point.length - 1];
 
 				try {
-					((GPIndividual) ind).trees[0].child.eval(state, threadnum, output, stack, ((GPIndividual) ind),
-							this);
+					((GPIndividual) ind).trees[0].child.eval(state, threadnum, output, stack, ((GPIndividual) ind), this);
 
-					error = (float) Math.pow(Y - ((IntegerData) output).Y, 2); // square error
+					error = (float) Math.pow(Y - ((IntegerData) output).Y, 2); // square
+																				// error
 
 				} catch (ArithmeticException ex) {
-					error = Float.MAX_VALUE / points.size(); //set max error for this test
+					error = Float.MAX_VALUE / points.size(); // set max error
+																// for this test
 				}
 
 				if (error < 1)
@@ -52,13 +53,13 @@ public class IntegerRegressionProblem extends AbstractRegressionProblem {
 			} else {
 				fitness += (float) maxNodes;
 			}
-			
+
 			// the fitness better be KozaFitness!
 			KozaFitness f = ((KozaFitness) ind.fitness);
 			f.setStandardizedFitness(state, fitness);
 			f.hits = hits;
 			ind.evaluated = true;
-			
+
 			// actually following the specification of GPProblem description
 			stack.reset();
 		}

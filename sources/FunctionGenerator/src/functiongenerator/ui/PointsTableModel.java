@@ -34,7 +34,6 @@ public class PointsTableModel extends AbstractTableModel {
 			this.rows.add(myRow);
 		}
 	}
-	
 
 	@Override
 	public int getColumnCount() {

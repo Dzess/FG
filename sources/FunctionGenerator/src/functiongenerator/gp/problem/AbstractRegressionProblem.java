@@ -31,8 +31,8 @@ public abstract class AbstractRegressionProblem extends GPProblem implements Sim
 
 	public void setPoints(List<Number[]> points) {
 		/*
-		 * points = new ArrayList<double[]>(); for (Double[] d : pairs) { points.add(new double[] { d[0], d[1] }); }
-		 * this.points = points;
+		 * points = new ArrayList<double[]>(); for (Double[] d : pairs) {
+		 * points.add(new double[] { d[0], d[1] }); } this.points = points;
 		 */
 		this.points = points;
 	}

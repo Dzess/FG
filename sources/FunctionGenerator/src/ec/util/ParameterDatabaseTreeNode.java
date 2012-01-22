@@ -2,8 +2,7 @@
   Copyright 2006 by Sean Luke
   Licensed under the Academic Free License version 3.0
   See the file "LICENSE" for more information
-*/
-
+ */
 
 /*
  * Created on Apr 5, 2005 8:24:19 PM
@@ -23,103 +22,103 @@ import javax.swing.tree.TreeNode;
 /**
  * @author spaus
  */
-class ParameterDatabaseTreeNode
-    extends DefaultMutableTreeNode
-    implements Comparable {
+class ParameterDatabaseTreeNode extends DefaultMutableTreeNode implements Comparable {
 
-    /**
+	/**
      * 
      */
-    public ParameterDatabaseTreeNode() {
-        super();
-        }
+	public ParameterDatabaseTreeNode() {
+		super();
+	}
 
-    /**
-     * @param userObject
-     */
-    public ParameterDatabaseTreeNode(Object userObject) {
-        super(userObject);
-        }
+	/**
+	 * @param userObject
+	 */
+	public ParameterDatabaseTreeNode(Object userObject) {
+		super(userObject);
+	}
 
-    /**
-     * @param userObject
-     * @param allowsChildren
-     */
-    public ParameterDatabaseTreeNode(Object userObject, boolean allowsChildren) {
-        super(userObject, allowsChildren);
-        }
-    
-    /**
-     * @param index
-     * @param visibleLeaves
-     * @return
-     */
-    public Object getChildAt(int index, boolean visibleLeaves) {
-        if (children == null) {
-            throw new ArrayIndexOutOfBoundsException("node has no children");
-            }
+	/**
+	 * @param userObject
+	 * @param allowsChildren
+	 */
+	public ParameterDatabaseTreeNode(Object userObject, boolean allowsChildren) {
+		super(userObject, allowsChildren);
+	}
 
-        if (!visibleLeaves) {
-            int nonLeafIndex = -1;
-            Enumeration e = children.elements();
-            while (e.hasMoreElements()) {
-                TreeNode n = (TreeNode)e.nextElement();
-                if (!n.isLeaf()) {
-                    if (++nonLeafIndex == index)
-                        return n;
-                    }
-                }
-            
-            throw new ArrayIndexOutOfBoundsException("index = "+index+", children = "+getChildCount(visibleLeaves));
-            }
-        
-        return super.getChildAt(index);
-        }
-    
-    /**
-     * @param visibleLeaves
-     * @return
-     */
-    public int getChildCount(boolean visibleLeaves) {
-        if (!visibleLeaves) {
-            int nonLeafCount = 0;
-            Enumeration e = children.elements();
-            while (e.hasMoreElements()) {
-                TreeNode n = (TreeNode)e.nextElement();
-                if (!n.isLeaf()) ++nonLeafCount;
-                }
-            
-            return nonLeafCount;
-            }
-        
-        return super.getChildCount();
-        }
-    
-    /* (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    public int compareTo(Object o) {
-        ParameterDatabaseTreeNode n = (ParameterDatabaseTreeNode)o;
+	/**
+	 * @param index
+	 * @param visibleLeaves
+	 * @return
+	 */
+	public Object getChildAt(int index, boolean visibleLeaves) {
+		if (children == null) {
+			throw new ArrayIndexOutOfBoundsException("node has no children");
+		}
 
-        return ((Comparable)userObject).compareTo(n.userObject);
-        }
-    
-    /**
-     * @param comp
-     */
-    public void sort(Comparator comp) {
-        if (children == null) 
-            return;
-        
-        Object[] childArr = children.toArray();
-        Arrays.sort(childArr, comp);
-        children = new Vector(Arrays.asList(childArr));
-        
-        Enumeration e = children.elements();
-        while (e.hasMoreElements()) {
-            ParameterDatabaseTreeNode n = 
-                (ParameterDatabaseTreeNode)e.nextElement();
-            n.sort(comp);
-            }
-        }
-    }
+		if (!visibleLeaves) {
+			int nonLeafIndex = -1;
+			Enumeration e = children.elements();
+			while (e.hasMoreElements()) {
+				TreeNode n = (TreeNode) e.nextElement();
+				if (!n.isLeaf()) {
+					if (++nonLeafIndex == index)
+						return n;
+				}
+			}
+
+			throw new ArrayIndexOutOfBoundsException("index = " + index + ", children = " + getChildCount(visibleLeaves));
+		}
+
+		return super.getChildAt(index);
+	}
+
+	/**
+	 * @param visibleLeaves
+	 * @return
+	 */
+	public int getChildCount(boolean visibleLeaves) {
+		if (!visibleLeaves) {
+			int nonLeafCount = 0;
+			Enumeration e = children.elements();
+			while (e.hasMoreElements()) {
+				TreeNode n = (TreeNode) e.nextElement();
+				if (!n.isLeaf())
+					++nonLeafCount;
+			}
+
+			return nonLeafCount;
+		}
+
+		return super.getChildCount();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(Object o) {
+		ParameterDatabaseTreeNode n = (ParameterDatabaseTreeNode) o;
+
+		return ((Comparable) userObject).compareTo(n.userObject);
+	}
+
+	/**
+	 * @param comp
+	 */
+	public void sort(Comparator comp) {
+		if (children == null)
+			return;
+
+		Object[] childArr = children.toArray();
+		Arrays.sort(childArr, comp);
+		children = new Vector(Arrays.asList(childArr));
+
+		Enumeration e = children.elements();
+		while (e.hasMoreElements()) {
+			ParameterDatabaseTreeNode n = (ParameterDatabaseTreeNode) e.nextElement();
+			n.sort(comp);
+		}
+	}
+}

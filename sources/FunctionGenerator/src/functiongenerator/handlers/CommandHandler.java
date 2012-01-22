@@ -13,8 +13,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import functiongenerator.FGRunnable;
 
-
-
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
  * 
@@ -26,6 +24,7 @@ public class CommandHandler extends AbstractHandler {
 	static private final Log logger = LogFactory.getLog(CommandHandler.class);
 
 	static private ExecutorService pool = Executors.newCachedThreadPool();
+
 	/**
 	 * The constructor.
 	 */
@@ -37,8 +36,7 @@ public class CommandHandler extends AbstractHandler {
 	 * from the application context.
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		final IWorkbenchWindow window = HandlerUtil
-				.getActiveWorkbenchWindowChecked(event);
+		final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
 		logger.debug("Starting the execution of the Command Hanlder");
 		pool.execute(new FGRunnable(window));

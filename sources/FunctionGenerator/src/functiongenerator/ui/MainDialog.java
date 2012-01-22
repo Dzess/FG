@@ -144,8 +144,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
-			jContentPane.setLayout(new BoxLayout(getJContentPane(),
-					BoxLayout.Y_AXIS));
+			jContentPane.setLayout(new BoxLayout(getJContentPane(), BoxLayout.Y_AXIS));
 			jContentPane.add(getPanelProblemType(), null);
 			jContentPane.add(getPanelConstraints(), null);
 			jContentPane.add(getPanelSettings(), null);
@@ -163,12 +162,9 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JPanel getPanelConstraints() {
 		if (panelConstraints == null) {
 			panelConstraints = new JPanel();
-			panelConstraints.setLayout(new BoxLayout(getPanelConstraints(),
-					BoxLayout.Y_AXIS));
-			panelConstraints.setBorder(BorderFactory.createTitledBorder(null,
-					"Constraints", TitledBorder.DEFAULT_JUSTIFICATION,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog",
-							Font.BOLD, 12), new Color(51, 51, 51)));
+			panelConstraints.setLayout(new BoxLayout(getPanelConstraints(), BoxLayout.Y_AXIS));
+			panelConstraints.setBorder(BorderFactory.createTitledBorder(null, "Constraints", TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			panelConstraints.add(getJScrollPane(), null);
 			panelConstraints.add(getConstraintsPanelButtons(), null);
 		}
@@ -205,10 +201,8 @@ public class MainDialog extends JDialog implements ActionListener {
 			labelPopulationSize.setName("labelPopulationSize");
 			panelSettings = new JPanel();
 			panelSettings.setLayout(new GridBagLayout());
-			panelSettings.setBorder(BorderFactory.createTitledBorder(null,
-					"Basic settings", TitledBorder.DEFAULT_JUSTIFICATION,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog",
-							Font.BOLD, 12), new Color(51, 51, 51)));
+			panelSettings.setBorder(BorderFactory.createTitledBorder(null, "Basic settings", TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			panelSettings.add(labelPopulationSize, gridBagConstraints2);
 			panelSettings.add(getTextPopulationSize(), gridBagConstraints11);
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
@@ -270,12 +264,9 @@ public class MainDialog extends JDialog implements ActionListener {
 			gridBagConstraints1.weightx = 1.0;
 			panelOperations = new JPanel();
 			panelOperations.setLayout(new GridBagLayout());
-			panelOperations.setBorder(BorderFactory.createTitledBorder(null,
-					"Available functions", TitledBorder.DEFAULT_JUSTIFICATION,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog",
-							Font.BOLD, 12), new Color(51, 51, 51)));
-			panelOperations
-					.add(getJScrollPaneOperations(), gridBagConstraints1);
+			panelOperations.setBorder(BorderFactory.createTitledBorder(null, "Available functions", TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			panelOperations.add(getJScrollPaneOperations(), gridBagConstraints1);
 		}
 		return panelOperations;
 	}
@@ -347,8 +338,7 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (tablePoints == null) {
 			tablePoints = new JTable();
 			tablePoints.setCellSelectionEnabled(true);
-			tablePoints
-					.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			tablePoints.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			tablePoints.setModel(new PointsTableModel(Double.class));
 			tablePoints.putClientProperty("terminateEditOnFocusLost", true);
 
@@ -434,10 +424,8 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (tableOperations == null) {
 			tableOperations = new JTable();
 			tableOperations.setCellSelectionEnabled(true);
-			tableOperations
-					.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			tableOperations
-					.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+			tableOperations.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			tableOperations.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 			tableOperations.setModel(OperationsTableModel.getReal());
 
 			setTableOperationsColumnWidth();
@@ -459,14 +447,11 @@ public class MainDialog extends JDialog implements ActionListener {
 
 		if (cmd.equals("updateType")) {
 			PointsTableModel model = (PointsTableModel) tablePoints.getModel();
-			if (model.getColumnClass(0).equals(Integer.class)
-					&& radioDouble.isSelected()) {
+			if (model.getColumnClass(0).equals(Integer.class) && radioDouble.isSelected()) {
 				tablePoints.setModel(new PointsTableModel(Double.class, model));
 				tableOperations.setModel(OperationsTableModel.getReal());
-			} else if (model.getColumnClass(0).equals(Double.class)
-					&& radioInteger.isSelected()) {
-				tablePoints
-						.setModel(new PointsTableModel(Integer.class, model));
+			} else if (model.getColumnClass(0).equals(Double.class) && radioInteger.isSelected()) {
+				tablePoints.setModel(new PointsTableModel(Integer.class, model));
 				tableOperations.setModel(OperationsTableModel.getInteger());
 			}
 			setTableOperationsColumnWidth();
@@ -481,50 +466,40 @@ public class MainDialog extends JDialog implements ActionListener {
 		} else if (cmd.equals("AddX")) {
 			PointsTableModel model = (PointsTableModel) tablePoints.getModel();
 			if (model.getColumnCount() >= 6) {
-				JOptionPane.showMessageDialog(this,
-						"More variables is not supported!", "Warning",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, "More variables is not supported!", "Warning", JOptionPane.WARNING_MESSAGE);
 			} else {
 				model.addX();
 			}
 		} else if (cmd.equals("RemoveX")) {
 			try {
-				PointsTableModel model = (PointsTableModel) tablePoints
-						.getModel();
+				PointsTableModel model = (PointsTableModel) tablePoints.getModel();
 				model.removeX();
 			} catch (RuntimeException ex) {
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
 		} else if (cmd.equals("Linear scaling")) {
 			LinearScalingDialog dlg = new LinearScalingDialog(this, getMode());
 			dlg.setVisible(true);
 			if (dlg.getResult()) {
-				if (JOptionPane.showConfirmDialog(this,
-						"Current values will be overridden. Proceed?",
-						"Confirm", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+				if (JOptionPane.showConfirmDialog(this, "Current values will be overridden. Proceed?", "Confirm",
+						JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
 					tablePoints.setModel(dlg.getModel());
 				}
 			}
 		} else if (cmd.equals("Evolve")) {
 			if (getPoints().size() == 0) {
-				JOptionPane.showMessageDialog(this,
-						"Please define at least 1 point.", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Please define at least 1 point.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
 			try {
 				List<Class<?>> operations = getOperations();
 				if (operations.size() == 0) {
-					JOptionPane.showMessageDialog(this,
-							"Please select at least 1 operation.", "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Please select at least 1 operation.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
@@ -538,24 +513,20 @@ public class MainDialog extends JDialog implements ActionListener {
 				JFileChooser chooser = getFileChooser();
 				if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 
-					Class<?> fieldType = radioDouble.isSelected() ? Double.class
-							: Integer.class;
+					Class<?> fieldType = radioDouble.isSelected() ? Double.class : Integer.class;
 					File file = chooser.getSelectedFile();
-					PointsTableModel model = loader.loadFromFile(file,
-							fieldType);
+					PointsTableModel model = loader.loadFromFile(file, fieldType);
 					tablePoints.setModel(model);
 				}
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (cmd.equals("Save")) {
 			try {
 				JFileChooser chooser = getFileChooser();
 				if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 
-					PointsTableModel model = (PointsTableModel) tablePoints
-							.getModel();
+					PointsTableModel model = (PointsTableModel) tablePoints.getModel();
 					File file = chooser.getSelectedFile();
 					String path = file.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".csv"))
@@ -564,8 +535,7 @@ public class MainDialog extends JDialog implements ActionListener {
 					loader.saveToFile(file, model);
 				}
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -605,8 +575,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	private JFormattedTextField getTextPopulationSize() {
 		if (textPopulationSize == null) {
-			textPopulationSize = new JFormattedTextField(
-					getPositiveIntegerFormatter());
+			textPopulationSize = new JFormattedTextField(getPositiveIntegerFormatter());
 			textPopulationSize.setText("25000");
 			textPopulationSize.setPreferredSize(new Dimension(32, 20));
 		}
@@ -620,8 +589,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	private JFormattedTextField getTextGenerations() {
 		if (textGenerations == null) {
-			textGenerations = new JFormattedTextField(
-					getPositiveIntegerFormatter());
+			textGenerations = new JFormattedTextField(getPositiveIntegerFormatter());
 			textGenerations.setText("50");
 			textGenerations.setPreferredSize(new Dimension(32, 20));
 		}
@@ -653,8 +621,7 @@ public class MainDialog extends JDialog implements ActionListener {
 
 	private List<Class<?>> getOperations() throws ClassNotFoundException {
 		List<Class<?>> operations = new ArrayList<Class<?>>();
-		OperationsTableModel model = (OperationsTableModel) tableOperations
-				.getModel();
+		OperationsTableModel model = (OperationsTableModel) tableOperations.getModel();
 		for (String operation : model.getSelectedRows()) {
 			operations.add(Class.forName(operation));
 		}
@@ -703,8 +670,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	private JFormattedTextField getTextMaxDepth() {
 		if (textMaxDepth == null) {
-			textMaxDepth = new JFormattedTextField(
-					getPositiveIntegerFormatter());
+			textMaxDepth = new JFormattedTextField(getPositiveIntegerFormatter());
 			textMaxDepth.setPreferredSize(new Dimension(32, 20));
 			textMaxDepth.setText("6");
 		}
@@ -734,10 +700,8 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (panelProblemType == null) {
 			panelProblemType = new JPanel();
 			panelProblemType.setLayout(new GridBagLayout());
-			panelProblemType.setBorder(BorderFactory.createTitledBorder(null,
-					"Problem type", TitledBorder.DEFAULT_JUSTIFICATION,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog",
-							Font.BOLD, 12), new Color(51, 51, 51)));
+			panelProblemType.setBorder(BorderFactory.createTitledBorder(null, "Problem type", TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			panelProblemType.add(getRadioDouble(), new GridBagConstraints());
 			panelProblemType.add(getRadioInteger(), new GridBagConstraints());
 		}
@@ -834,8 +798,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton getSavePreferencesButton() {
 		if (savePreferencesButton == null) {
 			savePreferencesButton = new JButton("Save");
-			savePreferencesButton
-					.setToolTipText("Saves the basic settings and functions into file");
+			savePreferencesButton.setToolTipText("Saves the basic settings and functions into file");
 			savePreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
 			savePreferencesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -854,8 +817,7 @@ public class MainDialog extends JDialog implements ActionListener {
 					// TODO: write the code for reading the preferences here
 				}
 			});
-			loadPreferencesButton
-					.setToolTipText("Loads the basic settings and functions from file");
+			loadPreferencesButton.setToolTipText("Loads the basic settings and functions from file");
 			loadPreferencesButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
 		return loadPreferencesButton;

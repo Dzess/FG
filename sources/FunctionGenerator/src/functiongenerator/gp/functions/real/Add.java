@@ -15,9 +15,8 @@ public class Add extends BinaryOperation {
 		return "+";
 	}
 
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
-		
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+
 		double result;
 		DoubleData rd = ((DoubleData) (input));
 

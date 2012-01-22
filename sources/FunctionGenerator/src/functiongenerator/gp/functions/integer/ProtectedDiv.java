@@ -10,8 +10,7 @@ import functiongenerator.gp.data.IntegerData;
 public class ProtectedDiv extends functiongenerator.gp.functions.real.ProtectedDiv {
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
 
 		int result;
 		IntegerData rd = ((IntegerData) (input));

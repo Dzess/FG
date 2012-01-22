@@ -2,10 +2,10 @@
   Copyright 2006 by Sean Luke
   Licensed under the Academic Free License version 3.0
   See the file "LICENSE" for more information
-*/
-
+ */
 
 package ec;
+
 import ec.util.*;
 
 /* 
@@ -17,16 +17,14 @@ import ec.util.*;
 
 /**
  * @author Sean Luke
- * @version 1.0 
+ * @version 1.0
  */
 
-public final class ECDefaults implements DefaultsForm
-    {
-    public static final String P_EC = "ec";
+public final class ECDefaults implements DefaultsForm {
+	public static final String P_EC = "ec";
 
-    /** Returns the default base. */
-    public static final Parameter base()
-        {
-        return new Parameter(P_EC);
-        }    
-    }
+	/** Returns the default base. */
+	public static final Parameter base() {
+		return new Parameter(P_EC);
+	}
+}

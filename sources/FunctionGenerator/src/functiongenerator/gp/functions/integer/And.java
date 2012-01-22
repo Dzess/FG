@@ -16,9 +16,8 @@ public class And extends BinaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
-		
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+
 		int result;
 		IntegerData rd = ((IntegerData) (input));
 
@@ -27,7 +26,7 @@ public class And extends BinaryOperation {
 
 		children[1].eval(state, thread, input, stack, individual, problem);
 		rd.Y = result & rd.Y;
-		
+
 	}
 
 }

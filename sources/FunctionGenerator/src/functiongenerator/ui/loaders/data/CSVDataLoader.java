@@ -20,10 +20,10 @@ import functiongenerator.ui.PointsTableModel;
  */
 public class CSVDataLoader implements IDataLoader {
 
-	public CSVDataLoader(){
-		
+	public CSVDataLoader() {
+
 	}
-	
+
 	@Override
 	public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException {
 
@@ -51,8 +51,7 @@ public class CSVDataLoader implements IDataLoader {
 				if (fieldType.equals(Double.class))
 					myRow.put(-1, Double.parseDouble(parts[parts.length - 1]));
 				else
-					myRow.put(-1,
-							(int) Double.parseDouble(parts[parts.length - 1]));
+					myRow.put(-1, (int) Double.parseDouble(parts[parts.length - 1]));
 
 				model.addRow(myRow);
 			}

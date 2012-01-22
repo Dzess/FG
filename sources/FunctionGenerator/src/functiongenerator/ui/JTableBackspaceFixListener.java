@@ -22,8 +22,7 @@ public class JTableBackspaceFixListener implements KeyListener {
 			// backspace has known bug for swing, this is bugfix for now
 			// we are changing the 'backspace' ASCII code to the
 			// 'delete' ASCII code
-			System.out.println("Consuming the : " + k.getKeyCode()
-					+ "replacing with: " + 127);
+			System.out.println("Consuming the : " + k.getKeyCode() + "replacing with: " + 127);
 			k.setKeyCode(127);
 		}
 	}

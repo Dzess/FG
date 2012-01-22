@@ -2,10 +2,10 @@
   Copyright 2006 by Sean Luke
   Licensed under the Academic Free License version 3.0
   See the file "LICENSE" for more information
-*/
-
+ */
 
 package ec.steadystate;
+
 import ec.*;
 import ec.util.*;
 
@@ -18,16 +18,14 @@ import ec.util.*;
 
 /**
  * @author Sean Luke
- * @version 1.0 
+ * @version 1.0
  */
 
-public final class SteadyStateDefaults implements DefaultsForm
-    {
-    public static final String P_STEADYSTATE = "steady";
+public final class SteadyStateDefaults implements DefaultsForm {
+	public static final String P_STEADYSTATE = "steady";
 
-    /** Returns the default base. */
-    public static final Parameter base()
-        {
-        return new Parameter(P_STEADYSTATE);
-        }    
-    }
+	/** Returns the default base. */
+	public static final Parameter base() {
+		return new Parameter(P_STEADYSTATE);
+	}
+}

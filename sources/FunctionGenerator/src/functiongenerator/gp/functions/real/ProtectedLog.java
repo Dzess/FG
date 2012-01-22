@@ -16,17 +16,16 @@ public class ProtectedLog extends UnaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
-		
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+
 		DoubleData rd = ((DoubleData) (input));
 
 		children[0].eval(state, thread, input, stack, individual, problem);
-		if(rd.Y > 0)
+		if (rd.Y > 0)
 			rd.Y = Math.log(rd.Y);
 		else
 			rd.Y = 0;
-		
+
 	}
 
 }

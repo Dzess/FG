@@ -74,18 +74,14 @@ public class Engine {
 
 	private void updateProgress(int currentGen, String output) {
 		for (IProgressListener listener : listeners) {
-			listener.update(((double) (currentGen * 100))
-					/ (double) this.getSettings().getGenerations(), output);
+			listener.update(((double) (currentGen * 100)) / (double) this.getSettings().getGenerations(), output);
 		}
 	}
 
-	private String generateClassTemplate(String func, String comment)
-			throws IOException {
+	private String generateClassTemplate(String func, String comment) throws IOException {
 		try {
-			InputStream template = Engine.class
-					.getResourceAsStream("ClassTemplate.java.tpl");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					template));
+			InputStream template = Engine.class.getResourceAsStream("ClassTemplate.java.tpl");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(template));
 			StringBuilder builder = new StringBuilder();
 
 			for (String line; (line = reader.readLine()) != null;) {
@@ -95,14 +91,12 @@ public class Engine {
 
 			int idx = builder.indexOf("/*functionCode*/");
 			if (idx < 0)
-				throw new RuntimeException(
-						"/*functionCode*/ not found in class template!");
+				throw new RuntimeException("/*functionCode*/ not found in class template!");
 			builder.replace(idx, idx + "/*functionCode*/".length(), func);
 
 			idx = builder.indexOf("/*comment*/");
 			if (idx < 0)
-				throw new RuntimeException(
-						"/*comment*/ not found in class template!");
+				throw new RuntimeException("/*comment*/ not found in class template!");
 			builder.replace(idx, idx + "/*comment*/".length(), comment);
 
 			String type = points.get(0)[0] instanceof Double ? "double" : "int";
@@ -120,10 +114,8 @@ public class Engine {
 			argumentsBuilder.deleteCharAt(argumentsBuilder.length() - 1);
 			idx = builder.indexOf("/*arguments*/");
 			if (idx < 0)
-				throw new RuntimeException(
-						"/*arguments*/ not found in class template!");
-			builder.replace(idx, idx + "/*arguments*/".length(),
-					argumentsBuilder.toString());
+				throw new RuntimeException("/*arguments*/ not found in class template!");
+			builder.replace(idx, idx + "/*arguments*/".length(), argumentsBuilder.toString());
 
 			return builder.toString();
 		} catch (UnsupportedEncodingException ex) {
@@ -139,10 +131,7 @@ public class Engine {
 
 	private void processNode(StringBuilder builder, GPNode node) {
 		if (node instanceof BinaryOperation) {
-			if (node instanceof ProtectedDiv
-					|| node instanceof Pow
-					|| node instanceof Min
-					|| node instanceof Max
+			if (node instanceof ProtectedDiv || node instanceof Pow || node instanceof Min || node instanceof Max
 					|| node instanceof functiongenerator.gp.functions.integer.ProtectedDiv
 					|| node instanceof functiongenerator.gp.functions.integer.Min
 					|| node instanceof functiongenerator.gp.functions.integer.Max) {
@@ -169,8 +158,7 @@ public class Engine {
 		} else if (node instanceof NullaryOperation) {
 			builder.append(node.toString());
 		} else {
-			throw new RuntimeException("Unknown node type: "
-					+ node.getClass().getName());
+			throw new RuntimeException("Unknown node type: " + node.getClass().getName());
 		}
 	}
 
@@ -226,8 +214,7 @@ public class Engine {
 
 		SimpleStatistics stat = (SimpleStatistics) state.statistics;
 		GPIndividual ind = (GPIndividual) stat.best_of_run[0];
-		String template = generateClassTemplate(translateTree(ind.trees[0]),
-				ind.fitness.fitnessToStringForHumans());
+		String template = generateClassTemplate(translateTree(ind.trees[0]), ind.fitness.fitnessToStringForHumans());
 
 		state.finish(result);
 		Evolve.cleanup(state);

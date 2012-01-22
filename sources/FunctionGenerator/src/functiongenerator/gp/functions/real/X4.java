@@ -10,10 +10,9 @@ import functiongenerator.gp.problem.AbstractRegressionProblem;
 
 public class X4 extends X0 {
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
-		
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+
 		DoubleData rd = ((DoubleData) (input));
-		rd.Y = (Double)((AbstractRegressionProblem)problem).X[4];
+		rd.Y = (Double) ((AbstractRegressionProblem) problem).X[4];
 	}
 }

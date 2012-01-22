@@ -2,10 +2,10 @@
   Copyright 2006 by Sean Luke
   Licensed under the Academic Free License version 3.0
   See the file "LICENSE" for more information
-*/
-
+ */
 
 package ec.breed;
+
 import ec.util.Parameter;
 import ec.*;
 
@@ -18,16 +18,14 @@ import ec.*;
 
 /**
  * @author Sean Luke
- * @version 1.0 
+ * @version 1.0
  */
 
-public final class BreedDefaults implements DefaultsForm 
-    {
-    public static final String P_BREED = "breed";
+public final class BreedDefaults implements DefaultsForm {
+	public static final String P_BREED = "breed";
 
-    /** Returns the default base. */
-    public static final Parameter base()
-        {
-        return new Parameter(P_BREED);
-        }
-    }
+	/** Returns the default base. */
+	public static final Parameter base() {
+		return new Parameter(P_BREED);
+	}
+}

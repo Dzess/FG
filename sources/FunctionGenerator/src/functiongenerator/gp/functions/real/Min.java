@@ -16,8 +16,7 @@ public class Min extends BinaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
-			Problem problem) {
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
 		double result;
 		DoubleData rd = ((DoubleData) (input));
 

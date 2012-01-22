@@ -54,8 +54,7 @@ public class Settings {
 	private final ParameterDatabase parameters;
 
 	public Settings() throws IOException {
-		parameters = new ParameterDatabase(
-				Engine.class.getResourceAsStream(TEMPLATE_FILENAME));
+		parameters = new ParameterDatabase(Engine.class.getResourceAsStream(TEMPLATE_FILENAME));
 	}
 
 	/**
@@ -75,8 +74,11 @@ public class Settings {
 	 * @return : the new instance of {@linkplain ParameterDatabase} class with
 	 *         all the values set.
 	 */
-	public ParameterDatabase generateParameterDatabase(int numberOfXes,
-			ProblemType problemType) {
+	public ParameterDatabase generateParameterDatabase(int numberOfXes, ProblemType problemType) {
+
+		if (numberOfXes < 1) {
+			throw new IllegalArgumentException("The number of X varables must be at least one");
+		}
 
 		ParameterDatabase db = (ParameterDatabase) parameters.clone();
 
@@ -84,26 +86,25 @@ public class Settings {
 		db.setProperty("gp.fs.0.size", "" + (operations.size() + numberOfXes));
 
 		if (problemType == ProblemType.DOUBLE) {
-			db.setProperty("eval.problem",RealRegressionProblem.class.getName());
+			db.setProperty("eval.problem", RealRegressionProblem.class.getName());
 			db.setProperty("eval.problem.data", DoubleData.class.getName());
 
 			// set the number of X variables
 			for (int i = 0; i < numberOfXes; ++i) {
-				db.setProperty("gp.fs.0.func." + i,"functiongenerator.gp.functions.real.X" + i);
+				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.real.X" + i);
 				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
 			}
 		} else if (problemType == ProblemType.INTEGER) {
-			db.setProperty("eval.problem",IntegerRegressionProblem.class.getName());
+			db.setProperty("eval.problem", IntegerRegressionProblem.class.getName());
 			db.setProperty("eval.problem.data", IntegerData.class.getName());
 
 			// set the number of X variables
 			for (int i = 0; i < numberOfXes; ++i) {
-				db.setProperty("gp.fs.0.func." + i,"functiongenerator.gp.functions.integer.X" + i);
+				db.setProperty("gp.fs.0.func." + i, "functiongenerator.gp.functions.integer.X" + i);
 				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
 			}
 		} else {
-			throw new IllegalArgumentException("No element for problem type: '"
-					+ problemType + "'");
+			throw new IllegalArgumentException("No element for problem type: '" + problemType + "'");
 		}
 
 		int count = operations.size();
@@ -130,7 +131,7 @@ public class Settings {
 
 		logger.debug("Paramter DB file file");
 		logger.debug(db.toString());
-		
+
 		return db;
 	}
 

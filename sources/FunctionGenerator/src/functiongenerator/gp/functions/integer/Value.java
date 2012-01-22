@@ -22,8 +22,7 @@ public class Value extends NullaryOperation {
 	}
 
 	@Override
-	public void eval(EvolutionState state, int thread, GPData input,
-			ADFStack stack, GPIndividual individual, Problem problem) {
+	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
 		IntegerData rd = ((IntegerData) (input));
 		rd.Y = value;
 	}
