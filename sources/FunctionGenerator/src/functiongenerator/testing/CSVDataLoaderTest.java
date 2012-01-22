@@ -1,6 +1,5 @@
 package functiongenerator.testing;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -17,19 +16,10 @@ import functiongenerator.ui.loaders.data.CSVDataLoader;
  * @author Piotr Jessa
  * 
  */
-public class CSVDataLoaderTest {
+public class CSVDataLoaderTest extends FileTestBase {
 
 	private CSVDataLoader loader;
-	private File file;
 	private PointsTableModel result;
-
-	static private String getLocation(String fileName) {
-		return "resources\\" + fileName;
-	}
-
-	static private File getFile(String fileName) {
-		return new File(getLocation(fileName));
-	}
 
 	@Before
 	public void set_up() {

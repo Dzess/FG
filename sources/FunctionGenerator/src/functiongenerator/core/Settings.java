@@ -2,6 +2,7 @@ package functiongenerator.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -37,6 +38,7 @@ import functiongenerator.gp.problem.RealRegressionProblem;
  * <li>population size - 200</li>
  * <li>max tree depth - 7</li>
  * <li>generations - 50</li>
+ * <li>operations - empty list of operations</li>
  * </ul>
  * 
  * 
@@ -44,17 +46,41 @@ import functiongenerator.gp.problem.RealRegressionProblem;
 public class Settings {
 	private List<Class<?>> operations = new ArrayList<Class<?>>();
 
-	private int popSize = 200;
-	private int generations = 50;
-	private int maxTreeDepth = 7;
+	private int popSize;
+	private int generations;
+	private int maxTreeDepth;
 
 	static private final String TEMPLATE_FILENAME = "template.params";
 	static private final Log logger = LogFactory.getLog(Settings.class);
 
 	private final ParameterDatabase parameters;
 
+	/**
+	 * This method has all values set to 0 or nulls.
+	 * 
+	 * @throws IOException
+	 *             : may be thrown when template is missing
+	 */
 	public Settings() throws IOException {
 		parameters = new ParameterDatabase(Engine.class.getResourceAsStream(TEMPLATE_FILENAME));
+	}
+
+	/**
+	 * Gets the default settings for the problem. This code should be used for
+	 * generating the instance.
+	 * 
+	 * @return the newly created instance with all parameters set to default
+	 * @throws IOException
+	 *             : may be thrown when template is missing
+	 */
+	static public Settings getDefault() throws IOException {
+		Settings settings = new Settings();
+		settings.setGenerations(50);
+		settings.setMaxTreeDepth(7);
+		settings.setPopulationSize(200);
+		settings.setOperations(new LinkedList<Class<?>>());
+
+		return settings;
 	}
 
 	/**
@@ -135,10 +161,51 @@ public class Settings {
 		return db;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + generations;
+		result = prime * result + maxTreeDepth;
+		result = prime * result + ((operations == null) ? 0 : operations.hashCode());
+		result = prime * result + popSize;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Settings)) {
+			return false;
+		}
+		Settings other = (Settings) obj;
+		if (generations != other.generations) {
+			return false;
+		}
+		if (maxTreeDepth != other.maxTreeDepth) {
+			return false;
+		}
+		if (operations == null) {
+			if (other.operations != null) {
+				return false;
+			}
+		} else if (!operations.equals(other.operations)) {
+			return false;
+		}
+		if (popSize != other.popSize) {
+			return false;
+		}
+		return true;
+	}
+
 	/*
 	 * Getters & Setter
 	 */
-
 	public List<Class<?>> getOperations() {
 		return operations;
 	}
