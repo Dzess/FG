@@ -1,5 +1,7 @@
 package functiongenerator.core.gp.rtfuntions;
 
+import java.util.List;
+
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -9,6 +11,11 @@ import javassist.NotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import ec.EvolutionState;
+import ec.Problem;
+import ec.gp.ADFStack;
+import ec.gp.GPData;
+import ec.gp.GPIndividual;
 import functiongenerator.core.gp.functions.real.Zero;
 
 /**
@@ -31,6 +38,12 @@ public abstract class RuntimeFunctionGenerator {
 	static private final Log logger = LogFactory.getLog(RuntimeFunctionGenerator.class);
 	static private int counter = 0;
 
+	static private final String TO_STRING_TEMPLATE = "public String toString() { return %value; }";
+
+	static private String getPackageName(Class<?> cls) {
+		return cls.getPackage().getName();
+	}
+
 	/**
 	 * Generates the binary class and loads it into JVM standard class loader
 	 * namespace. Though the exact type of the generated operation is dependent
@@ -49,6 +62,13 @@ public abstract class RuntimeFunctionGenerator {
 		logger.debug("Reading the JVM Class Pool");
 
 		ClassPool pool = ClassPool.getDefault();
+
+		logger.debug("Geting all the imports");
+		pool.importPackage(getPackageName(EvolutionState.class));
+		pool.importPackage(getPackageName(GPData.class));
+		pool.importPackage(getPackageName(ADFStack.class));
+		pool.importPackage(getPackageName(GPIndividual.class));
+		pool.importPackage(getPackageName(Problem.class));
 
 		logger.debug("Getting super class");
 		Class<?> superClassJVM = this.getSuperClassForOperation();
@@ -77,8 +97,16 @@ public abstract class RuntimeFunctionGenerator {
 		logger.debug("Getting the 'eval' method source code");
 		String methodBody = this.getEvalSourceCode();
 
+		logger.debug("Getting the required classed for this source code");
+		List<Class<?>> usedClasses = this.getUsedClasses();
+		for (Class<?> cls : usedClasses) {
+			pool.importPackage(getPackageName(cls));
+		}
+
 		logger.debug("Getting the 'toString' method source code");
-		String toStrMethodBody = this.getToStringSourceCode();
+		String toStringValue = this.getToStringReturnedValue();
+		toStringValue = "\"" + toStringValue + "\"";
+		String toStrMethodBody = TO_STRING_TEMPLATE.replace("%value", toStringValue);
 
 		CtMethod m;
 		CtMethod toStrM;
@@ -103,11 +131,30 @@ public abstract class RuntimeFunctionGenerator {
 		return c.getCanonicalName();
 	}
 
+	/**
+	 * Precise what kind of classes your code will be using in the body of the
+	 * method.
+	 */
+	protected abstract List<Class<?>> getUsedClasses();
+
+	/**
+	 * What is the superclass of your ECJ operation implementation
+	 */
 	protected abstract Class<?> getSuperClassForOperation();
 
+	/**
+	 * The body of the GPNode.eval() method should be presented here
+	 */
 	protected abstract String getEvalSourceCode();
 
-	protected abstract String getToStringSourceCode();
+	/**
+	 * The value that should be placed as literal. Must be evaluated at the run
+	 * time at last.
+	 */
+	protected abstract String getToStringReturnedValue();
 
+	/**
+	 * The short name of what your class will be named
+	 */
 	protected abstract String getClassName();
 }
