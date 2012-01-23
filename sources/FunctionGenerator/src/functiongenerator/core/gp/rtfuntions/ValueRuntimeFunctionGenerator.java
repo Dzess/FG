@@ -31,6 +31,13 @@ public class ValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
 
 	private final int value;
 
+	/**
+	 * Initializes the instance of {@linkplain ValueRuntimeFunctionGenerator}
+	 * class. The generated class will act as literal {@linkplain GPNode}.
+	 * 
+	 * @param value
+	 *            : the value that will be returned with this literal
+	 */
 	public ValueRuntimeFunctionGenerator(int value) {
 		this.value = value;
 		this.usedClasses = new LinkedList<Class<?>>();

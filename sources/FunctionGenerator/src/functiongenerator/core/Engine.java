@@ -10,6 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.LogFactory;
+
 import ec.EvolutionState;
 import ec.Evolve;
 import ec.gp.GPIndividual;
@@ -41,11 +43,12 @@ import functiongenerator.core.gp.problem.RealRegressionProblem;
  */
 public class Engine {
 
+	static private final org.apache.commons.logging.Log logger = LogFactory.getLog(Engine.class);
+
 	private List<Number[]> points = new ArrayList<Number[]>();
-
 	private Settings settings;
-
 	private List<IProgressListener> listeners = new ArrayList<IProgressListener>();
+
 	private volatile boolean cancel = false;
 
 	public List<Number[]> getPoints() {
@@ -171,9 +174,17 @@ public class Engine {
 	public String run() throws FileNotFoundException, IOException {
 		cancel = false;
 
-		// FIXME: get there setting the current type of problem
 		int numberOfXes = points.get(0).length - 1;
-		ProblemType type = ProblemType.DOUBLE;
+
+		ProblemType type = null;
+		if (points.get(0)[0] instanceof Double) {
+			logger.info("Problem is REAL numbered");
+			type = ProblemType.DOUBLE;
+		} else {
+			logger.info("Problem is INTEGER numbered");
+			type = ProblemType.INTEGER;
+		}
+
 		ParameterDatabase db = getSettings().generateParameterDatabase(numberOfXes, type);
 		EvolutionState state = Evolve.initialize(db, 0);
 		state.startFresh();
