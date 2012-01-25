@@ -41,6 +41,9 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
 import functiongenerator.core.Settings;
+import functiongenerator.core.gp.IOperationProviderFactory;
+import functiongenerator.core.gp.factories.IntegerOperationProviderFactory;
+import functiongenerator.core.gp.factories.RealOperationProviderFactory;
 import functiongenerator.ui.loaders.data.CSVDataLoader;
 import functiongenerator.ui.loaders.data.IDataLoader;
 import functiongenerator.ui.loaders.settings.INISettingsLoader;
@@ -48,6 +51,19 @@ import functiongenerator.ui.loaders.settings.ISettingsLoader;
 
 import java.awt.Insets;
 
+/**
+ * Stores all the logic of GUI.
+ * 
+ * <p>
+ * Makes heavy use of subsystems represented by classes:
+ * <ul>
+ * <li>{@linkplain Settings}</li>
+ * <li>{@linkplain ISettingsLoader}</li>
+ * <li>{@linkplain IDataLoader}</li>
+ * <li>{@linkplain IOperationProviderFactory}</li>
+ * </ul>
+ * </p>
+ */
 public class MainDialog extends JDialog implements ActionListener {
 
 	private JPanel jContentPane = null;
@@ -89,6 +105,9 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton loadPreferencesButton;
 	private JPanel panel;
 
+	private IOperationProviderFactory realFactory;
+	private IOperationProviderFactory integerFactory;
+
 	/**
 	 * If true, the dialog was successively closed by OK button.
 	 * 
@@ -107,7 +126,11 @@ public class MainDialog extends JDialog implements ActionListener {
 		super(owner, ModalityType.TOOLKIT_MODAL);
 		initialize();
 
+		// TODO: provide some way of injecting the logic here
 		settings = new Settings();
+		realFactory = new RealOperationProviderFactory();
+		integerFactory = new IntegerOperationProviderFactory();
+
 	}
 
 	/**
@@ -430,7 +453,9 @@ public class MainDialog extends JDialog implements ActionListener {
 			tableOperations.setCellSelectionEnabled(true);
 			tableOperations.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			tableOperations.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-			tableOperations.setModel(OperationsTableModel.getReal());
+
+			// create the default provider
+			tableOperations.setModel(new OperationsTableModel(realFactory));
 
 			setTableOperationsColumnWidth();
 		}
@@ -453,10 +478,15 @@ public class MainDialog extends JDialog implements ActionListener {
 			PointsTableModel model = (PointsTableModel) tablePoints.getModel();
 			if (model.getColumnClass(0).equals(Integer.class) && radioDouble.isSelected()) {
 				tablePoints.setModel(new PointsTableModel(Double.class, model));
-				tableOperations.setModel(OperationsTableModel.getReal());
+
+				// create here the type of the factory used
+				tableOperations.setModel(new OperationsTableModel(realFactory));
+
 			} else if (model.getColumnClass(0).equals(Double.class) && radioInteger.isSelected()) {
 				tablePoints.setModel(new PointsTableModel(Integer.class, model));
-				tableOperations.setModel(OperationsTableModel.getInteger());
+
+				// create here the type of the factory
+				tableOperations.setModel(new OperationsTableModel(integerFactory));
 			}
 			setTableOperationsColumnWidth();
 		} else if (cmd.equals("Add point")) {

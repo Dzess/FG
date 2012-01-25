@@ -16,6 +16,7 @@ import functiongenerator.core.gp.functions.NullaryOperation;
 import functiongenerator.core.gp.functions.UnaryOperation;
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
 import functiongenerator.core.gp.problem.RealRegressionProblem;
+import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
 
 /**
  * Describes all the settings used for configuring the {@linkplain Engine}
@@ -126,7 +127,7 @@ public class Settings {
 
 			// set the number of X variables
 			for (int i = 0; i < numberOfXes; ++i) {
-				
+
 				db.setProperty("gp.fs.0.func." + i, "functiongenerator.core.gp.functions.integer.X" + i);
 				db.setProperty("gp.fs.0.func." + i + ".nc", "nc0");
 			}
@@ -136,8 +137,12 @@ public class Settings {
 
 		int count = operations.size();
 		for (int i = 0; i < count; ++i) {
+
+			// put the name of the function
 			Class<?> op = operations.get(i);
 			db.setProperty("gp.fs.0.func." + (i + numberOfXes), op.getName());
+
+			// put the constraints of the functions
 			if (NullaryOperation.class.isAssignableFrom(op))
 				db.setProperty("gp.fs.0.func." + (i + numberOfXes) + ".nc", "nc0");
 			else if (UnaryOperation.class.isAssignableFrom(op))
@@ -145,6 +150,17 @@ public class Settings {
 			else if (BinaryOperation.class.isAssignableFrom(op))
 				db.setProperty("gp.fs.0.func." + (i + numberOfXes) + ".nc", "nc2");
 		}
+
+		// FIXME: this code should be kind refactored here
+		// operation should be modeled as objects
+
+		// set operations basing on the new thing operation
+		ValueRuntimeFunctionGenerator vrt = new ValueRuntimeFunctionGenerator(5);
+		String canonicalName = vrt.generateClassAndLoad();
+		String fullName = "gp.fs.0.func." + (operations.size() + 1 + numberOfXes);
+
+		db.setProperty(fullName, canonicalName);
+		db.setProperty(fullName + "nc", "nc0");
 
 		// set popSize and generations
 		db.setProperty("pop.subpop.0.size", "" + popSize);

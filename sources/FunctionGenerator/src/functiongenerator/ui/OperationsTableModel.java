@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import functiongenerator.core.gp.IOperationProvider;
+import functiongenerator.core.gp.IOperationProviderFactory;
 import functiongenerator.core.gp.functions.real.Add;
 import functiongenerator.core.gp.functions.real.Cos;
 import functiongenerator.core.gp.functions.real.Div;
@@ -20,10 +22,20 @@ import functiongenerator.core.gp.functions.real.Sin;
 import functiongenerator.core.gp.functions.real.Sub;
 import functiongenerator.core.gp.functions.real.Value;
 
+/**
+ * Models the list of the available functions. Mainly used for viewing purposes
+ * of this. Showing different edition possibilities for each of the
+ * {@linkplain IOperationProvider}.
+ * 
+ * @author Piotr Jessa
+ * 
+ */
 public class OperationsTableModel extends AbstractTableModel {
 
 	private String[] captions = new String[] { "", "Operation", "Full name", "Comment" };
 	private List<Object[]> rows = new ArrayList<Object[]>();
+
+	private final IOperationProviderFactory factory;
 
 	@Override
 	public int getColumnCount() {
@@ -81,75 +93,16 @@ public class OperationsTableModel extends AbstractTableModel {
 		return selected;
 	}
 
-	protected OperationsTableModel() {
+	public List<IOperationProvider> getSelectedOperations() {
+		List<IOperationProvider> selected = new ArrayList<IOperationProvider>();
 
+		// TODO: get the base of the selected element into the abstraction of
+		// operation provider
+
+		return selected;
 	}
 
-	public static OperationsTableModel getReal() {
-		OperationsTableModel model = new OperationsTableModel();
-
-		model.addRow(true, "Add", Add.class.getName(), "");
-		model.addRow(true, "Sub", Sub.class.getName(), "");
-		model.addRow(true, "Mul", Mul.class.getName(), "");
-		model.addRow(false, "Div", Div.class.getName(), "");
-		model.addRow(true, "ProtectedDiv", ProtectedDiv.class.getName(), "Returns 0 when divisor is 0.");
-		// model.addRow(true, "0", Zero.class.getName(), "0, constant.");
-		// model.addRow(true, "1", One.class.getName(), "1, constant.");
-		// model.addRow(true, "2", Two.class.getName(), "2, constant.");
-		// model.addRow(true, "3", Three.class.getName(), "3, constant.");
-		// model.addRow(true, "4", Four.class.getName(), "4, constant.");
-		// model.addRow(true, "5", Five.class.getName(), "5, constant.");
-		// model.addRow(true, "Value", Value.class.getName(),
-		// "Value defined as constant");
-		model.addRow(false, "Exp", Exp.class.getName(), "");
-		model.addRow(false, "Pow", Pow.class.getName(), "");
-		model.addRow(false, "Log", Log.class.getName(), "");
-		model.addRow(false, "ProtectedLog", ProtectedLog.class.getName(), "Returns 0 when argument is less or equal 0.");
-		model.addRow(false, "Min", Min.class.getName(), "");
-		model.addRow(false, "Max", Max.class.getName(), "");
-		model.addRow(false, "Sin", Sin.class.getName(), "");
-		model.addRow(false, "Cos", Cos.class.getName(), "");
-
-		return model;
-	}
-
-	public static OperationsTableModel getInteger() {
-		OperationsTableModel model = new OperationsTableModel();
-
-		model.addRow(true, "Add", functiongenerator.core.gp.functions.integer.Add.class.getName(), "");
-		model.addRow(true, "Sub", functiongenerator.core.gp.functions.integer.Sub.class.getName(), "");
-		model.addRow(true, "Mul", functiongenerator.core.gp.functions.integer.Mul.class.getName(), "");
-		model.addRow(false, "Div", functiongenerator.core.gp.functions.integer.Div.class.getName(), "");
-		model.addRow(true, "ProtectedDiv", functiongenerator.core.gp.functions.integer.ProtectedDiv.class.getName(),
-				"Returns 0 when divisor is 0.");
-		// model.addRow(true, "Value",
-		// functiongenerator.gp.functions.integer.Value.class.getName(),
-		// "Value defined as constant");
-		// model.addRow(true, "0",
-		// functiongenerator.gp.functions.integer.Zero.class.getName(),
-		// "0, constant.");
-		// model.addRow(true, "1",
-		// functiongenerator.gp.functions.integer.One.class.getName(),
-		// "1, constant.");
-		// model.addRow(true, "2",
-		// functiongenerator.gp.functions.integer.Two.class.getName(),
-		// "2, constant.");
-		// model.addRow(true, "3",
-		// functiongenerator.gp.functions.integer.Three.class.getName(),
-		// "3, constant.");
-		// model.addRow(true, "4",
-		// functiongenerator.gp.functions.integer.Four.class.getName(),
-		// "4, constant.");
-		// model.addRow(true, "5",
-		// functiongenerator.gp.functions.integer.Five.class.getName(),
-		// "5, constant.");
-		model.addRow(false, "Min", functiongenerator.core.gp.functions.integer.Min.class.getName(), "");
-		model.addRow(false, "Max", functiongenerator.core.gp.functions.integer.Max.class.getName(), "");
-		model.addRow(false, "And", functiongenerator.core.gp.functions.integer.And.class.getName(), "Bitwise and.");
-		model.addRow(false, "Or", functiongenerator.core.gp.functions.integer.Or.class.getName(), "Bitwise or.");
-		model.addRow(false, "Xor", functiongenerator.core.gp.functions.integer.Xor.class.getName(), "Bitwise xor.");
-		model.addRow(false, "Not", functiongenerator.core.gp.functions.integer.Not.class.getName(), "Bitwise not.");
-
-		return model;
-	}
+	protected OperationsTableModel(IOperationProviderFactory factory) {
+		this.factory = factory;
+	}	
 }

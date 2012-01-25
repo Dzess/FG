@@ -46,6 +46,7 @@ public class FGRunnable implements Runnable {
 
 	public FGRunnable(IWorkbenchWindow window) {
 		this.window = window;
+		
 	}
 
 	@Override

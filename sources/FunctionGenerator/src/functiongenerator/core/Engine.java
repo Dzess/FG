@@ -21,8 +21,6 @@ import ec.simple.SimpleStatistics;
 import ec.util.Log;
 import ec.util.LogRestarter;
 import ec.util.ParameterDatabase;
-import functiongenerator.core.gp.data.DoubleData;
-import functiongenerator.core.gp.data.IntegerData;
 import functiongenerator.core.gp.functions.BinaryOperation;
 import functiongenerator.core.gp.functions.NullaryOperation;
 import functiongenerator.core.gp.functions.UnaryOperation;
@@ -31,8 +29,6 @@ import functiongenerator.core.gp.functions.real.Min;
 import functiongenerator.core.gp.functions.real.Pow;
 import functiongenerator.core.gp.functions.real.ProtectedDiv;
 import functiongenerator.core.gp.problem.AbstractRegressionProblem;
-import functiongenerator.core.gp.problem.IntegerRegressionProblem;
-import functiongenerator.core.gp.problem.RealRegressionProblem;
 
 /**
  * Responsible for running the GP algorithm.
@@ -195,6 +191,7 @@ public class Engine {
 
 		StringWriter writer = new StringWriter();
 		StringBuffer buffer = writer.getBuffer();
+		// TODO: change the sample output log for the org.apache.commons.logging
 		state.output.addLog(writer, new LogRestarter() {
 
 			@Override

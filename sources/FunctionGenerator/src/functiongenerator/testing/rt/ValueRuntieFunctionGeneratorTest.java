@@ -1,10 +1,10 @@
-package functiongenerator.testing.rtfunctions;
+package functiongenerator.testing.rt;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import functiongenerator.core.gp.rtfuntions.ValueRuntimeFunctionGenerator;
+import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
 
 /**
  * Test if the class was loaded to the JVM class pool. Unit level.

@@ -1,4 +1,4 @@
-package functiongenerator.core.gp.rtfuntions;
+package functiongenerator.core.gp.rt;
 
 import java.util.LinkedList;
 import java.util.List;
