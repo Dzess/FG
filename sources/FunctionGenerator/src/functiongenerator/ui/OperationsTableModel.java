@@ -28,6 +28,10 @@ public class OperationsTableModel extends AbstractTableModel {
 	private final IOperationProviderFactory factory;
 
 	public OperationsTableModel(IOperationProviderFactory factory) {
+
+		if (factory == null)
+			throw new IllegalArgumentException("The factory must be presented");
+
 		this.factory = factory;
 
 		this.captions = new ArrayList<String>();

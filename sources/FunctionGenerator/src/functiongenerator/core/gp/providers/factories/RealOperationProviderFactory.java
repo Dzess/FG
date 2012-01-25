@@ -1,6 +1,11 @@
 package functiongenerator.core.gp.providers.factories;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.ui.internal.handlers.ReuseEditorTester;
+
+import javassist.bytecode.analysis.Analyzer;
 
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
@@ -10,15 +15,27 @@ import functiongenerator.core.gp.problem.RealRegressionProblem;
  * Provides the possible operations for the {@linkplain RealRegressionProblem}
  * in the form of {@linkplain IOperationProvider}.
  * 
+ * <p>
+ * This class is the <i>extension point</i> for adding new types of operations
+ * to the program.
+ * </p>
+ * 
  * @author Piotr Jessa
  * 
  */
 public class RealOperationProviderFactory implements IOperationProviderFactory {
 
+	private final List<IOperationProvider> avaliable;
+
+	public RealOperationProviderFactory() {
+		avaliable = new ArrayList<IOperationProvider>();
+
+		// NOTE: add here any types of providers
+	}
+
 	@Override
 	public List<IOperationProvider> getAvaliable() {
-		// TODO Auto-generated method stub
-		return null;
+		return avaliable;
 	}
 
 	// public static OperationsTableModel getReal() {
