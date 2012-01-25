@@ -1,4 +1,4 @@
-package functiongenerator.core.gp.factories;
+package functiongenerator.core.gp.providers.factories;
 
 import java.util.List;
 

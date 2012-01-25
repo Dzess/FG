@@ -42,8 +42,8 @@ import javax.swing.text.NumberFormatter;
 
 import functiongenerator.core.Settings;
 import functiongenerator.core.gp.IOperationProviderFactory;
-import functiongenerator.core.gp.factories.IntegerOperationProviderFactory;
-import functiongenerator.core.gp.factories.RealOperationProviderFactory;
+import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
+import functiongenerator.core.gp.providers.factories.RealOperationProviderFactory;
 import functiongenerator.ui.loaders.data.CSVDataLoader;
 import functiongenerator.ui.loaders.data.IDataLoader;
 import functiongenerator.ui.loaders.settings.INISettingsLoader;

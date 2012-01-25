@@ -1,26 +1,13 @@
 package functiongenerator.ui;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
-import functiongenerator.core.gp.functions.real.Add;
-import functiongenerator.core.gp.functions.real.Cos;
-import functiongenerator.core.gp.functions.real.Div;
-import functiongenerator.core.gp.functions.real.Exp;
-import functiongenerator.core.gp.functions.real.Log;
-import functiongenerator.core.gp.functions.real.Max;
-import functiongenerator.core.gp.functions.real.Min;
-import functiongenerator.core.gp.functions.real.Mul;
-import functiongenerator.core.gp.functions.real.Pow;
-import functiongenerator.core.gp.functions.real.ProtectedDiv;
-import functiongenerator.core.gp.functions.real.ProtectedLog;
-import functiongenerator.core.gp.functions.real.Sin;
-import functiongenerator.core.gp.functions.real.Sub;
-import functiongenerator.core.gp.functions.real.Value;
 
 /**
  * Models the list of the available functions. Mainly used for viewing purposes
@@ -30,16 +17,44 @@ import functiongenerator.core.gp.functions.real.Value;
  * @author Piotr Jessa
  * 
  */
+@SuppressWarnings("serial")
 public class OperationsTableModel extends AbstractTableModel {
 
-	private String[] captions = new String[] { "", "Operation", "Full name", "Comment" };
+	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Full name", "Comment" };
+
+	private List<String> captions;
 	private List<Object[]> rows = new ArrayList<Object[]>();
 
 	private final IOperationProviderFactory factory;
 
+	public OperationsTableModel(IOperationProviderFactory factory) {
+		this.factory = factory;
+
+		this.captions = new ArrayList<String>();
+		for (int i = 0; i < CONSTANT_CAPTIONS.length; i++) {
+			this.captions.add(CONSTANT_CAPTIONS[i]);
+		}
+
+		// get the longest parameters list
+		int maxParameters = 0;
+		for (IOperationProvider provider : factory.getAvaliable()) {
+			int size = provider.getParameters().size();
+			if (size > maxParameters) {
+				maxParameters = size;
+			}
+		}
+
+		// add the maximum elements to captions count
+		for (int i = 0; i < maxParameters; i++) {
+			String newCaption = "Arg " + Integer.toString(i);
+			captions.add(newCaption);
+		}
+
+	}
+
 	@Override
 	public int getColumnCount() {
-		return captions.length;
+		return captions.size();
 	}
 
 	@Override
@@ -54,6 +69,7 @@ public class OperationsTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int row, int col) {
+		// TODO: this code should be far more advanced here
 		return col == 0;
 	}
 
@@ -64,23 +80,24 @@ public class OperationsTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public Class getColumnClass(int c) {
+	public Class<?> getColumnClass(int c) {
+		// TODO: this code is pretty dependent on the IOperationProvider etc
 		return c == 0 ? Boolean.class : String.class;
 	}
 
-	public void addRow(Boolean checked, String operation, String fullname, String comment) {
+	private void addRow(Boolean checked, String operation, String fullname, String comment) {
 		int idx = rows.size();
 		rows.add(new Object[] { checked, operation, fullname, comment });
 		fireTableRowsInserted(idx, idx);
 	}
 
-	public void removeRow(int row) {
+	private void removeRow(int row) {
 		rows.remove(row);
 		fireTableRowsDeleted(row, row);
 	}
 
 	public String getColumnName(int col) {
-		return captions[col];
+		return captions.get(col);
 	}
 
 	public List<String> getSelectedRows() {
@@ -102,7 +119,4 @@ public class OperationsTableModel extends AbstractTableModel {
 		return selected;
 	}
 
-	protected OperationsTableModel(IOperationProviderFactory factory) {
-		this.factory = factory;
-	}	
 }
