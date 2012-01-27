@@ -29,8 +29,8 @@ public class OperationTableModelWithIntegerTest {
 	}
 
 	@Test
-	public void operations_has_5_columns() {
-		Assert.assertEquals(5, model.getColumnCount());
+	public void operations_has_4_columns() {
+		Assert.assertEquals(4, model.getColumnCount());
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class OperationTableModelWithIntegerTest {
 
 	@Test
 	public void columns_one_up_to_three_are_no_editable() {
-		for (int col = 1; col < 4; col++) {
+		for (int col = 1; col < 3; col++) {
 			for (int row = 0; row < model.getRowCount(); row++) {
 				Assert.assertFalse(model.isCellEditable(row, col));
 			}
@@ -56,11 +56,21 @@ public class OperationTableModelWithIntegerTest {
 	 * 
 	 * Otherwise not.
 	 */
-	@Ignore("Not yet implemented")
 	@Test
 	public void some_rows_are_editable_on_extended_columns() {
-		// TODO: implement this test for columing editions, beacause of the
-		// targetet row
-		// type
+
+		int columnOffset = 3;
+
+		int row = 0;
+		for (IOperationProvider provider : factory.getAvaliable()) {
+
+			for (int i = 0; i < provider.getParameters().size(); i++) {
+
+				boolean result = model.isCellEditable(row, columnOffset + i);
+				Assert.assertTrue("The cell is not editable", result);
+
+			}
+			row++;
+		}
 	}
 }

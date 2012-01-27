@@ -1,7 +1,9 @@
 package functiongenerator.ui;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -19,12 +21,14 @@ import functiongenerator.core.gp.IOperationProviderFactory;
 @SuppressWarnings("serial")
 public class OperationsTableModel extends AbstractTableModel {
 
-	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Full name", "Comment" };
+	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Comment" };
 
 	private List<String> captions;
 	private List<Object[]> rows = new ArrayList<Object[]>();
 
 	private final IOperationProviderFactory factory;
+
+	private int maxParameters;
 
 	public OperationsTableModel(IOperationProviderFactory factory) {
 
@@ -38,6 +42,21 @@ public class OperationsTableModel extends AbstractTableModel {
 			this.captions.add(CONSTANT_CAPTIONS[i]);
 		}
 
+		setColumns();
+		setRows();
+
+	}
+
+	private void setRows() {
+		// TODO: maybe the rows should be copied where they should be
+		// prepare the view of the rows here
+		for (IOperationProvider provider : factory.getAvaliable()) {
+			addRow(provider);
+		}
+	}
+
+	private void setColumns() {
+
 		// get the longest parameters list
 		int maxParameters = 0;
 		for (IOperationProvider provider : factory.getAvaliable()) {
@@ -47,12 +66,33 @@ public class OperationsTableModel extends AbstractTableModel {
 			}
 		}
 
+		this.maxParameters = maxParameters;
+
 		// add the maximum elements to captions count
 		for (int i = 0; i < maxParameters; i++) {
 			String newCaption = "Arg " + Integer.toString(i);
 			captions.add(newCaption);
 		}
+	}
 
+	private void addRow(IOperationProvider provider) {
+
+		int idx = rows.size();
+		Boolean checked = provider.isEnableByDefault();
+		String name = provider.getName();
+		String comment = provider.getComment();
+
+		List<Object> tableRow = new LinkedList<Object>();
+		tableRow.add(checked);
+		tableRow.add(name);
+		tableRow.add(comment);
+
+		for (int i = 0; i < maxParameters; i++) {
+			tableRow.add("");
+		}
+
+		rows.add(tableRow.toArray());
+		fireTableRowsInserted(idx, idx);
 	}
 
 	@Override
@@ -72,31 +112,37 @@ public class OperationsTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int row, int col) {
-		// TODO: this code should be far more advanced here
-		return col == 0;
+
+		if (col == 0) {
+			return true;
+		}
+
+		IOperationProvider provider = factory.getAvaliable().get(row);
+		int total = provider.getParameters().size();
+		int offset = CONSTANT_CAPTIONS.length;
+
+		if (col - offset < 0) {
+			return false;
+		}
+
+		if (col - offset < total) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public void setValueAt(Object value, int row, int col) {
+		// TODO: this code logic should be more advanced
+		// this code shoult be updating the parameters map of every provider
 		rows.get(row)[col] = value;
 		fireTableCellUpdated(row, col);
 	}
 
 	@Override
 	public Class<?> getColumnClass(int c) {
-		// TODO: this code is pretty dependent on the IOperationProvider etc
 		return c == 0 ? Boolean.class : String.class;
-	}
-
-	private void addRow(Boolean checked, String operation, String fullname, String comment) {
-		int idx = rows.size();
-		rows.add(new Object[] { checked, operation, fullname, comment });
-		fireTableRowsInserted(idx, idx);
-	}
-
-	private void removeRow(int row) {
-		rows.remove(row);
-		fireTableRowsDeleted(row, row);
 	}
 
 	public String getColumnName(int col) {

@@ -457,18 +457,18 @@ public class MainDialog extends JDialog implements ActionListener {
 			// create the default provider
 			tableOperations.setModel(new OperationsTableModel(realFactory));
 
-			setTableOperationsColumnWidth();
+			//setTableOperationsColumnWidth();
 		}
 		return tableOperations;
 	}
 
-	private void setTableOperationsColumnWidth() {
-		TableColumnModel cModel = tableOperations.getColumnModel();
-		cModel.getColumn(0).setPreferredWidth(15);
-		cModel.getColumn(1).setPreferredWidth(90);
-		cModel.getColumn(2).setPreferredWidth(180);
-		cModel.getColumn(3).setPreferredWidth(180);
-	}
+//	private void setTableOperationsColumnWidth() {
+//		TableColumnModel cModel = tableOperations.getColumnModel();
+//		cModel.getColumn(0).setPreferredWidth(15);
+//		cModel.getColumn(1).setPreferredWidth(90);
+//		cModel.getColumn(2).setPreferredWidth(180);
+//		cModel.getColumn(3).setPreferredWidth(180);
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
@@ -488,7 +488,6 @@ public class MainDialog extends JDialog implements ActionListener {
 				// create here the type of the factory
 				tableOperations.setModel(new OperationsTableModel(integerFactory));
 			}
-			setTableOperationsColumnWidth();
 		} else if (cmd.equals("Add point")) {
 			((PointsTableModel) tablePoints.getModel()).addRow();
 		} else if (cmd.equals("Remove point")) {
