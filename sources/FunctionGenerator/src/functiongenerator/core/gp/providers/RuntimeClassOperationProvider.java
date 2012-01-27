@@ -46,4 +46,10 @@ public class RuntimeClassOperationProvider implements IOperationProvider {
 		
 	}
 
+	@Override
+	public boolean isEnableByDefault() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

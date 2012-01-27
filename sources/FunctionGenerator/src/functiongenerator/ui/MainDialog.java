@@ -124,12 +124,16 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	public MainDialog(Frame owner) throws IOException {
 		super(owner, ModalityType.TOOLKIT_MODAL);
-		initialize();
 
 		// TODO: provide some way of injecting the logic here
 		settings = new Settings();
 		realFactory = new RealOperationProviderFactory();
 		integerFactory = new IntegerOperationProviderFactory();
+		
+		initialize();
+
+
+		
 
 	}
 

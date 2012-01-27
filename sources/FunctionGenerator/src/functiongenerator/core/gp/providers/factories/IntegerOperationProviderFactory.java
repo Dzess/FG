@@ -3,9 +3,13 @@ package functiongenerator.core.gp.providers.factories;
 import java.util.ArrayList;
 import java.util.List;
 
+import functiongenerator.core.gp.functions.integer.*;
+
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
+
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
+import functiongenerator.core.gp.providers.SimpleOperationProvider;
 
 /**
  * Provides the possible operations for the
@@ -26,6 +30,22 @@ public class IntegerOperationProviderFactory implements IOperationProviderFactor
 
 	public IntegerOperationProviderFactory() {
 		avaliable = new ArrayList<IOperationProvider>();
+
+		// NOTE: add here next supported operations
+		avaliable.add(new SimpleOperationProvider(Add.class, "Add", true));
+		avaliable.add(new SimpleOperationProvider(Sub.class, "Subtract", true));
+		avaliable.add(new SimpleOperationProvider(Mul.class, "Mulitply", true));
+		avaliable.add(new SimpleOperationProvider(Div.class, "Divide", false));
+		avaliable.add(new SimpleOperationProvider(ProtectedDiv.class, "Protected Divide", "Returns 0 when divisor is 0.", true));
+		avaliable.add(new SimpleOperationProvider(Min.class, "Min", false));
+		avaliable.add(new SimpleOperationProvider(Max.class, "Max", false));
+
+		// bitwise
+		avaliable.add(new SimpleOperationProvider(And.class, "And", "Bitwise And", false));
+		avaliable.add(new SimpleOperationProvider(Or.class, "Or", "Bitwise Or", false));
+		avaliable.add(new SimpleOperationProvider(Xor.class, "Xor", "Bitwise Xor", false));
+		avaliable.add(new SimpleOperationProvider(Not.class, "Not", "Bitwise Not", false));
+
 	}
 
 	@Override

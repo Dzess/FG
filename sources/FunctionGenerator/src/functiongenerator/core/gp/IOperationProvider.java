@@ -38,33 +38,30 @@ public interface IOperationProvider {
 
 	/**
 	 * Gets the Human Readable name of the operation.
-	 * 
-	 * @return : the name of operation.
 	 */
 	public String getName();
 
 	/**
 	 * Returns the additional information about the operation. What the
 	 * operation will be doing when it will act as {@linkplain GPNode}
-	 * 
-	 * @return : the string with description.
 	 */
 	public String getComment();
 
 	/**
+	 * Returns the information if this opetation provider should be enabled by
+	 * default.
+	 */
+	public boolean isEnableByDefault();
+
+	/**
 	 * Gets the {@linkplain Map} with the key being name of the parameter and
-	 * value being the type of the element.
-	 * 
-	 * @return
+	 * value being the type of the element. *
 	 */
 	public Map<String, Class<?>> getParameters();
 
 	/**
 	 * Parameterizes the object of {@linkplain IOperationProvider} with the same
 	 * map concept, but values here are exact <i>values</i> of parameters.
-	 * 
-	 * @param params
-	 *            : key is name of parameter, value is value.
 	 */
 	public void setParameters(Map<String, Object> params);
 }

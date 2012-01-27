@@ -9,7 +9,7 @@ import functiongenerator.ui.OperationsTableModel;
 
 /**
  * Integration level testing of the {@linkplain OperationsTableModel}. With
- * already existing classes.
+ * already existing classes for {@linkplain IOperationProviderFactory}.
  * 
  * @author Piotr Jessa
  * 
@@ -34,5 +34,5 @@ public class OperationTableModelTest {
 	public void model_works_well_with_integer_operations_provider() {
 		factory = new IntegerOperationProviderFactory();
 		model = new OperationsTableModel(factory);
-	}
+	}	
 }

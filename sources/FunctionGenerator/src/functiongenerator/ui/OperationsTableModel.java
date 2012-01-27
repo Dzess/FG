@@ -1,7 +1,6 @@
 package functiongenerator.ui;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
