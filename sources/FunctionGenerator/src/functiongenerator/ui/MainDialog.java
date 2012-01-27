@@ -131,10 +131,6 @@ public class MainDialog extends JDialog implements ActionListener {
 		integerFactory = new IntegerOperationProviderFactory();
 		
 		initialize();
-
-
-		
-
 	}
 
 	/**

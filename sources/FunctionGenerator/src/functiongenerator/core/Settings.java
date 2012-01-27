@@ -156,7 +156,7 @@ public class Settings {
 
 		// set operations basing on the new thing operation
 		ValueRuntimeFunctionGenerator vrt = new ValueRuntimeFunctionGenerator(5);
-		String canonicalName = vrt.generateClassAndLoad();
+		String canonicalName = vrt.generateClassAndLoad().getCanonicalName();
 		String fullName = "gp.fs.0.func." + (operations.size() + 1 + numberOfXes);
 
 		db.setProperty(fullName, canonicalName);

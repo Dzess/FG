@@ -20,7 +20,7 @@ public class ValueRuntieFunctionGeneratorTest {
 		String expected = "functiongenerator.core.gp.functions.real.Value_0";
 		ValueRuntimeFunctionGenerator rtGen = new ValueRuntimeFunctionGenerator(value);
 
-		String name = rtGen.generateClassAndLoad();
+		String name = rtGen.generateClassAndLoad().getCanonicalName();
 		Assert.assertEquals(expected, name);
 	}
 }

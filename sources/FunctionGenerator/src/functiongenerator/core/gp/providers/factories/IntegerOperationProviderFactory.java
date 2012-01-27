@@ -9,6 +9,7 @@ import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
 
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
+import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 import functiongenerator.core.gp.providers.SimpleOperationProvider;
 
 /**
@@ -45,6 +46,11 @@ public class IntegerOperationProviderFactory implements IOperationProviderFactor
 		avaliable.add(new SimpleOperationProvider(Or.class, "Or", "Bitwise Or", false));
 		avaliable.add(new SimpleOperationProvider(Xor.class, "Xor", "Bitwise Xor", false));
 		avaliable.add(new SimpleOperationProvider(Not.class, "Not", "Bitwise Not", false));
+
+		// additional literals
+		avaliable.add(new RuntimeOperationProvider(Integer.class, false));
+
+		// TODO: make better composite of creating multiple literals
 
 	}
 

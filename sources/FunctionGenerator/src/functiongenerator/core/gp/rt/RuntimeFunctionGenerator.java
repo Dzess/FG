@@ -16,6 +16,7 @@ import ec.Problem;
 import ec.gp.ADFStack;
 import ec.gp.GPData;
 import ec.gp.GPIndividual;
+import ec.gp.GPNode;
 import functiongenerator.core.gp.functions.real.Zero;
 
 /**
@@ -55,9 +56,9 @@ public abstract class RuntimeFunctionGenerator {
 	 * JVM namespace is also static.
 	 * </p>
 	 * 
-	 * @return the canonical name of the generated and loaded class.
+	 * @return class which extends the {@linkplain GPNode}
 	 */
-	public String generateClassAndLoad() throws IllegalArgumentException {
+	public Class<? extends GPNode> generateClassAndLoad() throws IllegalArgumentException {
 
 		logger.debug("Reading the JVM Class Pool");
 
@@ -110,7 +111,7 @@ public abstract class RuntimeFunctionGenerator {
 
 		CtMethod m;
 		CtMethod toStrM;
-		Class<?> c = null;
+		Class<? extends GPNode> c = null;
 		try {
 
 			toStrM = CtMethod.make(toStrMethodBody, myClass);
@@ -128,7 +129,7 @@ public abstract class RuntimeFunctionGenerator {
 		}
 
 		counter += 1;
-		return c.getCanonicalName();
+		return c;
 	}
 
 	/**
