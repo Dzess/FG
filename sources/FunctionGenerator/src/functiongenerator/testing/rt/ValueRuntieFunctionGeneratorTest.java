@@ -4,7 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
+import functiongenerator.core.gp.rt.IntegerValueRuntimeFunctionGenerator;
 
 /**
  * Test if the class was loaded to the JVM class pool. Unit level.
@@ -18,7 +18,7 @@ public class ValueRuntieFunctionGeneratorTest {
 	public void loads_throws_no_exceptions() {
 		int value = 5;
 		String expected = "functiongenerator.core.gp.functions.real.Value_0";
-		ValueRuntimeFunctionGenerator rtGen = new ValueRuntimeFunctionGenerator(value);
+		IntegerValueRuntimeFunctionGenerator rtGen = new IntegerValueRuntimeFunctionGenerator(value);
 
 		String name = rtGen.generateClassAndLoad().getCanonicalName();
 		Assert.assertEquals(expected, name);

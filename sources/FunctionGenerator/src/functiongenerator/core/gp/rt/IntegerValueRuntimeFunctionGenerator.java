@@ -19,10 +19,13 @@ import functiongenerator.core.gp.functions.NullaryOperation;
  * <i>code</i> is generated dynamically in the JVM Heap.
  * </p>
  * 
+ * <p>
+ * Typed for the {@linkplain Integer}.
+ * </p>
  * @author Piotr Jessa
  * 
  */
-public class ValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
+public class IntegerValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
 
 	static private final String TEMPLATE = "public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {"
 			+ " IntegerData rd = ((IntegerData) (input)); " + " rd.Y = %value; }";
@@ -32,13 +35,13 @@ public class ValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
 	private final int value;
 
 	/**
-	 * Initializes the instance of {@linkplain ValueRuntimeFunctionGenerator}
+	 * Initializes the instance of {@linkplain IntegerValueRuntimeFunctionGenerator}
 	 * class. The generated class will act as literal {@linkplain GPNode}.
 	 * 
 	 * @param value
 	 *            : the value that will be returned with this literal
 	 */
-	public ValueRuntimeFunctionGenerator(int value) {
+	public IntegerValueRuntimeFunctionGenerator(int value) {
 		this.value = value;
 		this.usedClasses = new LinkedList<Class<?>>();
 		this.usedClasses.add(IntegerData.class);
@@ -61,7 +64,6 @@ public class ValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
 
 	@Override
 	protected String getToStringReturnedValue() {
-
 		return Integer.toString(value);
 	}
 

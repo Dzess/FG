@@ -2,7 +2,6 @@ package functiongenerator.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.IllegalFormatException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -178,17 +177,26 @@ public class OperationsTableModel extends AbstractTableModel {
 			Entry<String, Class<?>> e = params.get(parameterIndex);
 
 			// check type
+			Object o = null;
 			try {
 				if (e.getValue() == Integer.class) {
 
 					Integer i = Integer.parseInt(value.toString());
-					Map<String, Object> toBeSetParams = this.parameters.get(provider);
-					toBeSetParams.put(e.getKey(), i);
+					o = i;
 
-					provider.setParameters(toBeSetParams);
-
+				} else if (e.getValue() == Double.class) {
+					Double d = Double.parseDouble(value.toString());
+					o = d;
 				}
 				// NOTE: add another data types here
+
+				if (o != null) {
+					Map<String, Object> toBeSetParams = this.parameters.get(provider);
+					toBeSetParams.put(e.getKey(), o);
+					provider.setParameters(toBeSetParams);
+				} else {
+					throw new IllegalArgumentException("The type of parameter unknown");
+				}
 
 			} catch (NumberFormatException exp) {
 				logger.warn("The illegal format for number", exp);

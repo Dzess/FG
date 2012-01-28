@@ -3,301 +3,315 @@ Generation: 0
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=156.0 Adjusted=0.006369427 Hits=0
+Fitness: Standardized=1022.0 Adjusted=9.775171E-4 Hits=1
 Tree 0:
- (- (+ (+ (* (protectedDiv x0 1) (protectedDiv
-     1 x0)) (- (protectedDiv 1 x0) (* 1 1))) (-
-     (- (* x0 x0) (- x0 x0)) (protectedDiv (-
-     x0 1) (+ x0 x0)))) (- (protectedDiv (+ (protectedDiv
-     1 x0) (- x0 x0)) (+ (- 1 1) (protectedDiv
-     1 1))) (* (+ (protectedDiv x0 x0) (+ 1 1))
-     (+ (protectedDiv 1 1) (- 1 x0)))))
+ (- (* x0 x0) (+ (+ -10.0 x0) x0))
 
 Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=156.0 Adjusted=0.006369427 Hits=0
+Fitness: Standardized=147.0 Adjusted=0.006756757 Hits=0
 Tree 0:
- (- (+ (+ (* (protectedDiv x0 1) (protectedDiv
-     1 x0)) (- (protectedDiv 1 x0) (* 1 1))) (-
-     (- (* x0 x0) (- x0 x0)) (protectedDiv (-
-     x0 1) (+ x0 x0)))) (- (protectedDiv (+ (protectedDiv
-     1 x0) (- x0 x0)) (+ (- 1 1) (protectedDiv
-     1 1))) (* (+ (protectedDiv x0 x0) (+ 1 1))
-     (+ (protectedDiv 1 1) (- 1 x0)))))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (protectedDiv -10.0 -10.0)))
 
 Generation: 2
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=92.0 Adjusted=0.010752688 Hits=0
+Fitness: Standardized=94.7 Adjusted=0.010449321 Hits=1
 Tree 0:
- (+ (+ (+ (protectedDiv x0 x0) (* x0 x0))
-     (+ (+ 1 1) (- (- 1 x0) (- x0 1)))) (protectedDiv
-     (* (- 1 x0) x0) (- (protectedDiv 1 1) (-
-     1 x0))))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (+ (- (protectedDiv -10.0 -10.0) (protectedDiv
+         x0 -10.0)) (protectedDiv (+ x0 x0) (+ x0
+         x0)))))
 
 Generation: 3
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=84.0 Adjusted=0.011764706 Hits=0
+Fitness: Standardized=94.7 Adjusted=0.010449321 Hits=1
 Tree 0:
- (- (- (* (+ (* 1 x0) (protectedDiv x0 1))
-     (protectedDiv 1 1)) (* (- (- x0 x0) (- 1
-     x0)) (protectedDiv (- 1 x0) (* 1 1)))) (+
-     (- (* (- 1 1) (+ x0 1)) (+ (protectedDiv
-         x0 1) (+ 1 1))) (- (- (+ x0 x0) (protectedDiv
-     1 1)) (+ (- 1 x0) (- 1 x0)))))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (+ (- (protectedDiv -10.0 -10.0) (protectedDiv
+         x0 -10.0)) (protectedDiv (+ x0 x0) (+ x0
+         x0)))))
 
 Generation: 4
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=68.0 Adjusted=0.014492754 Hits=19
+Fitness: Standardized=78.40069 Adjusted=0.01259435 Hits=1
 Tree 0:
- (- (+ (* 1 1) (- (- (* x0 x0) (- x0 x0))
-     (protectedDiv (- x0 1) (+ x0 x0)))) (- (protectedDiv
-     (+ (protectedDiv 1 x0) (- 1 1)) (+ (- 1 1)
-     (protectedDiv 1 1))) (* (+ (protectedDiv
-     x0 x0) (+ 1 1)) (+ (protectedDiv 1 1) (-
-     1 x0)))))
+ (- (+ (- (* x0 x0) (+ x0 -10.0)) (protectedDiv
+     (protectedDiv -10.0 -10.0) (+ x0 -10.0)))
+     (+ (+ (protectedDiv -10.0 -10.0) (+ x0 x0))
+         (protectedDiv -10.0 -10.0)))
 
 Generation: 5
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=30.0 Adjusted=0.032258064 Hits=21
+Fitness: Standardized=78.40069 Adjusted=0.01259435 Hits=1
 Tree 0:
- (- (+ (- (* x0 x0) (+ x0 x0)) (* (+ 1 x0)
-     (* 1 1))) (* (- (- x0 1) (+ 1 1)) (* (+ 1
-     1) (protectedDiv 1 1))))
+ (- (+ (- (* x0 x0) (+ x0 -10.0)) (protectedDiv
+     (protectedDiv -10.0 -10.0) (+ x0 -10.0)))
+     (+ (+ (protectedDiv -10.0 -10.0) (+ x0 x0))
+         (protectedDiv -10.0 -10.0)))
 
 Generation: 6
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
+Fitness: Standardized=78.40069 Adjusted=0.01259435 Hits=1
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- (* 1 x0)
-     (+ 1 1))) (+ 1 1)))
+ (- (+ (- (* x0 x0) (+ x0 -10.0)) (protectedDiv
+     (protectedDiv -10.0 -10.0) (+ x0 -10.0)))
+     (+ (+ (protectedDiv -10.0 -10.0) (+ x0 x0))
+         (protectedDiv -10.0 -10.0)))
 
 Generation: 7
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
+Fitness: Standardized=77.0 Adjusted=0.012820513 Hits=0
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- (* 1 x0)
-     (+ 1 1))) (+ 1 1)))
+ (- (- (- (* x0 x0) (+ x0 x0)) (+ -10.0 x0))
+     (protectedDiv (+ (+ x0 x0) (+ x0 (+ x0 x0)))
+         (+ x0 x0)))
 
 Generation: 8
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=68.0 Adjusted=0.014492754 Hits=19
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (+ (* x0 x0) (protectedDiv (+ x0 -10.0)
+     (+ -10.0 x0))) (+ (+ x0 -10.0) (protectedDiv
+     (+ x0 x0) x0))) (+ (+ (protectedDiv -10.0
+     -10.0) (+ x0 x0)) (protectedDiv -10.0 -10.0)))
 
 Generation: 9
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=22.0 Adjusted=0.04347826 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv -10.0
+     -10.0)) (protectedDiv -10.0 -10.0)))
 
 Generation: 10
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=22.0 Adjusted=0.04347826 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv -10.0
+     -10.0)) (protectedDiv -10.0 -10.0)))
 
 Generation: 11
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=22.0 Adjusted=0.04347826 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv -10.0
+     -10.0)) (protectedDiv -10.0 -10.0)))
 
 Generation: 12
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=22.0 Adjusted=0.04347826 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (- (* x0 x0) (+ (protectedDiv -10.0
+     -10.0) (+ x0 x0))) (+ (protectedDiv -10.0
+     -10.0) (protectedDiv -10.0 -10.0))) (+ x0
+     -10.0))
 
 Generation: 13
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=22.0 Adjusted=0.04347826 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv -10.0
+     -10.0)) (protectedDiv -10.0 -10.0)))
 
 Generation: 14
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 15
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 16
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 17
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 18
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 19
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 20
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 21
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- (- x0
-     1) 1)) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 22
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 23
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 24
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 25
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 26
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 27
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- (- x0
-     1) 1)) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 28
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 29
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 30
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
+Fitness: Standardized=20.0 Adjusted=0.04761905 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ (protectedDiv
+     -10.0 -10.0) (+ x0 x0)) (protectedDiv (+
+     -10.0 -10.0) -10.0)))
 
 Generation: 31
 Best Individual:
@@ -305,8 +319,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 32
 Best Individual:
@@ -314,8 +328,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 33
 Best Individual:
@@ -323,8 +337,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 34
 Best Individual:
@@ -332,8 +346,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 35
 Best Individual:
@@ -341,8 +355,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 36
 Best Individual:
@@ -350,8 +364,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 37
 Best Individual:
@@ -359,8 +373,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 38
 Best Individual:
@@ -368,8 +382,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 39
 Best Individual:
@@ -377,8 +391,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 40
 Best Individual:
@@ -386,8 +400,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 41
 Best Individual:
@@ -395,8 +409,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ 1 1) (+ (* (- x0 1) (- x0 (+ 1 1)))
-     (+ (+ 1 1) 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 42
 Best Individual:
@@ -404,8 +418,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 43
 Best Individual:
@@ -413,8 +427,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 44
 Best Individual:
@@ -422,8 +436,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 45
 Best Individual:
@@ -431,8 +445,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ (+ -10.0 -10.0) -10.0) -10.0)))
 
 Generation: 46
 Best Individual:
@@ -440,8 +454,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 47
 Best Individual:
@@ -449,8 +463,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 48
 Best Individual:
@@ -458,8 +472,8 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Generation: 49
 Best Individual:
@@ -467,13 +481,13 @@ Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ x0 -10.0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))
 
 Best Individual of Run:
 Subpopulation 0:
 Evaluated: true
 Fitness: Standardized=18.0 Adjusted=0.05263158 Hits=21
 Tree 0:
- (+ (+ (+ 1 1) 1) (+ (* (- x0 1) (- x0 (+
-     1 1))) (+ 1 1)))
+ (- (- (* x0 x0) (+ -10.0 x0)) (+ (+ x0 x0)
+     (protectedDiv (+ -10.0 (+ -10.0 -10.0)) -10.0)))

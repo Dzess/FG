@@ -9,6 +9,8 @@ import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
 
 import functiongenerator.core.gp.problem.RealRegressionProblem;
+import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
+import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 import functiongenerator.core.gp.providers.SimpleOperationProvider;
 
 /**
@@ -47,6 +49,10 @@ public class RealOperationProviderFactory implements IOperationProviderFactory {
 		avaliable.add(new SimpleOperationProvider(ProtectedLog.class, "Protected Log", "Returns 0 when argument is less or equal 0.", false));
 		avaliable.add(new SimpleOperationProvider(Sin.class, "Sin", false));
 		avaliable.add(new SimpleOperationProvider(Cos.class, "Cos", false));
+
+		// additional literals
+		avaliable.add(new RuntimeOperationProvider(Double.class, false));
+		avaliable.add(new RangeRuntimeOperationProvider(Double.class, false));
 
 	}
 

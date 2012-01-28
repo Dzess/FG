@@ -1,5 +1,6 @@
 package functiongenerator.core.gp;
 
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 
@@ -8,7 +9,9 @@ import ec.gp.GPNode;
 /**
  * Provides the abstraction used for structuring responsibility of producing the
  * {@linkplain GPNode} class. Exactly products the
- * {@code  Class<? extends GPNode> }
+ * {@code  List<Class<? extends GPNode>> }. Because some
+ * {@linkplain IOperationProvider} could potentially create more than one
+ * operator.
  * 
  * <p>
  * This abstraction has to be introduced, because some of the classes extending
@@ -25,7 +28,8 @@ import ec.gp.GPNode;
  * 
  * <p>
  * If other extension of variety of operations is needed it might be reasonable
- * to introduce another type of abstraction instead of {@linkplain SortedMap}
+ * to introduce another type of abstraction instead of those
+ * {@linkplain SortedMap} and {@linkplain Map} ways of GUI information exchange.
  * </p>
  * 
  * 
@@ -38,14 +42,15 @@ public interface IOperationProvider {
 	 * <i>Creates</i> the class and makes it loadable to the JVM class pool. If
 	 * class is already available then its {@linkplain Class} is returned.
 	 * 
-	 * @return representation of class which extends the {@linkplain GPNode}.
+	 * @return list representation of classes which extends the
+	 *         {@linkplain GPNode}.
 	 * @throws ClassNotFoundException
 	 *             when the loading of the class is not successful.
 	 * 
 	 * @throws IllegalArgumentException
 	 *             when not all the parameters has been successfully set.
 	 */
-	public Class<? extends GPNode> getOperation() throws ClassNotFoundException, IllegalArgumentException;
+	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException;
 
 	/**
 	 * Gets the Human Readable name of the operation.

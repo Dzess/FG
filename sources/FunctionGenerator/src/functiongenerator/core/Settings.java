@@ -143,12 +143,18 @@ public class Settings {
 			throw new IllegalArgumentException("No element for problem type: '" + problemType + "'");
 		}
 
-		// set the operations (GPNodes)
-		int count = operations.size();
+		// get from IOperationProviders classes
+		List<Class<? extends GPNode>> finalClasses = new ArrayList<Class<? extends GPNode>>();
+		for (IOperationProvider provider : operations) {
+			finalClasses.addAll(provider.getOperations());
+		}
+
+		// create the DB representations
+		int count = finalClasses.size();
 		for (int i = 0; i < count; ++i) {
 
 			// gets the possible functions
-			Class<?> op = operations.get(i).getOperation();
+			Class<? extends GPNode> op = finalClasses.get(i);
 			db.setProperty("gp.fs.0.func." + (i + numberOfXes), op.getName());
 
 			// put the constraints of the functions

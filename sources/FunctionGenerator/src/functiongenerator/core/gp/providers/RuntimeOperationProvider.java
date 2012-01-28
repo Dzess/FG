@@ -1,19 +1,28 @@
 package functiongenerator.core.gp.providers;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import ec.gp.GPNode;
 import functiongenerator.core.gp.IOperationProvider;
+import functiongenerator.core.gp.functions.NullaryOperation;
+import functiongenerator.core.gp.rt.DoubleValueRuntimeFunctionGenerator;
 import functiongenerator.core.gp.rt.RuntimeFunctionGenerator;
-import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
+import functiongenerator.core.gp.rt.IntegerValueRuntimeFunctionGenerator;
 
 /**
- * Describes the provider of the provider of classes which are generated at
- * runtime mainly by the some subclass of the
- * {@linkplain RuntimeFunctionGenerator}.
+ * Provider of classes which are generated at runtime mainly by the some
+ * subclass of the {@linkplain RuntimeFunctionGenerator}. Though the class
+ * created is {@linkplain NullaryOperation}.
+ * 
+ * <p>
+ * This class creates only one class for operation literal. For creating
+ * multiple values at once use {@linkplain RangeRuntimeOperationProvider}.
+ * </p>
  * 
  * <h5>
  * Parameters:</h5>
@@ -37,28 +46,37 @@ public class RuntimeOperationProvider implements IOperationProvider {
 
 	private final boolean isEnableByDefault;
 
-	public RuntimeOperationProvider(Class<?> typeOfData, boolean isEnableByDefault) {
+	private final Class<? extends Number> type;
 
+	/**
+	 * 
+	 * @param typeOfData
+	 *            : {@code Integer.class} or {@code Double.class}
+	 */
+	public RuntimeOperationProvider(Class<? extends Number> typeOfData, boolean isEnableByDefault) {
+
+		this.type = typeOfData;
 		this.isEnableByDefault = isEnableByDefault;
 		this.parameters = new TreeMap<String, Class<?>>();
 		this.parameters.put(ATTR_VALUE, typeOfData);
 
 		this.defaultParameters = new TreeMap<String, String>();
 
-		// FIXME: provide way of capturing the doubles here
-		this.defaultParameters.put(ATTR_VALUE, "Provide Integer Value Here");
+		this.defaultParameters.put(ATTR_VALUE, "Provide Value Here");
 
 		this.values = new HashMap<String, Object>();
 	}
 
 	@Override
-	public Class<? extends GPNode> getOperation() throws ClassNotFoundException, IllegalArgumentException {
+	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException {
 
 		// check if all parameters are set
 		if (this.fg == null)
 			throw new IllegalArgumentException("The the value parameter is missing");
 
-		return this.fg.generateClassAndLoad();
+		List<Class<? extends GPNode>> list = new LinkedList<Class<? extends GPNode>>();
+		list.add(fg.generateClassAndLoad());
+		return list;
 	}
 
 	@Override
@@ -84,10 +102,16 @@ public class RuntimeOperationProvider implements IOperationProvider {
 			throw new IllegalArgumentException("The passed params map has to have " + ATTR_VALUE);
 		}
 
-		// FIXME: extend this code to support both real data and integers
-		Integer numberValue = (Integer) values.get(ATTR_VALUE);
-		this.fg = new ValueRuntimeFunctionGenerator(numberValue);
-
+		if (type.equals(Integer.class)) {
+			Integer numberValue = (Integer) values.get(ATTR_VALUE);
+			this.fg = new IntegerValueRuntimeFunctionGenerator(numberValue);
+		} else if (type.equals(Double.class)) {
+			Double numberValu = (Double) values.get(ATTR_VALUE);
+			this.fg = new DoubleValueRuntimeFunctionGenerator(numberValu);
+		}
+		else{
+			throw new IllegalArgumentException("The class cannot be found");
+		}
 	}
 
 	@Override

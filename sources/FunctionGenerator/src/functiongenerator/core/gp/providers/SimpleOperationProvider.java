@@ -1,5 +1,7 @@
 package functiongenerator.core.gp.providers;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -18,6 +20,7 @@ import functiongenerator.core.gp.functions.integer.Add;
 public class SimpleOperationProvider implements IOperationProvider {
 
 	private final Class<? extends GPNode> cls;
+	private final List<Class<? extends GPNode>> list;
 	private final String name;
 	private final String comennt;
 	private final TreeMap<String, Class<?>> map;
@@ -34,14 +37,16 @@ public class SimpleOperationProvider implements IOperationProvider {
 		this.comennt = comment;
 		this.name = name;
 		this.cls = cls;
+		this.list = new LinkedList<Class<? extends GPNode>>();
+		this.list.add(cls);
 
 		this.map = new TreeMap<String, Class<?>>();
 		this.defaultParameters = new TreeMap<String, String>();
 	}
 
 	@Override
-	public Class<? extends GPNode> getOperation() {
-		return cls;
+	public List<Class<? extends GPNode>> getOperations() {
+		return list;
 	}
 
 	@Override

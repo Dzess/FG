@@ -9,6 +9,7 @@ import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
 
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
+import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 import functiongenerator.core.gp.providers.SimpleOperationProvider;
 
@@ -49,8 +50,8 @@ public class IntegerOperationProviderFactory implements IOperationProviderFactor
 
 		// additional literals
 		avaliable.add(new RuntimeOperationProvider(Integer.class, false));
+		avaliable.add(new RangeRuntimeOperationProvider(Integer.class, false));
 
-		// TODO: make better composite of creating multiple literals
 
 	}
 
