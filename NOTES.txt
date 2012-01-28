@@ -1,7 +1,6 @@
 Notatki z rozmowy.
 
-1. Problem z BACKSPACEM -> critical, ale podr¹¿yæ -> naprawione, ale nie da siê teraz usuwaæ elementów jeœli nie klikniemy na t¹ wartoœæ w œrodku, shift te¿ nie dzia³a.
-2. Logowanie + kontrola tego, czy bêdzie w eclipsie dzia³a³o.
+
 3. CSV , whitespacey, i œrednik ale lepiej nie ','. Uzale¿niæ od locle. Czyli my wczytujemy i my zapisujemy
 raczej nie jest nam potrzebna interoperacyjnoœæ.
 4. Zapisu formatu najlpiej do INI / XML / Properties. Init wymaga osobnej biblioteki ¿eby to napisaæ co wcale mo¿e nie byæ takie ³atwe.

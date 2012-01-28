@@ -107,6 +107,8 @@ public class MainDialog extends JDialog implements ActionListener {
 
 	private IOperationProviderFactory realFactory;
 	private IOperationProviderFactory integerFactory;
+	private JPanel extensionFunction;
+	private JButton addLiteralButton;
 
 	/**
 	 * If true, the dialog was successively closed by OK button.
@@ -139,8 +141,8 @@ public class MainDialog extends JDialog implements ActionListener {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(620, 681);
-		this.setMinimumSize(new Dimension(620, 500));
+		this.setSize(1024, 768);
+		this.setMinimumSize(new Dimension(800, 600));
 		this.setResizable(true);
 		this.setModal(true);
 		this.setName("MainDialog");
@@ -285,15 +287,12 @@ public class MainDialog extends JDialog implements ActionListener {
 	 */
 	private JPanel getPanelOperations() {
 		if (panelOperations == null) {
-			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-			gridBagConstraints1.fill = GridBagConstraints.BOTH;
-			gridBagConstraints1.weighty = 1.0;
-			gridBagConstraints1.weightx = 1.0;
 			panelOperations = new JPanel();
-			panelOperations.setLayout(new GridBagLayout());
 			panelOperations.setBorder(BorderFactory.createTitledBorder(null, "Available functions", TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
-			panelOperations.add(getJScrollPaneOperations(), gridBagConstraints1);
+			panelOperations.setLayout(new BoxLayout(panelOperations, BoxLayout.Y_AXIS));
+			panelOperations.add(getJScrollPaneOperations());
+			panelOperations.add(getExtensionFunction());
 		}
 		return panelOperations;
 	}
@@ -935,9 +934,24 @@ public class MainDialog extends JDialog implements ActionListener {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-			panel.add(getSavePreferencesButton());
 			panel.add(getLoadPreferencesButton());
+			panel.add(getSavePreferencesButton());
 		}
 		return panel;
+	}
+	private JPanel getExtensionFunction() {
+		if (extensionFunction == null) {
+			extensionFunction = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) extensionFunction.getLayout();
+			flowLayout.setAlignment(FlowLayout.LEFT);
+			extensionFunction.add(getAddLiteralButton());
+		}
+		return extensionFunction;
+	}
+	private JButton getAddLiteralButton() {
+		if (addLiteralButton == null) {
+			addLiteralButton = new JButton("Add Literal");
+		}
+		return addLiteralButton;
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
