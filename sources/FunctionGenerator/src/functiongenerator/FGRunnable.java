@@ -18,9 +18,10 @@ import functiongenerator.ui.ResultsDialog;
  * handlers simply invoke the {@link FGRunnable.run} method from this class.
  * 
  * 
- * <br/>
+ * <p>
  * Use {@link FGRunnable.main} method to run this program as the standalone
  * application.
+ * </p>
  */
 public class FGRunnable implements Runnable {
 

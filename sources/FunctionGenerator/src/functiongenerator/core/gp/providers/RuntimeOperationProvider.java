@@ -16,7 +16,7 @@ import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
  * {@linkplain RuntimeFunctionGenerator}.
  * 
  * <h5>
- * Parameters</h5>
+ * Parameters:</h5>
  * <ul>
  * <li><i>Value</i> : the generated value of the literal</li>
  * </ul>
@@ -33,7 +33,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 
 	private Map<String, Object> values;
 
-	private RuntimeFunctionGenerator funtionGenerator;
+	private RuntimeFunctionGenerator fg;
 
 	private final boolean isEnableByDefault;
 
@@ -52,8 +52,13 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public Class<? extends GPNode> getOperation() {
-		return this.funtionGenerator.generateClassAndLoad();
+	public Class<? extends GPNode> getOperation() throws ClassNotFoundException, IllegalArgumentException {
+
+		// check if all parameters are set
+		if (this.fg == null)
+			throw new IllegalArgumentException("The the value parameter is missing");
+
+		return this.fg.generateClassAndLoad();
 	}
 
 	@Override
@@ -81,7 +86,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 
 		// FIXME: extend this code to support both real data and integers
 		Integer numberValue = (Integer) values.get(ATTR_VALUE);
-		this.funtionGenerator = new ValueRuntimeFunctionGenerator(numberValue);
+		this.fg = new ValueRuntimeFunctionGenerator(numberValue);
 
 	}
 

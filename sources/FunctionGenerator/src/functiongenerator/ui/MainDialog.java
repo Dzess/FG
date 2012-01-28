@@ -41,6 +41,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
 import functiongenerator.core.Settings;
+import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
 import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
 import functiongenerator.core.gp.providers.factories.RealOperationProviderFactory;
@@ -526,7 +527,7 @@ public class MainDialog extends JDialog implements ActionListener {
 			}
 
 			try {
-				List<Class<?>> operations = getOperations();
+				List<IOperationProvider> operations = getOperations();
 				if (operations.size() == 0) {
 					JOptionPane.showMessageDialog(this, "Please select at least 1 operation.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
@@ -676,11 +677,14 @@ public class MainDialog extends JDialog implements ActionListener {
 		return Integer.parseInt(textMaxDepth.getText());
 	}
 
-	private List<Class<?>> getOperations() throws ClassNotFoundException {
-		List<Class<?>> operations = new ArrayList<Class<?>>();
+	private List<IOperationProvider> getOperations() throws ClassNotFoundException {
+
+		List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
 		OperationsTableModel model = (OperationsTableModel) tableOperations.getModel();
-		for (String operation : model.getSelectedRows()) {
-			operations.add(Class.forName(operation));
+
+		// FIXME: this coping might not be necessary 
+		for (IOperationProvider operation : model.getSelectedOperations()) {
+			operations.add(operation);
 		}
 		return operations;
 	}

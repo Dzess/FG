@@ -8,7 +8,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import ec.gp.GPNode;
 import ec.util.ParameterDatabase;
+import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.data.DoubleData;
 import functiongenerator.core.gp.data.IntegerData;
 import functiongenerator.core.gp.functions.BinaryOperation;
@@ -16,7 +18,6 @@ import functiongenerator.core.gp.functions.NullaryOperation;
 import functiongenerator.core.gp.functions.UnaryOperation;
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
 import functiongenerator.core.gp.problem.RealRegressionProblem;
-import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
 
 /**
  * Describes all the settings used for configuring the {@linkplain Engine}
@@ -32,8 +33,8 @@ import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
  * <i>template.params</i>. File is located in the <i>core</i> package.
  * </p>
  * 
- * <h4>
- * Default values:</h4>
+ * <h5>
+ * Default values:</h5>
  * 
  * <ul>
  * <li>population size - 200</li>
@@ -45,7 +46,7 @@ import functiongenerator.core.gp.rt.ValueRuntimeFunctionGenerator;
  * 
  */
 public class Settings {
-	private List<Class<?>> operations = new ArrayList<Class<?>>();
+	private List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
 
 	private int popSize;
 	private int generations;
@@ -79,7 +80,7 @@ public class Settings {
 		settings.setGenerations(50);
 		settings.setMaxTreeDepth(7);
 		settings.setPopulationSize(200);
-		settings.setOperations(new LinkedList<Class<?>>());
+		settings.setOperations(new LinkedList<IOperationProvider>());
 
 		return settings;
 	}
@@ -100,8 +101,15 @@ public class Settings {
 	 *            is being prepared
 	 * @return : the new instance of {@linkplain ParameterDatabase} class with
 	 *         all the values set.
+	 * 
+	 * @throws ClassNotFoundException
+	 *             no class for {@linkplain GPNode} can be loaded
+	 * @throws IllegalArgumentException
+	 *             some argument might be incorrect. Especially for
+	 *             {@linkplain IOperationProvider}
 	 */
-	public ParameterDatabase generateParameterDatabase(int numberOfXes, ProblemType problemType) {
+	public ParameterDatabase generateParameterDatabase(int numberOfXes, ProblemType problemType) throws IllegalArgumentException,
+			ClassNotFoundException {
 
 		if (numberOfXes < 1) {
 			throw new IllegalArgumentException("The number of X varables must be at least one");
@@ -135,11 +143,12 @@ public class Settings {
 			throw new IllegalArgumentException("No element for problem type: '" + problemType + "'");
 		}
 
+		// set the operations (GPNodes)
 		int count = operations.size();
 		for (int i = 0; i < count; ++i) {
 
-			// put the name of the function
-			Class<?> op = operations.get(i);
+			// gets the possible functions
+			Class<?> op = operations.get(i).getOperation();
 			db.setProperty("gp.fs.0.func." + (i + numberOfXes), op.getName());
 
 			// put the constraints of the functions
@@ -150,17 +159,6 @@ public class Settings {
 			else if (BinaryOperation.class.isAssignableFrom(op))
 				db.setProperty("gp.fs.0.func." + (i + numberOfXes) + ".nc", "nc2");
 		}
-
-		// FIXME: this code should be kind refactored here
-		// operation should be modeled as objects
-
-		// set operations basing on the new thing operation
-		ValueRuntimeFunctionGenerator vrt = new ValueRuntimeFunctionGenerator(5);
-		String canonicalName = vrt.generateClassAndLoad().getCanonicalName();
-		String fullName = "gp.fs.0.func." + (operations.size() + 1 + numberOfXes);
-
-		db.setProperty(fullName, canonicalName);
-		db.setProperty(fullName + "nc", "nc0");
 
 		// set popSize and generations
 		db.setProperty("pop.subpop.0.size", "" + popSize);
@@ -215,11 +213,11 @@ public class Settings {
 	/*
 	 * Getters & Setter
 	 */
-	public List<Class<?>> getOperations() {
+	public List<IOperationProvider> getOperations() {
 		return operations;
 	}
 
-	public void setOperations(List<Class<?>> operations) {
+	public void setOperations(List<IOperationProvider> operations) {
 		if (operations == null)
 			throw new IllegalArgumentException("operations");
 		this.operations = operations;

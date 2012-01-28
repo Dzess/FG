@@ -167,7 +167,7 @@ public class Engine {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public String run() throws FileNotFoundException, IOException {
+	public String run() throws Exception{
 		cancel = false;
 
 		int numberOfXes = points.get(0).length - 1;

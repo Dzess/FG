@@ -6,7 +6,7 @@ import java.util.SortedMap;
 import ec.gp.GPNode;
 
 /**
- * Provides the operation used for structuring responsibility of producing the
+ * Provides the abstraction used for structuring responsibility of producing the
  * {@linkplain GPNode} class. Exactly products the
  * {@code  Class<? extends GPNode> }
  * 
@@ -17,10 +17,15 @@ import ec.gp.GPNode;
  * <p>
  * The class, because of the parameterization, has to provide some interface to
  * tell the GUI how the parameters should be specified. For current
- * implementation scope the simple {@linkplain Map} of type of parameter and its
- * name it is perfectly sufficient. If other extension of variety of operations
- * is needed it might be reasonable to introduce another type of abstraction
- * instead of {@linkplain Map}
+ * implementation scope the simple {@linkplain SortedMap} of type of parameter
+ * and its name it is perfectly sufficient. The default vales are also presented
+ * by {@linkplain SortedMap}. The values to be set are passed using ordinary
+ * {@linkplain Map}.
+ * </p>
+ * 
+ * <p>
+ * If other extension of variety of operations is needed it might be reasonable
+ * to introduce another type of abstraction instead of {@linkplain SortedMap}
  * </p>
  * 
  * 
@@ -33,9 +38,14 @@ public interface IOperationProvider {
 	 * <i>Creates</i> the class and makes it loadable to the JVM class pool. If
 	 * class is already available then its {@linkplain Class} is returned.
 	 * 
-	 * @return : representation of class which extends the {@linkplain GPNode}.
+	 * @return representation of class which extends the {@linkplain GPNode}.
+	 * @throws ClassNotFoundException
+	 *             when the loading of the class is not successful.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             when not all the parameters has been successfully set.
 	 */
-	public Class<? extends GPNode> getOperation();
+	public Class<? extends GPNode> getOperation() throws ClassNotFoundException, IllegalArgumentException;
 
 	/**
 	 * Gets the Human Readable name of the operation.
@@ -55,8 +65,10 @@ public interface IOperationProvider {
 	public boolean isEnableByDefault();
 
 	/**
-	 * Gets the {@linkplain Map} with the key being name of the parameter and
-	 * value being the type of the element. *
+	 * Gets the {@linkplain SortedMap} with the key being name of the parameter
+	 * and value being the type of the element. The {@linkplain SortedMap} is
+	 * used because of the current implementation of GUI which uses position of
+	 * the elements to manage values.
 	 */
 	public SortedMap<String, Class<?>> getParameters();
 
@@ -67,7 +79,11 @@ public interface IOperationProvider {
 	public void setParameters(Map<String, Object> params);
 
 	/**
-	 * Gets the default values for each of the parameter.
+	 * Gets the default values for each of the parameter. The
+	 * {@linkplain SortedMap} returned here should be equal to the
+	 * {@linkplain SortedMap} of method {@code getParameters()} in the field of
+	 * available keys.
 	 */
 	public SortedMap<String, String> getParametersDefault();
+
 }

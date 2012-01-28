@@ -1,11 +1,18 @@
 package functiongenerator.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.IllegalFormatException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.swing.table.AbstractTableModel;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
@@ -14,6 +21,11 @@ import functiongenerator.core.gp.IOperationProviderFactory;
  * Models the list of the available functions. Mainly used for viewing purposes
  * of this. Showing different edition possibilities for each of the
  * {@linkplain IOperationProvider}.
+ * 
+ * <p>
+ * Manages the {@code isEditable()} property of cell basing on the additional
+ * parameters passed via {@linkplain IOperationProvider}.
+ * </p>
  * 
  * @author Piotr Jessa
  * 
@@ -24,8 +36,11 @@ public class OperationsTableModel extends AbstractTableModel {
 	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Comment" };
 	static private final String NA_VALUE = "N/A";
 
+	static private final Log logger = LogFactory.getLog(OperationsTableModel.class);
+
 	private List<String> captions;
 	private List<Object[]> rows = new ArrayList<Object[]>();
+	private Map<IOperationProvider, Map<String, Object>> parameters;
 
 	private final IOperationProviderFactory factory;
 
@@ -49,10 +64,16 @@ public class OperationsTableModel extends AbstractTableModel {
 	}
 
 	private void setRows() {
-		// TODO: maybe the rows should be copied where they should be
-		// prepare the view of the rows here
+
+		this.parameters = new HashMap<IOperationProvider, Map<String, Object>>();
+
 		for (IOperationProvider provider : factory.getAvaliable()) {
 			addRow(provider);
+
+			// TODO: add some information about defaults - might be useful when
+			// other values are needed
+			Map<String, Object> parametersMapPerProvider = new TreeMap<String, Object>();
+			this.parameters.put(provider, parametersMapPerProvider);
 		}
 	}
 
@@ -90,7 +111,7 @@ public class OperationsTableModel extends AbstractTableModel {
 
 		List<Entry<String, String>> sortedSet = new LinkedList<Entry<String, String>>(provider.getParametersDefault().entrySet());
 
-		for (int i = 0; i < maxParameters ; i++) {
+		for (int i = 0; i < maxParameters; i++) {
 
 			// try getting the default value for this parameter
 			if (sortedSet.size() > i) {
@@ -145,8 +166,36 @@ public class OperationsTableModel extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object value, int row, int col) {
-		// TODO: this code logic should be more advanced
-		// this code should be updating the parameters map of every provider
+
+		int offset = CONSTANT_CAPTIONS.length;
+		int parameterIndex = col - offset;
+
+		if (parameterIndex >= 0) {
+			IOperationProvider provider = factory.getAvaliable().get(row);
+
+			// get from the position the key value pair
+			List<Entry<String, Class<?>>> params = new ArrayList<Entry<String, Class<?>>>(provider.getParameters().entrySet());
+			Entry<String, Class<?>> e = params.get(parameterIndex);
+
+			// check type
+			try {
+				if (e.getValue() == Integer.class) {
+
+					Integer i = Integer.parseInt(value.toString());
+					Map<String, Object> toBeSetParams = this.parameters.get(provider);
+					toBeSetParams.put(e.getKey(), i);
+
+					provider.setParameters(toBeSetParams);
+
+				}
+				// NOTE: add another data types here
+
+			} catch (NumberFormatException exp) {
+				logger.warn("The illegal format for number", exp);
+				return;
+			}
+		}
+
 		rows.get(row)[col] = value;
 		fireTableCellUpdated(row, col);
 	}
@@ -160,22 +209,19 @@ public class OperationsTableModel extends AbstractTableModel {
 		return captions.get(col);
 	}
 
-	public List<String> getSelectedRows() {
-		List<String> selected = new ArrayList<String>();
-		for (Object[] row : rows) {
-			if (((Boolean) row[0])) {
-				selected.add((String) row[2]);
-			}
-		}
-		return selected;
-	}
-
 	public List<IOperationProvider> getSelectedOperations() {
 		List<IOperationProvider> selected = new ArrayList<IOperationProvider>();
 
-		// TODO: get the base of the selected element into the abstraction of
-		// operation provider
+		int index = 0;
+		for (Object[] row : rows) {
 
+			// if checked
+			if ((Boolean) row[0]) {
+				IOperationProvider provider = factory.getAvaliable().get(index);
+				selected.add(provider);
+			}
+			index++;
+		}
 		return selected;
 	}
 
