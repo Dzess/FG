@@ -24,7 +24,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	private final String name;
 	private final String comennt;
 	private final TreeMap<String, Class<?>> map;
-	private final TreeMap<String, String> defaultParameters;
+	private final TreeMap<String, Object> defaultParameters;
 
 	private final boolean isEnabled;
 
@@ -41,7 +41,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 		this.list.add(cls);
 
 		this.map = new TreeMap<String, Class<?>>();
-		this.defaultParameters = new TreeMap<String, String>();
+		this.defaultParameters = new TreeMap<String, Object>();
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, String> getParametersDefault() {
+	public SortedMap<String, Object> getParametersDefault() {
 		return defaultParameters;
 	}
 

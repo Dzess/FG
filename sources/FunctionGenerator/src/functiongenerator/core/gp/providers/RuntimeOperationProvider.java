@@ -38,7 +38,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	static public final String ATTR_VALUE = "Value";
 
 	private final SortedMap<String, Class<?>> parameters;
-	private final SortedMap<String, String> defaultParameters;
+	private final SortedMap<String, Object> defaultParameters;
 
 	private Map<String, Object> values;
 
@@ -60,9 +60,8 @@ public class RuntimeOperationProvider implements IOperationProvider {
 		this.parameters = new TreeMap<String, Class<?>>();
 		this.parameters.put(ATTR_VALUE, typeOfData);
 
-		this.defaultParameters = new TreeMap<String, String>();
-
-		this.defaultParameters.put(ATTR_VALUE, "Provide Value Here");
+		this.defaultParameters = new TreeMap<String, Object>();
+		this.defaultParameters.put(ATTR_VALUE, 1);
 
 		this.values = new HashMap<String, Object>();
 	}
@@ -120,7 +119,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, String> getParametersDefault() {
+	public SortedMap<String, Object> getParametersDefault() {
 		return defaultParameters;
 	}
 

@@ -22,6 +22,7 @@ import functiongenerator.core.gp.functions.NullaryOperation;
  * <p>
  * Typed for the {@linkplain Integer}.
  * </p>
+ * 
  * @author Piotr Jessa
  * 
  */
@@ -35,8 +36,9 @@ public class IntegerValueRuntimeFunctionGenerator extends RuntimeFunctionGenerat
 	private final int value;
 
 	/**
-	 * Initializes the instance of {@linkplain IntegerValueRuntimeFunctionGenerator}
-	 * class. The generated class will act as literal {@linkplain GPNode}.
+	 * Initializes the instance of
+	 * {@linkplain IntegerValueRuntimeFunctionGenerator} class. The generated
+	 * class will act as literal {@linkplain GPNode}.
 	 * 
 	 * @param value
 	 *            : the value that will be returned with this literal
@@ -54,7 +56,8 @@ public class IntegerValueRuntimeFunctionGenerator extends RuntimeFunctionGenerat
 
 	@Override
 	protected String getEvalSourceCode() {
-		return TEMPLATE.replace("%value", Integer.toString(value));
+		String current = new String(TEMPLATE);
+		return current.replace("%value", Integer.toString(value));
 	}
 
 	@Override

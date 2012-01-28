@@ -54,7 +54,8 @@ public class DoubleValueRuntimeFunctionGenerator extends RuntimeFunctionGenerato
 
 	@Override
 	protected String getEvalSourceCode() {
-		return TEMPLATE.replace("%value", Double.toString(value));
+		String current = new String(TEMPLATE);
+		return current.replace("%value", Double.toString(value));
 	}
 
 	@Override

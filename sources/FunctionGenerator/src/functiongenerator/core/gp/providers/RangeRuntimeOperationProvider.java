@@ -1,6 +1,5 @@
 package functiongenerator.core.gp.providers;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +38,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	static public final String ATTRE_STEP = "Step";
 
 	private final SortedMap<String, Class<?>> parameters;
-	private final SortedMap<String, String> defaultParameters;
+	private final SortedMap<String, Object> defaultParameters;
 	private final boolean isEnableByDefault;
 	private final Class<? extends Number> type;
 
@@ -59,28 +58,21 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 		this.parameters.put(ATTR_STOP, typeOfData);
 		this.parameters.put(ATTRE_STEP, typeOfData);
 
-		this.defaultParameters = new TreeMap<String, String>();
-
-		// TODO: maybe defaults should be different for double type
-		this.defaultParameters.put(ATTR_START, "-10");
-		this.defaultParameters.put(ATTR_STOP, "10");
-		this.defaultParameters.put(ATTRE_STEP, "1");
-
 		this.isEnableByDefault = isEnabledByDefault;
 
 		// default values
-		Map<String, Object> params = new HashMap<String, Object>();
+		this.defaultParameters = new TreeMap<String, Object>();
 		if (type == Integer.class) {
-			params.put(ATTR_START, -10);
-			params.put(ATTR_STOP, 10);
-			params.put(ATTRE_STEP, 1);
+			defaultParameters.put(ATTR_START, -10);
+			defaultParameters.put(ATTR_STOP, 10);
+			defaultParameters.put(ATTRE_STEP, 1);
 		} else if (type == Double.class) {
-			params.put(ATTR_START, -10.0);
-			params.put(ATTR_STOP, 10.0);
-			params.put(ATTRE_STEP, 1.0);
+			defaultParameters.put(ATTR_START, -10.0);
+			defaultParameters.put(ATTR_STOP, 10.0);
+			defaultParameters.put(ATTRE_STEP, 1.0);
 		}
 
-		setParameters(params);
+		setParameters(defaultParameters);
 	}
 
 	@Override
@@ -166,7 +158,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, String> getParametersDefault() {
+	public SortedMap<String, Object> getParametersDefault() {
 		return defaultParameters;
 	}
 

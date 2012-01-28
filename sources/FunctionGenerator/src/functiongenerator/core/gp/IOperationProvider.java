@@ -89,6 +89,6 @@ public interface IOperationProvider {
 	 * {@linkplain SortedMap} of method {@code getParameters()} in the field of
 	 * available keys.
 	 */
-	public SortedMap<String, String> getParametersDefault();
+	public SortedMap<String, Object> getParametersDefault();
 
 }

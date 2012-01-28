@@ -69,9 +69,8 @@ public class OperationsTableModel extends AbstractTableModel {
 		for (IOperationProvider provider : factory.getAvaliable()) {
 			addRow(provider);
 
-			// TODO: add some information about defaults - might be useful when
-			// other values are needed
-			Map<String, Object> parametersMapPerProvider = new TreeMap<String, Object>();
+			// add some information about defaults
+			Map<String, Object> parametersMapPerProvider = provider.getParametersDefault();
 			this.parameters.put(provider, parametersMapPerProvider);
 		}
 	}
@@ -108,13 +107,13 @@ public class OperationsTableModel extends AbstractTableModel {
 		tableRow.add(name);
 		tableRow.add(comment);
 
-		List<Entry<String, String>> sortedSet = new LinkedList<Entry<String, String>>(provider.getParametersDefault().entrySet());
+		List<Entry<String, Object>> sortedSet = new LinkedList<Entry<String, Object>>(provider.getParametersDefault().entrySet());
 
 		for (int i = 0; i < maxParameters; i++) {
 
 			// try getting the default value for this parameter
 			if (sortedSet.size() > i) {
-				String value = sortedSet.get(i).getValue();
+				String value = sortedSet.get(i).getValue().toString();
 				tableRow.add(value);
 			} else {
 				// if cannot be done put default for non acceptable parameters
