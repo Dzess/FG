@@ -22,6 +22,7 @@ import functiongenerator.core.gp.IOperationProviderFactory;
 public class OperationsTableModel extends AbstractTableModel {
 
 	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Comment" };
+	static private final String NA_VALUE = "N/A";
 
 	private List<String> captions;
 	private List<Object[]> rows = new ArrayList<Object[]>();
@@ -87,8 +88,18 @@ public class OperationsTableModel extends AbstractTableModel {
 		tableRow.add(name);
 		tableRow.add(comment);
 
-		for (int i = 0; i < maxParameters; i++) {
-			tableRow.add("");
+		List<Entry<String, String>> sortedSet = new LinkedList<Entry<String, String>>(provider.getParametersDefault().entrySet());
+
+		for (int i = 0; i < maxParameters ; i++) {
+
+			// try getting the default value for this parameter
+			if (sortedSet.size() > i) {
+				String value = sortedSet.get(i).getValue();
+				tableRow.add(value);
+			} else {
+				// if cannot be done put default for non acceptable parameters
+				tableRow.add(NA_VALUE);
+			}
 		}
 
 		rows.add(tableRow.toArray());
@@ -135,7 +146,7 @@ public class OperationsTableModel extends AbstractTableModel {
 	@Override
 	public void setValueAt(Object value, int row, int col) {
 		// TODO: this code logic should be more advanced
-		// this code shoult be updating the parameters map of every provider
+		// this code should be updating the parameters map of every provider
 		rows.get(row)[col] = value;
 		fireTableCellUpdated(row, col);
 	}

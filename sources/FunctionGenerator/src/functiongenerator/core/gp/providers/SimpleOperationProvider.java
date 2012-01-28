@@ -2,6 +2,8 @@ package functiongenerator.core.gp.providers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import ec.gp.GPNode;
 import functiongenerator.core.gp.IOperationProvider;
@@ -19,7 +21,8 @@ public class SimpleOperationProvider implements IOperationProvider {
 	private final Class<? extends GPNode> cls;
 	private final String name;
 	private final String comennt;
-	private final HashMap<String, Class<?>> map;
+	private final TreeMap<String, Class<?>> map;
+	private final TreeMap<String, String> defaultParameters;
 
 	private final boolean isEnabled;
 
@@ -33,7 +36,8 @@ public class SimpleOperationProvider implements IOperationProvider {
 		this.name = name;
 		this.cls = cls;
 
-		this.map = new HashMap<String, Class<?>>();
+		this.map = new TreeMap<String, Class<?>>();
+		this.defaultParameters = new TreeMap<String, String>();
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public Map<String, Class<?>> getParameters() {
+	public SortedMap<String, Class<?>> getParameters() {
 		return map;
 	}
 
@@ -64,6 +68,11 @@ public class SimpleOperationProvider implements IOperationProvider {
 	@Override
 	public boolean isEnableByDefault() {
 		return isEnabled;
+	}
+
+	@Override
+	public SortedMap<String, String> getParametersDefault() {
+		return defaultParameters;
 	}
 
 }

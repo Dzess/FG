@@ -2,6 +2,8 @@ package functiongenerator.core.gp.providers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import ec.gp.GPNode;
 import functiongenerator.core.gp.IOperationProvider;
@@ -26,8 +28,11 @@ public class RuntimeOperationProvider implements IOperationProvider {
 
 	static public final String ATTR_VALUE = "Value";
 
-	private final Map<String, Class<?>> parameters;
+	private final SortedMap<String, Class<?>> parameters;
+	private final SortedMap<String, String> defaultParameters;
+
 	private Map<String, Object> values;
+
 	private RuntimeFunctionGenerator funtionGenerator;
 
 	private final boolean isEnableByDefault;
@@ -35,8 +40,13 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	public RuntimeOperationProvider(Class<?> typeOfData, boolean isEnableByDefault) {
 
 		this.isEnableByDefault = isEnableByDefault;
-		this.parameters = new HashMap<String, Class<?>>();
+		this.parameters = new TreeMap<String, Class<?>>();
 		this.parameters.put(ATTR_VALUE, typeOfData);
+
+		this.defaultParameters = new TreeMap<String, String>();
+
+		// FIXME: provide way of capturing the doubles here
+		this.defaultParameters.put(ATTR_VALUE, "Provide Integer Value Here");
 
 		this.values = new HashMap<String, Object>();
 	}
@@ -57,7 +67,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public Map<String, Class<?>> getParameters() {
+	public SortedMap<String, Class<?>> getParameters() {
 		return parameters;
 	}
 
@@ -78,6 +88,11 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	@Override
 	public boolean isEnableByDefault() {
 		return isEnableByDefault;
+	}
+
+	@Override
+	public SortedMap<String, String> getParametersDefault() {
+		return defaultParameters;
 	}
 
 }

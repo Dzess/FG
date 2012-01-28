@@ -1,6 +1,7 @@
 package functiongenerator.core.gp;
 
 import java.util.Map;
+import java.util.SortedMap;
 
 import ec.gp.GPNode;
 
@@ -48,7 +49,7 @@ public interface IOperationProvider {
 	public String getComment();
 
 	/**
-	 * Returns the information if this opetation provider should be enabled by
+	 * Returns the information if this operation provider should be enabled by
 	 * default.
 	 */
 	public boolean isEnableByDefault();
@@ -57,11 +58,16 @@ public interface IOperationProvider {
 	 * Gets the {@linkplain Map} with the key being name of the parameter and
 	 * value being the type of the element. *
 	 */
-	public Map<String, Class<?>> getParameters();
+	public SortedMap<String, Class<?>> getParameters();
 
 	/**
 	 * Parameterizes the object of {@linkplain IOperationProvider} with the same
 	 * map concept, but values here are exact <i>values</i> of parameters.
 	 */
 	public void setParameters(Map<String, Object> params);
+
+	/**
+	 * Gets the default values for each of the parameter.
+	 */
+	public SortedMap<String, String> getParametersDefault();
 }

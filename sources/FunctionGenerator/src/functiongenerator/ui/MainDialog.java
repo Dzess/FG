@@ -109,6 +109,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	private IOperationProviderFactory integerFactory;
 	private JPanel extensionFunction;
 	private JButton addLiteralButton;
+	private JButton addLiteralRangeButton;
 
 	/**
 	 * If true, the dialog was successively closed by OK button.
@@ -131,7 +132,7 @@ public class MainDialog extends JDialog implements ActionListener {
 		settings = new Settings();
 		realFactory = new RealOperationProviderFactory();
 		integerFactory = new IntegerOperationProviderFactory();
-		
+
 		initialize();
 	}
 
@@ -456,18 +457,18 @@ public class MainDialog extends JDialog implements ActionListener {
 			// create the default provider
 			tableOperations.setModel(new OperationsTableModel(realFactory));
 
-			//setTableOperationsColumnWidth();
+			// setTableOperationsColumnWidth();
 		}
 		return tableOperations;
 	}
 
-//	private void setTableOperationsColumnWidth() {
-//		TableColumnModel cModel = tableOperations.getColumnModel();
-//		cModel.getColumn(0).setPreferredWidth(15);
-//		cModel.getColumn(1).setPreferredWidth(90);
-//		cModel.getColumn(2).setPreferredWidth(180);
-//		cModel.getColumn(3).setPreferredWidth(180);
-//	}
+	// private void setTableOperationsColumnWidth() {
+	// TableColumnModel cModel = tableOperations.getColumnModel();
+	// cModel.getColumn(0).setPreferredWidth(15);
+	// cModel.getColumn(1).setPreferredWidth(90);
+	// cModel.getColumn(2).setPreferredWidth(180);
+	// cModel.getColumn(3).setPreferredWidth(180);
+	// }
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
@@ -939,19 +940,40 @@ public class MainDialog extends JDialog implements ActionListener {
 		}
 		return panel;
 	}
+
 	private JPanel getExtensionFunction() {
 		if (extensionFunction == null) {
 			extensionFunction = new JPanel();
 			FlowLayout flowLayout = (FlowLayout) extensionFunction.getLayout();
 			flowLayout.setAlignment(FlowLayout.LEFT);
 			extensionFunction.add(getAddLiteralButton());
+			extensionFunction.add(getAddLiteralRangeButton());
 		}
 		return extensionFunction;
 	}
+
 	private JButton getAddLiteralButton() {
 		if (addLiteralButton == null) {
 			addLiteralButton = new JButton("Add Literal");
+			addLiteralButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO: do some code for adding the literal
+
+				}
+			});
 		}
 		return addLiteralButton;
+	}
+
+	private JButton getAddLiteralRangeButton() {
+		if (addLiteralRangeButton == null) {
+			addLiteralRangeButton = new JButton("Add Literal Range");
+			addLiteralRangeButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// TODO: do some code for adding literal range
+				}
+			});
+		}
+		return addLiteralRangeButton;
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
