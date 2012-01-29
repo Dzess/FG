@@ -117,9 +117,6 @@ public class Settings {
 
 		ParameterDatabase db = (ParameterDatabase) parameters.clone();
 
-		// add function set
-		db.setProperty("gp.fs.0.size", "" + (operations.size() + numberOfXes));
-
 		if (problemType == ProblemType.DOUBLE) {
 			db.setProperty("eval.problem", RealRegressionProblem.class.getName());
 			db.setProperty("eval.problem.data", DoubleData.class.getName());
@@ -166,6 +163,9 @@ public class Settings {
 				db.setProperty("gp.fs.0.func." + (i + numberOfXes) + ".nc", "nc2");
 		}
 
+		// set size of the function set
+		db.setProperty("gp.fs.0.size", "" + (finalClasses.size() + numberOfXes));
+
 		// set popSize and generations
 		db.setProperty("pop.subpop.0.size", "" + popSize);
 		db.setProperty("generations", "" + generations);
@@ -176,8 +176,8 @@ public class Settings {
 		db.setProperty("gp.koza.half.min-depth", "" + Math.min(2, maxTreeDepth));
 		db.setProperty("gp.koza.half.max-depth", "" + maxTreeDepth);
 
-		logger.debug("Paramter DB file file");
-		logger.debug(db.toString());
+		logger.info("Paramter DB file file");
+		logger.info(db.toString());
 
 		return db;
 	}
