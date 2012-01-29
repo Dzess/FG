@@ -13,10 +13,14 @@ import functiongenerator.ui.PointsTableModel;
 /**
  * Loads the Comma Separated Values file with the data to the program.
  * 
+ * <p>
+ * Current separator is the ';' symbol which is invariant for all the possibles
+ * localizations.
+ * </p>
  * 
  * @author Piotr Jessa
  * 
- */
+ */	
 public class CSVDataLoader implements IDataLoader {
 
 	static public final String SEPARATOR = ";";
