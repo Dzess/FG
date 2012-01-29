@@ -1,9 +1,7 @@
-package functiongenerator.testing;
+package functiongenerator.testing.loaders;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.IllegalFormatException;
 
 import junit.framework.Assert;
 

@@ -17,10 +17,10 @@ public class ValueRuntieFunctionGeneratorTest {
 	@Test
 	public void loads_throws_no_exceptions() {
 		int value = 5;
-		String expected = "functiongenerator.core.gp.functions.real.Value_0";
+		String expected = "functiongenerator.core.gp.functions.real.Value_";
 		IntegerValueRuntimeFunctionGenerator rtGen = new IntegerValueRuntimeFunctionGenerator(value);
 
 		String name = rtGen.generateClassAndLoad().getCanonicalName();
-		Assert.assertEquals(expected, name);
+		Assert.assertTrue(name.contains(expected));
 	}
 }

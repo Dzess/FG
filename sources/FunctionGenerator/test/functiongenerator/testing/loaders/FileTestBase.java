@@ -1,4 +1,4 @@
-package functiongenerator.testing;
+package functiongenerator.testing.loaders;
 
 import java.io.File;
 

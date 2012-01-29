@@ -9,27 +9,9 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import ec.gp.GPNode;
-import functiongenerator.core.gp.data.DoubleData;
-import functiongenerator.core.gp.data.IntegerData;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 
-public class RaneRuntimeOperationProviderTest {
-
-	private Double evaluateDouble(Class<? extends GPNode> cls) throws Exception {
-		GPNode node = cls.newInstance();
-		DoubleData data = new DoubleData();
-		node.eval(null, 0, data, null, null, null);
-
-		return data.Y;
-	}
-
-	private Integer evaluateInteger(Class<? extends GPNode> cls) throws Exception {
-		GPNode node = cls.newInstance();
-		IntegerData data = new IntegerData();
-		node.eval(null, 0, data, null, null, null);
-
-		return data.Y;
-	}
+public class RangeRuntimeOperationProviderTest extends RuntimeOperationProviderTestBase {
 
 	@Test
 	public void three_different__double_classes_are_generated_and_loaded() throws Exception {

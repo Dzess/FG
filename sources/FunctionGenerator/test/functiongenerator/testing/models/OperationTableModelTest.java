@@ -16,7 +16,6 @@ import functiongenerator.ui.OperationsTableModel;
  */
 public class OperationTableModelTest {
 
-	private OperationsTableModel model;
 	private IOperationProviderFactory factory;
 
 	@Test(expected = IllegalArgumentException.class)
@@ -27,12 +26,12 @@ public class OperationTableModelTest {
 	@Test
 	public void model_works_well_with_real_operations_provider() {
 		factory = new RealOperationProviderFactory();
-		model = new OperationsTableModel(factory);
+		new OperationsTableModel(factory);
 	}
 
 	@Test
 	public void model_works_well_with_integer_operations_provider() {
 		factory = new IntegerOperationProviderFactory();
-		model = new OperationsTableModel(factory);
+		new OperationsTableModel(factory);
 	}	
 }
