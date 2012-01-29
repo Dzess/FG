@@ -13,12 +13,13 @@ import functiongenerator.ui.PointsTableModel;
 /**
  * Loads the Comma Separated Values file with the data to the program.
  * 
- * TODO: add various options to data handling
  * 
  * @author Piotr Jessa
  * 
  */
 public class CSVDataLoader implements IDataLoader {
+
+	static public final String SEPARATOR = ";";
 
 	public CSVDataLoader() {
 
@@ -35,7 +36,7 @@ public class CSVDataLoader implements IDataLoader {
 
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String[] parts = line.split(",");
+				String[] parts = line.split(SEPARATOR);
 				HashMap<Integer, Number> myRow = new HashMap<Integer, Number>();
 
 				while (model.getColumnCount() < parts.length)
@@ -76,7 +77,7 @@ public class CSVDataLoader implements IDataLoader {
 			List<Number[]> rows = model.getRows();
 			for (Number[] row : rows) {
 				for (Number n : row) {
-					writer.write(n + ",");
+					writer.write(n + SEPARATOR);
 				}
 				writer.append('\n');
 			}
