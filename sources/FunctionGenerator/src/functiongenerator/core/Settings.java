@@ -55,6 +55,7 @@ public class Settings {
 	static private final String TEMPLATE_FILENAME = "template.params";
 	static private final Log logger = LogFactory.getLog(Settings.class);
 
+	
 	private final ParameterDatabase parameters;
 
 	/**

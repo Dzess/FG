@@ -79,4 +79,53 @@ public class SimpleOperationProvider implements IOperationProvider {
 		return defaultParameters;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cls == null) ? 0 : cls.hashCode());
+		result = prime * result + ((comennt == null) ? 0 : comennt.hashCode());
+		result = prime * result + (isEnabled ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof SimpleOperationProvider)) {
+			return false;
+		}
+		SimpleOperationProvider other = (SimpleOperationProvider) obj;
+		if (cls == null) {
+			if (other.cls != null) {
+				return false;
+			}
+		} else if (!cls.equals(other.cls)) {
+			return false;
+		}
+		if (comennt == null) {
+			if (other.comennt != null) {
+				return false;
+			}
+		} else if (!comennt.equals(other.comennt)) {
+			return false;
+		}
+		if (isEnabled != other.isEnabled) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
 }

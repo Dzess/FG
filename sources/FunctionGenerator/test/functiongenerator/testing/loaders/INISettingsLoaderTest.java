@@ -2,14 +2,19 @@ package functiongenerator.testing.loaders;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import functiongenerator.core.Settings;
+import functiongenerator.core.gp.IOperationProvider;
+import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
 import functiongenerator.ui.loaders.settings.INISettingsLoader;
 
 /**
@@ -78,6 +83,9 @@ public class INISettingsLoaderTest extends FileTestBase {
 		int maxTreeDepth = 2;
 		int popSize = 3;
 
+		IntegerOperationProviderFactory factory = new IntegerOperationProviderFactory();
+		List<IOperationProvider> operations = new ArrayList<IOperationProvider>(factory.getAvaliable());
+
 		Settings settings = new Settings();
 
 		settings.setGenerations(generations);
@@ -86,11 +94,19 @@ public class INISettingsLoaderTest extends FileTestBase {
 
 		settings.setPopulationSize(popSize);
 
+		settings.setOperations(operations);
+
 		loader.saveToFile(targetFile, settings);
 
 		result = loader.loadFromFile(targetFile);
 
 		Assert.assertEquals(settings, result);
+	}
+	
+	@Ignore("Not yet implemented")
+	@Test
+	public void test_saving_and_loading_operatinos(){
+		
 	}
 
 }
