@@ -35,7 +35,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 
 	static public final String ATTR_START = "Start Value";
 	static public final String ATTR_STOP = "Stop Value";
-	static public final String ATTRE_STEP = "Step";
+	static public final String ATTR_STEP = "Step";
 
 	private final SortedMap<String, Class<?>> parameters;
 	private final SortedMap<String, Object> defaultParameters;
@@ -56,7 +56,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 		this.parameters = new TreeMap<String, Class<?>>();
 		this.parameters.put(ATTR_START, typeOfData);
 		this.parameters.put(ATTR_STOP, typeOfData);
-		this.parameters.put(ATTRE_STEP, typeOfData);
+		this.parameters.put(ATTR_STEP, typeOfData);
 
 		this.isEnableByDefault = isEnabledByDefault;
 
@@ -65,11 +65,11 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 		if (type == Integer.class) {
 			defaultParameters.put(ATTR_START, -10);
 			defaultParameters.put(ATTR_STOP, 10);
-			defaultParameters.put(ATTRE_STEP, 1);
+			defaultParameters.put(ATTR_STEP, 1);
 		} else if (type == Double.class) {
 			defaultParameters.put(ATTR_START, -10.0);
 			defaultParameters.put(ATTR_STOP, 10.0);
-			defaultParameters.put(ATTRE_STEP, 1.0);
+			defaultParameters.put(ATTR_STEP, 1.0);
 		}
 
 		setParameters(defaultParameters);
@@ -113,7 +113,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 		this.fgs = new LinkedList<RuntimeFunctionGenerator>();
 
 		// existence constraints
-		if ((!params.containsKey(ATTR_STOP)) || (!params.containsKey(ATTR_START)) || (!params.containsKey(ATTRE_STEP))) {
+		if ((!params.containsKey(ATTR_STOP)) || (!params.containsKey(ATTR_START)) || (!params.containsKey(ATTR_STEP))) {
 			throw new IllegalArgumentException("The one of three parameters missing");
 		}
 
@@ -121,7 +121,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 
 			Integer startValue = (Integer) params.get(ATTR_START);
 			Integer stopValue = (Integer) params.get(ATTR_STOP);
-			Integer stepValue = (Integer) params.get(ATTRE_STEP);
+			Integer stepValue = (Integer) params.get(ATTR_STEP);
 
 			if (stepValue < 1) {
 				throw new IllegalArgumentException("The step cannot be less than one");
@@ -138,7 +138,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 		} else if (type.equals(Double.class)) {
 			Double startValue = (Double) params.get(ATTR_START);
 			Double stopValue = (Double) params.get(ATTR_STOP);
-			Double stepValue = (Double) params.get(ATTRE_STEP);
+			Double stepValue = (Double) params.get(ATTR_STEP);
 
 			if (stepValue <= 0) {
 				throw new IllegalArgumentException("The step cannot be less than zero");
