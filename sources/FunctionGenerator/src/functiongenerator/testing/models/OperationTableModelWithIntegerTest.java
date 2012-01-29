@@ -3,7 +3,6 @@ package functiongenerator.testing.models;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import functiongenerator.core.gp.IOperationProvider;
@@ -29,8 +28,8 @@ public class OperationTableModelWithIntegerTest {
 	}
 
 	@Test
-	public void operations_has_4_columns() {
-		Assert.assertEquals(4, model.getColumnCount());
+	public void operations_has_6_columns() {
+		Assert.assertEquals(6, model.getColumnCount());
 	}
 
 	@Test

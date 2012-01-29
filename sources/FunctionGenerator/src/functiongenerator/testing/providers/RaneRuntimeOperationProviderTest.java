@@ -4,16 +4,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import ec.gp.GPNode;
 import functiongenerator.core.gp.data.DoubleData;
+import functiongenerator.core.gp.data.IntegerData;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 
 public class RaneRuntimeOperationProviderTest {
 
+	private Double evaluateDouble(Class<? extends GPNode> cls) throws Exception {
+		GPNode node = cls.newInstance();
+		DoubleData data = new DoubleData();
+		node.eval(null, 0, data, null, null, null);
+
+		return data.Y;
+	}
+
+	private Integer evaluateInteger(Class<? extends GPNode> cls) throws Exception {
+		GPNode node = cls.newInstance();
+		IntegerData data = new IntegerData();
+		node.eval(null, 0, data, null, null, null);
+
+		return data.Y;
+	}
+
 	@Test
-	public void three_different_classes_are_generated_and_loaded() throws Exception {
+	public void three_different__double_classes_are_generated_and_loaded() throws Exception {
 		RangeRuntimeOperationProvider provider = new RangeRuntimeOperationProvider(Double.class, true);
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -24,14 +43,38 @@ public class RaneRuntimeOperationProviderTest {
 		provider.setParameters(params);
 
 		List<Class<? extends GPNode>> classes = provider.getOperations();
-		for (Class<? extends GPNode> cls : classes) {
-			System.out.println(cls.getCanonicalName());
-			GPNode node = cls.newInstance();
-			DoubleData data = new DoubleData();
-			node.eval(null, 0, data, null, null, null);
-			
-			System.out.println("Data after eval: ");
-			System.out.println(data.Y);
-		}
+
+		Double r1 = evaluateDouble(classes.get(0));
+		Assert.assertEquals(0.9, r1);
+
+		Double r2 = evaluateDouble(classes.get(1));
+		Assert.assertEquals(2.0, r2);
+
+		Double r3 = evaluateDouble(classes.get(2));
+		Assert.assertEquals(3.1, r3);
+
+	}
+
+	@Test
+	public void three_different_int_classes_are_generated_and_loaded() throws Exception {
+		RangeRuntimeOperationProvider provider = new RangeRuntimeOperationProvider(Integer.class, true);
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(RangeRuntimeOperationProvider.ATTR_START, 0);
+		params.put(RangeRuntimeOperationProvider.ATTR_STOP, 3);
+		params.put(RangeRuntimeOperationProvider.ATTR_STEP, 1);
+
+		provider.setParameters(params);
+
+		List<Class<? extends GPNode>> classes = provider.getOperations();
+
+		int r1 = evaluateInteger(classes.get(0));
+		Assert.assertEquals(0, r1);
+
+		int r2 = evaluateInteger(classes.get(1));
+		Assert.assertEquals(1, r2);
+
+		int r3 = evaluateInteger(classes.get(2));
+		Assert.assertEquals(2, r3);
 	}
 }
