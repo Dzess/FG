@@ -43,6 +43,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	private final Class<? extends Number> type;
 
 	private List<RuntimeFunctionGenerator> fgs;
+	private Map<String, Object> values;
 
 	/**
 	 * 
@@ -77,7 +78,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 
 	@Override
 	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException {
-		
+
 		List<Class<? extends GPNode>> result = new LinkedList<Class<? extends GPNode>>();
 		for (RuntimeFunctionGenerator fg : fgs) {
 
@@ -110,6 +111,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	@Override
 	public void setParameters(Map<String, Object> params) {
 
+		this.values = params;
 		this.fgs = new LinkedList<RuntimeFunctionGenerator>();
 
 		// existence constraints
@@ -151,8 +153,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 				fgs.add(fg);
 				currentValue += stepValue;
 			}
-		}
-		else{
+		} else {
 			throw new IllegalArgumentException("No type found !");
 		}
 	}
@@ -160,6 +161,48 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	@Override
 	public SortedMap<String, Object> getParametersDefault() {
 		return defaultParameters;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isEnableByDefault ? 1231 : 1237);
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((values == null) ? 0 : values.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof RangeRuntimeOperationProvider)) {
+			return false;
+		}
+		RangeRuntimeOperationProvider other = (RangeRuntimeOperationProvider) obj;
+		if (isEnableByDefault != other.isEnableByDefault) {
+			return false;
+		}
+		if (type == null) {
+			if (other.type != null) {
+				return false;
+			}
+		} else if (!type.equals(other.type)) {
+			return false;
+		}
+		if (values == null) {
+			if (other.values != null) {
+				return false;
+			}
+		} else if (!values.equals(other.values)) {
+			return false;
+		}
+		return true;
 	}
 
 }

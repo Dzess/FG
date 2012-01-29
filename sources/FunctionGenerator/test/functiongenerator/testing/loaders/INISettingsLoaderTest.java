@@ -2,8 +2,10 @@ package functiongenerator.testing.loaders;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -14,6 +16,10 @@ import org.junit.Test;
 
 import functiongenerator.core.Settings;
 import functiongenerator.core.gp.IOperationProvider;
+import functiongenerator.core.gp.functions.integer.Add;
+import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
+import functiongenerator.core.gp.providers.RuntimeOperationProvider;
+import functiongenerator.core.gp.providers.SimpleOperationProvider;
 import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
 import functiongenerator.ui.loaders.settings.INISettingsLoader;
 
@@ -66,7 +72,6 @@ public class INISettingsLoaderTest extends FileTestBase {
 		Assert.assertEquals(11, result.getMaxTreeDepth());
 		Assert.assertEquals(12, result.getPopSize());
 
-		// TODO: write asserting the list of operations
 	}
 
 	@Test
@@ -102,11 +107,39 @@ public class INISettingsLoaderTest extends FileTestBase {
 
 		Assert.assertEquals(settings, result);
 	}
-	
-	@Ignore("Not yet implemented")
-	@Test
-	public void test_saving_and_loading_operatinos(){
-		
-	}
 
+	@Test
+	public void test_saving_and_loading_operatinos() throws Exception {
+
+		File targetFile = getFile(SAVED_FILE_NAME);
+
+		List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
+
+		IOperationProvider p1 = new SimpleOperationProvider(Add.class, "Sample name", true);
+		IOperationProvider p2 = new RuntimeOperationProvider(Integer.class, false);
+		Map<String, Object> params = p2.getParametersDefault();
+		params.put(RuntimeOperationProvider.ATTR_VALUE, 3);
+
+		IOperationProvider p3 = new RangeRuntimeOperationProvider(Double.class, true);
+		Map<String, Object> params2 = p3.getParametersDefault();
+		params2.put(RangeRuntimeOperationProvider.ATTR_STEP, 2.0);
+
+		operations.add(p1);
+		operations.add(p2);
+		operations.add(p3);
+
+		Settings s = new Settings();
+		s.setOperations(operations);
+
+		loader.saveToFile(targetFile, s);
+
+		result = loader.loadFromFile(targetFile);
+
+		Assert.assertEquals(3, result.getOperations().size());
+
+		Assert.assertTrue(result.getOperations().contains(p1));
+		Assert.assertTrue(result.getOperations().contains(p2));
+		Assert.assertTrue(result.getOperations().contains(p3));
+
+	}
 }

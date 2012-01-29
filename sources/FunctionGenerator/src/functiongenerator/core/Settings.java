@@ -214,6 +214,7 @@ public class Settings {
 		if (popSize != other.popSize) {
 			return false;
 		}
+	
 		return true;
 	}
 

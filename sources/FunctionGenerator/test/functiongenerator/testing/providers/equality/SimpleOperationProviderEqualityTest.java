@@ -1,4 +1,4 @@
-package functiongenerator.testing.providers;
+package functiongenerator.testing.providers.equality;
 
 import junit.framework.Assert;
 
@@ -50,5 +50,9 @@ public class SimpleOperationProviderEqualityTest {
 		SimpleOperationProvider s5 = new SimpleOperationProvider(Sub.class, "Foo", true);
 		SimpleOperationProvider s6 = new SimpleOperationProvider(Add.class, "Foo", true);
 		Assert.assertFalse(s5.equals(s6));
+
+		SimpleOperationProvider s7 = new SimpleOperationProvider(Add.class, "Foo", "comment 1", true);
+		SimpleOperationProvider s8 = new SimpleOperationProvider(Add.class, "Foo", "comment 2", true);
+		Assert.assertFalse(s7.equals(s8));
 	}
 }
