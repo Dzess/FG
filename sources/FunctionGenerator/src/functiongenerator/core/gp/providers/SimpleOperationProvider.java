@@ -1,5 +1,6 @@
 package functiongenerator.core.gp.providers;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Class<?>> getParameters() {
+	public SortedMap<String, Class<?>> getParametersTypes() {
 		return map;
 	}
 
@@ -127,5 +128,10 @@ public class SimpleOperationProvider implements IOperationProvider {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getParameters() {
+		return new HashMap<String, Object>();
 	}
 }

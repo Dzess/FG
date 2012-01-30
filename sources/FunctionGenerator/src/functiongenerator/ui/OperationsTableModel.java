@@ -80,7 +80,7 @@ public class OperationsTableModel extends AbstractTableModel {
 		// get the longest parameters list
 		int maxParameters = 0;
 		for (IOperationProvider provider : factory.getAvaliable()) {
-			int size = provider.getParameters().size();
+			int size = provider.getParametersTypes().size();
 			if (size > maxParameters) {
 				maxParameters = size;
 			}
@@ -148,7 +148,7 @@ public class OperationsTableModel extends AbstractTableModel {
 		}
 
 		IOperationProvider provider = factory.getAvaliable().get(row);
-		int total = provider.getParameters().size();
+		int total = provider.getParametersTypes().size();
 		int offset = CONSTANT_CAPTIONS.length;
 
 		if (col - offset < 0) {
@@ -172,7 +172,7 @@ public class OperationsTableModel extends AbstractTableModel {
 			IOperationProvider provider = factory.getAvaliable().get(row);
 
 			// get from the position the key value pair
-			List<Entry<String, Class<?>>> params = new ArrayList<Entry<String, Class<?>>>(provider.getParameters().entrySet());
+			List<Entry<String, Class<?>>> params = new ArrayList<Entry<String, Class<?>>>(provider.getParametersTypes().entrySet());
 			Entry<String, Class<?>> e = params.get(parameterIndex);
 
 			// check type

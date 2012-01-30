@@ -72,6 +72,9 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 			defaultParameters.put(ATTR_STOP, 10.0);
 			defaultParameters.put(ATTR_STEP, 1.0);
 		}
+		else{
+			throw new IllegalArgumentException("The type of data must be Integer or Double");
+		}
 
 		setParameters(defaultParameters);
 	}
@@ -104,7 +107,7 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Class<?>> getParameters() {
+	public SortedMap<String, Class<?>> getParametersTypes() {
 		return parameters;
 	}
 
@@ -203,6 +206,11 @@ public class RangeRuntimeOperationProvider implements IOperationProvider {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getParameters() {
+		return values;
 	}
 
 }

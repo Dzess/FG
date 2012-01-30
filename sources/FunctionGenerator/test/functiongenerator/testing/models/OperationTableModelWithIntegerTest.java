@@ -63,7 +63,7 @@ public class OperationTableModelWithIntegerTest {
 		int row = 0;
 		for (IOperationProvider provider : factory.getAvaliable()) {
 
-			for (int i = 0; i < provider.getParameters().size(); i++) {
+			for (int i = 0; i < provider.getParametersTypes().size(); i++) {
 
 				boolean result = model.isCellEditable(row, columnOffset + i);
 				Assert.assertTrue("The cell is not editable", result);

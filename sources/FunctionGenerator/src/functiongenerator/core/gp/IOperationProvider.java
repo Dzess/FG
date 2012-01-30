@@ -75,13 +75,18 @@ public interface IOperationProvider {
 	 * used because of the current implementation of GUI which uses position of
 	 * the elements to manage values.
 	 */
-	public SortedMap<String, Class<?>> getParameters();
+	public SortedMap<String, Class<?>> getParametersTypes();
 
 	/**
 	 * Parameterizes the object of {@linkplain IOperationProvider} with the same
 	 * map concept, but values here are exact <i>values</i> of parameters.
 	 */
 	public void setParameters(Map<String, Object> params);
+
+	/**
+	 * Get the already saved collections of parameters.
+	 */
+	public Map<String, Object> getParameters();
 
 	/**
 	 * Gets the default values for each of the parameter. The

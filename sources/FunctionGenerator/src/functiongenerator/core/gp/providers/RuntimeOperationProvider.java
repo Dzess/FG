@@ -61,9 +61,16 @@ public class RuntimeOperationProvider implements IOperationProvider {
 		this.parameters.put(ATTR_VALUE, typeOfData);
 
 		this.defaultParameters = new TreeMap<String, Object>();
-		this.defaultParameters.put(ATTR_VALUE, 1);
 
-		this.values = new HashMap<String, Object>();
+		if (typeOfData == Integer.class) {
+			this.defaultParameters.put(ATTR_VALUE, 1);
+		} else if (typeOfData == Double.class) {
+			this.defaultParameters.put(ATTR_VALUE, 1.0);
+		} else {
+			throw new IllegalArgumentException("The type of data must be Integer or Double");
+		}
+
+		setParameters(defaultParameters);
 	}
 
 	@Override
@@ -89,7 +96,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Class<?>> getParameters() {
+	public SortedMap<String, Class<?>> getParametersTypes() {
 		return parameters;
 	}
 
@@ -162,5 +169,10 @@ public class RuntimeOperationProvider implements IOperationProvider {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getParameters() {
+		return values;
 	}
 }
