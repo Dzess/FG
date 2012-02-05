@@ -18,6 +18,7 @@ import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 import functiongenerator.core.gp.providers.SimpleOperationProvider;
+import functiongenerator.ui.loaders.InvalidFileFormatException;
 import functiongenerator.utils.MapHelper;
 
 /**

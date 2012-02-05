@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 import functiongenerator.core.Engine;
 import functiongenerator.core.IProgressListener;
 
+@SuppressWarnings("serial")
 public class ProgressDialog extends JDialog implements IProgressListener, ActionListener {
 
 	private JPanel jContentPane = null;

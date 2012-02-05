@@ -11,6 +11,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
  tools.jar,
  libs/ini4j-0.5.2.jar,
- libs/javassist.jar
+ libs/javassist.jar,
+ libs/jcommon-1.0.17.jar,
+ libs/jfreechart-1.0.14.jar
 Bundle-Vendor: Tomasz Pawlak
 Import-Package: org.apache.commons.logging

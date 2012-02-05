@@ -1,4 +1,4 @@
-package functiongenerator.ui.loaders.settings;
+package functiongenerator.ui.loaders;
 
 import java.io.IOException;
 

@@ -8,5 +8,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/ini4j-0.5.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/tools.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/javassist.jar"/>
+	<classpathentry kind="lib" path="libs/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="libs/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

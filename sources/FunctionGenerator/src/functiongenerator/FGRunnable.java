@@ -12,6 +12,11 @@ import functiongenerator.handlers.CommandHandler;
 import functiongenerator.ui.MainDialog;
 import functiongenerator.ui.ProgressDialog;
 import functiongenerator.ui.ResultsDialog;
+import functiongenerator.ui.charting.RegressionChartDialog;
+import functiongenerator.ui.charting.data.IDataSetProvider;
+import functiongenerator.ui.charting.data.SimpleDataSetProvider;
+import functiongenerator.ui.charting.makers.IChartMaker;
+import functiongenerator.ui.charting.makers.SimpleChartMaker;
 
 /**
  * What actually runs the code of function generator. The most of command
@@ -29,6 +34,7 @@ public class FGRunnable implements Runnable {
 
 	private MainDialog mainDlg;
 	private ProgressDialog progressDlg;
+	private RegressionChartDialog chartDlg;
 	private ResultsDialog resultsDlg;
 
 	private final IWorkbenchWindow window;
@@ -47,7 +53,7 @@ public class FGRunnable implements Runnable {
 
 	public FGRunnable(IWorkbenchWindow window) {
 		this.window = window;
-		
+
 	}
 
 	@Override
@@ -57,6 +63,7 @@ public class FGRunnable implements Runnable {
 		mainDlg = null;
 		progressDlg = null;
 		resultsDlg = null;
+		chartDlg = null;
 		try {
 
 			logger.info("Starting wizard");
@@ -64,7 +71,8 @@ public class FGRunnable implements Runnable {
 
 			// loop is used
 			// to maintain working even after the computations
-			// only way to exit from this loop is to hit cancel button or X in jDialog
+			// only way to exit from this loop is to hit cancel button or X in
+			// jDialog
 			while (true) {
 				logger.info("Restarting wizard");
 				mainDlg.resetState();
@@ -82,6 +90,16 @@ public class FGRunnable implements Runnable {
 					progressDlg.setEngine(engine);
 
 					engine.addListener(progressDlg);
+
+					// the types of charting engines
+					IDataSetProvider dataSetProvider = new SimpleDataSetProvider();
+					IChartMaker chartMaker = new SimpleChartMaker();
+
+					chartDlg = new RegressionChartDialog(dataSetProvider, chartMaker);
+					chartDlg.setVisible(true);
+					// TODO: get here some information about the engine
+
+					engine.addListener(chartDlg);
 
 					logger.debug("Running the algorithm");
 					String code = engine.run();
