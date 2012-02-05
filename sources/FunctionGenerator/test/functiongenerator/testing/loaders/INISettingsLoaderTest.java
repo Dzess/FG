@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import functiongenerator.core.ProblemType;
 import functiongenerator.core.Settings;
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.functions.integer.Add;
@@ -71,6 +72,7 @@ public class INISettingsLoaderTest extends FileTestBase {
 		Assert.assertEquals(12, result.getPopSize());
 
 	}
+	
 
 	@Test
 	public void test_saving_and_loading_cycle() throws Exception {
@@ -85,6 +87,7 @@ public class INISettingsLoaderTest extends FileTestBase {
 		int generations = 1;
 		int maxTreeDepth = 2;
 		int popSize = 3;
+		ProblemType problemType = ProblemType.INTEGER; 
 
 		IntegerOperationProviderFactory factory = new IntegerOperationProviderFactory();
 		List<IOperationProvider> operations = new ArrayList<IOperationProvider>(factory.getAvaliable());
@@ -98,6 +101,8 @@ public class INISettingsLoaderTest extends FileTestBase {
 		settings.setPopulationSize(popSize);
 
 		settings.setOperations(operations);
+		
+		settings.setProblemType(problemType);
 
 		loader.saveToFile(targetFile, settings);
 
@@ -105,6 +110,7 @@ public class INISettingsLoaderTest extends FileTestBase {
 
 		Assert.assertEquals(settings, result);
 	}
+
 
 	@Test
 	public void test_saving_and_loading_operatinos() throws Exception {
@@ -126,7 +132,7 @@ public class INISettingsLoaderTest extends FileTestBase {
 		operations.add(p2);
 		operations.add(p3);
 
-		Settings s = new Settings();
+		Settings s = Settings.getDefault();
 		s.setOperations(operations);
 
 		loader.saveToFile(targetFile, s);

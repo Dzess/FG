@@ -644,6 +644,8 @@ public class MainDialog extends JDialog implements ActionListener {
 		textGenerations.setText(Integer.toString(settings.getGenerations()));
 		textMaxDepth.setText(Integer.toString(settings.getMaxTreeDepth()));
 
+		// set the differential operations 
+		
 		this.settings = settings;
 	}
 

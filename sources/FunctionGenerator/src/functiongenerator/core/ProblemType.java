@@ -5,6 +5,6 @@ package functiongenerator.core;
  * Numbers.
  * 
  */
-enum ProblemType {
-	DOUBLE, INTEGER,
+public enum ProblemType {
+	 INTEGER,DOUBLE,
 }

@@ -51,11 +51,11 @@ public class Settings {
 	private int popSize;
 	private int generations;
 	private int maxTreeDepth;
+	private ProblemType problemType;
 
 	static private final String TEMPLATE_FILENAME = "template.params";
 	static private final Log logger = LogFactory.getLog(Settings.class);
 
-	
 	private final ParameterDatabase parameters;
 
 	/**
@@ -82,6 +82,7 @@ public class Settings {
 		settings.setMaxTreeDepth(7);
 		settings.setPopulationSize(200);
 		settings.setOperations(new LinkedList<IOperationProvider>());
+		settings.setProblemType(ProblemType.DOUBLE);
 
 		return settings;
 	}
@@ -214,7 +215,10 @@ public class Settings {
 		if (popSize != other.popSize) {
 			return false;
 		}
-	
+		if (problemType != other.problemType) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -258,6 +262,14 @@ public class Settings {
 
 	public int getMaxTreeDepth() {
 		return maxTreeDepth;
+	}
+
+	public ProblemType getProblemType() {
+		return problemType;
+	}
+
+	public void setProblemType(ProblemType problemType) {
+		this.problemType = problemType;
 	}
 
 	public void setMaxTreeDepth(int maxTreeDepth) {

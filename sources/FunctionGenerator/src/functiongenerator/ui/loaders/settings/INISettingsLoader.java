@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ini4j.Wini;
 
 import ec.gp.GPNode;
+import functiongenerator.core.ProblemType;
 import functiongenerator.core.Settings;
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
@@ -52,6 +53,8 @@ public class INISettingsLoader implements ISettingsLoader {
 
 	private static final String OPERATION_TYPE_CLASS = "Operation Type Class";
 
+	private static final String PROBLEM_TYPE = "Problem Type";
+
 	private int operationCounter;
 
 	@Override
@@ -63,6 +66,7 @@ public class INISettingsLoader implements ISettingsLoader {
 		int generations = wini.get(BASIC_SECTION, GENERATIONS, int.class);
 		int popSize = wini.get(BASIC_SECTION, POPULATION_SIZE, int.class);
 		int maxTreeDepth = wini.get(BASIC_SECTION, MAX_TREE_DEPTH, int.class);
+		ProblemType problemType = wini.get(BASIC_SECTION, PROBLEM_TYPE, ProblemType.class);
 
 		if (generations != 0) {
 			s.setGenerations(generations);
@@ -76,13 +80,18 @@ public class INISettingsLoader implements ISettingsLoader {
 			s.setMaxTreeDepth(maxTreeDepth);
 		}
 
+		if(problemType != null){
+			s.setProblemType(problemType);
+		}
+
 		// reading the operations
 		operationCounter = wini.get(OPERATION_SECTION, OPERATIONS_SIZE, int.class);
 
 		if (operationCounter > 0) {
 			List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
-			
-			// operation counter now works as the index of operations not the size of the collection
+
+			// operation counter now works as the index of operations not the
+			// size of the collection
 			operationCounter = operationCounter - 1;
 
 			while (operationCounter >= 0) {
@@ -116,6 +125,7 @@ public class INISettingsLoader implements ISettingsLoader {
 		wini.put(BASIC_SECTION, GENERATIONS, settings.getGenerations());
 		wini.put(BASIC_SECTION, POPULATION_SIZE, settings.getPopSize());
 		wini.put(BASIC_SECTION, MAX_TREE_DEPTH, settings.getMaxTreeDepth());
+		wini.put(BASIC_SECTION, PROBLEM_TYPE, settings.getProblemType());
 
 		operationCounter = 0;
 		for (IOperationProvider provider : settings.getOperations()) {
