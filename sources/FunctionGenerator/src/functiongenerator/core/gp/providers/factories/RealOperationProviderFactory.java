@@ -61,26 +61,4 @@ public class RealOperationProviderFactory implements IOperationProviderFactory {
 		return avaliable;
 	}
 
-	// public static OperationsTableModel getReal() {
-	// OperationsTableModel model = new OperationsTableModel();
-	//
-	// model.addRow(true, "Add", Add.class.getName(), "");
-	// model.addRow(true, "Sub", Sub.class.getName(), "");
-	// model.addRow(true, "Mul", Mul.class.getName(), "");
-	// model.addRow(false, "Div", Div.class.getName(), "");
-	// model.addRow(true, "ProtectedDiv", ProtectedDiv.class.getName(),
-	// "Returns 0 when divisor is 0.");
-	// model.addRow(false, "Exp", Exp.class.getName(), "");
-	// model.addRow(false, "Pow", Pow.class.getName(), "");
-	// model.addRow(false, "Log", Log.class.getName(), "");
-	// model.addRow(false, "ProtectedLog", ProtectedLog.class.getName(),
-	// "Returns 0 when argument is less or equal 0.");
-	// model.addRow(false, "Min", Min.class.getName(), "");
-	// model.addRow(false, "Max", Max.class.getName(), "");
-	// model.addRow(false, "Sin", Sin.class.getName(), "");
-	// model.addRow(false, "Cos", Cos.class.getName(), "");
-	//
-	// return model;
-	// }
-	//
 }

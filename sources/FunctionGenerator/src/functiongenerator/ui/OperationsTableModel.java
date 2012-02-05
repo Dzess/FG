@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -39,7 +38,8 @@ public class OperationsTableModel extends AbstractTableModel {
 
 	private List<String> captions;
 	private List<Object[]> rows = new ArrayList<Object[]>();
-	private Map<IOperationProvider, Map<String, Object>> parameters;
+	// private Map<IOperationProvider, Map<String, Object>> parameters;
+	private List<Map<String, Object>> parameters;
 
 	private final IOperationProviderFactory factory;
 
@@ -64,14 +64,17 @@ public class OperationsTableModel extends AbstractTableModel {
 
 	private void setRows() {
 
-		this.parameters = new HashMap<IOperationProvider, Map<String, Object>>();
+		// this.parameters = new HashMap<IOperationProvider, Map<String,
+		// Object>>();
+		this.parameters = new ArrayList<Map<String, Object>>();
 
 		for (IOperationProvider provider : factory.getAvaliable()) {
 			addRow(provider);
 
 			// add some information about defaults
 			Map<String, Object> parametersMapPerProvider = provider.getParametersDefault();
-			this.parameters.put(provider, parametersMapPerProvider);
+			// this.parameters.put(provider, parametersMapPerProvider);
+			this.parameters.add(parametersMapPerProvider);
 		}
 	}
 
@@ -190,7 +193,9 @@ public class OperationsTableModel extends AbstractTableModel {
 				// NOTE: add another data types here
 
 				if (o != null) {
-					Map<String, Object> toBeSetParams = this.parameters.get(provider);
+					// Map<String, Object> toBeSetParams =
+					// this.parameters.get(provider);
+					Map<String, Object> toBeSetParams = this.parameters.get(row);
 					toBeSetParams.put(e.getKey(), o);
 					provider.setParameters(toBeSetParams);
 				} else {
