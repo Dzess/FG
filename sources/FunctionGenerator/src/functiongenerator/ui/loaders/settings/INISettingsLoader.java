@@ -17,6 +17,7 @@ import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 import functiongenerator.core.gp.providers.SimpleOperationProvider;
+import functiongenerator.utils.MapHelper;
 
 /**
  * Writes and loads the settings of the experiment into INI file format.
@@ -77,12 +78,14 @@ public class INISettingsLoader implements ISettingsLoader {
 
 		// reading the operations
 		operationCounter = wini.get(OPERATION_SECTION, OPERATIONS_SIZE, int.class);
-		operationCounter = operationCounter - 1;
 
-		if (operationCounter != 0) {
+		if (operationCounter > 0) {
 			List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
+			
+			// operation counter now works as the index of operations not the size of the collection
+			operationCounter = operationCounter - 1;
 
-			while (operationCounter > 0) {
+			while (operationCounter >= 0) {
 
 				IOperationProvider op = loadOperation(wini);
 				if (op != null) {
@@ -170,7 +173,7 @@ public class INISettingsLoader implements ISettingsLoader {
 
 	}
 
-	private IOperationProvider loadOperation(Wini wini) {
+	private IOperationProvider loadOperation(Wini wini) throws IOException {
 
 		String sectionName = getOperationID();
 		String clsName = wini.get(sectionName, OPERATION_CLASS, String.class);
@@ -213,18 +216,31 @@ public class INISettingsLoader implements ISettingsLoader {
 
 			provider.setEnabled(selected);
 
-			System.out.println(map.getClass());
-			
 			// creating the parameters here
-			Map<String, String> textMap = (Map<String, String>) map;
-			
+			Map<String, String> textMap = MapHelper.parse((String) map);
 
 			// using the types provided by provider perform casting
 			Map<String, Object> params = new HashMap<String, Object>();
 			for (Map.Entry<String, String> e : textMap.entrySet()) {
 				String key = e.getKey();
 				Class<?> type = provider.getParametersTypes().get(key);
+				Object value = null;
 
+				// this code i pretty ugly way of doing things
+				// but there is no other option to do this
+				if (type == Double.class) {
+					String s = e.getValue();
+					Double v = Double.parseDouble(s);
+					value = v;
+				} else if (type == Integer.class) {
+					Integer v = Integer.parseInt(e.getValue());
+					value = v;
+				} else {
+					// not supported operation
+					throw new IllegalArgumentException("The data type is not Integer nor Double");
+				}
+
+				params.put(key, value);
 			}
 
 			provider.setParameters(params);
@@ -232,7 +248,7 @@ public class INISettingsLoader implements ISettingsLoader {
 			return provider;
 		} catch (Exception e) {
 			logger.warn("Could not instatniate the operation provider", e);
-			return null;
+			throw new InvalidFileFormatException("The data in file is corrupted", e);
 		}
 	}
 }
