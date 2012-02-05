@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 import ec.gp.GPNode;
@@ -70,7 +69,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Class<?>> getParametersTypes() {
+	public Map<String, Class<?>> getParametersTypes() {
 		return map;
 	}
 
@@ -85,7 +84,7 @@ public class SimpleOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Object> getParametersDefault() {
+	public Map<String, Object> getParametersDefault() {
 		return defaultParameters;
 	}
 

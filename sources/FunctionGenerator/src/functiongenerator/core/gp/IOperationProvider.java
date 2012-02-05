@@ -88,11 +88,9 @@ public interface IOperationProvider {
 
 	/**
 	 * Gets the {@linkplain SortedMap} with the key being name of the parameter
-	 * and value being the type of the element. The {@linkplain SortedMap} is
-	 * used because of the current implementation of GUI which uses position of
-	 * the elements to manage values.
+	 * and value being the type of the element.
 	 */
-	public SortedMap<String, Class<?>> getParametersTypes();
+	public Map<String, Class<?>> getParametersTypes();
 
 	/**
 	 * Parameterizes the object of {@linkplain IOperationProvider} with the same
@@ -106,11 +104,10 @@ public interface IOperationProvider {
 	public Map<String, Object> getParameters();
 
 	/**
-	 * Gets the default values for each of the parameter. The
-	 * {@linkplain SortedMap} returned here should be equal to the
-	 * {@linkplain SortedMap} of method {@code getParameters()} in the field of
-	 * available keys.
+	 * Gets the default values for each of the parameter. The {@linkplain Map}
+	 * returned here should be equal to the {@linkplain Map} of method
+	 * {@code getParameters()} in the field of available keys.
 	 */
-	public SortedMap<String, Object> getParametersDefault();
+	public Map<String, Object> getParametersDefault();
 
 }

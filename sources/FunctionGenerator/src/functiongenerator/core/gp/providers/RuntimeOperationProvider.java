@@ -99,7 +99,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Class<?>> getParametersTypes() {
+	public Map<String, Class<?>> getParametersTypes() {
 		return parameters;
 	}
 
@@ -128,7 +128,7 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	}
 
 	@Override
-	public SortedMap<String, Object> getParametersDefault() {
+	public Map<String, Object> getParametersDefault() {
 		return defaultParameters;
 	}
 
