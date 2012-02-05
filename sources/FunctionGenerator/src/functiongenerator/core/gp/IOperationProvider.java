@@ -31,7 +31,19 @@ import ec.gp.GPNode;
  * to introduce another type of abstraction instead of those
  * {@linkplain SortedMap} and {@linkplain Map} ways of GUI information exchange.
  * </p>
- * 
+ * <p>
+ * The basic information about {@linkplain IOperationProvider} contain:
+ * <ul>
+ * <li>Name</li>
+ * <li>Comment</li>
+ * <li>Being Enabled</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Classes that implement the {@linkplain IOperationProvider} interface should
+ * have the default empty constructor used for the reconstructing instances from
+ * the file setting.
+ * </p>
  * 
  * @author Piotr Jessa
  * 
@@ -68,6 +80,11 @@ public interface IOperationProvider {
 	 * default.
 	 */
 	public boolean isEnableByDefault();
+
+	/**
+	 * The term which identifies if the element should be visible.
+	 */
+	public void setEnabled(boolean isEnabled);
 
 	/**
 	 * Gets the {@linkplain SortedMap} with the key being name of the parameter

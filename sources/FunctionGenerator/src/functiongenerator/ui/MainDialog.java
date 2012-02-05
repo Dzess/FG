@@ -682,7 +682,7 @@ public class MainDialog extends JDialog implements ActionListener {
 		List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
 		OperationsTableModel model = (OperationsTableModel) tableOperations.getModel();
 
-		// FIXME: this coping might not be necessary 
+		// TODO: this coping might not be necessary 
 		for (IOperationProvider operation : model.getSelectedOperations()) {
 			operations.add(operation);
 		}

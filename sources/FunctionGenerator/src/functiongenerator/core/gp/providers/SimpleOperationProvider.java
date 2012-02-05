@@ -22,12 +22,17 @@ public class SimpleOperationProvider implements IOperationProvider {
 
 	private final Class<? extends GPNode> cls;
 	private final List<Class<? extends GPNode>> list;
-	private final String name;
-	private final String comennt;
+	private String name;
+	private String comennt;
+
 	private final TreeMap<String, Class<?>> map;
 	private final TreeMap<String, Object> defaultParameters;
 
-	private final boolean isEnabled;
+	private boolean isEnabled;
+
+	public SimpleOperationProvider() {
+		this(null, null, false);
+	}
 
 	public SimpleOperationProvider(Class<? extends GPNode> cls, String name, boolean isEnabled) {
 		this(cls, name, "", isEnabled);
@@ -43,6 +48,10 @@ public class SimpleOperationProvider implements IOperationProvider {
 
 		this.map = new TreeMap<String, Class<?>>();
 		this.defaultParameters = new TreeMap<String, Object>();
+	}
+
+	public Class<? extends GPNode> getNodeClass() {
+		return this.cls;
 	}
 
 	@Override
@@ -133,5 +142,18 @@ public class SimpleOperationProvider implements IOperationProvider {
 	@Override
 	public Map<String, Object> getParameters() {
 		return new HashMap<String, Object>();
+	}
+
+	public void setName(String newName) {
+		name = newName;
+	}
+
+	public void setComment(String newComment) {
+		comennt = newComment;
+	}
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 }

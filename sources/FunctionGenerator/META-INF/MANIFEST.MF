@@ -9,6 +9,8 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
- tools.jar
+ tools.jar,
+ libs/ini4j-0.5.2.jar,
+ libs/javassist.jar
 Bundle-Vendor: Tomasz Pawlak
 Import-Package: org.apache.commons.logging

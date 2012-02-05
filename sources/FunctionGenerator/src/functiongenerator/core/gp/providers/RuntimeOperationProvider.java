@@ -1,6 +1,5 @@
 package functiongenerator.core.gp.providers;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,8 @@ import ec.gp.GPNode;
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.functions.NullaryOperation;
 import functiongenerator.core.gp.rt.DoubleValueRuntimeFunctionGenerator;
-import functiongenerator.core.gp.rt.RuntimeFunctionGenerator;
 import functiongenerator.core.gp.rt.IntegerValueRuntimeFunctionGenerator;
+import functiongenerator.core.gp.rt.RuntimeFunctionGenerator;
 
 /**
  * Provider of classes which are generated at runtime mainly by the some
@@ -44,10 +43,10 @@ public class RuntimeOperationProvider implements IOperationProvider {
 
 	private RuntimeFunctionGenerator fg;
 
-	private final boolean isEnableByDefault;
+	private boolean isEnableByDefault;
 
 	private final Class<? extends Number> type;
-
+	
 	/**
 	 * 
 	 * @param typeOfData
@@ -73,6 +72,10 @@ public class RuntimeOperationProvider implements IOperationProvider {
 		setParameters(defaultParameters);
 	}
 
+	public Class<? extends Number> getOperationType(){
+		return this.type;
+	}
+	
 	@Override
 	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException {
 
@@ -174,5 +177,10 @@ public class RuntimeOperationProvider implements IOperationProvider {
 	@Override
 	public Map<String, Object> getParameters() {
 		return values;
+	}
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		isEnableByDefault = isEnabled;
 	}
 }
