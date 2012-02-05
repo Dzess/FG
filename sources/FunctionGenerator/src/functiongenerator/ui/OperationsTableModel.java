@@ -1,6 +1,9 @@
 package functiongenerator.ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +108,9 @@ public class OperationsTableModel extends AbstractTableModel {
 		tableRow.add(comment);
 
 		List<Entry<String, Object>> sortedSet = new LinkedList<Entry<String, Object>>(provider.getParameters().entrySet());
+
+		// sort the list by the parameters
+		Collections.sort(sortedSet, new PairComparator());
 
 		for (int i = 0; i < maxParameters; i++) {
 
@@ -229,4 +235,15 @@ public class OperationsTableModel extends AbstractTableModel {
 		return selected;
 	}
 
+	/**
+	 * Helper class used for sorting map entries aka tuples
+	 */
+	class PairComparator implements Comparator<Entry<String, Object>> {
+
+		@Override
+		public int compare(Entry<String, Object> paramT1, Entry<String, Object> paramT2) {
+			return paramT1.getKey().compareTo(paramT2.getKey());
+		}
+
+	}
 }
