@@ -7,17 +7,16 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -36,21 +35,21 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableColumnModel;
 import javax.swing.text.NumberFormatter;
 
+import functiongenerator.core.ProblemType;
 import functiongenerator.core.Settings;
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
+import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
+import functiongenerator.core.gp.providers.RuntimeOperationProvider;
+import functiongenerator.core.gp.providers.SimpleOperationProvider;
 import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
 import functiongenerator.core.gp.providers.factories.RealOperationProviderFactory;
 import functiongenerator.ui.loaders.data.CSVDataLoader;
 import functiongenerator.ui.loaders.data.IDataLoader;
 import functiongenerator.ui.loaders.settings.INISettingsLoader;
 import functiongenerator.ui.loaders.settings.ISettingsLoader;
-
-import java.awt.Insets;
 
 /**
  * Stores all the logic of GUI.
@@ -65,8 +64,9 @@ import java.awt.Insets;
  * </ul>
  * </p>
  */
+@SuppressWarnings("serial")
 public class MainDialog extends JDialog implements ActionListener {
-
+	
 	private JPanel jContentPane = null;
 	private JPanel panelConstraints = null;
 	private JPanel panelSettings = null;
@@ -644,9 +644,73 @@ public class MainDialog extends JDialog implements ActionListener {
 		textGenerations.setText(Integer.toString(settings.getGenerations()));
 		textMaxDepth.setText(Integer.toString(settings.getMaxTreeDepth()));
 
-		// set the differential operations 
-		
+		// set the differential operations using the problem type provided
+		// and using the list of already saved operations ;)
+		// TODO: this method should be refactored out of this scopes
+		List<IOperationProvider> operations = settings.getOperations();
+		List<IOperationProvider> alreadyExisting = null;
+		if (ProblemType.INTEGER == settings.getProblemType()) {
+			radioInteger.setSelected(true);
+			radioDouble.setSelected(false);
+
+			alreadyExisting = integerFactory.getAvaliable();
+			setOperationsToModel(alreadyExisting, operations);
+			tableOperations.setModel(new OperationsTableModel(integerFactory));
+
+		} else if (ProblemType.DOUBLE == settings.getProblemType()) {
+			radioInteger.setSelected(false);
+			radioDouble.setSelected(true);
+
+			alreadyExisting = realFactory.getAvaliable();
+			setOperationsToModel(alreadyExisting, operations);
+			tableOperations.setModel(new OperationsTableModel(realFactory));
+		}
+
 		this.settings = settings;
+	}
+
+	private void setOperationsToModel(List<IOperationProvider> alreadyExisting, List<IOperationProvider> operations) {
+		// remove all the elements that are already existing and are not
+		// simple operation
+		// providers
+		List<IOperationProvider> toRemove = new LinkedList<IOperationProvider>();
+		for (IOperationProvider existingProvider : alreadyExisting) {
+			if (existingProvider.getClass() == RangeRuntimeOperationProvider.class) {
+				toRemove.add(existingProvider);
+			} else if (existingProvider.getClass() == RuntimeOperationProvider.class) {
+				toRemove.add(existingProvider);
+			}
+		}
+
+		alreadyExisting.removeAll(toRemove);
+
+		for (IOperationProvider provider : operations) {
+
+			if (provider.getClass() == SimpleOperationProvider.class) {
+
+				SimpleOperationProvider simpleProvider = (SimpleOperationProvider) provider;
+				// change the already existing elements (need to find such
+				// class)
+				for (IOperationProvider existingProvider : alreadyExisting) {
+					if (existingProvider.getClass() == SimpleOperationProvider.class) {
+						// check if it is the about the same node function
+						SimpleOperationProvider sProvider = (SimpleOperationProvider) existingProvider;
+						if (sProvider.getNodeClass() == simpleProvider.getNodeClass()) {
+							// found the exact same element, so break
+							// but before perform all changes (selection)
+							sProvider.setEnabled(true);
+							break;
+						}
+					}
+				}
+
+			} else {
+				// with other classes there is not so much f
+				// just replace the element in already existing
+				provider.setEnabled(true);
+				alreadyExisting.add(provider);
+			}
+		}
 	}
 
 	/**
@@ -662,6 +726,11 @@ public class MainDialog extends JDialog implements ActionListener {
 		settings.setMaxTreeDepth(getMaxTreeDepth());
 		settings.setPopulationSize(getPopulationSize());
 
+		if (radioDouble.isSelected()) {
+			settings.setProblemType(ProblemType.DOUBLE);
+		} else if (radioInteger.isSelected()) {
+			settings.setProblemType(ProblemType.INTEGER);
+		}
 		settings.setOperations(getOperations());
 
 		return settings;
@@ -684,7 +753,7 @@ public class MainDialog extends JDialog implements ActionListener {
 		List<IOperationProvider> operations = new ArrayList<IOperationProvider>();
 		OperationsTableModel model = (OperationsTableModel) tableOperations.getModel();
 
-		// TODO: this coping might not be necessary 
+		// do not copy those operations
 		for (IOperationProvider operation : model.getSelectedOperations()) {
 			operations.add(operation);
 		}
@@ -922,7 +991,6 @@ public class MainDialog extends JDialog implements ActionListener {
 
 							// update the graphical elements
 							setSettings(s);
-
 						}
 					} catch (Exception ex) {
 						JOptionPane.showMessageDialog(parent, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
