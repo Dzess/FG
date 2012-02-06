@@ -9,6 +9,7 @@ import ec.gp.GPNode;
 import ec.gp.GPTree;
 import functiongenerator.core.Engine;
 import functiongenerator.core.gp.data.DoubleData;
+import functiongenerator.core.gp.data.IntegerData;
 import functiongenerator.core.gp.problem.AbstractRegressionProblem;
 
 /**
@@ -46,18 +47,35 @@ public class RegressionDataSetProvider implements IDataSetProvider {
 
 		for (Number[] point : problem.getPoints()) {
 
+			// perform checking that we are operating on 2d chart
+			if (point.length > 2) {
+				throw new IllegalStateException("Operation not supported");
+			}
+
 			problem.X = point;
-			double Y = (Double) point[point.length - 1];
-			DoubleData output = new DoubleData();
 
-			// run the evaluation for single X
-			root.eval(null, 0, output, null, individual, problem);
+			if (point[0].getClass() == Double.class) {
 
-			double YEstimated = output.Y;
+				Double Y = (Double) point[point.length - 1];
 
-			// only
-			series.add(point[0], Y);
-			esitmated.add(point[0], YEstimated);
+				// run the evaluation for single X
+				DoubleData output = new DoubleData();
+				root.eval(null, 0, output, null, individual, problem);
+				Double YEstimated = output.Y;
+
+				series.add(point[0], Y);
+				esitmated.add(point[0], YEstimated);
+			} else {
+
+				Integer Y = (Integer) point[point.length - 1];
+
+				IntegerData output = new IntegerData();
+				root.eval(null, 0, output, null, individual, problem);
+				Integer YEstimated = output.Y;
+
+				series.add(point[0], Y);
+				esitmated.add(point[0], YEstimated);
+			}
 		}
 
 		XYSeriesCollection collection = new XYSeriesCollection();
