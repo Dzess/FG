@@ -10,28 +10,34 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.AbstractDataset;
 
 /**
- * Class responsible for rendering chart basing on the data provided by the
- * {@linkplain RegressionProblem} and the solution provided by symbolic
- * regression.
+ * Sample class for learning the JFreeChart library.
  * 
  * @author Piotr Jessa
  * 
  */
 public class SimpleChartMaker implements IChartMaker {
 
-	/* (non-Javadoc)
-	 * @see functiongenerator.ui.charting.makers.IChartMaker#createChart(org.jfree.data.category.CategoryDataset)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * functiongenerator.ui.charting.makers.IChartMaker#createChart(org.jfree
+	 * .data.category.CategoryDataset)
 	 */
 	@Override
-	public JFreeChart createChart(final CategoryDataset dataset) {
+	public JFreeChart createChart(final AbstractDataset dataset) {
+
+		CategoryDataset catageryDataset = (CategoryDataset) dataset;
+
 		// create the chart...
 		final JFreeChart chart = ChartFactory.createLineChart("Line Chart Demo 1", // chart
 																					// title
 				"Type", // domain axis label
 				"Value", // range axis label
-				dataset, // data
+				catageryDataset, // data
 				PlotOrientation.VERTICAL, // orientation
 				true, // include legend
 				true, // tooltips
@@ -69,5 +75,10 @@ public class SimpleChartMaker implements IChartMaker {
 		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
+	}
+
+	@Override
+	public JFreeChart emptyChart() {
+		return null;
 	}
 }

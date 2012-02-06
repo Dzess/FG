@@ -2,6 +2,9 @@ package functiongenerator.ui.charting.data;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.AbstractDataset;
+
+import ec.gp.GPIndividual;
 
 /**
  * Gets the data set based.
@@ -15,7 +18,7 @@ public class SimpleDataSetProvider implements IDataSetProvider {
 	 * @see functiongenerator.ui.charting.data.IDataSetProvider#getDataSet()
 	 */
 	@Override
-	public CategoryDataset getDataSet() {
+	public AbstractDataset getDataSet(GPIndividual individual) {
 		return createDataset();
 	}
 
@@ -24,7 +27,7 @@ public class SimpleDataSetProvider implements IDataSetProvider {
 	 * 
 	 * @return The dataset.
 	 */
-	private CategoryDataset createDataset() {
+	private AbstractDataset createDataset() {
 
 		// row keys...
 		final String series1 = "First";

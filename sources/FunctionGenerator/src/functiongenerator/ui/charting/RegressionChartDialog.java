@@ -6,9 +6,13 @@ import javax.swing.JDialog;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.AbstractDataset;
 import org.jfree.ui.RefineryUtilities;
 
+import com.sun.codemodel.internal.JResourceFile;
+
+import ec.gp.GPIndividual;
+import functiongenerator.core.Engine;
 import functiongenerator.core.IProgressListener;
 import functiongenerator.ui.charting.data.IDataSetProvider;
 import functiongenerator.ui.charting.data.SimpleDataSetProvider;
@@ -30,20 +34,21 @@ import functiongenerator.ui.charting.makers.SimpleChartMaker;
 public class RegressionChartDialog extends JDialog implements IProgressListener {
 
 	static private final Dimension PREFFERED_SIZE = new Dimension(800, 600);
-	
+
 	private final IChartMaker chartMaker;
 	private final IDataSetProvider dataSetProvider;
+
+	private Engine engine;
+
+	private ChartPanel chartPanel;
 
 	public RegressionChartDialog(final IDataSetProvider dataSetProvider, final IChartMaker chartMaker) {
 
 		this.dataSetProvider = dataSetProvider;
 		this.chartMaker = chartMaker;
 
-		final CategoryDataset dataset = dataSetProvider.getDataSet();
-
-		final JFreeChart chart = chartMaker.createChart(dataset);
-		final ChartPanel chartPanel = new ChartPanel(chart);
-
+		JFreeChart chart = chartMaker.emptyChart();
+		chartPanel = new ChartPanel(chart);
 		setContentPane(chartPanel);
 
 		setPreferredSize(PREFFERED_SIZE);
@@ -59,7 +64,29 @@ public class RegressionChartDialog extends JDialog implements IProgressListener 
 
 	@Override
 	public void update(double done, String message) {
-		// TODO Auto-generated method stub
 
+		GPIndividual individual = tryGettingIndividual();
+		JFreeChart chart = null;
+		if (individual != null) {
+			AbstractDataset dataset = dataSetProvider.getDataSet(individual);
+			chart = chartMaker.createChart(dataset);
+		} else {
+			chart = chartMaker.emptyChart();
+		}
+
+		chartPanel.setChart(chart);
+	}
+
+	private GPIndividual tryGettingIndividual() {
+		if (engine != null) {
+			if (engine.getBestIndividual() != null) {
+				return engine.getBestIndividual();
+			}
+		}
+		return null;
+	}
+
+	public void setEngine(Engine engine) {
+		this.engine = engine;
 	}
 }

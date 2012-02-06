@@ -8,14 +8,18 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import functiongenerator.core.Engine;
+import functiongenerator.core.Settings;
+import functiongenerator.core.gp.problem.AbstractRegressionProblem;
 import functiongenerator.handlers.CommandHandler;
 import functiongenerator.ui.MainDialog;
 import functiongenerator.ui.ProgressDialog;
 import functiongenerator.ui.ResultsDialog;
 import functiongenerator.ui.charting.RegressionChartDialog;
 import functiongenerator.ui.charting.data.IDataSetProvider;
+import functiongenerator.ui.charting.data.RegressionDataSetProvider;
 import functiongenerator.ui.charting.data.SimpleDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
+import functiongenerator.ui.charting.makers.RegressionChartMaker;
 import functiongenerator.ui.charting.makers.SimpleChartMaker;
 
 /**
@@ -85,6 +89,8 @@ public class FGRunnable implements Runnable {
 					engine.setSettings(mainDlg.getSettings());
 					engine.setPoints(mainDlg.getPoints());
 
+					engine.init();
+
 					progressDlg = new ProgressDialog(null);
 					progressDlg.setVisible(true);
 					progressDlg.setEngine(engine);
@@ -92,12 +98,16 @@ public class FGRunnable implements Runnable {
 					engine.addListener(progressDlg);
 
 					// the types of charting engines
-					IDataSetProvider dataSetProvider = new SimpleDataSetProvider();
-					IChartMaker chartMaker = new SimpleChartMaker();
+
+					AbstractRegressionProblem problem = engine.getProblem();
+					IDataSetProvider dataSetProvider = new RegressionDataSetProvider(problem);
+					IChartMaker chartMaker = new RegressionChartMaker();
+					// IDataSetProvider dataSetProvider = new SimpleDataSetProvider();
+					// IChartMaker chartMaker = new SimpleChartMaker();
 
 					chartDlg = new RegressionChartDialog(dataSetProvider, chartMaker);
 					chartDlg.setVisible(true);
-					// TODO: get here some information about the engine
+					chartDlg.setEngine(engine);
 
 					engine.addListener(chartDlg);
 

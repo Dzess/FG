@@ -47,6 +47,38 @@ public class Engine {
 
 	private volatile boolean cancel = false;
 
+	private GPIndividual bestIndividual;
+
+	private AbstractRegressionProblem problem;
+
+	private EvolutionState state;
+
+	private StringBuffer buffer;
+
+	/**
+	 * Gets best individual for the problem so far. Might result in null if no
+	 * individual has been already achieved.
+	 * 
+	 * <p>
+	 * Run Phase
+	 * </p>
+	 */
+	public GPIndividual getBestIndividual() {
+		return bestIndividual;
+	}
+
+	/**
+	 * Returns the current problem which is being processes by engine. Before
+	 * initiation phase of the {@linkplain Engine} returns null.
+	 * 
+	 * <p>
+	 * Initiation Phase
+	 * </p>
+	 */
+	public AbstractRegressionProblem getProblem() {
+		return problem;
+	}
+
 	public List<Number[]> getPoints() {
 		return points;
 	}
@@ -162,12 +194,11 @@ public class Engine {
 	}
 
 	/**
+	 * Initializes the all possible elements
 	 * 
-	 * @return Java code template.
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	public String run() throws Exception{
+	public void init() throws Exception {
 		cancel = false;
 
 		int numberOfXes = points.get(0).length - 1;
@@ -182,15 +213,16 @@ public class Engine {
 		}
 
 		ParameterDatabase db = getSettings().generateParameterDatabase(numberOfXes, type);
-		EvolutionState state = Evolve.initialize(db, 0);
+		state = Evolve.initialize(db, 0);
 		state.startFresh();
 
-		AbstractRegressionProblem problem = (AbstractRegressionProblem) state.evaluator.p_problem;
+		problem = (AbstractRegressionProblem) state.evaluator.p_problem;
 		problem.setPoints(points);
 		problem.setMaxTreeDepth(getSettings().getMaxTreeDepth());
 
 		StringWriter writer = new StringWriter();
-		StringBuffer buffer = writer.getBuffer();
+		buffer = writer.getBuffer();
+
 		// TODO: change the sample output log for the org.apache.commons.logging
 		state.output.addLog(writer, new LogRestarter() {
 
@@ -204,11 +236,20 @@ public class Engine {
 				return l;
 			}
 		}, true, false);
+	}
+
+	/**
+	 * Runs the computations
+	 */
+	public String run() throws Exception {
 
 		/* the big loop */
 		int result = EvolutionState.R_NOTDONE;
 		while (result == EvolutionState.R_NOTDONE && !cancel) {
 			result = state.evolve();
+
+			SimpleStatistics stat = (SimpleStatistics) state.statistics;
+			bestIndividual = (GPIndividual) stat.best_of_run[0];
 
 			updateProgress(state.generation, buffer.toString());
 			buffer.delete(0, buffer.length());
