@@ -17,7 +17,7 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.javaeditorkit;
+package functiongenerator.ui.printing;
 
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Document;
@@ -31,6 +31,7 @@ import javax.swing.text.ViewFactory;
  * @author Timothy Prinzing
  * @version 1.2 05/04/98
  */
+@SuppressWarnings("serial")
 public class JavaEditorKit extends DefaultEditorKit {
 
 	public JavaEditorKit() {

@@ -29,6 +29,7 @@ import functiongenerator.core.gp.functions.real.Min;
 import functiongenerator.core.gp.functions.real.Pow;
 import functiongenerator.core.gp.functions.real.ProtectedDiv;
 import functiongenerator.core.gp.problem.AbstractRegressionProblem;
+import functiongenerator.ui.printing.TreeToStringTranslator;
 
 /**
  * Responsible for running the GP algorithm.
@@ -109,6 +110,7 @@ public class Engine {
 		}
 	}
 
+	// TODO: refactor this code outt here
 	private String generateClassTemplate(String func, String comment) throws IOException {
 		try {
 			InputStream template = Engine.class.getResourceAsStream("ClassTemplate.java.tpl");
@@ -154,50 +156,12 @@ public class Engine {
 		}
 	}
 
-	private String translateTree(GPTree tree) {
-		StringBuilder builder = new StringBuilder();
-		processNode(builder, tree.child);
-		return builder.toString();
-	}
-
-	private void processNode(StringBuilder builder, GPNode node) {
-		if (node instanceof BinaryOperation) {
-			if (node instanceof ProtectedDiv || node instanceof Pow || node instanceof Min || node instanceof Max
-					|| node instanceof functiongenerator.core.gp.functions.integer.ProtectedDiv
-					|| node instanceof functiongenerator.core.gp.functions.integer.Min
-					|| node instanceof functiongenerator.core.gp.functions.integer.Max) {
-				builder.append(node.toString());
-				builder.append('(');
-				processNode(builder, node.children[0]);
-				builder.append(", ");
-				processNode(builder, node.children[1]);
-				builder.append(')');
-			} else {
-				builder.append('(');
-				processNode(builder, node.children[0]);
-				builder.append(") ");
-				builder.append(node.toString());
-				builder.append(" (");
-				processNode(builder, node.children[1]);
-				builder.append(')');
-			}
-		} else if (node instanceof UnaryOperation) {
-			builder.append(node.toString());
-			builder.append('(');
-			processNode(builder, node.children[0]);
-			builder.append(')');
-		} else if (node instanceof NullaryOperation) {
-			builder.append(node.toString());
-		} else {
-			throw new RuntimeException("Unknown node type: " + node.getClass().getName());
-		}
-	}
-
 	/**
 	 * Initializes the all possible elements
 	 * 
 	 * @throws Exception
 	 */
+	@SuppressWarnings("serial")
 	public void init() throws Exception {
 		cancel = false;
 
@@ -223,7 +187,6 @@ public class Engine {
 		StringWriter writer = new StringWriter();
 		buffer = writer.getBuffer();
 
-		// TODO: change the sample output log for the org.apache.commons.logging
 		state.output.addLog(writer, new LogRestarter() {
 
 			@Override
@@ -236,6 +199,7 @@ public class Engine {
 				return l;
 			}
 		}, true, false);
+
 	}
 
 	/**
@@ -263,7 +227,9 @@ public class Engine {
 
 		SimpleStatistics stat = (SimpleStatistics) state.statistics;
 		GPIndividual ind = (GPIndividual) stat.best_of_run[0];
-		String template = generateClassTemplate(translateTree(ind.trees[0]), ind.fitness.fitnessToStringForHumans());
+
+		String expression = TreeToStringTranslator.translateTree(ind.trees[0]);
+		String template = generateClassTemplate(expression, ind.fitness.fitnessToStringForHumans());
 
 		state.finish(result);
 		Evolve.cleanup(state);

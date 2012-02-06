@@ -1,13 +1,15 @@
 package functiongenerator.ui.charting;
 
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Label;
-import java.awt.LayoutManager;
 
+import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,25 +18,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.ui.RefineryUtilities;
 
-import com.sun.codemodel.internal.JResourceFile;
-
 import ec.gp.GPIndividual;
+import ec.gp.GPTree;
 import functiongenerator.core.Engine;
 import functiongenerator.core.IProgressListener;
 import functiongenerator.ui.charting.data.IDataSetProvider;
 import functiongenerator.ui.charting.data.SimpleDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
 import functiongenerator.ui.charting.makers.SimpleChartMaker;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.JLayeredPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.BoxLayout;
-import java.awt.Component;
+import functiongenerator.ui.printing.TreeToStringTranslator;
 
 /**
  * Displays the chart of the symbolic regression in the form of the
@@ -78,7 +70,7 @@ public class RegressionChartDialog extends JDialog implements IProgressListener 
 		chartPanel.setReshowDelay(100);
 
 		// label
-		textLabel = new JLabel("Status:");
+		textLabel = new JLabel("");
 		textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mainPanel.setLayer(textLabel, 1);
 		textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,7 +82,7 @@ public class RegressionChartDialog extends JDialog implements IProgressListener 
 		setModalityType(ModalityType.MODELESS);
 
 		setContentPane(mainPanel);
-		
+
 		mainPanel.moveToBack(textLabel);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.moveToFront(chartPanel);
@@ -120,6 +112,11 @@ public class RegressionChartDialog extends JDialog implements IProgressListener 
 
 			chartPanel.setChart(chart);
 			chartPanel.setVisible(true);
+
+			// set data to the label (usually the first one ;))
+			GPTree tree = individual.trees[0];
+			String expression = TreeToStringTranslator.translateTree(tree);
+			textLabel.setText(expression);
 
 		} catch (Exception e) {
 			logger.warn("Exception during drawing chart", e);

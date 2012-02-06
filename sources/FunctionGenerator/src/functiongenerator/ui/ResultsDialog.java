@@ -26,9 +26,10 @@ import javax.swing.JScrollPane;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
-import functiongenerator.ui.javaeditorkit.JavaContext;
-import functiongenerator.ui.javaeditorkit.JavaEditorKit;
-import functiongenerator.ui.javaeditorkit.Token;
+import functiongenerator.ui.printing.JavaContext;
+import functiongenerator.ui.printing.JavaEditorKit;
+import functiongenerator.ui.printing.Token;
+
 import javax.swing.WindowConstants;
 
 public class ResultsDialog extends JDialog implements ActionListener {
@@ -88,7 +89,7 @@ public class ResultsDialog extends JDialog implements ActionListener {
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setTitle("Results");
 		this.setContentPane(getJContentPane());
-		this.setModal(false);
+		this.setModal(true);
 		this.setWindowAtScreenCenter();
 	}
 

@@ -321,7 +321,7 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton getButtonCancel() {
 		if (buttonCancel == null) {
 			buttonCancel = new JButton();
-			buttonCancel.setText("Cancel");
+			buttonCancel.setText("Exit");
 			buttonCancel.addActionListener(this);
 		}
 		return buttonCancel;
@@ -539,7 +539,7 @@ public class MainDialog extends JDialog implements ActionListener {
 
 			result = true;
 			setVisible(false);
-		} else if (cmd.equals("Cancel")) {
+		} else if (cmd.equals("Exit")) {
 			result = false;
 			setVisible(false);
 		} else if (cmd.equals("Load")) {

@@ -17,7 +17,7 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.javaeditorkit;
+package functiongenerator.ui.printing;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +39,7 @@ import javax.swing.text.Segment;
  * @author Timothy Prinzing
  * @version 1.2 05/04/98
  */
+@SuppressWarnings("serial")
 public class JavaDocument extends PlainDocument {
 
 	public JavaDocument() {

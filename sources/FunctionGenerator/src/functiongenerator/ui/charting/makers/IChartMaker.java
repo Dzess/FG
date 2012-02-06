@@ -1,7 +1,6 @@
 package functiongenerator.ui.charting.makers;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.AbstractDataset;
 
 public interface IChartMaker {

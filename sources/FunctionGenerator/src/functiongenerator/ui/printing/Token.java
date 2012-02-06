@@ -17,7 +17,7 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.javaeditorkit;
+package functiongenerator.ui.printing;
 
 import java.io.Serializable;
 
@@ -31,6 +31,7 @@ import sun.tools.java.Constants;
  * @author Timothy Prinzing
  * @version 1.2 05/04/98
  */
+@SuppressWarnings("serial")
 public class Token implements Serializable {
 
 	Token(String representation, int scanValue) {

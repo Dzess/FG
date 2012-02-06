@@ -1,6 +1,5 @@
 package functiongenerator.ui.charting.data;
 
-import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.AbstractDataset;
 

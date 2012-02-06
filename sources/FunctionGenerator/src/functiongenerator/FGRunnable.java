@@ -116,6 +116,7 @@ public class FGRunnable implements Runnable {
 					String code = engine.run();
 
 					progressDlg.dispose();
+					chartDlg.dispose();
 
 					if (code != null) { // not cancelled
 						resultsDlg = new ResultsDialog(null);

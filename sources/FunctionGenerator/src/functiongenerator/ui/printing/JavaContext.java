@@ -17,7 +17,7 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.javaeditorkit;
+package functiongenerator.ui.printing;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -47,6 +47,7 @@ import javax.swing.text.ViewFactory;
  * @author Timothy Prinzing
  * @version 1.2 05/04/98
  */
+@SuppressWarnings("serial")
 public class JavaContext extends StyleContext implements ViewFactory {
 
 	/**
