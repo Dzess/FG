@@ -102,7 +102,8 @@ public class FGRunnable implements Runnable {
 					AbstractRegressionProblem problem = engine.getProblem();
 					IDataSetProvider dataSetProvider = new RegressionDataSetProvider(problem);
 					IChartMaker chartMaker = new RegressionChartMaker();
-					// IDataSetProvider dataSetProvider = new SimpleDataSetProvider();
+					// IDataSetProvider dataSetProvider = new
+					// SimpleDataSetProvider();
 					// IChartMaker chartMaker = new SimpleChartMaker();
 
 					chartDlg = new RegressionChartDialog(dataSetProvider, chartMaker);
@@ -146,6 +147,14 @@ public class FGRunnable implements Runnable {
 
 			if (progressDlg != null) {
 				progressDlg.dispose();
+			}
+
+			if (resultsDlg != null) {
+				resultsDlg.dispose();
+			}
+
+			if (chartDlg != null) {
+				chartDlg.dispose();
 			}
 		}
 	}

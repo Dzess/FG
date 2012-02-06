@@ -88,7 +88,7 @@ public class ResultsDialog extends JDialog implements ActionListener {
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setTitle("Results");
 		this.setContentPane(getJContentPane());
-		this.setModal(true);
+		this.setModal(false);
 		this.setWindowAtScreenCenter();
 	}
 

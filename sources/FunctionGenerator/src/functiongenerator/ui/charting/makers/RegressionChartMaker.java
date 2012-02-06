@@ -28,6 +28,7 @@ public class RegressionChartMaker implements IChartMaker {
 	}
 
 	private JFreeChart drawChart(XYDataset xyDataset) {
+		
 		JFreeChart chart = ChartFactory.createXYLineChart(
 				"Current fitness", // chart title
 				"X", // x axis label
