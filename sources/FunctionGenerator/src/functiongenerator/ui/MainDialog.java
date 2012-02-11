@@ -1029,9 +1029,12 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton getAddLiteralButton() {
 		if (addLiteralButton == null) {
 			addLiteralButton = new JButton("Add Literal");
+			
+			// TODO: maybe the control of how many literal things should be available
+			addLiteralButton.setVisible(false);
 			addLiteralButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO: do some code for adding the literal
+
 
 				}
 			});
@@ -1042,9 +1045,12 @@ public class MainDialog extends JDialog implements ActionListener {
 	private JButton getAddLiteralRangeButton() {
 		if (addLiteralRangeButton == null) {
 			addLiteralRangeButton = new JButton("Add Literal Range");
+			
+			// TODO:  maybe the control of how many literal things should be available
+			addLiteralRangeButton.setVisible(false);
 			addLiteralRangeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// TODO: do some code for adding literal range
+
 				}
 			});
 		}

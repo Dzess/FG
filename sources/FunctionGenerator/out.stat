@@ -3,568 +3,657 @@ Generation: 0
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=418.14664 Adjusted=0.0023857998 Hits=0
 Tree 0:
- (+ (protectedDiv (* (+ x0 x0) (* x0 x0))
-     (* x0 (* x0 x0))) x0)
+ (protectedDiv (- (+ (* (protectedDiv x0 x0)
+     (* x0 x0)) (* (protectedDiv x0 x0) (- x0
+     x0))) (protectedDiv (- (+ x0 x0) (* x0 x0))
+     (protectedDiv (protectedDiv x0 x0) (* x0
+         x0)))) (+ (* (- (* x0 x0) (* x0 x0)) (- (*
+     x0 x0) (- x0 x0))) (+ (+ (* x0 x0) x0) (protectedDiv
+     (* x0 x0) (- x0 x0)))))
 
 Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=418.14664 Adjusted=0.0023857998 Hits=0
 Tree 0:
- (- (+ x0 (protectedDiv (+ (* x0 x0) (+ x0
-     x0)) x0)) x0)
+ (protectedDiv (- (+ (* (protectedDiv x0 x0)
+     (* x0 x0)) (* (protectedDiv x0 x0) (- x0
+     x0))) (protectedDiv (- (+ x0 x0) (* x0 x0))
+     (protectedDiv (protectedDiv x0 x0) (* x0
+         x0)))) (+ (* (- (* x0 x0) (* x0 x0)) (- (*
+     x0 x0) (- x0 x0))) (+ (+ (* x0 x0) x0) (protectedDiv
+     (* x0 x0) (- x0 x0)))))
 
 Generation: 2
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=233.1711 Adjusted=0.0042703818 Hits=0
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (- (protectedDiv x0 x0) x0) (* x0 (- x0
-         x0))) (protectedDiv (* (- x0 x0) (+ x0 x0))
-     x0)))
+ (- (- (+ (protectedDiv x0 x0) (protectedDiv
+     x0 x0)) (- (+ x0 x0) (* x0 x0))) (* (protectedDiv
+     (protectedDiv x0 x0) (+ x0 (protectedDiv
+     x0 x0))) (- (* x0 x0) (+ x0 x0))))
 
 Generation: 3
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=233.1711 Adjusted=0.0042703818 Hits=0
 Tree 0:
- (+ (protectedDiv (+ (protectedDiv x0 x0)
-     (protectedDiv x0 x0)) (protectedDiv x0 x0))
-     x0)
+ (- (- (+ (protectedDiv x0 x0) (protectedDiv
+     x0 x0)) (- (+ x0 x0) (* x0 x0))) (* (protectedDiv
+     (protectedDiv x0 x0) (+ x0 (protectedDiv
+     x0 x0))) (- (* x0 x0) (+ x0 x0))))
 
 Generation: 4
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=157.5184 Adjusted=0.006308416 Hits=0
 Tree 0:
- (+ (+ (protectedDiv x0 x0) (protectedDiv
-     (protectedDiv x0 x0) (protectedDiv x0 x0)))
-     x0)
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (* (- x0 x0) (protectedDiv x0 x0))) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (+ (* x0 x0) (protectedDiv
+     x0 x0)))) (+ (+ (* (* x0 x0) (protectedDiv
+     x0 x0)) (+ (protectedDiv x0 x0) (- x0 x0)))
+     (- (- x0 x0) x0)))
 
 Generation: 5
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=132.0 Adjusted=0.007518797 Hits=0
 Tree 0:
- (- (protectedDiv (protectedDiv (+ (* x0 x0)
-     (+ x0 x0)) (+ (- x0 x0) (- x0 x0))) (protectedDiv
-     (+ x0 (protectedDiv x0 x0)) (* (protectedDiv
-     x0 x0) x0))) (- x0 (* (protectedDiv (+ x0
-     x0) (* x0 x0)) (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (- x0 x0)) (* (+ x0 x0) (protectedDiv
+     x0 x0)))))
 
 Generation: 6
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=132.0 Adjusted=0.007518797 Hits=0
 Tree 0:
- (protectedDiv (+ (+ (* (protectedDiv x0 x0)
-     (+ x0 x0)) (* (protectedDiv x0 x0) (- x0
-     x0))) (+ (+ (- x0 x0) (- x0 x0)) (- (+ x0
-     x0) (* x0 x0)))) (- (protectedDiv x0 (protectedDiv
-     (- x0 x0) (- x0 x0))) (+ (protectedDiv (protectedDiv
-     x0 x0) (* x0 x0)) (protectedDiv (* x0 x0)
-     (+ x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (- x0 x0)) (* (+ x0 x0) (protectedDiv
+     x0 x0)))))
 
 Generation: 7
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=115.08954 Adjusted=0.008614041 Hits=1
 Tree 0:
- (protectedDiv (+ (+ x0 x0) (+ (+ (- x0 x0)
-     (- x0 x0)) (- (+ x0 x0) (* x0 x0)))) (- (protectedDiv
-     (protectedDiv (+ x0 x0) (* x0 x0)) (protectedDiv
-     (- x0 x0) (- x0 x0))) (+ (protectedDiv (protectedDiv
-     x0 x0) (* x0 x0)) (protectedDiv (* x0 x0)
-     (+ x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (- x0 x0)) (* (+ x0 x0) x0))))
 
 Generation: 8
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (- (protectedDiv x0 x0) x0) (- (* x0 x0)
-         (+ x0 x0))) (protectedDiv (* (- x0 x0) (+
-     x0 x0)) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (- x0 x0)))
 
 Generation: 9
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (+ (protectedDiv (+ (+ x0 x0) x0) (protectedDiv
-     (- x0 x0) (- x0 x0))) (+ (protectedDiv (+
-     x0 x0) x0) x0)) (protectedDiv (- (* (- x0
-     x0) x0) (+ (- x0 x0) (- x0 x0))) x0))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (*
+     x0 x0) (protectedDiv (+ (+ x0 x0) (- x0 x0))
+     (* (+ x0 x0) (protectedDiv x0 x0)))))
 
 Generation: 10
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (protectedDiv (- x0 (- x0 x0)) (- (* x0
-     x0) (- (protectedDiv x0 x0) (+ x0 x0))))
-     (protectedDiv (+ (+ (* x0 x0) (- x0 x0))
-         (- (+ x0 x0) (protectedDiv x0 x0))) x0))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (protectedDiv x0 x0))))
 
 Generation: 11
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* x0 x0) (protectedDiv (* (- x0 x0) (+ x0
-     x0)) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (*
+     x0 x0) (protectedDiv (+ (+ x0 x0) (- x0 x0))
+     (* (+ x0 x0) (protectedDiv x0 x0)))))
 
 Generation: 12
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv x0 (protectedDiv (* x0 (-
-     x0 x0)) (* (protectedDiv x0 x0) x0))) (-
-     x0 (* (protectedDiv (+ x0 x0) (* x0 x0))
-     (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (*
+     x0 x0) (protectedDiv (+ (+ x0 x0) (- x0 x0))
+     (* (+ x0 x0) (protectedDiv x0 x0)))))
 
 Generation: 13
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (protectedDiv (+ (+ (* (protectedDiv x0 x0)
-     (+ x0 x0)) (* (+ x0 x0) (- x0 x0))) (+ (+
-     (- x0 x0) (- x0 x0)) (- (+ x0 x0) (* x0 x0))))
-     (- (- x0 x0) (+ (protectedDiv (protectedDiv
-         x0 x0) (* x0 x0)) (protectedDiv (* x0 x0)
-         (+ x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) x0)))
 
 Generation: 14
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (protectedDiv (- x0 x0) (+ (- x0 x0) (- x0
-         x0))) (protectedDiv (- x0 x0) (* x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (- x0 x0)) (* (- x0 x0) x0))))
 
 Generation: 15
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (* (protectedDiv (protectedDiv x0 x0)
-     x0) (+ (* x0 x0) (+ x0 x0))) (- x0 x0)) (protectedDiv
-     (+ (* x0 x0) (- x0 x0)) (protectedDiv (+
-     x0 x0) (- x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- x0 x0)
+     (* (+ x0 x0) x0))))
 
 Generation: 16
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (protectedDiv (+ (+ (+ x0 x0) (protectedDiv
-     (protectedDiv x0 x0) (- x0 x0))) (+ (+ (-
-     x0 x0) (- x0 x0)) (- (+ x0 x0) (* x0 x0))))
-     (- (- (- x0 x0) (- x0 x0)) (+ (protectedDiv
-         (protectedDiv x0 x0) (* x0 x0)) (protectedDiv
-         (* x0 x0) (+ x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (protectedDiv x0 x0))))
 
 Generation: 17
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (protectedDiv (* (- x0 x0)
-     (+ x0 x0)) x0) (* (+ (+ x0 x0) (* x0 x0))
-     (protectedDiv (- x0 x0) (- x0 x0)))) (- x0
-     (* (protectedDiv (+ x0 x0) (* x0 x0)) (+
-         x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (- x0 x0)))
 
 Generation: 18
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (protectedDiv x0 x0) (* x0 (- x0 x0)))
-     (- x0 (protectedDiv (* x0 x0) (- x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (+ (+ x0 x0) (- x0
+     x0)) (* (- x0 x0) x0))))
 
 Generation: 19
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (+ (- x0 x0) (+ (protectedDiv (+ x0 x0)
-     x0) x0)) (protectedDiv (- (* (- x0 x0) x0)
-     (- (- x0 x0) (- x0 x0))) (- x0 (- x0 (+ x0
-     x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (+ x0 x0)) (- x0 x0))))
 
 Generation: 20
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (protectedDiv (+ (* x0 x0) (* (+ x0 x0) (protectedDiv
-     x0 x0))) x0)
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ x0 x0)
+     (- x0 x0))))
 
 Generation: 21
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (+ (- (protectedDiv x0 x0) x0) (+ (+
-     x0 x0) (protectedDiv x0 x0))) (protectedDiv
-     (* (protectedDiv x0 x0) (protectedDiv x0
-         x0)) (- (protectedDiv x0 x0) (* x0 x0))))
-     (protectedDiv (* (protectedDiv x0 x0) (*
-         (- x0 x0) (- x0 x0))) (protectedDiv x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (- (* x0 x0) (- x0 x0)))))
 
 Generation: 22
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (+ x0 (+ (protectedDiv x0 x0) (+ (protectedDiv
-     x0 x0) (- x0 x0)))) (protectedDiv (* (* (*
-     x0 x0) (+ x0 x0)) (* x0 x0)) (protectedDiv
-     (+ (protectedDiv x0 x0) (protectedDiv x0
-         x0)) (+ (- x0 x0) (- x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (- x0 x0)) x0)) (+ (+ (* (*
+     x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (+ x0
+     x0) (+ x0 x0)) x0)))
 
 Generation: 23
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (+ (protectedDiv (+ x0 x0) x0) x0) (protectedDiv
-     (protectedDiv (- x0 x0) (protectedDiv x0
-         x0)) (+ x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (- (protectedDiv x0 x0) (- x0 x0)))))
 
 Generation: 24
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (* x0 x0) (* x0 (- x0 x0))) (protectedDiv
-     (+ (- x0 x0) (protectedDiv x0 x0)) (protectedDiv
-     x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- (protectedDiv
+     x0 x0) (+ x0 x0)) (* (+ x0 x0) (- x0 x0)))))
 
 Generation: 25
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (- x0 x0) x0) (- x0 (* (protectedDiv
-     (+ x0 x0) (* x0 x0)) (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (* (protectedDiv x0 x0) (- (* x0
+     x0) (* x0 x0)))))
 
 Generation: 26
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (+ x0 (protectedDiv (+ x0 x0) x0)) (protectedDiv
-     (protectedDiv (* x0 (- x0 x0)) (+ x0 x0))
-     (+ (+ x0 x0) (+ x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (+ (* x0 x0) (- x0
+     x0)) (* (- x0 x0) (* x0 x0)))))
 
 Generation: 27
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (protectedDiv (- x0 x0) (+ (- x0 x0) (- x0
-         x0))) (- (+ x0 (* x0 x0)) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (- x0 x0)) (* (protectedDiv
+     x0 x0) (+ x0 x0)))) (+ (+ (* (* x0 x0) (protectedDiv
+     x0 x0)) (+ (protectedDiv x0 x0) (- x0 x0)))
+     (protectedDiv (+ (+ x0 x0) (+ x0 x0)) x0)))
 
 Generation: 28
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (- x0 x0) (protectedDiv x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (*
+     (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))))
 
 Generation: 29
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (protectedDiv (+ x0 x0) (* (* x0 x0) (- x0
-         x0))) (- x0 (protectedDiv x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (+ x0 x0) (* (- x0
+     x0) (protectedDiv x0 x0)))))
 
 Generation: 30
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (- x0 x0) x0) (+ (* (protectedDiv x0 x0)
-     (protectedDiv x0 x0)) (+ (- x0 x0) (- x0
-     x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (protectedDiv x0 x0)
+     (- (* x0 x0) (* x0 x0)))))
 
 Generation: 31
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (+ (protectedDiv (protectedDiv (protectedDiv
-     x0 x0) x0) (- x0 x0)) (+ (protectedDiv (+
-     x0 x0) x0) x0)) (protectedDiv (+ (protectedDiv
-     x0 x0) (+ (* x0 x0) (* x0 x0))) (- x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (protectedDiv
+     x0 x0) (- x0 x0))))
 
 Generation: 32
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (protectedDiv x0 x0) (* (- x0 x0) x0))
-     x0))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (- (- x0 x0) (* x0 x0)))))
 
 Generation: 33
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (* x0 x0) (* x0 (- x0 x0))) (* (* x0 x0)
-     (+ (- x0 x0) (protectedDiv x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- x0 x0)
+     (* (- x0 x0) (* x0 x0)))))
 
 Generation: 34
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (protectedDiv (- x0 x0)
-     (- x0 x0)) (protectedDiv (protectedDiv x0
-     x0) (- x0 x0))) (- x0 (* (protectedDiv (+
-     x0 x0) (* x0 x0)) (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* (* x0 x0) (protectedDiv
+     x0 x0)))) (+ (+ (* (* x0 x0) (protectedDiv
+     x0 x0)) (+ (protectedDiv x0 x0) (- x0 x0)))
+     (* (- (* x0 x0) (* x0 x0)) x0)))
 
 Generation: 35
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (+ (protectedDiv (+ x0 x0) (protectedDiv
-         x0 x0)) (+ x0 x0)) (- x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- (protectedDiv
+     x0 x0) (protectedDiv x0 x0)) (* (+ x0 x0)
+     (- x0 x0)))))
 
 Generation: 36
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (- (* x0 x0) x0) (* x0 (- x0 x0))) (*
-     (+ (protectedDiv x0 x0) x0) (- x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (-
+     x0 x0) (- x0 x0))) (protectedDiv (+ x0 x0)
+     (* (+ x0 x0) (protectedDiv x0 x0)))))
 
 Generation: 37
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (* (protectedDiv (protectedDiv x0 x0)
-     x0) (+ (* x0 x0) (+ x0 x0))) (protectedDiv
-     (- x0 x0) (- x0 x0))) (protectedDiv (+ (-
-     x0 x0) (+ (- x0 x0) x0)) (- x0 x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* x0 x0) (+ (protectedDiv x0 x0) (- x0 x0)))
+     (* (- (* x0 x0) (* x0 x0)) (- (* x0 x0) (+
+         x0 x0)))))
 
 Generation: 38
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (* x0 (* (- x0 x0) (* x0
-     x0))) (+ (- x0 x0) x0)) (- x0 (* (protectedDiv
-     (+ x0 x0) (* x0 x0)) (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ x0 x0)
+     (* (- x0 x0) (protectedDiv x0 x0)))))
 
 Generation: 39
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (* (- x0 x0) (+ x0 x0)) (protectedDiv x0
-     x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (+ (- x0 x0) (- x0
+     x0)) x0)))
 
 Generation: 40
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (protectedDiv (+ (* (+ (* x0 x0) (+ x0 x0))
-     (+ x0 (- x0 x0))) (+ (- x0 x0) (- x0 x0)))
-     (+ (protectedDiv (protectedDiv x0 (- x0 x0))
-         (+ (- x0 x0) x0)) (- (+ x0 (* x0 x0)) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (- (* x0 x0) (- x0 x0)))))
 
 Generation: 41
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (+ x0 x0) (protectedDiv
-     (* x0 x0) (protectedDiv x0 x0))) x0) (protectedDiv
-     (* (- (protectedDiv x0 x0) (* x0 x0)) (protectedDiv
-         (+ x0 x0) (- x0 x0))) (protectedDiv (* (-
-     x0 x0) x0) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (protectedDiv x0
+     x0) x0) (- x0 x0))))
 
 Generation: 42
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (protectedDiv (- x0 x0)
-     (* (protectedDiv x0 x0) (* x0 x0))) (protectedDiv
-     (* x0 (+ x0 x0)) (- (- x0 x0) (- x0 x0))))
-     (- x0 (* (protectedDiv (+ x0 x0) (* x0 x0))
-         (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- (protectedDiv
+     x0 x0) (protectedDiv x0 x0)) (+ x0 x0))))
 
 Generation: 43
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (+ (+ (protectedDiv x0 x0) (protectedDiv
-     x0 x0)) x0) (protectedDiv (* (- x0 x0) (*
-     x0 x0)) (- (+ x0 x0) (* x0 x0)))) (protectedDiv
-     (* (+ (* x0 x0) (* x0 x0)) (* x0 (- x0 x0)))
-     (protectedDiv (+ (- x0 x0) (+ x0 x0)) (+
-         (* x0 x0) (+ x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (* (- (* x0 x0) (* x0
+     x0)) (- (* x0 x0) (* x0 x0)))))
 
 Generation: 44
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (+ (* x0 x0) (- x0 x0))) x0) (protectedDiv
-     (protectedDiv (protectedDiv (protectedDiv
-         x0 x0) (* x0 x0)) (protectedDiv (- x0 x0)
-         (protectedDiv x0 x0))) (* (protectedDiv (-
-     x0 x0) (* x0 x0)) (+ x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (* (protectedDiv
+     x0 x0) x0) (* (- x0 x0) (+ x0 x0)))))
 
 Generation: 45
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (* (protectedDiv (protectedDiv x0 x0)
-     x0) (+ (* x0 x0) (+ x0 x0))) (protectedDiv
-     (* x0 (- x0 x0)) (- (+ x0 x0) x0))) (protectedDiv
-     (protectedDiv (- (+ x0 x0) (+ x0 x0)) x0)
-     (protectedDiv (- x0 x0) (* x0 x0))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (+ (+ x0 x0) (+ x0
+     x0)) (* (protectedDiv x0 x0) (- x0 x0)))))
 
 Generation: 46
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (+ (protectedDiv (- x0 x0) (+ (- x0 x0)
-     (- x0 x0))) (+ (protectedDiv (+ x0 x0) x0)
-     x0)) (protectedDiv (* (protectedDiv x0 (+
-     x0 x0)) (- x0 x0)) (protectedDiv (+ (protectedDiv
-     x0 x0) (- x0 x0)) (* x0 (- x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* (* x0 x0) (protectedDiv
+     x0 x0)))) (+ (+ (* (* x0 x0) (protectedDiv
+     x0 x0)) (+ (protectedDiv x0 x0) (- x0 x0)))
+     (protectedDiv x0 (* (- x0 x0) (protectedDiv
+         x0 x0)))))
 
 Generation: 47
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (protectedDiv (+ (protectedDiv
-     x0 x0) (protectedDiv x0 x0)) (+ x0 (+ x0
-     x0))) (- x0 x0)) (- x0 (* (protectedDiv (+
-     x0 x0) (* x0 x0)) (+ x0 (* x0 x0)))))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (+ (protectedDiv
+     x0 x0) (+ x0 x0)) (protectedDiv (- x0 x0)
+     x0))))
 
 Generation: 48
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (protectedDiv (+ (* (+ x0 x0) (protectedDiv
-     x0 x0)) (* x0 x0)) x0) (protectedDiv (protectedDiv
-     x0 x0) (protectedDiv (- x0 x0) x0)))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (protectedDiv (- (protectedDiv
+     x0 x0) (+ x0 x0)) (* (- x0 x0) (* x0 x0)))))
 
 Generation: 49
 Best Individual:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (- (- (* (protectedDiv (protectedDiv x0 x0)
-     x0) (+ (* x0 x0) (+ x0 x0))) (* (- x0 x0)
-     (protectedDiv (+ x0 x0) (* x0 x0)))) (protectedDiv
-     (* (protectedDiv x0 x0) (* x0 (- x0 x0)))
-     x0))
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (protectedDiv
+     x0 x0)) (protectedDiv (- (protectedDiv x0
+     x0) (protectedDiv x0 x0)) (* (protectedDiv
+     x0 x0) (protectedDiv x0 x0)))))
 
 Best Individual of Run:
 Subpopulation 0:
 Evaluated: true
-Fitness: Standardized=67.0 Adjusted=0.014705882 Hits=1
+Fitness: Standardized=112.0 Adjusted=0.0088495575 Hits=20
 Tree 0:
- (+ (protectedDiv (* (+ x0 x0) (* x0 x0))
-     (* x0 (* x0 x0))) x0)
+ (+ (+ (+ (- (protectedDiv x0 x0) (+ x0 x0))
+     (- (protectedDiv x0 x0) x0)) (protectedDiv
+     (* (+ x0 x0) (+ x0 x0)) (* x0 x0))) (+ (+
+     (* (* x0 x0) (protectedDiv x0 x0)) (+ (protectedDiv
+     x0 x0) (- x0 x0))) (- x0 x0)))
