@@ -10,3 +10,6 @@ sources/FunctionGenerator/bin
 *.settings/
 *.metadata/
 runtime-EclipseApplication/
+
+# Disable all of the ECJ statistics
+*.stat
