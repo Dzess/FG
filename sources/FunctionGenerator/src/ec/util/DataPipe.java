@@ -6,7 +6,14 @@
 
 package ec.util;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 
 /*
  DataPipe is a mechanism which allows you to pipe data from an OutputStream to an InputStream within a single thread.

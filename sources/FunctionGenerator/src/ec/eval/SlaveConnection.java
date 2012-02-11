@@ -6,11 +6,14 @@
 
 package ec.eval;
 
-import java.io.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Iterator;
 import java.util.LinkedList;
-import ec.*;
-import java.util.*;
+
+import ec.EvolutionState;
 
 /**
  * SlaveConnection.java

@@ -6,9 +6,22 @@
 
 package ec.vector.breed;
 
-import ec.vector.*;
-import ec.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
 import ec.util.Parameter;
+import ec.vector.BitVectorIndividual;
+import ec.vector.ByteVectorIndividual;
+import ec.vector.DoubleVectorIndividual;
+import ec.vector.FloatVectorIndividual;
+import ec.vector.GeneVectorIndividual;
+import ec.vector.IntegerVectorIndividual;
+import ec.vector.LongVectorIndividual;
+import ec.vector.ShortVectorIndividual;
+import ec.vector.VectorDefaults;
+import ec.vector.VectorGene;
+import ec.vector.VectorIndividual;
+import ec.vector.VectorSpecies;
 
 /* 
  * MultipleVectorCrossoverPipeline.java

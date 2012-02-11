@@ -6,7 +6,8 @@
 
 package ec.gp;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Prototype;
 
 /* 
  * GPNodeSelector.java

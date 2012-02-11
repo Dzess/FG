@@ -6,11 +6,17 @@
 
 package ec.multiobjective.nsga2;
 
-import java.util.*;
-import ec.*;
-import ec.multiobjective.*;
-import ec.simple.*;
-import ec.util.*;
+import java.util.ArrayList;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Initializer;
+import ec.Population;
+import ec.Subpopulation;
+import ec.multiobjective.MultiObjectiveFitness;
+import ec.simple.SimpleEvaluator;
+import ec.util.Parameter;
+import ec.util.SortComparator;
 
 /* 
  * NSGA2Evaluator.java

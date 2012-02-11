@@ -6,7 +6,7 @@
 
 package ec;
 
-import ec.util.*;
+import ec.util.Parameter;
 
 /* 
  * Problem.java

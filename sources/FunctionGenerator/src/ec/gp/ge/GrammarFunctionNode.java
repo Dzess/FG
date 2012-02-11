@@ -1,7 +1,9 @@
 package ec.gp.ge;
 
-import java.util.*;
-import ec.gp.*;
+import java.util.Iterator;
+
+import ec.gp.GPFunctionSet;
+import ec.gp.GPNode;
 
 /*
  * GrammarFunctionNode.java

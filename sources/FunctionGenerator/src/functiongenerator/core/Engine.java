@@ -1,7 +1,6 @@
 package functiongenerator.core;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,19 +14,10 @@ import org.apache.commons.logging.LogFactory;
 import ec.EvolutionState;
 import ec.Evolve;
 import ec.gp.GPIndividual;
-import ec.gp.GPNode;
-import ec.gp.GPTree;
 import ec.simple.SimpleStatistics;
 import ec.util.Log;
 import ec.util.LogRestarter;
 import ec.util.ParameterDatabase;
-import functiongenerator.core.gp.functions.BinaryOperation;
-import functiongenerator.core.gp.functions.NullaryOperation;
-import functiongenerator.core.gp.functions.UnaryOperation;
-import functiongenerator.core.gp.functions.real.Max;
-import functiongenerator.core.gp.functions.real.Min;
-import functiongenerator.core.gp.functions.real.Pow;
-import functiongenerator.core.gp.functions.real.ProtectedDiv;
 import functiongenerator.core.gp.problem.AbstractRegressionProblem;
 import functiongenerator.ui.printing.TreeToStringTranslator;
 

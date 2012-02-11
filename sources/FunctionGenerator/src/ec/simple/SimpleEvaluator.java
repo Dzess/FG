@@ -9,7 +9,6 @@ package ec.simple;
 import ec.Evaluator;
 import ec.EvolutionState;
 import ec.util.Parameter;
-import ec.Individual;
 
 /* 
  * SimpleEvaluator.java

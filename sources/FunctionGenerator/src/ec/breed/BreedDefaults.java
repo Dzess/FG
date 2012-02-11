@@ -6,8 +6,8 @@
 
 package ec.breed;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * BreedDefaults.java

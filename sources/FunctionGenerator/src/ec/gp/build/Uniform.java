@@ -6,12 +6,22 @@
 
 package ec.gp.build;
 
-import ec.gp.*;
-import java.util.*;
-import java.math.*;
-import ec.util.*;
-import ec.*;
-import java.io.*;
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import ec.EvolutionState;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPNodeBuilder;
+import ec.gp.GPNodeParent;
+import ec.gp.GPType;
+import ec.util.MersenneTwisterFast;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
+import ec.util.RandomChoiceChooserD;
 
 /* 
  * Uniform.java

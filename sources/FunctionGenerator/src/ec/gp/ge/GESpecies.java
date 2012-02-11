@@ -9,19 +9,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import ec.gp.*;
-import ec.*;
-import ec.vector.*;
-import ec.util.*;
-
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.EvolutionState;
+import ec.gp.ERC;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPIndividual;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPSpecies;
+import ec.gp.GPTree;
+import ec.util.Parameter;
+import ec.vector.ByteVectorIndividual;
+import ec.vector.IntegerVectorSpecies;
 
 /*
  * GESpecies.java

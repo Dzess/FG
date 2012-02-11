@@ -6,8 +6,14 @@
 
 package ec;
 
-import java.io.*;
-import ec.util.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+
+import ec.util.Output;
+import ec.util.Parameter;
 
 /*
  * Fitness.java

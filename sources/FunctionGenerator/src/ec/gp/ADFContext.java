@@ -6,8 +6,11 @@
 
 package ec.gp;
 
-import ec.*;
-import ec.util.*;
+import ec.Evaluator;
+import ec.EvolutionState;
+import ec.Problem;
+import ec.Prototype;
+import ec.util.Parameter;
 
 /* 
  * ADFContext.java

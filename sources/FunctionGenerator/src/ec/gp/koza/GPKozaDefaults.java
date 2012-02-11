@@ -6,9 +6,9 @@
 
 package ec.gp.koza;
 
+import ec.DefaultsForm;
 import ec.gp.GPDefaults;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * GPKozaDefaults.java

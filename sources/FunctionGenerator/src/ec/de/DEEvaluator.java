@@ -1,7 +1,8 @@
 package ec.de;
 
-import ec.*;
-import ec.simple.*;
+import ec.EvolutionState;
+import ec.Population;
+import ec.simple.SimpleEvaluator;
 
 /* 
  * DEEvaluator.java

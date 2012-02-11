@@ -6,9 +6,13 @@
 
 package ec.gp;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+import ec.EvolutionState;
+import ec.util.DecodeReturn;
+import ec.util.Parameter;
 
 /* 
  * ERC.java

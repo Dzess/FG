@@ -6,9 +6,13 @@
 
 package ec.gp.koza;
 
-import ec.*;
-import ec.gp.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.gp.GPIndividual;
+import ec.gp.GPNode;
+import ec.gp.GPNodeGatherer;
+import ec.gp.GPNodeSelector;
+import ec.gp.GPTree;
+import ec.util.Parameter;
 
 /* 
  * KozaNodeSelector.java

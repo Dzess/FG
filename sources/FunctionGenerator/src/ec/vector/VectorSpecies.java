@@ -6,9 +6,10 @@
 
 package ec.vector;
 
-import ec.util.*;
-import java.io.*;
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Species;
+import ec.util.Parameter;
 
 /* 
  * VectorSpecies.java

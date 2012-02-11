@@ -1,13 +1,11 @@
 package functiongenerator.ui.charting;
 
-import java.awt.Component;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 
@@ -27,8 +25,6 @@ import functiongenerator.ui.charting.data.SimpleDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
 import functiongenerator.ui.charting.makers.SimpleChartMaker;
 import functiongenerator.ui.printing.TreeToStringTranslator;
-import javax.swing.JTextArea;
-import java.awt.BorderLayout;
 
 /**
  * Displays the chart of the symbolic regression in the form of the

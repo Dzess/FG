@@ -6,8 +6,11 @@
 
 package ec;
 
-import ec.util.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
+import ec.util.Parameter;
 
 /* 
  * Species.java

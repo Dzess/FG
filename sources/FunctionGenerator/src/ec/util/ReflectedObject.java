@@ -6,9 +6,15 @@
 
 package ec.util;
 
-import java.lang.reflect.*;
-import javax.swing.tree.*;
-import javax.swing.event.*;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 public class ReflectedObject implements TreeModel {
 	Class type; // the class or TYPE of the object

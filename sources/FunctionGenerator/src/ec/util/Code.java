@@ -6,8 +6,10 @@
 
 package ec.util;
 
-import java.io.*;
-import ec.*;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
+import ec.EvolutionState;
 
 /* 
  * Code.java

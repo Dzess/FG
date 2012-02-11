@@ -6,8 +6,15 @@
 
 package ec.coevolve;
 
-import ec.*;
-import ec.util.*;
+import ec.Evaluator;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.SelectionMethod;
+import ec.Subpopulation;
+import ec.util.Parameter;
+import ec.util.QuickSort;
+import ec.util.SortComparatorL;
 
 /**
  * MultiPopCoevolutionaryEvaluator.java

@@ -6,8 +6,9 @@
 
 package ec;
 
-import ec.util.Parameter;
 import java.io.Serializable;
+
+import ec.util.Parameter;
 
 /* 
  * Setup.java

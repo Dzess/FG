@@ -6,8 +6,13 @@
 
 package ec.select;
 
-import ec.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.util.Parameter;
+import ec.util.QuickSort;
+import ec.util.RandomChoice;
+import ec.util.SortComparatorL;
 
 /* 
  * GreedyOverselection.java

@@ -6,11 +6,16 @@
 
 package ec.multiobjective.spea2;
 
-import ec.*;
-import ec.util.*;
-import ec.multiobjective.*;
-import ec.simple.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.multiobjective.MultiObjectiveFitness;
+import ec.simple.SimpleBreeder;
+import ec.util.Parameter;
 
 /* 
  * SPEA2Breeder.java

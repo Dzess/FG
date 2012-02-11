@@ -11,7 +11,8 @@ import ec.EvolutionState;
 import ec.Individual;
 import ec.SelectionMethod;
 import ec.util.Parameter;
-import ec.vector.*;
+import ec.vector.VectorDefaults;
+import ec.vector.VectorIndividual;
 
 /**
  * <p>

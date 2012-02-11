@@ -6,9 +6,15 @@
 
 package ec.gp.koza;
 
-import ec.*;
-import ec.util.*;
-import ec.gp.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.gp.GPBreedingPipeline;
+import ec.gp.GPIndividual;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPNodeSelector;
+import ec.gp.GPTree;
+import ec.util.Parameter;
 
 /* 
  * CrossoverPipeline.java

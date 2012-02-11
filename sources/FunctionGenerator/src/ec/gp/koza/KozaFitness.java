@@ -6,9 +6,16 @@
 
 package ec.gp.koza;
 
-import ec.util.*;
-import ec.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
+import ec.EvolutionState;
+import ec.Fitness;
+import ec.util.Code;
+import ec.util.DecodeReturn;
+import ec.util.Parameter;
 
 /* 
  * KozaFitness.java

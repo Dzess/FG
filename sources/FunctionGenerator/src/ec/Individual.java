@@ -6,9 +6,15 @@
 
 package ec;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+
+import ec.util.Code;
+import ec.util.Output;
 import ec.util.Parameter;
-import java.io.*;
-import ec.util.*;
 
 /*
  * Individual.java

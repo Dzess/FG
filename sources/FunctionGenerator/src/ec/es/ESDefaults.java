@@ -6,8 +6,8 @@
 
 package ec.es;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * ESDefaults.java

@@ -6,8 +6,8 @@
 
 package ec.spatial;
 
-import ec.*;
-import ec.util.*;
+import ec.DefaultsForm;
+import ec.util.Parameter;
 
 /* 
  * SpatialDefaults.java

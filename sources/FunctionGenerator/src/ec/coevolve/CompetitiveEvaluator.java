@@ -6,8 +6,11 @@
 
 package ec.coevolve;
 
-import ec.*;
-import ec.util.*;
+import ec.Evaluator;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.util.Parameter;
+import ec.util.SortComparator;
 
 /**
  * CompetitiveEvaluator.java

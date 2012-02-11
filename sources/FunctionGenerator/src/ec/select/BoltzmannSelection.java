@@ -6,8 +6,10 @@
 
 package ec.select;
 
-import ec.util.*;
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
 
 /* 
  * BoltzmannSelection.java

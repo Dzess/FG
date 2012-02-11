@@ -6,11 +6,15 @@
 
 package ec.multiobjective.nsga2;
 
-import java.io.*;
-import ec.util.Code;
-import ec.multiobjective.MultiObjectiveFitness;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
 import ec.EvolutionState;
 import ec.Fitness;
+import ec.multiobjective.MultiObjectiveFitness;
+import ec.util.Code;
 
 /* 
  * NSGA2MultiObjectiveFitness.java

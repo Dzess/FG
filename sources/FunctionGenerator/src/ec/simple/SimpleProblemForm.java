@@ -6,7 +6,8 @@
 
 package ec.simple;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
 
 /* 
  * SimpleProblemForm.java

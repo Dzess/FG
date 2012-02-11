@@ -6,8 +6,9 @@
 
 package ec.spatial;
 
-import ec.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.Subpopulation;
+import ec.util.Parameter;
 
 /* 
  * Spatial1DSubpopulation.java

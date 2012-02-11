@@ -6,9 +6,10 @@
 
 package ec.multiobjective.spea2;
 
-import ec.*;
-import ec.select.*;
-import ec.simple.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.select.TournamentSelection;
+import ec.simple.SimpleBreeder;
 
 /* 
  * SPEA2TournamentSelection.java

@@ -6,14 +6,19 @@
 
 package ec.eval;
 
-import ec.*;
-import ec.util.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.Problem;
 import ec.coevolve.GroupedProblemForm;
 import ec.simple.SimpleProblemForm;
 import ec.steadystate.QueueIndividual;
-import java.util.ArrayList;
-
-import java.io.*;
+import ec.util.Parameter;
 
 /**
  * MasterProblem.java

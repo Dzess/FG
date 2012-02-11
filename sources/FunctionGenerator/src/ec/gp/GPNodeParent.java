@@ -6,7 +6,6 @@
 
 package ec.gp;
 
-import ec.Prototype;
 
 /* 
  * GPNodeParent.java

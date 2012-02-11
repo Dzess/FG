@@ -6,8 +6,8 @@
 
 package ec.multiobjective;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * MultiObjectiveDefaults.java

@@ -6,10 +6,17 @@
 
 package ec.gp;
 
-import ec.*;
-import java.io.*;
-import ec.util.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import ec.EvolutionState;
+import ec.Problem;
+import ec.Prototype;
+import ec.util.DecodeReturn;
+import ec.util.Output;
+import ec.util.Parameter;
 
 /* 
  * GPNode.java

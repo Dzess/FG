@@ -3,11 +3,21 @@ package functiongenerator.core.gp.providers.factories;
 import java.util.ArrayList;
 import java.util.List;
 
-import functiongenerator.core.gp.functions.real.*;
-
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
-
+import functiongenerator.core.gp.functions.real.Add;
+import functiongenerator.core.gp.functions.real.Cos;
+import functiongenerator.core.gp.functions.real.Div;
+import functiongenerator.core.gp.functions.real.Exp;
+import functiongenerator.core.gp.functions.real.Log;
+import functiongenerator.core.gp.functions.real.Max;
+import functiongenerator.core.gp.functions.real.Min;
+import functiongenerator.core.gp.functions.real.Mul;
+import functiongenerator.core.gp.functions.real.Pow;
+import functiongenerator.core.gp.functions.real.ProtectedDiv;
+import functiongenerator.core.gp.functions.real.ProtectedLog;
+import functiongenerator.core.gp.functions.real.Sin;
+import functiongenerator.core.gp.functions.real.Sub;
 import functiongenerator.core.gp.problem.RealRegressionProblem;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 import functiongenerator.core.gp.providers.RuntimeOperationProvider;

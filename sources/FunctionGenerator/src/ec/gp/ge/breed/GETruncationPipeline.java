@@ -6,9 +6,14 @@
 
 package ec.gp.ge.breed;
 
-import ec.gp.ge.*;
-import ec.*;
-import ec.util.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.gp.ge.GEDefaults;
+import ec.gp.ge.GEIndividual;
+import ec.gp.ge.GESpecies;
+import ec.util.Parameter;
 
 /* 
  * GEProblem.java

@@ -1,7 +1,9 @@
 package ec.util;
 
-import java.net.*;
-import java.util.*;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 /**
  * Modified from <a href=

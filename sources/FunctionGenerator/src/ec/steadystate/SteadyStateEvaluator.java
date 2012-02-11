@@ -6,11 +6,14 @@
 
 package ec.steadystate;
 
-import ec.simple.*;
-import ec.*;
-import ec.util.Parameter;
-import java.util.*;
+import java.util.LinkedList;
+
+import ec.EvolutionState;
+import ec.Individual;
 import ec.eval.MasterProblem;
+import ec.simple.SimpleEvaluator;
+import ec.simple.SimpleProblemForm;
+import ec.util.Parameter;
 
 /* 
  * SteadyStateEvaluator.java

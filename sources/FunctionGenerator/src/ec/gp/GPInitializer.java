@@ -9,9 +9,9 @@ package ec.gp;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import ec.EvolutionState;
 import ec.simple.SimpleInitializer;
 import ec.util.Parameter;
-import ec.EvolutionState;
 
 /* 
  * GPInitializer.java

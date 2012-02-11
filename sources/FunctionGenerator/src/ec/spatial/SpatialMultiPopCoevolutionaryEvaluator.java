@@ -6,9 +6,10 @@
 
 package ec.spatial;
 
-import ec.*;
-import ec.util.*;
-import ec.coevolve.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.coevolve.MultiPopCoevolutionaryEvaluator;
 
 /* 
  * SpatialMultiPopCoevolutionaryEvaluator.java

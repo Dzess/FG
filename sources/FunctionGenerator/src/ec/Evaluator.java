@@ -6,9 +6,9 @@
 
 package ec;
 
+import ec.eval.MasterProblem;
 import ec.util.ParamClassLoadException;
 import ec.util.Parameter;
-import ec.eval.MasterProblem;
 
 /* 
  * Evaluator.java

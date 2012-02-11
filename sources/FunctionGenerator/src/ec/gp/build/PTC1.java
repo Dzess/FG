@@ -6,9 +6,15 @@
 
 package ec.gp.build;
 
-import ec.*;
-import ec.gp.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPNodeBuilder;
+import ec.gp.GPNodeParent;
+import ec.gp.GPType;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
 
 /* 
  * PTC1.java

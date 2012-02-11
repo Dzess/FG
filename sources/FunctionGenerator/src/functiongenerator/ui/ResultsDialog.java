@@ -23,14 +23,13 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
 import functiongenerator.ui.printing.JavaContext;
 import functiongenerator.ui.printing.JavaEditorKit;
 import functiongenerator.ui.printing.Token;
-
-import javax.swing.WindowConstants;
 
 public class ResultsDialog extends JDialog implements ActionListener {
 

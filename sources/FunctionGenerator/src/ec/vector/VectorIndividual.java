@@ -6,7 +6,8 @@
 
 package ec.vector;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
 
 /*
  * VectorIndividual.java

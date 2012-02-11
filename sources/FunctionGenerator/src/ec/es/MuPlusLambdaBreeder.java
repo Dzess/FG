@@ -6,7 +6,9 @@
 
 package ec.es;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
 
 /* 
  * MuPlusLambdaBreeder.java

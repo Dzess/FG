@@ -6,10 +6,14 @@
 
 package ec.steadystate;
 
-import ec.simple.*;
-import ec.*;
-import ec.util.*;
-import java.util.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Initializer;
+import ec.Population;
+import ec.SelectionMethod;
+import ec.simple.SimpleBreeder;
+import ec.util.Parameter;
 
 /* 
  * SteadyStateBreeder.java

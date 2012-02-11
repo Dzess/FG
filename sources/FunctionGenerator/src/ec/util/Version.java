@@ -6,7 +6,7 @@
 
 package ec.util;
 
-import java.util.*;
+import java.util.Properties;
 
 /* 
  * Version.java

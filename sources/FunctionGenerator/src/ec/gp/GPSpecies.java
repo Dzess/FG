@@ -6,9 +6,15 @@
 
 package ec.gp;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
+import ec.EvolutionState;
+import ec.Fitness;
+import ec.Individual;
+import ec.Species;
+import ec.util.Parameter;
 
 /* 
  * GPSpecies.java

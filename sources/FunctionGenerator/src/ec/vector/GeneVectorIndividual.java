@@ -6,9 +6,15 @@
 
 package ec.vector;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
+import ec.EvolutionState;
+import ec.util.Code;
+import ec.util.DecodeReturn;
+import ec.util.Parameter;
 
 /*
  * GeneVectorIndividual.java

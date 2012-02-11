@@ -6,8 +6,13 @@
 
 package ec.es;
 
-import ec.*;
-import ec.util.*;
+import ec.Breeder;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Initializer;
+import ec.Population;
+import ec.util.Parameter;
 
 /* 
  * MuCommaLambdaBreeder.java

@@ -6,9 +6,14 @@
 
 package ec.rule.breed;
 
-import ec.rule.*;
-import ec.*;
-import ec.util.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.rule.RuleDefaults;
+import ec.rule.RuleIndividual;
+import ec.rule.RuleInitializer;
+import ec.rule.RuleSet;
+import ec.util.Parameter;
 
 /* 
  * RuleCrossoverPipeline.java

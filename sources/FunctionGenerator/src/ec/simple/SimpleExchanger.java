@@ -7,10 +7,10 @@
 package ec.simple;
 
 import ec.EvolutionState;
-import ec.Population;
 import ec.Exchanger;
+import ec.Population;
+import ec.steadystate.SteadyStateExchangerForm;
 import ec.util.Parameter;
-import ec.steadystate.*;
 
 /* 
  * SimpleExchanger.java

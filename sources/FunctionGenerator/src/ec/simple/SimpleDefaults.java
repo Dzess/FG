@@ -6,8 +6,8 @@
 
 package ec.simple;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * SimpleDefaults.java

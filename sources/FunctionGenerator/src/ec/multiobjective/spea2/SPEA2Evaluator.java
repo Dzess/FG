@@ -6,10 +6,11 @@
 
 package ec.multiobjective.spea2;
 
-import ec.*;
-import ec.util.*;
-import ec.multiobjective.*;
-import ec.simple.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.multiobjective.MultiObjectiveFitness;
+import ec.simple.SimpleEvaluator;
+import ec.util.MersenneTwisterFast;
 
 /* 
  * SPEA2Evaluator.java

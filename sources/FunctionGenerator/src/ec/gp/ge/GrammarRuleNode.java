@@ -1,6 +1,6 @@
 package ec.gp.ge;
 
-import java.util.*;
+import java.util.Iterator;
 
 /*
  * GrammarRuleNode.java

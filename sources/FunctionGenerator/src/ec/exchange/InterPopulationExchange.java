@@ -6,9 +6,14 @@
 
 package ec.exchange;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import java.io.Serializable;
+
+import ec.EvolutionState;
+import ec.Exchanger;
+import ec.Individual;
+import ec.Population;
+import ec.SelectionMethod;
+import ec.util.Parameter;
 
 /* 
  * InterPopulationExchange.java

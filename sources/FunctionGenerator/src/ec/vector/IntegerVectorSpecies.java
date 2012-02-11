@@ -6,8 +6,8 @@
 
 package ec.vector;
 
-import ec.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.util.Parameter;
 
 /* 
  * IntegerVectorSpecies.java

@@ -6,7 +6,8 @@
 
 package ec.gp;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Problem;
 
 /* 
  * ADM.java

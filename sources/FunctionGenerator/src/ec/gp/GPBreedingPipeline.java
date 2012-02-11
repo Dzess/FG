@@ -6,7 +6,9 @@
 
 package ec.gp;
 
-import ec.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Population;
 
 /* 
  * GPBreedingPipeline.java

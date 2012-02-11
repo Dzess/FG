@@ -6,8 +6,12 @@
 
 package ec.select;
 
-import ec.*;
-import ec.util.*;
+import ec.BreedingSource;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.SelectionMethod;
+import ec.util.Parameter;
 
 /* 
  * MultiSelection.java

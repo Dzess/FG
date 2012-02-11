@@ -6,9 +6,10 @@
 
 package ec.gp;
 
-import ec.util.*;
-import ec.*;
-import ec.simple.*;
+import ec.EvolutionState;
+import ec.Problem;
+import ec.simple.SimpleProblemForm;
+import ec.util.Parameter;
 
 /* 
  * GPProblem.java

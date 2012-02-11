@@ -8,7 +8,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import functiongenerator.core.Engine;
-import functiongenerator.core.Settings;
 import functiongenerator.core.gp.problem.AbstractRegressionProblem;
 import functiongenerator.handlers.CommandHandler;
 import functiongenerator.ui.MainDialog;
@@ -17,10 +16,8 @@ import functiongenerator.ui.ResultsDialog;
 import functiongenerator.ui.charting.RegressionChartDialog;
 import functiongenerator.ui.charting.data.IDataSetProvider;
 import functiongenerator.ui.charting.data.RegressionDataSetProvider;
-import functiongenerator.ui.charting.data.SimpleDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
 import functiongenerator.ui.charting.makers.RegressionChartMaker;
-import functiongenerator.ui.charting.makers.SimpleChartMaker;
 
 /**
  * What actually runs the code of function generator. The most of command

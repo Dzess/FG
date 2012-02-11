@@ -6,8 +6,8 @@
 
 package ec.simple;
 
-import ec.Finisher;
 import ec.EvolutionState;
+import ec.Finisher;
 import ec.util.Parameter;
 
 /* 

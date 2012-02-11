@@ -6,7 +6,7 @@
 
 package ec.simple;
 
-import ec.*;
+import ec.EvolutionState;
 import ec.util.Checkpoint;
 
 /* 

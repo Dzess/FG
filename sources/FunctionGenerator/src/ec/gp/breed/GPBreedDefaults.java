@@ -6,9 +6,9 @@
 
 package ec.gp.breed;
 
+import ec.DefaultsForm;
 import ec.gp.GPDefaults;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * GPBreedDefaults.java

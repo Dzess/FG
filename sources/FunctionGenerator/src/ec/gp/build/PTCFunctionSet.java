@@ -6,9 +6,11 @@
 
 package ec.gp.build;
 
-import ec.*;
-import ec.util.*;
-import ec.gp.*;
+import ec.EvolutionState;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPInitializer;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
 
 /* 
  * PTCFunctionSet.java

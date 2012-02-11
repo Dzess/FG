@@ -1,8 +1,9 @@
 package ec.de;
 
-import ec.*;
-import ec.util.*;
-import ec.vector.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.util.Parameter;
+import ec.vector.DoubleVectorIndividual;
 
 /* 
  * Best1BinDEBreeder.java

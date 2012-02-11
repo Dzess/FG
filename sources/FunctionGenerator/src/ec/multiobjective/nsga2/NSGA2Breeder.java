@@ -6,9 +6,12 @@
 
 package ec.multiobjective.nsga2;
 
-import ec.*;
-import ec.util.*;
-import ec.simple.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.Subpopulation;
+import ec.simple.SimpleBreeder;
+import ec.util.Parameter;
 
 /* 
  * NSGA2Breeder.java

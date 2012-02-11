@@ -6,9 +6,9 @@
 
 package ec.gp.build;
 
+import ec.DefaultsForm;
+import ec.gp.GPDefaults;
 import ec.util.Parameter;
-import ec.gp.*;
-import ec.*;
 
 /* 
  * GPBuildDefaults.java

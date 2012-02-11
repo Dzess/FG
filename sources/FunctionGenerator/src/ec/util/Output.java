@@ -6,9 +6,14 @@
 
 package ec.util;
 
-import java.io.*;
-import java.util.Vector;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.io.Writer;
 import java.util.Enumeration;
+import java.util.Vector;
 
 /*
  * Output.java

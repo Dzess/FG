@@ -6,7 +6,8 @@
 
 package ec.steadystate;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
 
 /* 
  * SteadyStateStatisticsForm.java

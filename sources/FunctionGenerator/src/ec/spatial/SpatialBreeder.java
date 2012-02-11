@@ -6,15 +6,11 @@
 
 package ec.spatial;
 
-import ec.Initializer;
-import ec.Individual;
 import ec.BreedingPipeline;
-import ec.Breeder;
-import ec.simple.*;
 import ec.EvolutionState;
 import ec.Population;
+import ec.simple.SimpleBreeder;
 import ec.util.Parameter;
-import ec.util.*;
 
 /* 
  * SpatialBreeder.java

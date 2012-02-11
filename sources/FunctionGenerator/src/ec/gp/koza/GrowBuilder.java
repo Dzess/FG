@@ -6,9 +6,12 @@
 
 package ec.gp.koza;
 
-import ec.*;
-import ec.gp.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPNode;
+import ec.gp.GPNodeParent;
+import ec.gp.GPType;
+import ec.util.Parameter;
 
 /* 
  * GrowBuilder.java

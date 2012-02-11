@@ -3,11 +3,19 @@ package functiongenerator.core.gp.providers.factories;
 import java.util.ArrayList;
 import java.util.List;
 
-import functiongenerator.core.gp.functions.integer.*;
-
 import functiongenerator.core.gp.IOperationProvider;
 import functiongenerator.core.gp.IOperationProviderFactory;
-
+import functiongenerator.core.gp.functions.integer.Add;
+import functiongenerator.core.gp.functions.integer.And;
+import functiongenerator.core.gp.functions.integer.Div;
+import functiongenerator.core.gp.functions.integer.Max;
+import functiongenerator.core.gp.functions.integer.Min;
+import functiongenerator.core.gp.functions.integer.Mul;
+import functiongenerator.core.gp.functions.integer.Not;
+import functiongenerator.core.gp.functions.integer.Or;
+import functiongenerator.core.gp.functions.integer.ProtectedDiv;
+import functiongenerator.core.gp.functions.integer.Sub;
+import functiongenerator.core.gp.functions.integer.Xor;
 import functiongenerator.core.gp.problem.IntegerRegressionProblem;
 import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
 import functiongenerator.core.gp.providers.RuntimeOperationProvider;

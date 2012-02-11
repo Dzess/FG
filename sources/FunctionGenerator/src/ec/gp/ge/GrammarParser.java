@@ -1,11 +1,19 @@
 package ec.gp.ge;
 
-import java.io.*;
-import java.util.*;
-import ec.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import ec.EvolutionState;
+import ec.Prototype;
 import ec.gp.GPFunctionSet;
-import ec.gp.GPNode;
-import ec.util.*;
+import ec.util.Lexer;
+import ec.util.Output;
+import ec.util.Parameter;
 
 /*
  * GrammarParser.java

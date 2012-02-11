@@ -6,8 +6,11 @@
 
 package ec.parsimony;
 
-import ec.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.Fitness;
+import ec.Individual;
+import ec.Statistics;
+import ec.util.Parameter;
 
 /**
  * This Statistics subclass implements Poli's "Tarpeian" method of parsimony

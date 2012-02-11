@@ -6,8 +6,8 @@
 
 package ec.gp.ge;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * GEDefaults.java

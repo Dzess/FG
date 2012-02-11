@@ -20,11 +20,16 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Evolve;
+import ec.Individual;
 import ec.coevolve.GroupedProblemForm;
 import ec.simple.SimpleProblemForm;
-import ec.simple.SimpleEvolutionState;
-import ec.util.*;
+import ec.util.MersenneTwisterFast;
+import ec.util.Output;
+import ec.util.Parameter;
+import ec.util.ParameterDatabase;
+import ec.util.Version;
 
 /**
  * Slave.java

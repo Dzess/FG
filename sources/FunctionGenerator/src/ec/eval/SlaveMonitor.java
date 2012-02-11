@@ -6,14 +6,23 @@
 
 package ec.eval;
 
-import ec.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import ec.util.*;
-import ec.steadystate.SteadyStateEvolutionState;
+import ec.EvolutionState;
 import ec.steadystate.QueueIndividual;
+import ec.util.Output;
+import ec.util.Parameter;
 
 /**
  * SlaveMonitor.java

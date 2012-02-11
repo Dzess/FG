@@ -6,8 +6,11 @@
 
 package ec.breed;
 
-import ec.*;
-import ec.util.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.util.Parameter;
 
 /* 
  * BufferedBreedingPipeline.java

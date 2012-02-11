@@ -6,8 +6,11 @@
 
 package ec.select;
 
-import ec.util.*;
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
 
 /* 
  * FitProportionateSelection.java

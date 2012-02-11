@@ -6,9 +6,10 @@
 
 package ec.rule;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Species;
+import ec.util.Parameter;
 
 /* 
  * RuleSpecies.java

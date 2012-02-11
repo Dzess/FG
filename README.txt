@@ -1,6 +1,6 @@
-Author: Piotr Jessa
+Copyrights: Piotr Jessa & Tomasz Pawlak
 Description: Fork of the Eclipse based program for function generation using ECJ.
-Copyrights: http://creativecommons.org/licenses/by-nc-sa/3.0/
+License: http://creativecommons.org/licenses/by-nc-sa/3.0/
 See: www.alife.pl/generator-funkcji
 
 For developers:

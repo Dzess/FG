@@ -6,11 +6,14 @@
 
 package ec.simple;
 
-import ec.*;
-import ec.steadystate.*;
-import java.io.IOException;
-import ec.util.*;
 import java.io.File;
+import java.io.IOException;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Statistics;
+import ec.steadystate.SteadyStateStatisticsForm;
+import ec.util.Parameter;
 
 /* 
  * SimpleStatistics.java

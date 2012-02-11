@@ -6,10 +6,11 @@
 
 package ec.parsimony;
 
-import ec.*;
-import ec.util.*;
-import ec.steadystate.*;
-import ec.select.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.select.SelectDefaults;
+import ec.select.TournamentSelection;
+import ec.util.Parameter;
 
 /* 
  * LexicographicTournamentSelection.java

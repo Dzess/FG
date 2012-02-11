@@ -6,7 +6,7 @@
 
 package ec.spatial;
 
-import ec.*;
+import ec.EvolutionState;
 
 /* 
  * Space.java

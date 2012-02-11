@@ -6,8 +6,8 @@
 
 package ec.vector;
 
-import ec.*;
-import ec.util.*;
+import ec.DefaultsForm;
+import ec.util.Parameter;
 
 /* 
  * VectorDefaults.java

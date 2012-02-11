@@ -5,7 +5,6 @@ import ec.Problem;
 import ec.gp.ADFStack;
 import ec.gp.GPData;
 import ec.gp.GPIndividual;
-import ec.util.Parameter;
 import functiongenerator.core.gp.data.DoubleData;
 import functiongenerator.core.gp.functions.BinaryOperation;
 

@@ -6,8 +6,8 @@
 
 package ec.rule;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * RuleDefaults.java

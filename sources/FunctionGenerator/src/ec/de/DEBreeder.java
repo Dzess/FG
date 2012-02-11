@@ -1,8 +1,12 @@
 package ec.de;
 
-import ec.*;
-import ec.util.*;
-import ec.vector.*;
+import ec.Breeder;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.util.Parameter;
+import ec.vector.DoubleVectorIndividual;
+import ec.vector.FloatVectorSpecies;
 
 /* 
  * DEBreeder.java

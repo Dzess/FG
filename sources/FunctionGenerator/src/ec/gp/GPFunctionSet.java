@@ -6,10 +6,16 @@
 
 package ec.gp;
 
-import java.io.*;
-import ec.*;
-import ec.util.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
+
+import ec.Clique;
+import ec.EvolutionState;
+import ec.util.Parameter;
 
 /* 
  * GPFunctionSet.java

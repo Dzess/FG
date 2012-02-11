@@ -6,8 +6,8 @@
 
 package ec.gp;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * GPDefaults.java

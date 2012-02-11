@@ -6,10 +6,16 @@
 
 package ec.gp.koza;
 
-import ec.*;
-import ec.gp.*;
-import java.io.*;
-import ec.util.*;
+import java.io.File;
+import java.io.IOException;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Statistics;
+import ec.gp.GPIndividual;
+import ec.gp.GPNode;
+import ec.gp.GPSpecies;
+import ec.util.Parameter;
 
 /* 
  * KozaShortStatistics.java

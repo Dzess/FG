@@ -5,12 +5,16 @@
  */
 package ec.gp.ge;
 
-import ec.*;
-import ec.gp.*;
-import ec.gp.koza.*;
-import ec.simple.*;
-import ec.coevolve.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
+import ec.Problem;
+import ec.coevolve.GroupedProblemForm;
+import ec.gp.GPIndividual;
+import ec.gp.GPProblem;
+import ec.gp.koza.KozaFitness;
+import ec.simple.SimpleProblemForm;
+import ec.util.Parameter;
 
 /* 
  * GEProblem.java

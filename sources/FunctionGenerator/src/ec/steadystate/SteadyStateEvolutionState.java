@@ -6,13 +6,13 @@
 
 package ec.steadystate;
 
-import ec.*;
-import ec.util.Parameter;
+import java.util.HashMap;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Statistics;
 import ec.util.Checkpoint;
-import ec.util.Output;
-import ec.simple.*;
-//import ec.eval.MasterProblem;
-import java.util.*;
+import ec.util.Parameter;
 
 /* 
  * SteadyStateEvolutionState.java

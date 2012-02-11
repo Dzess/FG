@@ -6,14 +6,18 @@
 
 package ec.multiobjective;
 
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+
+import ec.EvolutionState;
+import ec.Fitness;
+import ec.Individual;
+import ec.util.Code;
 import ec.util.DecodeReturn;
 import ec.util.Parameter;
-import ec.util.Code;
-import ec.Fitness;
-import ec.EvolutionState;
-import java.util.*;
-import ec.*;
 
 /* 
  * MultiObjectiveFitness.java

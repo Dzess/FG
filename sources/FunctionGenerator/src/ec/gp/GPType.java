@@ -6,8 +6,9 @@
 
 package ec.gp;
 
-import ec.*;
-import ec.util.*;
+import ec.Clique;
+import ec.EvolutionState;
+import ec.util.Parameter;
 
 /* 
  * GPType.java

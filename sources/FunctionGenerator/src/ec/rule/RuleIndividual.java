@@ -6,9 +6,16 @@
 
 package ec.rule;
 
-import ec.*;
-import ec.util.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.util.Code;
+import ec.util.Parameter;
 
 /* 
  * RuleIndividual.java

@@ -6,8 +6,8 @@
 
 package ec.select;
 
+import ec.DefaultsForm;
 import ec.util.Parameter;
-import ec.*;
 
 /* 
  * SelectDefaults.java

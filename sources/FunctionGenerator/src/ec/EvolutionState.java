@@ -6,12 +6,12 @@
 
 package ec;
 
-import ec.util.ParameterDatabase;
-import ec.util.Parameter;
+import java.io.IOException;
+
 import ec.util.MersenneTwisterFast;
 import ec.util.Output;
-import java.io.IOException;
-import java.util.Vector;
+import ec.util.Parameter;
+import ec.util.ParameterDatabase;
 
 /* 
  * EvolutionState.java

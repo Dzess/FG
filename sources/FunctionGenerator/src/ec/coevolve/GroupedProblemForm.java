@@ -6,7 +6,9 @@
 
 package ec.coevolve;
 
-import ec.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Population;
 
 /**
  * GroupedProblemForm.java

@@ -12,10 +12,18 @@
 
 package ec.gp.build;
 
-import ec.gp.*;
-import ec.*;
-import ec.util.*;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Stack;
+
+import ec.EvolutionState;
+import ec.gp.GPFunctionSet;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPNodeBuilder;
+import ec.gp.GPNodeParent;
+import ec.gp.GPType;
+import ec.util.Parameter;
+import ec.util.RandomChoice;
 
 public class RandTree extends GPNodeBuilder {
 	public static final String P_RANDOMBRANCH = "randtree";

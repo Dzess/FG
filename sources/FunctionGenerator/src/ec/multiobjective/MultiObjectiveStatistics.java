@@ -6,15 +6,16 @@
 
 package ec.multiobjective;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import ec.EvolutionState;
 import ec.Individual;
-import ec.Subpopulation;
-import ec.multiobjective.MultiObjectiveFitness;
 import ec.simple.SimpleStatistics;
-import ec.util.*;
-import java.io.*;
+import ec.util.Parameter;
+import ec.util.QuickSort;
+import ec.util.SortComparator;
 
 /* 
  * MultiObjectiveStatistics.java

@@ -6,10 +6,18 @@
 
 package ec.pso;
 
-import ec.*;
-import ec.util.*;
-import ec.vector.*;
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+
+import ec.EvolutionState;
+import ec.Subpopulation;
+import ec.util.Code;
+import ec.util.Parameter;
+import ec.vector.DoubleVectorIndividual;
+import ec.vector.FloatVectorSpecies;
 
 /**
  * PSOSubpopulation.java

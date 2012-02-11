@@ -12,7 +12,7 @@
 
 package ec.steadystate;
 
-import ec.*;
+import ec.Individual;
 
 public class QueueIndividual implements java.io.Serializable {
 	public Individual ind;

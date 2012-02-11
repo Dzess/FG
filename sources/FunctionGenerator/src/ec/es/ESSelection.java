@@ -6,8 +6,10 @@
 
 package ec.es;
 
-import ec.*;
-import ec.util.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.util.Parameter;
 
 /* 
  * ESSelection.java

@@ -6,10 +6,15 @@
 
 package ec.simple;
 
-import ec.Fitness;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
 import ec.EvolutionState;
-import ec.util.*;
-import java.io.*;
+import ec.Fitness;
+import ec.util.Code;
+import ec.util.Parameter;
 
 /*
  * SimpleFitness.java

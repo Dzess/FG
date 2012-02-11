@@ -6,9 +6,15 @@
 
 package ec.gp.breed;
 
-import ec.*;
-import ec.util.*;
-import ec.gp.*;
+import ec.BreedingPipeline;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.gp.GPBreedingPipeline;
+import ec.gp.GPIndividual;
+import ec.gp.GPInitializer;
+import ec.gp.GPNode;
+import ec.gp.GPTree;
+import ec.util.Parameter;
 
 /* 
  * MutateSwapPipeline.java

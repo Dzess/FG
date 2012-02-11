@@ -6,9 +6,12 @@
 
 package ec.select;
 
-import ec.*;
-import ec.util.*;
-import ec.steadystate.*;
+import ec.EvolutionState;
+import ec.Individual;
+import ec.SelectionMethod;
+import ec.steadystate.SteadyStateBSourceForm;
+import ec.steadystate.SteadyStateEvolutionState;
+import ec.util.Parameter;
 
 /* 
  * RandomSelection.java

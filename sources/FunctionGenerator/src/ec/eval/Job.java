@@ -6,9 +6,13 @@
 
 package ec.eval;
 
-import ec.*;
-import java.io.*;
-import ec.util.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.util.DataPipe;
 
 /**
  * Job.java

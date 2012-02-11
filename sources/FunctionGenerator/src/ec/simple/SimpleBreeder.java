@@ -6,14 +6,15 @@
 
 package ec.simple;
 
-import ec.Initializer;
-import ec.Individual;
-import ec.BreedingPipeline;
 import ec.Breeder;
+import ec.BreedingPipeline;
 import ec.EvolutionState;
+import ec.Individual;
+import ec.Initializer;
 import ec.Population;
 import ec.util.Parameter;
-import ec.util.*;
+import ec.util.QuickSort;
+import ec.util.SortComparatorL;
 
 /* 
  * SimpleBreeder.java

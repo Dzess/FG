@@ -6,10 +6,10 @@
 
 package ec.simple;
 
-import ec.Initializer;
 import ec.EvolutionState;
-import ec.util.Parameter;
+import ec.Initializer;
 import ec.Population;
+import ec.util.Parameter;
 
 /* 
  * SimpleInitializer.java

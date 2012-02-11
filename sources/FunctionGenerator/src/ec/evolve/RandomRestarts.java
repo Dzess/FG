@@ -1,9 +1,12 @@
 package ec.evolve;
 
-import ec.*;
-import ec.steadystate.*;
-import ec.util.*;
-import java.io.*;
+import java.io.File;
+
+import ec.EvolutionState;
+import ec.Statistics;
+import ec.Subpopulation;
+import ec.steadystate.SteadyStateStatisticsForm;
+import ec.util.Parameter;
 
 /**
  * A special Statistics class which performs random restarts on the population,

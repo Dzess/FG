@@ -6,9 +6,9 @@
 
 package ec.gp.ge;
 
-import ec.*;
-import ec.gp.*;
-import ec.vector.*;
+import ec.EvolutionState;
+import ec.gp.GPIndividual;
+import ec.vector.ByteVectorIndividual;
 
 /* 
  * GEIndividual.java

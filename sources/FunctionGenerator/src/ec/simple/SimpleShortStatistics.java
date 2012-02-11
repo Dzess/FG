@@ -6,10 +6,13 @@
 
 package ec.simple;
 
-import ec.*;
-import java.io.*;
-import ec.util.*;
-import ec.eval.*;
+import java.io.File;
+import java.io.IOException;
+
+import ec.EvolutionState;
+import ec.Individual;
+import ec.Statistics;
+import ec.util.Parameter;
 
 /* 
  * SimpleShortStatistics.java

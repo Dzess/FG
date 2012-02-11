@@ -6,10 +6,12 @@
 
 package ec.gp;
 
-import ec.*;
-import ec.util.*;
-import java.util.*;
 import java.util.Enumeration;
+import java.util.Hashtable;
+
+import ec.Clique;
+import ec.EvolutionState;
+import ec.util.Parameter;
 
 /* 
  * GPTreeConstraints.java
