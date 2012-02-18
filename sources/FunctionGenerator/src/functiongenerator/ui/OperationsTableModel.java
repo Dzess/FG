@@ -33,7 +33,7 @@ import functiongenerator.core.gp.IOperationProviderFactory;
 public class OperationsTableModel extends AbstractTableModel {
 
 	static private final String[] CONSTANT_CAPTIONS = new String[] { "", "Operation", "Comment" };
-	static private final String NA_VALUE = "N/A";
+	static private final String NA_VALUE = "";
 
 	static private final Log logger = LogFactory.getLog(OperationsTableModel.class);
 

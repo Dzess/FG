@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: FunctionGenerator
-Bundle-SymbolicName: FunctionGenerator; singleton:=true
-Bundle-Version: 1.0.2
+Bundle-Name: Function Generator Plugin
+Bundle-SymbolicName: pl.alife.fg;singleton:=true
+Bundle-Version: 1.0.3
 Bundle-Activator: functiongenerator.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
@@ -14,5 +14,5 @@ Bundle-ClassPath: .,
  libs/jcommon-1.0.17.jar,
  libs/jfreechart-1.0.14.jar,
  libs/tools.jar
-Bundle-Vendor: Tomasz Pawlak
+Bundle-Vendor: Piotr Jessa & Tomasz Pawlak
 Import-Package: org.apache.commons.logging

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="FunctionGenerator"
+      id="pl.alife.fg-feature"
       label="FunctionGenerator"
-      version="1.0.0.qualifier">
+      version="1.0.0.qualifier"
+      provider-name="Piotr Jessa">
 
    <description url="http://www.alife.pl/generator-funkcji">
-      Function generator used for generating sample functions using symbolic regression.
+      Function generator used for generating sample functions for Java language using symbolic regression and genetic programing.
    </description>
 
    <copyright>
@@ -98,12 +99,5 @@ UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING AND TO THE FULLEST
    <requires>
       <import plugin="org.apache.commons.logging"/>
    </requires>
-
-   <plugin
-         id="FunctionGenerator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>

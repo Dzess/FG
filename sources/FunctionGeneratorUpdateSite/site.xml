@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/FunctionGenerator_1.0.0.201202111513.jar" id="FunctionGenerator" version="1.0.0.201202111513"/>
+   <description name="Function Generator Update Site">
+      Allows the instalation of Function Generator using Eclipse Update Site.
+   </description>
 </site>
