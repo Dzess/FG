@@ -13,3 +13,7 @@ runtime-EclipseApplication/
 
 # Disable all of the ECJ statistics
 *.stat
+
+# Disable all KDE files
+*.directory
+*~
