@@ -18,11 +18,13 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import ec.gp.GPIndividual;
 import functiongenerator.core.Engine;
 import functiongenerator.core.IProgressListener;
 
 @SuppressWarnings("serial")
-public class ProgressDialog extends JDialog implements IProgressListener, ActionListener {
+public class ProgressDialog extends JDialog implements IProgressListener,
+		ActionListener {
 
 	private JPanel jContentPane = null;
 	private JProgressBar progressBar = null;
@@ -158,7 +160,7 @@ public class ProgressDialog extends JDialog implements IProgressListener, Action
 	}
 
 	@Override
-	public void update(double done, String message) {
+	public void update(double done, String message, GPIndividual individual) {
 		progressBar.setValue((int) done);
 		textLog.append(message);
 		JScrollBar scroll = textLogContainer.getVerticalScrollBar();

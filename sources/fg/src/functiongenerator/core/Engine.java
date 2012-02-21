@@ -54,7 +54,7 @@ public class Engine {
 	 * Run Phase
 	 * </p>
 	 */
-	public GPIndividual getBestIndividual() {
+	private GPIndividual getBestIndividual() {
 		return bestIndividual;
 	}
 
@@ -94,9 +94,9 @@ public class Engine {
 		listeners.remove(listener);
 	}
 
-	private void updateProgress(int currentGen, String output) {
+	private void updateProgress(int currentGen, String output,GPIndividual individual) {
 		for (IProgressListener listener : listeners) {
-			listener.update(((double) (currentGen * 100)) / (double) this.getSettings().getGenerations(), output);
+			listener.update(((double) (currentGen * 100)) / (double) this.getSettings().getGenerations(), output,individual);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class Engine {
 			SimpleStatistics stat = (SimpleStatistics) state.statistics;
 			bestIndividual = (GPIndividual) stat.best_of_run[0];
 
-			updateProgress(state.generation, buffer.toString());
+			updateProgress(state.generation, buffer.toString(),bestIndividual);
 			buffer.delete(0, buffer.length());
 		}
 

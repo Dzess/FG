@@ -1,6 +1,12 @@
 package functiongenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import javax.swing.UIManager;
+
+import com.sun.java.swing.plaf.gtk.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,11 +19,15 @@ import functiongenerator.handlers.CommandHandler;
 import functiongenerator.ui.MainDialog;
 import functiongenerator.ui.ProgressDialog;
 import functiongenerator.ui.ResultsDialog;
-import functiongenerator.ui.charting.RegressionChartDialog;
+import functiongenerator.ui.charting.ChartsHolderDialog;
+import functiongenerator.ui.charting.IChartPanel;
+import functiongenerator.ui.charting.RegressionChartPanel;
 import functiongenerator.ui.charting.data.IDataSetProvider;
 import functiongenerator.ui.charting.data.RegressionDataSetProvider;
+import functiongenerator.ui.charting.data.SimpleDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
 import functiongenerator.ui.charting.makers.RegressionChartMaker;
+import functiongenerator.ui.charting.makers.SimpleChartMaker;
 
 /**
  * What actually runs the code of function generator. The most of command
@@ -25,7 +35,7 @@ import functiongenerator.ui.charting.makers.RegressionChartMaker;
  * 
  * 
  * <p>
- * Use {@link FGRunnable.main} method to run this program as the standalone
+ * Use {@link FGRunnable.main} method to run this program as the stand alone
  * application.
  * </p>
  */
@@ -35,7 +45,7 @@ public class FGRunnable implements Runnable {
 
 	private MainDialog mainDlg;
 	private ProgressDialog progressDlg;
-	private RegressionChartDialog chartDlg;
+	private ChartsHolderDialog chartDlg;
 	private ResultsDialog resultsDlg;
 
 	private final IWorkbenchWindow window;
@@ -48,6 +58,13 @@ public class FGRunnable implements Runnable {
 	 */
 	static public void main(String[] args) {
 
+		// go for GTK look and feel 
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (Exception e) {
+			logger.warn("No look and feel", e);
+		}
+
 		FGRunnable runner = new FGRunnable(null);
 		runner.run();
 	}
@@ -55,6 +72,29 @@ public class FGRunnable implements Runnable {
 	public FGRunnable(IWorkbenchWindow window) {
 		this.window = window;
 
+	}
+
+	private List<IChartPanel> produceChartPanels(Engine engine) {
+		List<IChartPanel> panels = new ArrayList<IChartPanel>();
+
+		// regression
+		AbstractRegressionProblem problem = engine.getProblem();
+		IDataSetProvider dataSetProvider = new RegressionDataSetProvider(
+				problem);
+		IChartMaker chartMaker = new RegressionChartMaker();
+
+		// simple
+		IDataSetProvider simpleDataSet = new SimpleDataSetProvider();
+		IChartMaker simpleMaker = new SimpleChartMaker();
+
+		panels.add(new RegressionChartPanel("Visualization", dataSetProvider,
+				chartMaker));
+		panels.add(new RegressionChartPanel("Sample", simpleDataSet,
+				simpleMaker));
+
+		// NOTE: add other charting options here
+
+		return panels;
 	}
 
 	@Override
@@ -91,22 +131,11 @@ public class FGRunnable implements Runnable {
 					progressDlg = new ProgressDialog(null);
 					progressDlg.setVisible(true);
 					progressDlg.setEngine(engine);
-
 					engine.addListener(progressDlg);
 
-					// the types of charting engines
-
-					AbstractRegressionProblem problem = engine.getProblem();
-					IDataSetProvider dataSetProvider = new RegressionDataSetProvider(problem);
-					IChartMaker chartMaker = new RegressionChartMaker();
-					// IDataSetProvider dataSetProvider = new
-					// SimpleDataSetProvider();
-					// IChartMaker chartMaker = new SimpleChartMaker();
-
-					chartDlg = new RegressionChartDialog(dataSetProvider, chartMaker);
+					List<IChartPanel> avaliablePanels = produceChartPanels(engine);
+					chartDlg = new ChartsHolderDialog(avaliablePanels);
 					chartDlg.setVisible(true);
-					chartDlg.setEngine(engine);
-
 					engine.addListener(chartDlg);
 
 					logger.debug("Running the algorithm");
@@ -133,7 +162,8 @@ public class FGRunnable implements Runnable {
 			}
 		} catch (Exception ex) {
 			if (window != null) {
-				MessageDialog.openError(window.getShell(), "FunctionGenerator", ex.getLocalizedMessage());
+				MessageDialog.openError(window.getShell(), "FunctionGenerator",
+						ex.getLocalizedMessage());
 			}
 			ex.printStackTrace();
 			logger.error(ex);
