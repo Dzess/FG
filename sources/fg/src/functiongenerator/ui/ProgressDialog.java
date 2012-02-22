@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
 
 import ec.gp.GPIndividual;
 import functiongenerator.core.Engine;
+import functiongenerator.core.EvolutionStateHelper;
 import functiongenerator.core.IProgressListener;
 
 @SuppressWarnings("serial")
@@ -160,7 +161,8 @@ public class ProgressDialog extends JDialog implements IProgressListener,
 	}
 
 	@Override
-	public void update(double done, String message, GPIndividual individual) {
+	public void update(String message, EvolutionStateHelper helper) {
+		double done = helper.getCompletedPercent();
 		progressBar.setValue((int) done);
 		textLog.append(message);
 		JScrollBar scroll = textLogContainer.getVerticalScrollBar();

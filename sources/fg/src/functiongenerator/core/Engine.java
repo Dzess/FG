@@ -30,7 +30,8 @@ import functiongenerator.ui.printing.TreeToStringTranslator;
  */
 public class Engine {
 
-	static private final org.apache.commons.logging.Log logger = LogFactory.getLog(Engine.class);
+	static private final org.apache.commons.logging.Log logger = LogFactory
+			.getLog(Engine.class);
 
 	private List<Number[]> points = new ArrayList<Number[]>();
 	private Settings settings;
@@ -45,18 +46,6 @@ public class Engine {
 	private EvolutionState state;
 
 	private StringBuffer buffer;
-
-	/**
-	 * Gets best individual for the problem so far. Might result in null if no
-	 * individual has been already achieved.
-	 * 
-	 * <p>
-	 * Run Phase
-	 * </p>
-	 */
-	private GPIndividual getBestIndividual() {
-		return bestIndividual;
-	}
 
 	/**
 	 * Returns the current problem which is being processes by engine. Before
@@ -94,17 +83,20 @@ public class Engine {
 		listeners.remove(listener);
 	}
 
-	private void updateProgress(int currentGen, String output,GPIndividual individual) {
+	private void updateProgress(String output, EvolutionStateHelper stateHelper) {
 		for (IProgressListener listener : listeners) {
-			listener.update(((double) (currentGen * 100)) / (double) this.getSettings().getGenerations(), output,individual);
+			listener.update(output,stateHelper);
 		}
 	}
 
 	// TODO: refactor this code outt here
-	private String generateClassTemplate(String func, String comment) throws IOException {
+	private String generateClassTemplate(String func, String comment)
+			throws IOException {
 		try {
-			InputStream template = Engine.class.getResourceAsStream("ClassTemplate.java.tpl");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(template));
+			InputStream template = Engine.class
+					.getResourceAsStream("ClassTemplate.java.tpl");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					template));
 			StringBuilder builder = new StringBuilder();
 
 			for (String line; (line = reader.readLine()) != null;) {
@@ -114,12 +106,14 @@ public class Engine {
 
 			int idx = builder.indexOf("/*functionCode*/");
 			if (idx < 0)
-				throw new RuntimeException("/*functionCode*/ not found in class template!");
+				throw new RuntimeException(
+						"/*functionCode*/ not found in class template!");
 			builder.replace(idx, idx + "/*functionCode*/".length(), func);
 
 			idx = builder.indexOf("/*comment*/");
 			if (idx < 0)
-				throw new RuntimeException("/*comment*/ not found in class template!");
+				throw new RuntimeException(
+						"/*comment*/ not found in class template!");
 			builder.replace(idx, idx + "/*comment*/".length(), comment);
 
 			String type = points.get(0)[0] instanceof Double ? "double" : "int";
@@ -137,8 +131,10 @@ public class Engine {
 			argumentsBuilder.deleteCharAt(argumentsBuilder.length() - 1);
 			idx = builder.indexOf("/*arguments*/");
 			if (idx < 0)
-				throw new RuntimeException("/*arguments*/ not found in class template!");
-			builder.replace(idx, idx + "/*arguments*/".length(), argumentsBuilder.toString());
+				throw new RuntimeException(
+						"/*arguments*/ not found in class template!");
+			builder.replace(idx, idx + "/*arguments*/".length(),
+					argumentsBuilder.toString());
 
 			return builder.toString();
 		} catch (UnsupportedEncodingException ex) {
@@ -166,7 +162,8 @@ public class Engine {
 			type = ProblemType.INTEGER;
 		}
 
-		ParameterDatabase db = getSettings().generateParameterDatabase(numberOfXes, type);
+		ParameterDatabase db = getSettings().generateParameterDatabase(
+				numberOfXes, type);
 		state = Evolve.initialize(db, 0);
 		state.startFresh();
 
@@ -199,13 +196,14 @@ public class Engine {
 
 		/* the big loop */
 		int result = EvolutionState.R_NOTDONE;
+		EvolutionStateHelper stateHelper = new EvolutionStateHelper(state);
 		while (result == EvolutionState.R_NOTDONE && !cancel) {
 			result = state.evolve();
-
-			SimpleStatistics stat = (SimpleStatistics) state.statistics;
-			bestIndividual = (GPIndividual) stat.best_of_run[0];
-
-			updateProgress(state.generation, buffer.toString(),bestIndividual);
+			
+			bestIndividual = stateHelper.getBesIndividual();
+			updateProgress(buffer.toString(), stateHelper);
+			
+			// this method is for buffer
 			buffer.delete(0, buffer.length());
 		}
 
@@ -219,7 +217,7 @@ public class Engine {
 		GPIndividual ind = (GPIndividual) stat.best_of_run[0];
 
 		String expression = TreeToStringTranslator.translateTree(ind.trees[0]);
-		String template = generateClassTemplate(expression, ind.fitness.fitnessToStringForHumans());
+		String template = generateClassTemplate(expression,ind.fitness.fitnessToStringForHumans());
 
 		state.finish(result);
 		Evolve.cleanup(state);

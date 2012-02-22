@@ -18,6 +18,7 @@ import org.jfree.data.general.AbstractDataset;
 
 import ec.gp.GPIndividual;
 import ec.gp.GPTree;
+import functiongenerator.core.EvolutionStateHelper;
 import functiongenerator.ui.charting.data.IDataSetProvider;
 import functiongenerator.ui.charting.makers.IChartMaker;
 import functiongenerator.ui.printing.TreeToStringTranslator;
@@ -82,9 +83,10 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 	}
 
 	@Override
-	public void redraw(GPIndividual individual) {
+	public void redraw(EvolutionStateHelper state) {
 		try {
 			JFreeChart chart = null;
+			GPIndividual individual = state.getBesIndividual();
 			if (individual != null) {
 				AbstractDataset dataset = dataSetProvider
 						.getDataSet(individual);

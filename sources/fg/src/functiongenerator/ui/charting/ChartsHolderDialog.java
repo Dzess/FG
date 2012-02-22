@@ -10,6 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
 import ec.gp.GPIndividual;
+import functiongenerator.core.EvolutionStateHelper;
 import functiongenerator.core.IProgressListener;
 
 /**
@@ -48,12 +49,13 @@ public class ChartsHolderDialog extends JDialog implements IProgressListener {
 	}	
 
 	@Override
-	public void update(double done, String message, GPIndividual individual) {
+	public void update(String message, EvolutionStateHelper helper) {
 
+		
 		// let this only one chart be redrawn
 		int index = tabbedPane.getSelectedIndex();
 		IChartPanel panel = charts.get(index);
-		panel.redraw(individual);
+		panel.redraw(helper);
 		
 		Component component = tabbedPane.getSelectedComponent();
 		component.repaint();

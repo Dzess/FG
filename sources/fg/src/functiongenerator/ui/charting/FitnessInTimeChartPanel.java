@@ -5,6 +5,8 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 import ec.gp.GPIndividual;
+import functiongenerator.core.EvolutionStateHelper;
+
 import javax.swing.JLabel;
 
 /**
@@ -33,9 +35,9 @@ public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
 	}
 
 	@Override
-	public void redraw(GPIndividual individual) {
+	public void redraw(EvolutionStateHelper helper) {
 		// actually do nothing for now
-		label.setText(individual.genotypeToString());
+		
 	}
 
 }

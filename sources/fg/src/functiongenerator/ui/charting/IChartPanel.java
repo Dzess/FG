@@ -2,7 +2,7 @@ package functiongenerator.ui.charting;
 
 import java.awt.Component;
 
-import ec.gp.GPIndividual;
+import functiongenerator.core.EvolutionStateHelper;
 
 /**
  * Identifies the each of the charts that can be showed with
@@ -23,9 +23,9 @@ public interface IChartPanel {
 	/**
 	 * Recalculate all the stuff with this chart and draw it.
 	 * 
-	 * @param individual
+	 * @param state
 	 *            : currently the best solution
 	 */
-	public void redraw(GPIndividual individual);
+	public void redraw(EvolutionStateHelper state);
 
 }

@@ -1,7 +1,6 @@
 package functiongenerator.core;
 
-import ec.gp.GPIndividual;
 
 public interface IProgressListener {
-	void update(double done, String message, GPIndividual individual);
+	void update(String message, EvolutionStateHelper individual);
 }
