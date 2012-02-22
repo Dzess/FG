@@ -1,11 +1,10 @@
-package functiongenerator.ui.charting;
+package functiongenerator.ui.charting.regression;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
@@ -19,8 +18,9 @@ import org.jfree.data.general.AbstractDataset;
 import ec.gp.GPIndividual;
 import ec.gp.GPTree;
 import functiongenerator.core.EvolutionStateHelper;
-import functiongenerator.ui.charting.data.IDataSetProvider;
-import functiongenerator.ui.charting.makers.IChartMaker;
+import functiongenerator.ui.charting.IChartPanel;
+import functiongenerator.ui.charting.regression.data.IDataSetProvider;
+import functiongenerator.ui.charting.regression.makers.IChartMaker;
 import functiongenerator.ui.printing.TreeToStringTranslator;
 
 /**

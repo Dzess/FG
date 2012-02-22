@@ -18,15 +18,15 @@ import functiongenerator.ui.MainDialog;
 import functiongenerator.ui.ProgressDialog;
 import functiongenerator.ui.ResultsDialog;
 import functiongenerator.ui.charting.ChartsHolderDialog;
-import functiongenerator.ui.charting.FitnessInTimeChartPanel;
 import functiongenerator.ui.charting.IChartPanel;
-import functiongenerator.ui.charting.RegressionChartPanel;
-import functiongenerator.ui.charting.data.IDataSetProvider;
-import functiongenerator.ui.charting.data.RegressionDataSetProvider;
-import functiongenerator.ui.charting.data.SimpleDataSetProvider;
-import functiongenerator.ui.charting.makers.IChartMaker;
-import functiongenerator.ui.charting.makers.RegressionChartMaker;
-import functiongenerator.ui.charting.makers.SimpleChartMaker;
+import functiongenerator.ui.charting.fitness.FitnessInTimeChartPanel;
+import functiongenerator.ui.charting.regression.RegressionChartPanel;
+import functiongenerator.ui.charting.regression.data.IDataSetProvider;
+import functiongenerator.ui.charting.regression.data.RegressionDataSetProvider;
+import functiongenerator.ui.charting.regression.data.SimpleDataSetProvider;
+import functiongenerator.ui.charting.regression.makers.IChartMaker;
+import functiongenerator.ui.charting.regression.makers.RegressionChartMaker;
+import functiongenerator.ui.charting.regression.makers.SimpleChartMaker;
 
 /**
  * What actually runs the code of function generator. The most of command

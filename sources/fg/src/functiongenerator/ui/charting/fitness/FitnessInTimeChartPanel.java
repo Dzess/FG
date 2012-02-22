@@ -1,13 +1,12 @@
-package functiongenerator.ui.charting;
+package functiongenerator.ui.charting.fitness;
 
 import java.awt.Component;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ec.gp.GPIndividual;
 import functiongenerator.core.EvolutionStateHelper;
-
-import javax.swing.JLabel;
+import functiongenerator.ui.charting.IChartPanel;
 
 /**
  * Displays the overall aggregated fitness over already passed populations.

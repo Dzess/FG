@@ -1,4 +1,4 @@
-package functiongenerator.ui.charting.makers;
+package functiongenerator.ui.charting.regression.makers;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -24,7 +24,7 @@ public class SimpleChartMaker implements IChartMaker {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * functiongenerator.ui.charting.makers.IChartMaker#createChart(org.jfree
+	 * functiongenerator.ui.charting.regression.makers.IChartMaker#createChart(org.jfree
 	 * .data.category.CategoryDataset)
 	 */
 	@Override

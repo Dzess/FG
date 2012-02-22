@@ -1,4 +1,4 @@
-package functiongenerator.ui.charting.data;
+package functiongenerator.ui.charting.regression.data;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.AbstractDataset;
@@ -14,7 +14,7 @@ import ec.gp.GPIndividual;
 public class SimpleDataSetProvider implements IDataSetProvider {
 
 	/* (non-Javadoc)
-	 * @see functiongenerator.ui.charting.data.IDataSetProvider#getDataSet()
+	 * @see functiongenerator.ui.charting.regression.data.IDataSetProvider#getDataSet()
 	 */
 	@Override
 	public AbstractDataset getDataSet(GPIndividual individual) {

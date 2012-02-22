@@ -9,7 +9,6 @@ import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
-import ec.gp.GPIndividual;
 import functiongenerator.core.EvolutionStateHelper;
 import functiongenerator.core.IProgressListener;
 

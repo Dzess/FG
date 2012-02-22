@@ -1,4 +1,4 @@
-package functiongenerator.ui.charting.data;
+package functiongenerator.ui.charting.regression.data;
 
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.xy.XYSeries;
