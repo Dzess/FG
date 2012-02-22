@@ -34,61 +34,61 @@ import javax.swing.text.ViewFactory;
 @SuppressWarnings("serial")
 public class JavaEditorKit extends DefaultEditorKit {
 
-	public JavaEditorKit() {
-		super();
-	}
+    public JavaEditorKit() {
+        super();
+    }
 
-	public JavaContext getStylePreferences() {
-		if (preferences == null) {
-			preferences = new JavaContext();
-		}
-		return preferences;
-	}
+    public JavaContext getStylePreferences() {
+        if (preferences == null) {
+            preferences = new JavaContext();
+        }
+        return preferences;
+    }
 
-	public void setStylePreferences(JavaContext prefs) {
-		preferences = prefs;
-	}
+    public void setStylePreferences(JavaContext prefs) {
+        preferences = prefs;
+    }
 
-	// --- EditorKit methods -------------------------
+    // --- EditorKit methods -------------------------
 
-	/**
-	 * Get the MIME type of the data that this kit represents support for. This
-	 * kit supports the type <code>text/java</code>.
-	 */
-	public String getContentType() {
-		return "text/java";
-	}
+    /**
+     * Get the MIME type of the data that this kit represents support for. This
+     * kit supports the type <code>text/java</code>.
+     */
+    public String getContentType() {
+        return "text/java";
+    }
 
-	/**
-	 * Create a copy of the editor kit. This allows an implementation to serve
-	 * as a prototype for others, so that they can be quickly created.
-	 */
-	public Object clone() {
-		JavaEditorKit kit = new JavaEditorKit();
-		kit.preferences = preferences;
-		return kit;
-	}
+    /**
+     * Create a copy of the editor kit. This allows an implementation to serve
+     * as a prototype for others, so that they can be quickly created.
+     */
+    public Object clone() {
+        JavaEditorKit kit = new JavaEditorKit();
+        kit.preferences = preferences;
+        return kit;
+    }
 
-	/**
-	 * Creates an uninitialized text storage model that is appropriate for this
-	 * type of editor.
-	 * 
-	 * @return the model
-	 */
-	public Document createDefaultDocument() {
-		return new JavaDocument();
-	}
+    /**
+     * Creates an uninitialized text storage model that is appropriate for this
+     * type of editor.
+     * 
+     * @return the model
+     */
+    public Document createDefaultDocument() {
+        return new JavaDocument();
+    }
 
-	/**
-	 * Fetches a factory that is suitable for producing views of any models that
-	 * are produced by this kit. The default is to have the UI produce the
-	 * factory, so this method has no implementation.
-	 * 
-	 * @return the view factory
-	 */
-	public final ViewFactory getViewFactory() {
-		return getStylePreferences();
-	}
+    /**
+     * Fetches a factory that is suitable for producing views of any models that
+     * are produced by this kit. The default is to have the UI produce the
+     * factory, so this method has no implementation.
+     * 
+     * @return the view factory
+     */
+    public final ViewFactory getViewFactory() {
+        return getStylePreferences();
+    }
 
-	JavaContext preferences;
+    JavaContext preferences;
 }

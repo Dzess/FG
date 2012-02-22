@@ -106,264 +106,272 @@ import ec.util.Parameter;
  */
 
 public class KozaShortStatistics extends Statistics {
-	public Individual[] getBestSoFar() {
-		return best_of_run;
-	}
+    public Individual[] getBestSoFar() {
+        return best_of_run;
+    }
 
-	/** compress? */
-	public static final String P_COMPRESS = "gzip";
+    /** compress? */
+    public static final String P_COMPRESS = "gzip";
 
-	public static final String P_FULL = "gather-full";
+    public static final String P_FULL = "gather-full";
 
-	public boolean doFull;
+    public boolean doFull;
 
-	public Individual[] best_of_run;
-	public long totalNodes[];
-	public long totalDepths[];
+    public Individual[] best_of_run;
+    public long totalNodes[];
+    public long totalDepths[];
 
-	// timings
-	public long lastTime;
+    // timings
+    public long lastTime;
 
-	// usage
-	public long lastUsage;
+    // usage
+    public long lastUsage;
 
-	/** log file parameter */
-	public static final String P_STATISTICS_FILE = "file";
+    /** log file parameter */
+    public static final String P_STATISTICS_FILE = "file";
 
-	/** The Statistics' log */
-	public int statisticslog;
+    /** The Statistics' log */
+    public int statisticslog;
 
-	public KozaShortStatistics() { /* best_of_run = null; */
-		statisticslog = 0; /* stdout */
-	}
+    public KozaShortStatistics() { /* best_of_run = null; */
+        statisticslog = 0; /* stdout */
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
-		File statisticsFile = state.parameters.getFile(base.push(P_STATISTICS_FILE), null);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
+        File statisticsFile = state.parameters.getFile(base.push(P_STATISTICS_FILE), null);
 
-		if (statisticsFile != null)
-			try {
-				statisticslog = state.output.addLog(statisticsFile, !state.parameters.getBoolean(base.push(P_COMPRESS), null, false),
-						state.parameters.getBoolean(base.push(P_COMPRESS), null, false));
-			} catch (IOException i) {
-				state.output.fatal("An IOException occurred while trying to create the log " + statisticsFile + ":\n" + i);
-			}
-		doFull = state.parameters.getBoolean(base.push(P_FULL), null, false);
-	}
+        if (statisticsFile != null)
+            try {
+                statisticslog = state.output.addLog(statisticsFile,
+                        !state.parameters.getBoolean(base.push(P_COMPRESS), null, false),
+                        state.parameters.getBoolean(base.push(P_COMPRESS), null, false));
+            } catch (IOException i) {
+                state.output.fatal("An IOException occurred while trying to create the log " + statisticsFile + ":\n"
+                        + i);
+            }
+        doFull = state.parameters.getBoolean(base.push(P_FULL), null, false);
+    }
 
-	public void preInitializationStatistics(final EvolutionState state) {
-		super.preInitializationStatistics(state);
+    public void preInitializationStatistics(final EvolutionState state) {
+        super.preInitializationStatistics(state);
 
-		if (doFull) {
-			Runtime r = Runtime.getRuntime();
-			lastTime = System.currentTimeMillis();
-			lastUsage = r.totalMemory() - r.freeMemory();
-		}
-	}
+        if (doFull) {
+            Runtime r = Runtime.getRuntime();
+            lastTime = System.currentTimeMillis();
+            lastUsage = r.totalMemory() - r.freeMemory();
+        }
+    }
 
-	public void postInitializationStatistics(final EvolutionState state) {
-		super.postInitializationStatistics(state);
-		// set up our best_of_run array -- can't do this in setup, because
-		// we don't know if the number of subpopulations has been determined yet
-		best_of_run = new Individual[state.population.subpops.length];
+    public void postInitializationStatistics(final EvolutionState state) {
+        super.postInitializationStatistics(state);
+        // set up our best_of_run array -- can't do this in setup, because
+        // we don't know if the number of subpopulations has been determined yet
+        best_of_run = new Individual[state.population.subpops.length];
 
-		// print out our generation number
-		state.output.print("0 ", statisticslog);
+        // print out our generation number
+        state.output.print("0 ", statisticslog);
 
-		// gather timings
-		if (doFull) {
-			totalNodes = new long[state.population.subpops.length];
-			for (int x = 0; x < totalNodes.length; x++)
-				totalNodes[x] = 0;
-			totalDepths = new long[state.population.subpops.length];
-			for (int x = 0; x < totalDepths.length; x++)
-				totalDepths[x] = 0;
-			Runtime r = Runtime.getRuntime();
-			long curU = r.totalMemory() - r.freeMemory();
-			state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
-			state.output.print("" + (curU - lastUsage) + " ", statisticslog);
-		}
-	}
+        // gather timings
+        if (doFull) {
+            totalNodes = new long[state.population.subpops.length];
+            for (int x = 0; x < totalNodes.length; x++)
+                totalNodes[x] = 0;
+            totalDepths = new long[state.population.subpops.length];
+            for (int x = 0; x < totalDepths.length; x++)
+                totalDepths[x] = 0;
+            Runtime r = Runtime.getRuntime();
+            long curU = r.totalMemory() - r.freeMemory();
+            state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
+            state.output.print("" + (curU - lastUsage) + " ", statisticslog);
+        }
+    }
 
-	public void preBreedingStatistics(final EvolutionState state) {
-		super.preBreedingStatistics(state);
-		if (doFull) {
-			Runtime r = Runtime.getRuntime();
-			lastTime = System.currentTimeMillis();
-			lastUsage = r.totalMemory() - r.freeMemory();
-		}
-	}
+    public void preBreedingStatistics(final EvolutionState state) {
+        super.preBreedingStatistics(state);
+        if (doFull) {
+            Runtime r = Runtime.getRuntime();
+            lastTime = System.currentTimeMillis();
+            lastUsage = r.totalMemory() - r.freeMemory();
+        }
+    }
 
-	public void postBreedingStatistics(final EvolutionState state) {
-		super.postBreedingStatistics(state);
-		state.output.print("" + (state.generation + 1) + " ", statisticslog); // 1
-																				// because
-																				// we're
-																				// putting
-																				// the
-																				// breeding
-																				// info
-																				// on
-																				// the
-																				// same
-																				// line
-																				// as
-																				// the
-																				// generation
-																				// it
-																				// *produces*,
-																				// and
-																				// the
-																				// generation
-																				// number
-																				// is
-																				// increased
-																				// *after*
-																				// breeding
-																				// occurs,
-																				// and
-																				// statistics
-																				// for
-																				// it
+    public void postBreedingStatistics(final EvolutionState state) {
+        super.postBreedingStatistics(state);
+        state.output.print("" + (state.generation + 1) + " ", statisticslog); // 1
+                                                                              // because
+                                                                              // we're
+                                                                              // putting
+                                                                              // the
+                                                                              // breeding
+                                                                              // info
+                                                                              // on
+                                                                              // the
+                                                                              // same
+                                                                              // line
+                                                                              // as
+                                                                              // the
+                                                                              // generation
+                                                                              // it
+                                                                              // *produces*,
+                                                                              // and
+                                                                              // the
+                                                                              // generation
+                                                                              // number
+                                                                              // is
+                                                                              // increased
+                                                                              // *after*
+                                                                              // breeding
+                                                                              // occurs,
+                                                                              // and
+                                                                              // statistics
+                                                                              // for
+                                                                              // it
 
-		// gather timings
-		if (doFull) {
-			Runtime r = Runtime.getRuntime();
-			long curU = r.totalMemory() - r.freeMemory();
-			state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
-			state.output.print("" + (curU - lastUsage) + " ", statisticslog);
-		}
-	}
+        // gather timings
+        if (doFull) {
+            Runtime r = Runtime.getRuntime();
+            long curU = r.totalMemory() - r.freeMemory();
+            state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
+            state.output.print("" + (curU - lastUsage) + " ", statisticslog);
+        }
+    }
 
-	public void preEvaluationStatistics(final EvolutionState state) {
-		super.preEvaluationStatistics(state);
-		if (doFull) {
-			Runtime r = Runtime.getRuntime();
-			lastTime = System.currentTimeMillis();
-			lastUsage = r.totalMemory() - r.freeMemory();
-		}
-	}
+    public void preEvaluationStatistics(final EvolutionState state) {
+        super.preEvaluationStatistics(state);
+        if (doFull) {
+            Runtime r = Runtime.getRuntime();
+            lastTime = System.currentTimeMillis();
+            lastUsage = r.totalMemory() - r.freeMemory();
+        }
+    }
 
-	/**
-	 * Prints out the statistics, but does not end with a println -- this lets
-	 * overriding methods print additional statistics on the same line
-	 */
-	protected void _postEvaluationStatistics(final EvolutionState state) {
-		// gather timings
-		if (doFull) {
-			Runtime r = Runtime.getRuntime();
-			long curU = r.totalMemory() - r.freeMemory();
-			state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
-			state.output.print("" + (curU - lastUsage) + " ", statisticslog);
-		}
+    /**
+     * Prints out the statistics, but does not end with a println -- this lets
+     * overriding methods print additional statistics on the same line
+     */
+    protected void _postEvaluationStatistics(final EvolutionState state) {
+        // gather timings
+        if (doFull) {
+            Runtime r = Runtime.getRuntime();
+            long curU = r.totalMemory() - r.freeMemory();
+            state.output.print("" + (System.currentTimeMillis() - lastTime) + " ", statisticslog);
+            state.output.print("" + (curU - lastUsage) + " ", statisticslog);
+        }
 
-		Individual[] best_i = new Individual[state.population.subpops.length]; // quiets
-																				// compiler
-																				// complaints
+        Individual[] best_i = new Individual[state.population.subpops.length]; // quiets
+                                                                               // compiler
+                                                                               // complaints
 
-		for (int x = 0; x < state.population.subpops.length; x++) {
-			if (doFull) {
-				long totNodesPerGen = 0;
-				long totDepthPerGen = 0;
+        for (int x = 0; x < state.population.subpops.length; x++) {
+            if (doFull) {
+                long totNodesPerGen = 0;
+                long totDepthPerGen = 0;
 
-				// check to make sure they're the right class
-				if (!(state.population.subpops[x].species instanceof GPSpecies))
-					state.output.fatal("Subpopulation " + x + " is not of the species form GPSpecies."
-							+ "  Cannot do timing statistics with KozaShortStatistics.");
+                // check to make sure they're the right class
+                if (!(state.population.subpops[x].species instanceof GPSpecies))
+                    state.output.fatal("Subpopulation " + x + " is not of the species form GPSpecies."
+                            + "  Cannot do timing statistics with KozaShortStatistics.");
 
-				long[] numNodes = new long[((GPIndividual) (state.population.subpops[x].species.i_prototype)).trees.length];
-				long[] numDepth = new long[((GPIndividual) (state.population.subpops[x].species.i_prototype)).trees.length];
+                long[] numNodes = new long[((GPIndividual) (state.population.subpops[x].species.i_prototype)).trees.length];
+                long[] numDepth = new long[((GPIndividual) (state.population.subpops[x].species.i_prototype)).trees.length];
 
-				for (int y = 0; y < state.population.subpops[x].individuals.length; y++) {
-					GPIndividual i = (GPIndividual) (state.population.subpops[x].individuals[y]);
-					for (int z = 0; z < i.trees.length; z++) {
-						numNodes[z] += i.trees[z].child.numNodes(GPNode.NODESEARCH_ALL);
-						numDepth[z] += i.trees[z].child.depth();
-					}
-				}
+                for (int y = 0; y < state.population.subpops[x].individuals.length; y++) {
+                    GPIndividual i = (GPIndividual) (state.population.subpops[x].individuals[y]);
+                    for (int z = 0; z < i.trees.length; z++) {
+                        numNodes[z] += i.trees[z].child.numNodes(GPNode.NODESEARCH_ALL);
+                        numDepth[z] += i.trees[z].child.depth();
+                    }
+                }
 
-				for (int tr = 0; tr < numNodes.length; tr++)
-					totNodesPerGen += numNodes[tr];
+                for (int tr = 0; tr < numNodes.length; tr++)
+                    totNodesPerGen += numNodes[tr];
 
-				totalNodes[x] += totNodesPerGen;
+                totalNodes[x] += totNodesPerGen;
 
-				state.output.print("" + ((double) totNodesPerGen) / state.population.subpops[x].individuals.length + " [", statisticslog);
+                state.output.print("" + ((double) totNodesPerGen) / state.population.subpops[x].individuals.length
+                        + " [", statisticslog);
 
-				for (int tr = 0; tr < numNodes.length; tr++) {
-					if (tr > 0)
-						state.output.print("|", statisticslog);
-					state.output.print("" + ((double) numNodes[tr]) / state.population.subpops[x].individuals.length, statisticslog);
-				}
-				state.output.print("] ", statisticslog);
+                for (int tr = 0; tr < numNodes.length; tr++) {
+                    if (tr > 0)
+                        state.output.print("|", statisticslog);
+                    state.output.print("" + ((double) numNodes[tr]) / state.population.subpops[x].individuals.length,
+                            statisticslog);
+                }
+                state.output.print("] ", statisticslog);
 
-				state.output.print("" + ((double) totalNodes[x])
-						/ (state.population.subpops[x].individuals.length * (state.generation + 1)) + " ", statisticslog);
+                state.output.print("" + ((double) totalNodes[x])
+                        / (state.population.subpops[x].individuals.length * (state.generation + 1)) + " ",
+                        statisticslog);
 
-				for (int tr = 0; tr < numDepth.length; tr++)
-					totDepthPerGen += numDepth[tr];
+                for (int tr = 0; tr < numDepth.length; tr++)
+                    totDepthPerGen += numDepth[tr];
 
-				totalDepths[x] += totDepthPerGen;
+                totalDepths[x] += totDepthPerGen;
 
-				state.output.print("" + ((double) totDepthPerGen) / (state.population.subpops[x].individuals.length * numDepth.length)
-						+ " [", statisticslog);
+                state.output.print("" + ((double) totDepthPerGen)
+                        / (state.population.subpops[x].individuals.length * numDepth.length) + " [", statisticslog);
 
-				for (int tr = 0; tr < numDepth.length; tr++) {
-					if (tr > 0)
-						state.output.print("|", statisticslog);
-					state.output.print("" + ((double) numDepth[tr]) / state.population.subpops[x].individuals.length, statisticslog);
-				}
-				state.output.print("] ", statisticslog);
+                for (int tr = 0; tr < numDepth.length; tr++) {
+                    if (tr > 0)
+                        state.output.print("|", statisticslog);
+                    state.output.print("" + ((double) numDepth[tr]) / state.population.subpops[x].individuals.length,
+                            statisticslog);
+                }
+                state.output.print("] ", statisticslog);
 
-				state.output.print("" + ((double) totalDepths[x])
-						/ (state.population.subpops[x].individuals.length * (state.generation + 1)) + " ", statisticslog);
-			}
+                state.output.print("" + ((double) totalDepths[x])
+                        / (state.population.subpops[x].individuals.length * (state.generation + 1)) + " ",
+                        statisticslog);
+            }
 
-			// fitness information
-			float meanStandardized = 0.0f;
-			float meanAdjusted = 0.0f;
-			long hits = 0;
+            // fitness information
+            float meanStandardized = 0.0f;
+            float meanAdjusted = 0.0f;
+            long hits = 0;
 
-			if (!(state.population.subpops[x].species.f_prototype instanceof KozaFitness))
-				state.output.fatal("Subpopulation " + x
-						+ " is not of the fitness KozaFitness.  Cannot do timing statistics with KozaStatistics.");
+            if (!(state.population.subpops[x].species.f_prototype instanceof KozaFitness))
+                state.output.fatal("Subpopulation " + x
+                        + " is not of the fitness KozaFitness.  Cannot do timing statistics with KozaStatistics.");
 
-			best_i[x] = null;
-			for (int y = 0; y < state.population.subpops[x].individuals.length; y++) {
-				// best individual
-				if (best_i[x] == null || state.population.subpops[x].individuals[y].fitness.betterThan(best_i[x].fitness))
-					best_i[x] = state.population.subpops[x].individuals[y];
+            best_i[x] = null;
+            for (int y = 0; y < state.population.subpops[x].individuals.length; y++) {
+                // best individual
+                if (best_i[x] == null
+                        || state.population.subpops[x].individuals[y].fitness.betterThan(best_i[x].fitness))
+                    best_i[x] = state.population.subpops[x].individuals[y];
 
-				// mean for population
-				meanStandardized += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness)).standardizedFitness();
-				meanAdjusted += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness)).adjustedFitness();
-				hits += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness)).hits;
-			}
+                // mean for population
+                meanStandardized += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness))
+                        .standardizedFitness();
+                meanAdjusted += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness)).adjustedFitness();
+                hits += ((KozaFitness) (state.population.subpops[x].individuals[y].fitness)).hits;
+            }
 
-			// compute fitness stats
-			meanStandardized /= state.population.subpops[x].individuals.length;
-			meanAdjusted /= state.population.subpops[x].individuals.length;
-			state.output.print("" + meanStandardized + " " + meanAdjusted + " " + ((double) hits)
-					/ state.population.subpops[x].individuals.length + " ", statisticslog);
-			state.output.print(
-					"" + ((KozaFitness) (best_i[x].fitness)).standardizedFitness() + " "
-							+ ((KozaFitness) (best_i[x].fitness)).adjustedFitness() + " " + ((KozaFitness) (best_i[x].fitness)).hits + " ",
-					statisticslog);
+            // compute fitness stats
+            meanStandardized /= state.population.subpops[x].individuals.length;
+            meanAdjusted /= state.population.subpops[x].individuals.length;
+            state.output.print("" + meanStandardized + " " + meanAdjusted + " " + ((double) hits)
+                    / state.population.subpops[x].individuals.length + " ", statisticslog);
+            state.output.print("" + ((KozaFitness) (best_i[x].fitness)).standardizedFitness() + " "
+                    + ((KozaFitness) (best_i[x].fitness)).adjustedFitness() + " "
+                    + ((KozaFitness) (best_i[x].fitness)).hits + " ", statisticslog);
 
-			// now test to see if it's the new best_of_run[x]
-			if (best_of_run[x] == null || best_i[x].fitness.betterThan(best_of_run[x].fitness))
-				best_of_run[x] = best_i[x];
+            // now test to see if it's the new best_of_run[x]
+            if (best_of_run[x] == null || best_i[x].fitness.betterThan(best_of_run[x].fitness))
+                best_of_run[x] = best_i[x];
 
-			state.output.print("" + ((KozaFitness) (best_of_run[x].fitness)).standardizedFitness() + " "
-					+ ((KozaFitness) (best_of_run[x].fitness)).adjustedFitness() + " " + ((KozaFitness) (best_of_run[x].fitness)).hits
-					+ " ", statisticslog);
-		}
-		// we're done!
-	}
+            state.output.print("" + ((KozaFitness) (best_of_run[x].fitness)).standardizedFitness() + " "
+                    + ((KozaFitness) (best_of_run[x].fitness)).adjustedFitness() + " "
+                    + ((KozaFitness) (best_of_run[x].fitness)).hits + " ", statisticslog);
+        }
+        // we're done!
+    }
 
-	public void postEvaluationStatistics(final EvolutionState state) {
-		super.postEvaluationStatistics(state);
-		_postEvaluationStatistics(state);
-		state.output.println("", statisticslog);
-	}
+    public void postEvaluationStatistics(final EvolutionState state) {
+        super.postEvaluationStatistics(state);
+        _postEvaluationStatistics(state);
+        state.output.println("", statisticslog);
+    }
 
 }

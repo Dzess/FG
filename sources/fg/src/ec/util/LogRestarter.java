@@ -26,15 +26,15 @@ import java.io.Serializable;
  */
 
 public abstract class LogRestarter implements Serializable {
-	/*
-	 * recreate the writer for, and properly reopen a log upon a system restart
-	 * from a checkpoint
-	 */
-	public abstract Log restart(Log l) throws IOException;
+    /*
+     * recreate the writer for, and properly reopen a log upon a system restart
+     * from a checkpoint
+     */
+    public abstract Log restart(Log l) throws IOException;
 
-	/*
-	 * close an existing log file and reopen it (non-appending), if that'
-	 * appropriate for this kind of log. Otherwise, don't do anything.
-	 */
-	public abstract Log reopen(Log l) throws IOException;
+    /*
+     * close an existing log file and reopen it (non-appending), if that'
+     * appropriate for this kind of log. Otherwise, don't do anything.
+     */
+    public abstract Log reopen(Log l) throws IOException;
 }

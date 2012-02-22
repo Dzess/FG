@@ -27,69 +27,69 @@ import functiongenerator.ui.charting.IChartPanel;
 @SuppressWarnings("serial")
 public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
 
-	private static final String TITLE = "Quality in Time";
-	private final XYLineAndShapeRenderer renderer;
+    private static final String TITLE = "Quality in Time";
+    private final XYLineAndShapeRenderer renderer;
 
-	private final ChartPanel chartPanel;
-	private XYSeries series;
+    private final ChartPanel chartPanel;
+    private XYSeries series;
 
-	public FitnessInTimeChartPanel() {
-		this.renderer = new XYLineAndShapeRenderer();
-		this.series = new XYSeries("Fitness");
-		this.chartPanel = new ChartPanel(this.getEmptyChart());
+    public FitnessInTimeChartPanel() {
+        this.renderer = new XYLineAndShapeRenderer();
+        this.series = new XYSeries("Fitness");
+        this.chartPanel = new ChartPanel(this.getEmptyChart());
 
-		setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
 
-		add(chartPanel);
-		chartPanel.setMouseZoomable(false);
-		chartPanel.setReshowDelay(100);
-	}
+        add(chartPanel);
+        chartPanel.setMouseZoomable(false);
+        chartPanel.setReshowDelay(100);
+    }
 
-	private JFreeChart drawChart(XYDataset dataset) {
-		JFreeChart chart = ChartFactory.createXYLineChart("Fitness", // chart
-				"Generations", // x axis label
-				"Standardized Fitness", // y axis label
-				dataset, PlotOrientation.VERTICAL, false, true, false);
+    private JFreeChart drawChart(XYDataset dataset) {
+        JFreeChart chart = ChartFactory.createXYLineChart("Fitness", // chart
+                "Generations", // x axis label
+                "Standardized Fitness", // y axis label
+                dataset, PlotOrientation.VERTICAL, false, true, false);
 
-		XYPlot plot = (XYPlot) chart.getPlot();
-		plot.setRenderer(renderer);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setRenderer(renderer);
 
-		return chart;
-	}
+        return chart;
+    }
 
-	private JFreeChart getEmptyChart() {
-		XYDataset dataset = new DefaultXYDataset();
-		return drawChart(dataset);
-	}
+    private JFreeChart getEmptyChart() {
+        XYDataset dataset = new DefaultXYDataset();
+        return drawChart(dataset);
+    }
 
-	private JFreeChart getChart(double fitness, int generation) {
+    private JFreeChart getChart(double fitness, int generation) {
 
-		// the series does not change through time so use field value
-		series.add(generation, fitness);
+        // the series does not change through time so use field value
+        series.add(generation, fitness);
 
-		XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series);
-		return drawChart(dataset);
-	}
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+        return drawChart(dataset);
+    }
 
-	@Override
-	public Component getComponent() {
-		return this;
-	}
+    @Override
+    public Component getComponent() {
+        return this;
+    }
 
-	@Override
-	public String getTitle() {
-		return TITLE;
-	}
+    @Override
+    public String getTitle() {
+        return TITLE;
+    }
 
-	@Override
-	public void redraw(EvolutionStateHelper helper) {
+    @Override
+    public void redraw(EvolutionStateHelper helper) {
 
-		// actually do nothing for now
-		double fitness = helper.getFitness();
-		int generation = helper.getGeneration();
+        // actually do nothing for now
+        double fitness = helper.getFitness();
+        int generation = helper.getGeneration();
 
-		JFreeChart chart = this.getChart(fitness, generation);
-		chartPanel.setChart(chart);
-	}
+        JFreeChart chart = this.getChart(fitness, generation);
+        chartPanel.setChart(chart);
+    }
 }

@@ -22,48 +22,48 @@ import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
  */
 public class RangeRuntimeOperationProviderEqualityTest {
 
-	@Test
-	public void two_operations_are_equal() {
-		RangeRuntimeOperationProvider p1 = new RangeRuntimeOperationProvider(Integer.class, true);
-		RangeRuntimeOperationProvider p2 = new RangeRuntimeOperationProvider(Integer.class, true);
-		Assert.assertEquals(p1, p2);
+    @Test
+    public void two_operations_are_equal() {
+        RangeRuntimeOperationProvider p1 = new RangeRuntimeOperationProvider(Integer.class, true);
+        RangeRuntimeOperationProvider p2 = new RangeRuntimeOperationProvider(Integer.class, true);
+        Assert.assertEquals(p1, p2);
 
-		Map<String, Object> params = p1.getParametersDefault();
-		params.put(RangeRuntimeOperationProvider.ATTR_STOP, 3);
+        Map<String, Object> params = p1.getParametersDefault();
+        params.put(RangeRuntimeOperationProvider.ATTR_STOP, 3);
 
-		RangeRuntimeOperationProvider p3 = new RangeRuntimeOperationProvider(Integer.class, true);
-		RangeRuntimeOperationProvider p4 = new RangeRuntimeOperationProvider(Integer.class, true);
-		p3.setParameters(params);
-		p4.setParameters(params);
+        RangeRuntimeOperationProvider p3 = new RangeRuntimeOperationProvider(Integer.class, true);
+        RangeRuntimeOperationProvider p4 = new RangeRuntimeOperationProvider(Integer.class, true);
+        p3.setParameters(params);
+        p4.setParameters(params);
 
-		Assert.assertEquals(p3, p4);
+        Assert.assertEquals(p3, p4);
 
-		// two different maps
-		RangeRuntimeOperationProvider p5 = new RangeRuntimeOperationProvider(Integer.class, true);
-		RangeRuntimeOperationProvider p6 = new RangeRuntimeOperationProvider(Integer.class, true);
+        // two different maps
+        RangeRuntimeOperationProvider p5 = new RangeRuntimeOperationProvider(Integer.class, true);
+        RangeRuntimeOperationProvider p6 = new RangeRuntimeOperationProvider(Integer.class, true);
 
-		Map<String, Object> params2 = p5.getParametersDefault();
-		params2.put(RangeRuntimeOperationProvider.ATTR_STOP, 3);
-		
-		p5.setParameters(params);
-		p6.setParameters(params2);
+        Map<String, Object> params2 = p5.getParametersDefault();
+        params2.put(RangeRuntimeOperationProvider.ATTR_STOP, 3);
 
-		Assert.assertEquals(p5, p6);
-	}
+        p5.setParameters(params);
+        p6.setParameters(params2);
 
-	@Test
-	public void two_operation_are_not_equal() {
-		RangeRuntimeOperationProvider p1 = new RangeRuntimeOperationProvider(Double.class, true);
-		RangeRuntimeOperationProvider p2 = new RangeRuntimeOperationProvider(Integer.class, true);
-		Assert.assertFalse(p1.equals(p2));
+        Assert.assertEquals(p5, p6);
+    }
 
-		Map<String, Object> params = p2.getParametersDefault();
-		params.put(RangeRuntimeOperationProvider.ATTR_STEP, 3);
+    @Test
+    public void two_operation_are_not_equal() {
+        RangeRuntimeOperationProvider p1 = new RangeRuntimeOperationProvider(Double.class, true);
+        RangeRuntimeOperationProvider p2 = new RangeRuntimeOperationProvider(Integer.class, true);
+        Assert.assertFalse(p1.equals(p2));
 
-		RangeRuntimeOperationProvider p3 = new RangeRuntimeOperationProvider(Integer.class, true);
-		RangeRuntimeOperationProvider p4 = new RangeRuntimeOperationProvider(Integer.class, true);
-		p3.setParameters(params);
+        Map<String, Object> params = p2.getParametersDefault();
+        params.put(RangeRuntimeOperationProvider.ATTR_STEP, 3);
 
-		Assert.assertFalse(p3.equals(p4));
-	}
+        RangeRuntimeOperationProvider p3 = new RangeRuntimeOperationProvider(Integer.class, true);
+        RangeRuntimeOperationProvider p4 = new RangeRuntimeOperationProvider(Integer.class, true);
+        p3.setParameters(params);
+
+        Assert.assertFalse(p3.equals(p4));
+    }
 }

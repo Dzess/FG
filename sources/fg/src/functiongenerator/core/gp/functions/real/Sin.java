@@ -10,18 +10,19 @@ import functiongenerator.core.gp.functions.UnaryOperation;
 
 public class Sin extends UnaryOperation {
 
-	@Override
-	public String toString() {
-		return "Math.sin";
-	}
+    @Override
+    public String toString() {
+        return "Math.sin";
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
 
-		DoubleData rd = ((DoubleData) (input));
+        DoubleData rd = ((DoubleData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);
-		rd.Y = Math.sin(rd.Y);
-	}
+        children[0].eval(state, thread, input, stack, individual, problem);
+        rd.Y = Math.sin(rd.Y);
+    }
 
 }

@@ -31,86 +31,82 @@ import functiongenerator.ui.printing.TreeToStringTranslator;
 @SuppressWarnings("serial")
 public class RegressionChartPanel extends JPanel implements IChartPanel {
 
-	static private final Log logger = LogFactory
-			.getLog(RegressionChartPanel.class);
+    static private final Log logger = LogFactory.getLog(RegressionChartPanel.class);
 
-	private static final String NO_DATA_AVALIABLE = "No visualization avaliable";
+    private static final String NO_DATA_AVALIABLE = "No visualization avaliable";
 
-	private final IChartMaker chartMaker;
-	private final IDataSetProvider dataSetProvider;
+    private final IChartMaker chartMaker;
+    private final IDataSetProvider dataSetProvider;
 
-	private ChartPanel chartPanel;
-	private JTextArea textArea;
+    private ChartPanel chartPanel;
+    private JTextArea textArea;
 
-	private String title;
+    private String title;
 
-	public RegressionChartPanel(String title,
-			final IDataSetProvider dataSetProvider, final IChartMaker chartMaker) {
+    public RegressionChartPanel(String title, final IDataSetProvider dataSetProvider, final IChartMaker chartMaker) {
 
-		this.dataSetProvider = dataSetProvider;
-		this.chartMaker = chartMaker;
-		this.title = title;
+        this.dataSetProvider = dataSetProvider;
+        this.chartMaker = chartMaker;
+        this.title = title;
 
-		// chart panel
-		JFreeChart chart = chartMaker.emptyChart();
-		chartPanel = new ChartPanel(chart);
-		chartPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null,
-				null, null));
-		chartPanel.setMouseZoomable(false);
-		chartPanel.setReshowDelay(100);
+        // chart panel
+        JFreeChart chart = chartMaker.emptyChart();
+        chartPanel = new ChartPanel(chart);
+        chartPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        chartPanel.setMouseZoomable(false);
+        chartPanel.setReshowDelay(100);
 
-		// label
-		textArea = new JTextArea("");
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
+        // label
+        textArea = new JTextArea("");
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
 
-		setPreferredSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(400, 300));
 
-		setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
 
-		add(chartPanel, BorderLayout.CENTER);
-		add(textArea, BorderLayout.NORTH);
-	}
+        add(chartPanel, BorderLayout.CENTER);
+        add(textArea, BorderLayout.NORTH);
+    }
 
-	@Override
-	public Component getComponent() {
-		return this;
-	}
+    @Override
+    public Component getComponent() {
+        return this;
+    }
 
-	@Override
-	public void redraw(EvolutionStateHelper state) {
-		try {
-			JFreeChart chart = null;
-			GPIndividual individual = state.getBesIndividual();
-			if (individual != null) {
-				AbstractDataset dataset = dataSetProvider
-						.getDataSet(individual);
-				chart = chartMaker.createChart(dataset);
-			} else {
-				chart = chartMaker.emptyChart();
-			}
+    @Override
+    public void redraw(EvolutionStateHelper state) {
+        try {
+            JFreeChart chart = null;
+            GPIndividual individual = state.getBesIndividual();
+            if (individual != null) {
+                AbstractDataset dataset = dataSetProvider.getDataSet(individual);
+                chart = chartMaker.createChart(dataset);
+            } else {
+                chart = chartMaker.emptyChart();
+            }
 
-			chartPanel.setChart(chart);
-			chartPanel.setVisible(true);
+            chartPanel.setChart(chart);
+            chartPanel.setVisible(true);
 
-			// set data to the label (usually the first one ;))
-			GPTree tree = individual.trees[0];
-			String expression = TreeToStringTranslator.translateTree(tree);
-			textArea.setText(expression);
+            // set data to the label (usually the first one ;))
+            GPTree tree = individual.trees[0];
+            String expression = TreeToStringTranslator.translateTree(tree);
+            textArea.setText(expression);
 
-		} catch (Exception e) {
-			logger.warn("Exception during drawing chart", e);
+        } catch (Exception e) {
+            logger.warn("Exception during drawing chart", e);
 
-			textArea.setText(NO_DATA_AVALIABLE);
-			chartPanel.setVisible(false);
-		} finally {
-			repaint();
-		}
-	}
+            textArea.setText(NO_DATA_AVALIABLE);
+            chartPanel.setVisible(false);
+        } finally {
+            repaint();
+        }
+    }
 
-	@Override
-	public String getTitle() {
-		return title;
-	}
+    @Override
+    public String getTitle() {
+        return title;
+    }
 }

@@ -22,10 +22,10 @@ import ec.util.Parameter;
  */
 
 public final class MultiObjectiveDefaults implements DefaultsForm {
-	public static final String P_MULTI = "multi";
+    public static final String P_MULTI = "multi";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_MULTI);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_MULTI);
+    }
 }

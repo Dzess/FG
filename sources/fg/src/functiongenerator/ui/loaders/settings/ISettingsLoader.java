@@ -15,24 +15,24 @@ import functiongenerator.core.Settings;
  */
 public interface ISettingsLoader {
 
-	/**
-	 * Creates the {@linkplain Settings} instance basing on the data read.
-	 * 
-	 * @param file
-	 *            : file in which the engine state is preserved
-	 * @return New instance of settings with all valid data set.
-	 * @throws IOException
-	 */
-	public Settings loadFromFile(File file) throws IOException;
+    /**
+     * Creates the {@linkplain Settings} instance basing on the data read.
+     * 
+     * @param file
+     *            : file in which the engine state is preserved
+     * @return New instance of settings with all valid data set.
+     * @throws IOException
+     */
+    public Settings loadFromFile(File file) throws IOException;
 
-	/**
-	 * Saves the engine into file.
-	 * 
-	 * @param file
-	 *            : where to be saved
-	 * @param settings
-	 *            : the model of the experiment
-	 * @throws IOException
-	 */
-	public void saveToFile(File file, Settings settings) throws IOException;
+    /**
+     * Saves the engine into file.
+     * 
+     * @param file
+     *            : where to be saved
+     * @param settings
+     *            : the model of the experiment
+     * @throws IOException
+     */
+    public void saveToFile(File file, Settings settings) throws IOException;
 }

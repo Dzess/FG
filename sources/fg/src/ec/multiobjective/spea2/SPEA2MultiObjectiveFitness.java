@@ -36,75 +36,77 @@ import ec.util.Code;
  */
 
 public class SPEA2MultiObjectiveFitness extends MultiObjectiveFitness {
-	public static final String SPEA2_FITNESS_PREAMBLE = "Fitness: ";
-	public static final String SPEA2_STRENGTH_PREAMBLE = "Strength: ";
-	public static final String SPEA2_DISTANCE_PREAMBLE = "Distance: ";
+    public static final String SPEA2_FITNESS_PREAMBLE = "Fitness: ";
+    public static final String SPEA2_STRENGTH_PREAMBLE = "Strength: ";
+    public static final String SPEA2_DISTANCE_PREAMBLE = "Distance: ";
 
-	public String[] getAuxilliaryFitnessNames() {
-		return new String[] { "Strength", "Raw Fitness", "Kth NN Distance" };
-	}
+    public String[] getAuxilliaryFitnessNames() {
+        return new String[] { "Strength", "Raw Fitness", "Kth NN Distance" };
+    }
 
-	public double[] getAuxilliaryFitnessValues() {
-		return new double[] { strength, fitness, kthNNDistance };
-	}
+    public double[] getAuxilliaryFitnessValues() {
+        return new double[] { strength, fitness, kthNNDistance };
+    }
 
-	/** SPEA2 strength (# of nodes it dominates) */
-	public double strength; // S(i)
+    /** SPEA2 strength (# of nodes it dominates) */
+    public double strength; // S(i)
 
-	/** SPEA2 NN distance */
-	public double kthNNDistance; // D(i)
+    /** SPEA2 NN distance */
+    public double kthNNDistance; // D(i)
 
-	/**
-	 * Final SPEA2 fitness. Equals the raw fitness R(i) plus the kthNNDistance
-	 * D(i).
-	 */
-	public double fitness;
+    /**
+     * Final SPEA2 fitness. Equals the raw fitness R(i) plus the kthNNDistance
+     * D(i).
+     */
+    public double fitness;
 
-	public String fitnessToString() {
-		return super.fitnessToString() + "\n" + SPEA2_FITNESS_PREAMBLE + Code.encode(fitness) + "\n" + SPEA2_STRENGTH_PREAMBLE
-				+ Code.encode(strength) + "\n" + SPEA2_DISTANCE_PREAMBLE + Code.encode(kthNNDistance);
-	}
+    public String fitnessToString() {
+        return super.fitnessToString() + "\n" + SPEA2_FITNESS_PREAMBLE + Code.encode(fitness) + "\n"
+                + SPEA2_STRENGTH_PREAMBLE + Code.encode(strength) + "\n" + SPEA2_DISTANCE_PREAMBLE
+                + Code.encode(kthNNDistance);
+    }
 
-	public String fitnessToStringForHumans() {
-		return super.fitnessToStringForHumans() + "\n" + "S=" + strength + " D=" + kthNNDistance + " " + SPEA2_FITNESS_PREAMBLE + fitness;
-	}
+    public String fitnessToStringForHumans() {
+        return super.fitnessToStringForHumans() + "\n" + "S=" + strength + " D=" + kthNNDistance + " "
+                + SPEA2_FITNESS_PREAMBLE + fitness;
+    }
 
-	public void readFitness(final EvolutionState state, final LineNumberReader reader) throws IOException {
-		super.readFitness(state, reader);
-		fitness = Code.readDoubleWithPreamble(SPEA2_FITNESS_PREAMBLE, state, reader);
-		strength = Code.readDoubleWithPreamble(SPEA2_STRENGTH_PREAMBLE, state, reader);
-		kthNNDistance = Code.readDoubleWithPreamble(SPEA2_DISTANCE_PREAMBLE, state, reader);
-	}
+    public void readFitness(final EvolutionState state, final LineNumberReader reader) throws IOException {
+        super.readFitness(state, reader);
+        fitness = Code.readDoubleWithPreamble(SPEA2_FITNESS_PREAMBLE, state, reader);
+        strength = Code.readDoubleWithPreamble(SPEA2_STRENGTH_PREAMBLE, state, reader);
+        kthNNDistance = Code.readDoubleWithPreamble(SPEA2_DISTANCE_PREAMBLE, state, reader);
+    }
 
-	public void writeFitness(final EvolutionState state, final DataOutput dataOutput) throws IOException {
-		super.writeFitness(state, dataOutput);
-		dataOutput.writeDouble(fitness);
-		dataOutput.writeDouble(strength);
-		dataOutput.writeDouble(fitness);
-		dataOutput.writeDouble(kthNNDistance);
-	}
+    public void writeFitness(final EvolutionState state, final DataOutput dataOutput) throws IOException {
+        super.writeFitness(state, dataOutput);
+        dataOutput.writeDouble(fitness);
+        dataOutput.writeDouble(strength);
+        dataOutput.writeDouble(fitness);
+        dataOutput.writeDouble(kthNNDistance);
+    }
 
-	public void readFitness(final EvolutionState state, final DataInput dataInput) throws IOException {
-		super.readFitness(state, dataInput);
-		fitness = dataInput.readDouble();
-		strength = dataInput.readDouble();
-		fitness = dataInput.readDouble();
-		kthNNDistance = dataInput.readDouble();
-	}
+    public void readFitness(final EvolutionState state, final DataInput dataInput) throws IOException {
+        super.readFitness(state, dataInput);
+        fitness = dataInput.readDouble();
+        strength = dataInput.readDouble();
+        fitness = dataInput.readDouble();
+        kthNNDistance = dataInput.readDouble();
+    }
 
-	/**
-	 * The selection criteria in SPEA2 uses the computed fitness, and not pareto
-	 * dominance.
-	 */
-	public boolean equivalentTo(Fitness _fitness) {
-		return fitness == ((SPEA2MultiObjectiveFitness) _fitness).fitness;
-	}
+    /**
+     * The selection criteria in SPEA2 uses the computed fitness, and not pareto
+     * dominance.
+     */
+    public boolean equivalentTo(Fitness _fitness) {
+        return fitness == ((SPEA2MultiObjectiveFitness) _fitness).fitness;
+    }
 
-	/**
-	 * The selection criteria in SPEA2 uses the computed fitness, and not pareto
-	 * dominance.
-	 */
-	public boolean betterThan(Fitness _fitness) {
-		return fitness < ((SPEA2MultiObjectiveFitness) _fitness).fitness;
-	}
+    /**
+     * The selection criteria in SPEA2 uses the computed fitness, and not pareto
+     * dominance.
+     */
+    public boolean betterThan(Fitness _fitness) {
+        return fitness < ((SPEA2MultiObjectiveFitness) _fitness).fitness;
+    }
 }

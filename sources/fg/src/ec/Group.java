@@ -33,10 +33,10 @@ package ec;
  */
 
 public interface Group extends Setup, Cloneable {
-	/**
-	 * Returns a copy of the object just as it had been immediately after Setup
-	 * was called on it (or on an ancestor object). You can obtain a fresh
-	 * instance using clone(), and then modify that.
-	 */
-	public Group emptyClone();
+    /**
+     * Returns a copy of the object just as it had been immediately after Setup
+     * was called on it (or on an ancestor object). You can obtain a fresh
+     * instance using clone(), and then modify that.
+     */
+    public Group emptyClone();
 }

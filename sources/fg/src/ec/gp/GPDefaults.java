@@ -26,10 +26,10 @@ import ec.util.Parameter;
  */
 
 public final class GPDefaults implements DefaultsForm {
-	public static final String P_GP = "gp";
+    public static final String P_GP = "gp";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_GP);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_GP);
+    }
 }

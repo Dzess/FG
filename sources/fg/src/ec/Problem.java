@@ -61,91 +61,92 @@ import ec.util.Parameter;
  */
 
 public abstract class Problem implements Prototype {
-	public static final String P_PROBLEM = "problem";
+    public static final String P_PROBLEM = "problem";
 
-	/** Here's a nice default base for you -- you can change it if you like */
-	public Parameter defaultBase() {
-		return new Parameter(P_PROBLEM);
-	}
+    /** Here's a nice default base for you -- you can change it if you like */
+    public Parameter defaultBase() {
+        return new Parameter(P_PROBLEM);
+    }
 
-	// default form does nothing
-	public void setup(final EvolutionState state, final Parameter base) {
-	}
+    // default form does nothing
+    public void setup(final EvolutionState state, final Parameter base) {
+    }
 
-	public Object clone() {
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new InternalError();
-		} // never happens
-	}
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        } // never happens
+    }
 
-	/**
-	 * May be called by the Evaluator prior to a series of individuals to
-	 * evaluate, and then ended with a finishEvaluating(...). If this is the
-	 * case then the Problem is free to delay modifying the individuals or their
-	 * fitnesses until at finishEvaluating(...). If no prepareToEvaluate(...) is
-	 * called prior to evaluation, the Problem must complete its modification of
-	 * the individuals and their fitnesses as they are evaluated as stipulated
-	 * in the relevant evaluate(...) documentation for SimpleProblemForm or
-	 * GroupedProblemForm. The default method does nothing. Note that
-	 * prepareToEvaluate() can be called *multiple times* prior to
-	 * finishEvaluating() being called -- in this case, the subsequent calls may
-	 * be ignored.
-	 */
-	public void prepareToEvaluate(final EvolutionState state, final int threadnum) {
-	}
+    /**
+     * May be called by the Evaluator prior to a series of individuals to
+     * evaluate, and then ended with a finishEvaluating(...). If this is the
+     * case then the Problem is free to delay modifying the individuals or their
+     * fitnesses until at finishEvaluating(...). If no prepareToEvaluate(...) is
+     * called prior to evaluation, the Problem must complete its modification of
+     * the individuals and their fitnesses as they are evaluated as stipulated
+     * in the relevant evaluate(...) documentation for SimpleProblemForm or
+     * GroupedProblemForm. The default method does nothing. Note that
+     * prepareToEvaluate() can be called *multiple times* prior to
+     * finishEvaluating() being called -- in this case, the subsequent calls may
+     * be ignored.
+     */
+    public void prepareToEvaluate(final EvolutionState state, final int threadnum) {
+    }
 
-	/**
-	 * Will be called by the Evaluator after prepareToEvaluate(...) is called
-	 * and then a series of individuals are evaluated. However individuals may
-	 * be evaluated without prepareToEvaluate or finishEvaluating being called
-	 * at all. See the documentation for prepareToEvaluate for more information.
-	 * The default method does nothing.
-	 */
-	public void finishEvaluating(final EvolutionState state, final int threadnum) {
-	}
+    /**
+     * Will be called by the Evaluator after prepareToEvaluate(...) is called
+     * and then a series of individuals are evaluated. However individuals may
+     * be evaluated without prepareToEvaluate or finishEvaluating being called
+     * at all. See the documentation for prepareToEvaluate for more information.
+     * The default method does nothing.
+     */
+    public void finishEvaluating(final EvolutionState state, final int threadnum) {
+    }
 
-	/**
-	 * Called to set up remote evaluation network contacts when the run is
-	 * started. By default does nothing.
-	 */
-	public void initializeContacts(EvolutionState state) {
-	}
+    /**
+     * Called to set up remote evaluation network contacts when the run is
+     * started. By default does nothing.
+     */
+    public void initializeContacts(EvolutionState state) {
+    }
 
-	/**
-	 * Called to reinitialize remote evaluation network contacts when the run is
-	 * restarted from checkpoint. By default does nothing.
-	 */
-	public void reinitializeContacts(EvolutionState state) {
-	}
+    /**
+     * Called to reinitialize remote evaluation network contacts when the run is
+     * restarted from checkpoint. By default does nothing.
+     */
+    public void reinitializeContacts(EvolutionState state) {
+    }
 
-	/**
-	 * Called to shut down remote evaluation network contacts when the run is
-	 * completed. By default does nothing.
-	 */
-	public void closeContacts(EvolutionState state, int result) {
-	}
+    /**
+     * Called to shut down remote evaluation network contacts when the run is
+     * completed. By default does nothing.
+     */
+    public void closeContacts(EvolutionState state, int result) {
+    }
 
-	/**
-	 * Asynchronous Steady-State EC only: Returns true if the problem is ready
-	 * to evaluate. In most cases, the default is true.
-	 */
-	public boolean canEvaluate() {
-		return true;
-	}
+    /**
+     * Asynchronous Steady-State EC only: Returns true if the problem is ready
+     * to evaluate. In most cases, the default is true.
+     */
+    public boolean canEvaluate() {
+        return true;
+    }
 
-	/**
-	 * Part of SimpleProblemForm. Included here so you don't have to write the
-	 * default version, which usually does nothing.
-	 */
-	public void describe(final EvolutionState state, final Individual ind, final int subpopulation, final int threadnum, final int log) {
-		return;
-	}
+    /**
+     * Part of SimpleProblemForm. Included here so you don't have to write the
+     * default version, which usually does nothing.
+     */
+    public void describe(final EvolutionState state, final Individual ind, final int subpopulation,
+            final int threadnum, final int log) {
+        return;
+    }
 
-	/** @deprecated. Use the version without verbosity */
-	public final void describe(final Individual ind, final EvolutionState state, final int subpopulation, final int threadnum,
-			final int log, final int verbosity) {
-		describe(state, ind, subpopulation, threadnum, log);
-	}
+    /** @deprecated. Use the version without verbosity */
+    public final void describe(final Individual ind, final EvolutionState state, final int subpopulation,
+            final int threadnum, final int log, final int verbosity) {
+        describe(state, ind, subpopulation, threadnum, log);
+    }
 }

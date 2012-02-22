@@ -40,42 +40,42 @@ import ec.util.DataPipe;
  */
 
 public class Job {
-	// either Slave.V_EVALUATESIMPLE or Slave.V_EVALUATEGROUPED
-	int type;
+    // either Slave.V_EVALUATESIMPLE or Slave.V_EVALUATEGROUPED
+    int type;
 
-	boolean sent = false;
-	Individual[] inds; // original individuals
-	Individual[] newinds; // individuals that were returned -- may be different
-							// individuals!
-	int[] subPops;
-	boolean countVictoriesOnly;
-	boolean[] updateFitness;
+    boolean sent = false;
+    Individual[] inds; // original individuals
+    Individual[] newinds; // individuals that were returned -- may be different
+                          // individuals!
+    int[] subPops;
+    boolean countVictoriesOnly;
+    boolean[] updateFitness;
 
-	void copyIndividualsForward() {
-		if (newinds == null || newinds.length != inds.length)
-			newinds = new Individual[inds.length];
-		for (int i = 0; i < inds.length; i++) {
-			newinds[i] = (Individual) (inds[i].clone());
-		}
-	}
+    void copyIndividualsForward() {
+        if (newinds == null || newinds.length != inds.length)
+            newinds = new Individual[inds.length];
+        for (int i = 0; i < inds.length; i++) {
+            newinds[i] = (Individual) (inds[i].clone());
+        }
+    }
 
-	// a ridiculous hack
-	void copyIndividualsBack(EvolutionState state) {
-		try {
-			DataPipe p = new DataPipe();
-			DataInputStream in = p.input;
-			DataOutputStream out = p.output;
+    // a ridiculous hack
+    void copyIndividualsBack(EvolutionState state) {
+        try {
+            DataPipe p = new DataPipe();
+            DataInputStream in = p.input;
+            DataOutputStream out = p.output;
 
-			for (int i = 0; i < inds.length; i++) {
-				p.reset();
-				newinds[i].writeIndividual(state, out);
-				inds[i].readIndividual(state, in);
-			}
+            for (int i = 0; i < inds.length; i++) {
+                p.reset();
+                newinds[i].writeIndividual(state, out);
+                inds[i].readIndividual(state, in);
+            }
 
-			newinds = null;
-		} catch (IOException e) {
-			e.printStackTrace();
-			state.output.fatal("Caught impossible IOException in Job.copyIndividualsBack()");
-		}
-	}
+            newinds = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            state.output.fatal("Caught impossible IOException in Job.copyIndividualsBack()");
+        }
+    }
 }

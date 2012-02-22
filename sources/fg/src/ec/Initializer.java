@@ -42,17 +42,17 @@ package ec;
  */
 
 public abstract class Initializer implements Singleton {
-	/** parameter for a new population */
-	public static final String P_POP = "pop";
+    /** parameter for a new population */
+    public static final String P_POP = "pop";
 
-	/**
-	 * Creates and returns a new initial population for the evolutionary run.
-	 * This is commonly done by setting up a Population (by calling
-	 * setupPopulation below) then calling its populate() method. This method
-	 * will likely only be called once in a run.
-	 */
-	public abstract Population initialPopulation(final EvolutionState state, int thread);
+    /**
+     * Creates and returns a new initial population for the evolutionary run.
+     * This is commonly done by setting up a Population (by calling
+     * setupPopulation below) then calling its populate() method. This method
+     * will likely only be called once in a run.
+     */
+    public abstract Population initialPopulation(final EvolutionState state, int thread);
 
-	/** Loads a Population from the parameter file, sets it up, and returns it. */
-	public abstract Population setupPopulation(final EvolutionState state, int thread);
+    /** Loads a Population from the parameter file, sets it up, and returns it. */
+    public abstract Population setupPopulation(final EvolutionState state, int thread);
 }

@@ -148,242 +148,252 @@ import ec.util.Parameter;
  */
 
 public class VectorSpecies extends Species {
-	public static final String P_VECTORSPECIES = "species";
+    public static final String P_VECTORSPECIES = "species";
 
-	public final static String P_CROSSOVERTYPE = "crossover-type";
-	public final static String P_CHUNKSIZE = "chunk-size";
-	public final static String V_ONE_POINT = "one";
-	public final static String V_TWO_POINT = "two";
-	public final static String V_ANY_POINT = "any";
-	public final static String V_LINE_RECOMB = "line";
-	public final static String V_INTERMED_RECOMB = "intermediate";
-	public final static String V_SIMULATED_BINARY = "sbx";
-	public final static String P_CROSSOVER_DISTRIBUTION_INDEX = "crossover-distribution-index";
-	public final static String P_MUTATIONPROB = "mutation-prob";
-	public final static String P_CROSSOVERPROB = "crossover-prob";
-	public final static String P_GENOMESIZE = "genome-size";
-	public final static String P_LINEDISTANCE = "line-extension";
-	public final static String V_GEOMETRIC = "geometric";
-	public final static String P_GEOMETRIC_PROBABILITY = "geometric-prob";
-	public final static String V_UNIFORM = "uniform";
-	public final static String P_UNIFORM_MIN = "min-initial-size";
-	public final static String P_UNIFORM_MAX = "max-initial-size";
+    public final static String P_CROSSOVERTYPE = "crossover-type";
+    public final static String P_CHUNKSIZE = "chunk-size";
+    public final static String V_ONE_POINT = "one";
+    public final static String V_TWO_POINT = "two";
+    public final static String V_ANY_POINT = "any";
+    public final static String V_LINE_RECOMB = "line";
+    public final static String V_INTERMED_RECOMB = "intermediate";
+    public final static String V_SIMULATED_BINARY = "sbx";
+    public final static String P_CROSSOVER_DISTRIBUTION_INDEX = "crossover-distribution-index";
+    public final static String P_MUTATIONPROB = "mutation-prob";
+    public final static String P_CROSSOVERPROB = "crossover-prob";
+    public final static String P_GENOMESIZE = "genome-size";
+    public final static String P_LINEDISTANCE = "line-extension";
+    public final static String V_GEOMETRIC = "geometric";
+    public final static String P_GEOMETRIC_PROBABILITY = "geometric-prob";
+    public final static String V_UNIFORM = "uniform";
+    public final static String P_UNIFORM_MIN = "min-initial-size";
+    public final static String P_UNIFORM_MAX = "max-initial-size";
 
-	public final static int C_ONE_POINT = 0;
-	public final static int C_TWO_POINT = 1;
-	public final static int C_ANY_POINT = 128;
-	public final static int C_LINE_RECOMB = 256;
-	public final static int C_INTERMED_RECOMB = 512;
-	public final static int C_SIMULATED_BINARY = 1024;
-	public final static int C_NONE = 0;
-	public final static int C_GEOMETRIC = 1;
-	public final static int C_UNIFORM = 2;
+    public final static int C_ONE_POINT = 0;
+    public final static int C_TWO_POINT = 1;
+    public final static int C_ANY_POINT = 128;
+    public final static int C_LINE_RECOMB = 256;
+    public final static int C_INTERMED_RECOMB = 512;
+    public final static int C_SIMULATED_BINARY = 1024;
+    public final static int C_NONE = 0;
+    public final static int C_GEOMETRIC = 1;
+    public final static int C_UNIFORM = 2;
 
-	/** Probability that a gene will mutate */
-	public float mutationProbability;
-	/**
-	 * Probability that a gene will cross over -- ONLY used in V_ANY_POINT
-	 * crossover
-	 */
-	public float crossoverProbability;
-	/** What kind of crossover do we have? */
-	public int crossoverType;
-	/** How big of a genome should we create on initialization? */
-	public int genomeSize;
-	/** What should the SBX distribution index be? */
-	public int crossoverDistributionIndex;
-	/** How should we reset the genome? */
-	public int genomeResizeAlgorithm;
-	/** What's the smallest legal genome? */
-	public int minInitialSize;
-	/** What's the largest legal genome? */
-	public int maxInitialSize;
-	/**
-	 * With what probability would our genome be at least 1 larger than it is
-	 * now during initialization?
-	 */
-	public float genomeIncreaseProbability;
-	/** How big of chunks should we define for crossover? */
-	public int chunksize;
-	/**
-	 * How far along the long a child can be located for line or intermediate
-	 * recombination
-	 */
-	public double lineDistance;
-	/** Was the initial size determined dynamically? */
-	public boolean dynamicInitialSize = false;
+    /** Probability that a gene will mutate */
+    public float mutationProbability;
+    /**
+     * Probability that a gene will cross over -- ONLY used in V_ANY_POINT
+     * crossover
+     */
+    public float crossoverProbability;
+    /** What kind of crossover do we have? */
+    public int crossoverType;
+    /** How big of a genome should we create on initialization? */
+    public int genomeSize;
+    /** What should the SBX distribution index be? */
+    public int crossoverDistributionIndex;
+    /** How should we reset the genome? */
+    public int genomeResizeAlgorithm;
+    /** What's the smallest legal genome? */
+    public int minInitialSize;
+    /** What's the largest legal genome? */
+    public int maxInitialSize;
+    /**
+     * With what probability would our genome be at least 1 larger than it is
+     * now during initialization?
+     */
+    public float genomeIncreaseProbability;
+    /** How big of chunks should we define for crossover? */
+    public int chunksize;
+    /**
+     * How far along the long a child can be located for line or intermediate
+     * recombination
+     */
+    public double lineDistance;
+    /** Was the initial size determined dynamically? */
+    public boolean dynamicInitialSize = false;
 
-	// we use warned here because it's quite a bit faster than calling warnOnce
-	protected boolean warned = false;
-	EvolutionState state;
+    // we use warned here because it's quite a bit faster than calling warnOnce
+    protected boolean warned = false;
+    EvolutionState state;
 
-	protected void warnAboutGene(int gene) {
-		state.output.warnOnce("Attempt to access maxGene or minGene from IntegerVectorSpecies beyond initial genomeSize.\n"
-				+ "From now on, maxGene(a) = maxGene(maxGeneIndex) for a >= maxGeneIndex.  Likewise for minGene(...)");
-		warned = true;
-	}
+    protected void warnAboutGene(int gene) {
+        state.output
+                .warnOnce("Attempt to access maxGene or minGene from IntegerVectorSpecies beyond initial genomeSize.\n"
+                        + "From now on, maxGene(a) = maxGene(maxGeneIndex) for a >= maxGeneIndex.  Likewise for minGene(...)");
+        warned = true;
+    }
 
-	public Parameter defaultBase() {
-		return VectorDefaults.base().push(P_VECTORSPECIES);
-	}
+    public Parameter defaultBase() {
+        return VectorDefaults.base().push(P_VECTORSPECIES);
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		// setup constraints FIRST so the individuals can see them when they're
-		// set up.
+    public void setup(final EvolutionState state, final Parameter base) {
+        // setup constraints FIRST so the individuals can see them when they're
+        // set up.
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		this.state = state;
+        this.state = state;
 
-		String genomeSizeForm = state.parameters.getString(base.push(P_GENOMESIZE), def.push(P_GENOMESIZE));
-		if (genomeSizeForm == null) // clearly an error
-		{
-			state.output.fatal("No genome size specified.", base.push(P_GENOMESIZE), def.push(P_GENOMESIZE));
-		} else if (genomeSizeForm.equals(V_GEOMETRIC)) {
-			dynamicInitialSize = true;
-			genomeSize = 1;
-			genomeResizeAlgorithm = C_GEOMETRIC;
-			chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
-			if (chunksize != 1)
-				state.output.fatal("To use Geometric size initialization, VectorSpecies must have a chunksize of 1",
-						base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE));
-			minInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN), 0);
-			if (minInitialSize < 0) {
-				state.output.warning("Gemoetric size initialization used, but no minimum initial size provided.  Assuming minimum is 0.");
-				minInitialSize = 0;
-			}
-			genomeIncreaseProbability = state.parameters.getFloatWithMax(base.push(P_GEOMETRIC_PROBABILITY),
-					def.push(P_GEOMETRIC_PROBABILITY), 0.0, 1.0);
-			if (genomeIncreaseProbability < 0.0 || genomeIncreaseProbability >= 1.0) // note
-																						// >=
-				state.output.fatal("To use Gemoetric size initialization, the genome increase probability must be >= 0.0 and < 1.0",
-						base.push(P_GEOMETRIC_PROBABILITY), def.push(P_GEOMETRIC_PROBABILITY));
-		} else if (genomeSizeForm.equals(V_UNIFORM)) {
-			dynamicInitialSize = true;
-			genomeSize = 1;
-			genomeResizeAlgorithm = C_UNIFORM;
-			chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
-			if (chunksize != 1)
-				state.output.fatal("To use Uniform size initialization, VectorSpecies must have a chunksize of 1", base.push(P_CHUNKSIZE),
-						def.push(P_CHUNKSIZE));
-			minInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN), 0);
-			if (minInitialSize < 0)
-				state.output.fatal("To use Uniform size initialization, you must set a minimum initial size >= 0",
-						base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN));
-			maxInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX), 0);
-			if (maxInitialSize < 0)
-				state.output.fatal("To use Uniform size initialization, you must set a maximum initial size >= 0",
-						base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX));
-			if (maxInitialSize < minInitialSize)
-				state.output.fatal("To use Uniform size initialization, you must set a maximum initial size >= the minimum initial size",
-						base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX));
-		} else // it's a number
-		{
-			genomeSize = state.parameters.getInt(base.push(P_GENOMESIZE), def.push(P_GENOMESIZE), 1);
-			if (genomeSize == 0)
-				state.output.error("VectorSpecies must have a genome size > 0", base.push(P_GENOMESIZE), def.push(P_GENOMESIZE));
+        String genomeSizeForm = state.parameters.getString(base.push(P_GENOMESIZE), def.push(P_GENOMESIZE));
+        if (genomeSizeForm == null) // clearly an error
+        {
+            state.output.fatal("No genome size specified.", base.push(P_GENOMESIZE), def.push(P_GENOMESIZE));
+        } else if (genomeSizeForm.equals(V_GEOMETRIC)) {
+            dynamicInitialSize = true;
+            genomeSize = 1;
+            genomeResizeAlgorithm = C_GEOMETRIC;
+            chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
+            if (chunksize != 1)
+                state.output.fatal("To use Geometric size initialization, VectorSpecies must have a chunksize of 1",
+                        base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE));
+            minInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN), 0);
+            if (minInitialSize < 0) {
+                state.output
+                        .warning("Gemoetric size initialization used, but no minimum initial size provided.  Assuming minimum is 0.");
+                minInitialSize = 0;
+            }
+            genomeIncreaseProbability = state.parameters.getFloatWithMax(base.push(P_GEOMETRIC_PROBABILITY),
+                    def.push(P_GEOMETRIC_PROBABILITY), 0.0, 1.0);
+            if (genomeIncreaseProbability < 0.0 || genomeIncreaseProbability >= 1.0) // note
+                                                                                     // >=
+                state.output
+                        .fatal("To use Gemoetric size initialization, the genome increase probability must be >= 0.0 and < 1.0",
+                                base.push(P_GEOMETRIC_PROBABILITY), def.push(P_GEOMETRIC_PROBABILITY));
+        } else if (genomeSizeForm.equals(V_UNIFORM)) {
+            dynamicInitialSize = true;
+            genomeSize = 1;
+            genomeResizeAlgorithm = C_UNIFORM;
+            chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
+            if (chunksize != 1)
+                state.output.fatal("To use Uniform size initialization, VectorSpecies must have a chunksize of 1",
+                        base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE));
+            minInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN), 0);
+            if (minInitialSize < 0)
+                state.output.fatal("To use Uniform size initialization, you must set a minimum initial size >= 0",
+                        base.push(P_UNIFORM_MIN), def.push(P_UNIFORM_MIN));
+            maxInitialSize = state.parameters.getInt(base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX), 0);
+            if (maxInitialSize < 0)
+                state.output.fatal("To use Uniform size initialization, you must set a maximum initial size >= 0",
+                        base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX));
+            if (maxInitialSize < minInitialSize)
+                state.output
+                        .fatal("To use Uniform size initialization, you must set a maximum initial size >= the minimum initial size",
+                                base.push(P_UNIFORM_MAX), def.push(P_UNIFORM_MAX));
+        } else // it's a number
+        {
+            genomeSize = state.parameters.getInt(base.push(P_GENOMESIZE), def.push(P_GENOMESIZE), 1);
+            if (genomeSize == 0)
+                state.output.error("VectorSpecies must have a genome size > 0", base.push(P_GENOMESIZE),
+                        def.push(P_GENOMESIZE));
 
-			genomeResizeAlgorithm = C_NONE;
+            genomeResizeAlgorithm = C_NONE;
 
-			chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
-			if (chunksize <= 0 || chunksize > genomeSize)
-				state.output.fatal("VectorSpecies must have a chunksize which is > 0 and < genomeSize", base.push(P_CHUNKSIZE),
-						def.push(P_CHUNKSIZE));
-			if (genomeSize % chunksize != 0)
-				state.output.fatal("VectorSpecies must have a genomeSize which is a multiple of chunksize", base.push(P_CHUNKSIZE),
-						def.push(P_CHUNKSIZE));
-		}
+            chunksize = state.parameters.getIntWithDefault(base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE), 1);
+            if (chunksize <= 0 || chunksize > genomeSize)
+                state.output.fatal("VectorSpecies must have a chunksize which is > 0 and < genomeSize",
+                        base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE));
+            if (genomeSize % chunksize != 0)
+                state.output.fatal("VectorSpecies must have a genomeSize which is a multiple of chunksize",
+                        base.push(P_CHUNKSIZE), def.push(P_CHUNKSIZE));
+        }
 
-		mutationProbability = state.parameters.getFloatWithMax(base.push(P_MUTATIONPROB), def.push(P_MUTATIONPROB), 0.0, 1.0);
-		if (mutationProbability == -1.0)
-			state.output.error("VectorSpecies must have a mutation probability between 0.0 and 1.0 inclusive", base.push(P_MUTATIONPROB),
-					def.push(P_MUTATIONPROB));
+        mutationProbability = state.parameters.getFloatWithMax(base.push(P_MUTATIONPROB), def.push(P_MUTATIONPROB),
+                0.0, 1.0);
+        if (mutationProbability == -1.0)
+            state.output.error("VectorSpecies must have a mutation probability between 0.0 and 1.0 inclusive",
+                    base.push(P_MUTATIONPROB), def.push(P_MUTATIONPROB));
 
-		String ctype = state.parameters.getStringWithDefault(base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE), null);
-		crossoverType = C_ONE_POINT;
-		if (ctype == null)
-			state.output.warning("No crossover type given for VectorSpecies, assuming one-point crossover", base.push(P_CROSSOVERTYPE),
-					def.push(P_CROSSOVERTYPE));
-		else if (ctype.equalsIgnoreCase(V_ONE_POINT))
-			crossoverType = C_ONE_POINT; // redundant
-		else if (ctype.equalsIgnoreCase(V_TWO_POINT))
-			crossoverType = C_TWO_POINT;
-		else if (ctype.equalsIgnoreCase(V_ANY_POINT))
-			crossoverType = C_ANY_POINT;
-		else if (ctype.equalsIgnoreCase(V_LINE_RECOMB))
-			crossoverType = C_LINE_RECOMB;
-		else if (ctype.equalsIgnoreCase(V_INTERMED_RECOMB))
-			crossoverType = C_INTERMED_RECOMB;
-		else if (ctype.equalsIgnoreCase(V_SIMULATED_BINARY))
-			crossoverType = C_SIMULATED_BINARY;
-		else
-			state.output.error("VectorSpecies given a bad crossover type: " + ctype, base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE));
+        String ctype = state.parameters.getStringWithDefault(base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE),
+                null);
+        crossoverType = C_ONE_POINT;
+        if (ctype == null)
+            state.output.warning("No crossover type given for VectorSpecies, assuming one-point crossover",
+                    base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE));
+        else if (ctype.equalsIgnoreCase(V_ONE_POINT))
+            crossoverType = C_ONE_POINT; // redundant
+        else if (ctype.equalsIgnoreCase(V_TWO_POINT))
+            crossoverType = C_TWO_POINT;
+        else if (ctype.equalsIgnoreCase(V_ANY_POINT))
+            crossoverType = C_ANY_POINT;
+        else if (ctype.equalsIgnoreCase(V_LINE_RECOMB))
+            crossoverType = C_LINE_RECOMB;
+        else if (ctype.equalsIgnoreCase(V_INTERMED_RECOMB))
+            crossoverType = C_INTERMED_RECOMB;
+        else if (ctype.equalsIgnoreCase(V_SIMULATED_BINARY))
+            crossoverType = C_SIMULATED_BINARY;
+        else
+            state.output.error("VectorSpecies given a bad crossover type: " + ctype, base.push(P_CROSSOVERTYPE),
+                    def.push(P_CROSSOVERTYPE));
 
-		if (crossoverType == C_LINE_RECOMB || crossoverType == C_INTERMED_RECOMB) {
-			if (!(this instanceof IntegerVectorSpecies) && !(this instanceof FloatVectorSpecies))
-				state.output.error(
-						"Line and intermediate recombinations are only supported by IntegerVectorSpecies and FloatVectorSpecies",
-						base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE));
-			lineDistance = state.parameters.getDouble(base.push(P_LINEDISTANCE), def.push(P_LINEDISTANCE), 0.0);
-			if (lineDistance == -1.0)
-				state.output
-						.error("If it's going to use line or intermediate recombination, VectorSpecies needs a line extension >= 0.0  (0.25 is common)",
-								base.push(P_LINEDISTANCE), def.push(P_LINEDISTANCE));
-		} else
-			lineDistance = 0.0;
+        if (crossoverType == C_LINE_RECOMB || crossoverType == C_INTERMED_RECOMB) {
+            if (!(this instanceof IntegerVectorSpecies) && !(this instanceof FloatVectorSpecies))
+                state.output
+                        .error("Line and intermediate recombinations are only supported by IntegerVectorSpecies and FloatVectorSpecies",
+                                base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE));
+            lineDistance = state.parameters.getDouble(base.push(P_LINEDISTANCE), def.push(P_LINEDISTANCE), 0.0);
+            if (lineDistance == -1.0)
+                state.output
+                        .error("If it's going to use line or intermediate recombination, VectorSpecies needs a line extension >= 0.0  (0.25 is common)",
+                                base.push(P_LINEDISTANCE), def.push(P_LINEDISTANCE));
+        } else
+            lineDistance = 0.0;
 
-		if (crossoverType == C_ANY_POINT) {
-			crossoverProbability = state.parameters.getFloatWithMax(base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB), 0.0, 0.5);
-			if (crossoverProbability == -1.0)
-				state.output
-						.error("If it's going to use any-point crossover, VectorSpecies must have a crossover probability between 0.0 and 0.5 inclusive",
-								base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB));
-		} else
-			crossoverProbability = 0.0f;
+        if (crossoverType == C_ANY_POINT) {
+            crossoverProbability = state.parameters.getFloatWithMax(base.push(P_CROSSOVERPROB),
+                    def.push(P_CROSSOVERPROB), 0.0, 0.5);
+            if (crossoverProbability == -1.0)
+                state.output
+                        .error("If it's going to use any-point crossover, VectorSpecies must have a crossover probability between 0.0 and 0.5 inclusive",
+                                base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB));
+        } else
+            crossoverProbability = 0.0f;
 
-		if (crossoverType == C_SIMULATED_BINARY) {
-			if (!(this instanceof FloatVectorSpecies))
-				state.output.error("Simulated binary crossover (SBX) is only supported by FloatVectorSpecies", base.push(P_CROSSOVERTYPE),
-						def.push(P_CROSSOVERTYPE));
-			crossoverDistributionIndex = state.parameters.getInt(base.push(P_CROSSOVER_DISTRIBUTION_INDEX),
-					def.push(P_CROSSOVER_DISTRIBUTION_INDEX), 0);
-			if (crossoverDistributionIndex < 0)
-				state.output
-						.fatal("If FloatVectorSpecies is going to use simulated binary crossover (SBX), the distribution index must be defined and >= 0.",
-								base.push(P_CROSSOVER_DISTRIBUTION_INDEX), def.push(P_CROSSOVER_DISTRIBUTION_INDEX));
-		} else
-			crossoverProbability = 0.0f;
+        if (crossoverType == C_SIMULATED_BINARY) {
+            if (!(this instanceof FloatVectorSpecies))
+                state.output.error("Simulated binary crossover (SBX) is only supported by FloatVectorSpecies",
+                        base.push(P_CROSSOVERTYPE), def.push(P_CROSSOVERTYPE));
+            crossoverDistributionIndex = state.parameters.getInt(base.push(P_CROSSOVER_DISTRIBUTION_INDEX),
+                    def.push(P_CROSSOVER_DISTRIBUTION_INDEX), 0);
+            if (crossoverDistributionIndex < 0)
+                state.output
+                        .fatal("If FloatVectorSpecies is going to use simulated binary crossover (SBX), the distribution index must be defined and >= 0.",
+                                base.push(P_CROSSOVER_DISTRIBUTION_INDEX), def.push(P_CROSSOVER_DISTRIBUTION_INDEX));
+        } else
+            crossoverProbability = 0.0f;
 
-		state.output.exitIfErrors();
+        state.output.exitIfErrors();
 
-		if (crossoverType != C_ANY_POINT && state.parameters.exists(base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB)))
-			state.output
-					.warning(
-							"The 'crossover-prob' parameter may only be used with any-point crossover.  It states the probability that a particular gene will be crossed over.  If you were looking for the probability of crossover happening at *all*, look at the 'likelihood' parameter.",
-							base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB));
+        if (crossoverType != C_ANY_POINT
+                && state.parameters.exists(base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB)))
+            state.output
+                    .warning(
+                            "The 'crossover-prob' parameter may only be used with any-point crossover.  It states the probability that a particular gene will be crossed over.  If you were looking for the probability of crossover happening at *all*, look at the 'likelihood' parameter.",
+                            base.push(P_CROSSOVERPROB), def.push(P_CROSSOVERPROB));
 
-		// NOW call super.setup(...), which will in turn set up the prototypical
-		// individual
-		super.setup(state, base);
-	}
+        // NOW call super.setup(...), which will in turn set up the prototypical
+        // individual
+        super.setup(state, base);
+    }
 
-	public Individual newIndividual(final EvolutionState state, int thread)
+    public Individual newIndividual(final EvolutionState state, int thread)
 
-	{
-		VectorIndividual newind = (VectorIndividual) (super.newIndividual(state, thread));
+    {
+        VectorIndividual newind = (VectorIndividual) (super.newIndividual(state, thread));
 
-		if (genomeResizeAlgorithm == C_NONE)
-			newind.reset(state, thread);
-		else if (genomeResizeAlgorithm == C_UNIFORM) {
-			int size = state.random[thread].nextInt(maxInitialSize - minInitialSize + 1) + minInitialSize;
-			newind.reset(state, thread, size);
-		} else if (genomeResizeAlgorithm == C_GEOMETRIC) {
-			int size = minInitialSize;
-			while (state.random[thread].nextBoolean(genomeIncreaseProbability))
-				size++;
-			newind.reset(state, thread, size);
-		}
+        if (genomeResizeAlgorithm == C_NONE)
+            newind.reset(state, thread);
+        else if (genomeResizeAlgorithm == C_UNIFORM) {
+            int size = state.random[thread].nextInt(maxInitialSize - minInitialSize + 1) + minInitialSize;
+            newind.reset(state, thread, size);
+        } else if (genomeResizeAlgorithm == C_GEOMETRIC) {
+            int size = minInitialSize;
+            while (state.random[thread].nextBoolean(genomeIncreaseProbability))
+                size++;
+            newind.reset(state, thread, size);
+        }
 
-		return newind;
-	}
+        return newind;
+    }
 }

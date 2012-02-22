@@ -59,60 +59,61 @@ import ec.util.Parameter;
  */
 
 public class TarpeianStatistics extends Statistics {
-	/** one in n individuals are killed */
-	public static final String P_KILL_PROPORTION = "kill-proportion";
-	float killProportion;
+    /** one in n individuals are killed */
+    public static final String P_KILL_PROPORTION = "kill-proportion";
+    float killProportion;
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		killProportion = state.parameters.getFloat(base.push(P_KILL_PROPORTION), null, 0.0);
-		if (killProportion < 0 || killProportion > 1)
-			state.output.fatal("Parameter not found, or it has an invalid value (<0 or >1).", base.push(P_KILL_PROPORTION));
-	}
+        killProportion = state.parameters.getFloat(base.push(P_KILL_PROPORTION), null, 0.0);
+        if (killProportion < 0 || killProportion > 1)
+            state.output.fatal("Parameter not found, or it has an invalid value (<0 or >1).",
+                    base.push(P_KILL_PROPORTION));
+    }
 
-	/**
-	 * Marks a proportion (killProportion) of individuals with above-average
-	 * size (within their own subpopulation) to a minimum value.
-	 */
-	public void preEvaluationStatistics(final EvolutionState state) {
-		for (int subpopulation = 0; subpopulation < state.population.subpops.length; subpopulation++) {
-			double averageSize = 0;
+    /**
+     * Marks a proportion (killProportion) of individuals with above-average
+     * size (within their own subpopulation) to a minimum value.
+     */
+    public void preEvaluationStatistics(final EvolutionState state) {
+        for (int subpopulation = 0; subpopulation < state.population.subpops.length; subpopulation++) {
+            double averageSize = 0;
 
-			for (int i = 0; i < state.population.subpops[subpopulation].individuals.length; i++)
-				averageSize += state.population.subpops[subpopulation].individuals[i].size();
+            for (int i = 0; i < state.population.subpops[subpopulation].individuals.length; i++)
+                averageSize += state.population.subpops[subpopulation].individuals[i].size();
 
-			averageSize /= state.population.subpops[subpopulation].individuals.length;
+            averageSize /= state.population.subpops[subpopulation].individuals.length;
 
-			for (int i = 0; i < state.population.subpops[subpopulation].individuals.length; i++) {
-				if ((state.population.subpops[subpopulation].individuals[i].size() > averageSize)
-						&& (state.random[0].nextFloat() < killProportion)) {
-					Individual ind = state.population.subpops[subpopulation].individuals[i];
-					setMinimumFitness(state, subpopulation, ind);
-					ind.evaluated = true;
-				}
-			}
-		}
-	}
+            for (int i = 0; i < state.population.subpops[subpopulation].individuals.length; i++) {
+                if ((state.population.subpops[subpopulation].individuals[i].size() > averageSize)
+                        && (state.random[0].nextFloat() < killProportion)) {
+                    Individual ind = state.population.subpops[subpopulation].individuals[i];
+                    setMinimumFitness(state, subpopulation, ind);
+                    ind.evaluated = true;
+                }
+            }
+        }
+    }
 
-	/**
-	 * Sets the fitness of an individual to the minimum fitness possible. If the
-	 * fitness is of type ec.simple.SimpleFitness, that minimum value is
-	 * -Float.MAX_VALUE; If the fitness is of type ec.gp.koza.KozaFitness, that
-	 * minimum value is Float.MAX_VALUE; Else, a fatal error is reported.
-	 * 
-	 * You need to override this method if you're using any other type of
-	 * fitness.
-	 */
-	public void setMinimumFitness(final EvolutionState state, int subpopulation, Individual ind) {
-		Fitness fitness = ind.fitness;
-		if (fitness instanceof ec.gp.koza.KozaFitness)
-			((ec.gp.koza.KozaFitness) fitness).setStandardizedFitness(state, Float.MAX_VALUE);
-		else if (fitness instanceof ec.simple.SimpleFitness)
-			((ec.simple.SimpleFitness) fitness).setFitness(state, -Float.MAX_VALUE, false);
-		else
-			state.output
-					.fatal("TarpeianStatistics only accepts individuals with fitness of type ec.simple.SimpleFitness or ec.gp.koza.KozaFitness.");
-	}
+    /**
+     * Sets the fitness of an individual to the minimum fitness possible. If the
+     * fitness is of type ec.simple.SimpleFitness, that minimum value is
+     * -Float.MAX_VALUE; If the fitness is of type ec.gp.koza.KozaFitness, that
+     * minimum value is Float.MAX_VALUE; Else, a fatal error is reported.
+     * 
+     * You need to override this method if you're using any other type of
+     * fitness.
+     */
+    public void setMinimumFitness(final EvolutionState state, int subpopulation, Individual ind) {
+        Fitness fitness = ind.fitness;
+        if (fitness instanceof ec.gp.koza.KozaFitness)
+            ((ec.gp.koza.KozaFitness) fitness).setStandardizedFitness(state, Float.MAX_VALUE);
+        else if (fitness instanceof ec.simple.SimpleFitness)
+            ((ec.simple.SimpleFitness) fitness).setFitness(state, -Float.MAX_VALUE, false);
+        else
+            state.output
+                    .fatal("TarpeianStatistics only accepts individuals with fitness of type ec.simple.SimpleFitness or ec.gp.koza.KozaFitness.");
+    }
 
 }

@@ -11,18 +11,18 @@ import java.io.File;
  */
 public class FileTestBase {
 
-	protected File file;
+    protected File file;
 
-	public FileTestBase() {
-		super();
-	}
+    public FileTestBase() {
+        super();
+    }
 
-	private String getLocation(String fileName) {
-		return "resources" + File.separator + fileName;
-	}
+    private String getLocation(String fileName) {
+        return "resources" + File.separator + fileName;
+    }
 
-	protected File getFile(String fileName) {
-		return new File(getLocation(fileName));
-	}
+    protected File getFile(String fileName) {
+        return new File(getLocation(fileName));
+    }
 
 }

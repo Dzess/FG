@@ -23,10 +23,10 @@ import ec.util.Parameter;
  */
 
 public class GPBuildDefaults implements DefaultsForm {
-	public static final String P_BUILD = "build";
+    public static final String P_BUILD = "build";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return GPDefaults.base().push(P_BUILD);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return GPDefaults.base().push(P_BUILD);
+    }
 }

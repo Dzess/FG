@@ -26,10 +26,10 @@ import ec.util.Parameter;
  */
 
 public final class RuleDefaults implements DefaultsForm {
-	public static final String P_RULE = "rule";
+    public static final String P_RULE = "rule";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_RULE);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_RULE);
+    }
 }

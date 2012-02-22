@@ -30,202 +30,193 @@ import functiongenerator.ui.printing.TreeToStringTranslator;
  */
 public class Engine {
 
-	static private final org.apache.commons.logging.Log logger = LogFactory
-			.getLog(Engine.class);
+    static private final org.apache.commons.logging.Log logger = LogFactory.getLog(Engine.class);
 
-	private List<Number[]> points = new ArrayList<Number[]>();
-	private Settings settings;
-	private List<IProgressListener> listeners = new ArrayList<IProgressListener>();
+    private List<Number[]> points = new ArrayList<Number[]>();
+    private Settings settings;
+    private List<IProgressListener> listeners = new ArrayList<IProgressListener>();
 
-	private volatile boolean cancel = false;
+    private volatile boolean cancel = false;
 
-	private GPIndividual bestIndividual;
+    private GPIndividual bestIndividual;
 
-	private AbstractRegressionProblem problem;
+    private AbstractRegressionProblem problem;
 
-	private EvolutionState state;
+    private EvolutionState state;
 
-	private StringBuffer buffer;
+    private StringBuffer buffer;
 
-	/**
-	 * Returns the current problem which is being processes by engine. Before
-	 * initiation phase of the {@linkplain Engine} returns null.
-	 * 
-	 * <p>
-	 * Initiation Phase
-	 * </p>
-	 */
-	public AbstractRegressionProblem getProblem() {
-		return problem;
-	}
+    /**
+     * Returns the current problem which is being processes by engine. Before
+     * initiation phase of the {@linkplain Engine} returns null.
+     * 
+     * <p>
+     * Initiation Phase
+     * </p>
+     */
+    public AbstractRegressionProblem getProblem() {
+        return problem;
+    }
 
-	public List<Number[]> getPoints() {
-		return points;
-	}
+    public List<Number[]> getPoints() {
+        return points;
+    }
 
-	public void setPoints(List<Number[]> points) {
-		this.points = points;
-	}
+    public void setPoints(List<Number[]> points) {
+        this.points = points;
+    }
 
-	public Settings getSettings() {
-		return settings;
-	}
+    public Settings getSettings() {
+        return settings;
+    }
 
-	public void setSettings(Settings settings) {
-		this.settings = settings;
-	}
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
 
-	public void addListener(IProgressListener listener) {
-		listeners.add(listener);
-	}
+    public void addListener(IProgressListener listener) {
+        listeners.add(listener);
+    }
 
-	public void removeListener(IProgressListener listener) {
-		listeners.remove(listener);
-	}
+    public void removeListener(IProgressListener listener) {
+        listeners.remove(listener);
+    }
 
-	private void updateProgress(String output, EvolutionStateHelper stateHelper) {
-		for (IProgressListener listener : listeners) {
-			listener.update(output,stateHelper);
-		}
-	}
+    private void updateProgress(String output, EvolutionStateHelper stateHelper) {
+        for (IProgressListener listener : listeners) {
+            listener.update(output, stateHelper);
+        }
+    }
 
-	// TODO: refactor this code outt here
-	private String generateClassTemplate(String func, String comment)
-			throws IOException {
-		try {
-			InputStream template = Engine.class
-					.getResourceAsStream("ClassTemplate.java.tpl");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					template));
-			StringBuilder builder = new StringBuilder();
+    // TODO: refactor this code outt here
+    private String generateClassTemplate(String func, String comment) throws IOException {
+        try {
+            InputStream template = Engine.class.getResourceAsStream("ClassTemplate.java.tpl");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(template));
+            StringBuilder builder = new StringBuilder();
 
-			for (String line; (line = reader.readLine()) != null;) {
-				builder.append(line);
-				builder.append('\n');
-			}
+            for (String line; (line = reader.readLine()) != null;) {
+                builder.append(line);
+                builder.append('\n');
+            }
 
-			int idx = builder.indexOf("/*functionCode*/");
-			if (idx < 0)
-				throw new RuntimeException(
-						"/*functionCode*/ not found in class template!");
-			builder.replace(idx, idx + "/*functionCode*/".length(), func);
+            int idx = builder.indexOf("/*functionCode*/");
+            if (idx < 0)
+                throw new RuntimeException("/*functionCode*/ not found in class template!");
+            builder.replace(idx, idx + "/*functionCode*/".length(), func);
 
-			idx = builder.indexOf("/*comment*/");
-			if (idx < 0)
-				throw new RuntimeException(
-						"/*comment*/ not found in class template!");
-			builder.replace(idx, idx + "/*comment*/".length(), comment);
+            idx = builder.indexOf("/*comment*/");
+            if (idx < 0)
+                throw new RuntimeException("/*comment*/ not found in class template!");
+            builder.replace(idx, idx + "/*comment*/".length(), comment);
 
-			String type = points.get(0)[0] instanceof Double ? "double" : "int";
+            String type = points.get(0)[0] instanceof Double ? "double" : "int";
 
-			while ((idx = builder.indexOf("/*type*/")) >= 0) {
-				builder.replace(idx, idx + "/*type*/".length(), type);
-			}
+            while ((idx = builder.indexOf("/*type*/")) >= 0) {
+                builder.replace(idx, idx + "/*type*/".length(), type);
+            }
 
-			StringBuilder argumentsBuilder = new StringBuilder();
-			for (int i = 0; i < points.get(0).length - 1; ++i) {
-				argumentsBuilder.append(type + " x");
-				argumentsBuilder.append(i);
-				argumentsBuilder.append(',');
-			}
-			argumentsBuilder.deleteCharAt(argumentsBuilder.length() - 1);
-			idx = builder.indexOf("/*arguments*/");
-			if (idx < 0)
-				throw new RuntimeException(
-						"/*arguments*/ not found in class template!");
-			builder.replace(idx, idx + "/*arguments*/".length(),
-					argumentsBuilder.toString());
+            StringBuilder argumentsBuilder = new StringBuilder();
+            for (int i = 0; i < points.get(0).length - 1; ++i) {
+                argumentsBuilder.append(type + " x");
+                argumentsBuilder.append(i);
+                argumentsBuilder.append(',');
+            }
+            argumentsBuilder.deleteCharAt(argumentsBuilder.length() - 1);
+            idx = builder.indexOf("/*arguments*/");
+            if (idx < 0)
+                throw new RuntimeException("/*arguments*/ not found in class template!");
+            builder.replace(idx, idx + "/*arguments*/".length(), argumentsBuilder.toString());
 
-			return builder.toString();
-		} catch (UnsupportedEncodingException ex) {
-			return null;
-		}
-	}
+            return builder.toString();
+        } catch (UnsupportedEncodingException ex) {
+            return null;
+        }
+    }
 
-	/**
-	 * Initializes the all possible elements
-	 * 
-	 * @throws Exception
-	 */
-	@SuppressWarnings("serial")
-	public void init() throws Exception {
-		cancel = false;
+    /**
+     * Initializes the all possible elements
+     * 
+     * @throws Exception
+     */
+    @SuppressWarnings("serial")
+    public void init() throws Exception {
+        cancel = false;
 
-		int numberOfXes = points.get(0).length - 1;
+        int numberOfXes = points.get(0).length - 1;
 
-		ProblemType type = null;
-		if (points.get(0)[0] instanceof Double) {
-			logger.info("Problem is REAL numbered");
-			type = ProblemType.DOUBLE;
-		} else {
-			logger.info("Problem is INTEGER numbered");
-			type = ProblemType.INTEGER;
-		}
+        ProblemType type = null;
+        if (points.get(0)[0] instanceof Double) {
+            logger.info("Problem is REAL numbered");
+            type = ProblemType.DOUBLE;
+        } else {
+            logger.info("Problem is INTEGER numbered");
+            type = ProblemType.INTEGER;
+        }
 
-		ParameterDatabase db = getSettings().generateParameterDatabase(
-				numberOfXes, type);
-		state = Evolve.initialize(db, 0);
-		state.startFresh();
+        ParameterDatabase db = getSettings().generateParameterDatabase(numberOfXes, type);
+        state = Evolve.initialize(db, 0);
+        state.startFresh();
 
-		problem = (AbstractRegressionProblem) state.evaluator.p_problem;
-		problem.setPoints(points);
-		problem.setMaxTreeDepth(getSettings().getMaxTreeDepth());
+        problem = (AbstractRegressionProblem) state.evaluator.p_problem;
+        problem.setPoints(points);
+        problem.setMaxTreeDepth(getSettings().getMaxTreeDepth());
 
-		StringWriter writer = new StringWriter();
-		buffer = writer.getBuffer();
+        StringWriter writer = new StringWriter();
+        buffer = writer.getBuffer();
 
-		state.output.addLog(writer, new LogRestarter() {
+        state.output.addLog(writer, new LogRestarter() {
 
-			@Override
-			public Log restart(Log l) throws IOException {
-				return l;
-			}
+            @Override
+            public Log restart(Log l) throws IOException {
+                return l;
+            }
 
-			@Override
-			public Log reopen(Log l) throws IOException {
-				return l;
-			}
-		}, true, false);
+            @Override
+            public Log reopen(Log l) throws IOException {
+                return l;
+            }
+        }, true, false);
 
-	}
+    }
 
-	/**
-	 * Runs the computations
-	 */
-	public String run() throws Exception {
+    /**
+     * Runs the computations
+     */
+    public String run() throws Exception {
 
-		/* the big loop */
-		int result = EvolutionState.R_NOTDONE;
-		EvolutionStateHelper stateHelper = new EvolutionStateHelper(state);
-		while (result == EvolutionState.R_NOTDONE && !cancel) {
-			result = state.evolve();
-			
-			bestIndividual = stateHelper.getBesIndividual();
-			updateProgress(buffer.toString(), stateHelper);
-			
-			// this method is for buffer
-			buffer.delete(0, buffer.length());
-		}
+        /* the big loop */
+        int result = EvolutionState.R_NOTDONE;
+        EvolutionStateHelper stateHelper = new EvolutionStateHelper(state);
+        while (result == EvolutionState.R_NOTDONE && !cancel) {
+            result = state.evolve();
 
-		if (cancel) {
-			state.finish(result);
-			Evolve.cleanup(state);
-			return null;
-		}
+            bestIndividual = stateHelper.getBesIndividual();
+            updateProgress(buffer.toString(), stateHelper);
 
-		SimpleStatistics stat = (SimpleStatistics) state.statistics;
-		GPIndividual ind = (GPIndividual) stat.best_of_run[0];
+            // this method is for buffer
+            buffer.delete(0, buffer.length());
+        }
 
-		String expression = TreeToStringTranslator.translateTree(ind.trees[0]);
-		String template = generateClassTemplate(expression,ind.fitness.fitnessToStringForHumans());
+        if (cancel) {
+            state.finish(result);
+            Evolve.cleanup(state);
+            return null;
+        }
 
-		state.finish(result);
-		Evolve.cleanup(state);
+        SimpleStatistics stat = (SimpleStatistics) state.statistics;
+        GPIndividual ind = (GPIndividual) stat.best_of_run[0];
 
-		return template;
-	}
+        String expression = TreeToStringTranslator.translateTree(ind.trees[0]);
+        String template = generateClassTemplate(expression, ind.fitness.fitnessToStringForHumans());
 
-	public void cancel() {
-		cancel = true;
-	}
+        state.finish(result);
+        Evolve.cleanup(state);
+
+        return template;
+    }
+
+    public void cancel() {
+        cancel = true;
+    }
 }

@@ -45,106 +45,106 @@ import ec.util.Parameter;
  */
 
 public class SimpleFitness extends Fitness {
-	protected float fitness;
-	protected boolean isIdeal;
+    protected float fitness;
+    protected boolean isIdeal;
 
-	public Parameter defaultBase() {
-		return SimpleDefaults.base().push(P_FITNESS);
-	}
+    public Parameter defaultBase() {
+        return SimpleDefaults.base().push(P_FITNESS);
+    }
 
-	/**
-	 * Deprecated -- now redefined to set the fitness but ALWAYS say that it's
-	 * not ideal. If you need to specify that it's ideal, you should use the new
-	 * function setFitness(final EvolutionState state, float _f, boolean
-	 * _isIdeal).
-	 * 
-	 * @deprecated
-	 */
-	public void setFitness(final EvolutionState state, float _f) {
-		setFitness(state, _f, false);
-	}
+    /**
+     * Deprecated -- now redefined to set the fitness but ALWAYS say that it's
+     * not ideal. If you need to specify that it's ideal, you should use the new
+     * function setFitness(final EvolutionState state, float _f, boolean
+     * _isIdeal).
+     * 
+     * @deprecated
+     */
+    public void setFitness(final EvolutionState state, float _f) {
+        setFitness(state, _f, false);
+    }
 
-	public void setFitness(final EvolutionState state, float _f, boolean _isIdeal) {
-		// we now allow f to be *any* value, positive or negative
-		if (_f == Float.POSITIVE_INFINITY || _f == Float.NEGATIVE_INFINITY || Float.isNaN(_f)) {
-			state.output.warning("Bad fitness: " + _f + ", setting to 0.");
-			fitness = 0;
-		} else
-			fitness = _f;
-		isIdeal = _isIdeal;
-	}
+    public void setFitness(final EvolutionState state, float _f, boolean _isIdeal) {
+        // we now allow f to be *any* value, positive or negative
+        if (_f == Float.POSITIVE_INFINITY || _f == Float.NEGATIVE_INFINITY || Float.isNaN(_f)) {
+            state.output.warning("Bad fitness: " + _f + ", setting to 0.");
+            fitness = 0;
+        } else
+            fitness = _f;
+        isIdeal = _isIdeal;
+    }
 
-	public float fitness() {
-		return fitness;
-	}
+    public float fitness() {
+        return fitness;
+    }
 
-	public void setup(final EvolutionState state, Parameter base) {
-		super.setup(state, base); // unnecessary but what the heck
-	}
+    public void setup(final EvolutionState state, Parameter base) {
+        super.setup(state, base); // unnecessary but what the heck
+    }
 
-	public boolean isIdealFitness() {
-		return isIdeal;
-	}
+    public boolean isIdealFitness() {
+        return isIdeal;
+    }
 
-	public boolean equivalentTo(final Fitness _fitness) {
-		return _fitness.fitness() == fitness();
-	}
+    public boolean equivalentTo(final Fitness _fitness) {
+        return _fitness.fitness() == fitness();
+    }
 
-	public boolean betterThan(final Fitness _fitness) {
-		return _fitness.fitness() < fitness();
-	}
+    public boolean betterThan(final Fitness _fitness) {
+        return _fitness.fitness() < fitness();
+    }
 
-	public String fitnessToString() {
-		return FITNESS_PREAMBLE + Code.encode(fitness());
-	}
+    public String fitnessToString() {
+        return FITNESS_PREAMBLE + Code.encode(fitness());
+    }
 
-	public String fitnessToStringForHumans() {
-		return FITNESS_PREAMBLE + fitness();
-	}
+    public String fitnessToStringForHumans() {
+        return FITNESS_PREAMBLE + fitness();
+    }
 
-	/** Presently does not decode the fact that the fitness is ideal or not */
-	public void readFitness(final EvolutionState state, final LineNumberReader reader) throws IOException {
-		setFitness(state, Code.readFloatWithPreamble(FITNESS_PREAMBLE, state, reader));
+    /** Presently does not decode the fact that the fitness is ideal or not */
+    public void readFitness(final EvolutionState state, final LineNumberReader reader) throws IOException {
+        setFitness(state, Code.readFloatWithPreamble(FITNESS_PREAMBLE, state, reader));
 
-		/*
-		 * int linenumber = reader.getLineNumber(); String s =
-		 * reader.readLine(); if (s==null || s.length() <
-		 * FITNESS_PREAMBLE.length()) // uh oh
-		 * state.output.fatal("Reading Line " + linenumber + ": " +
-		 * "Bad Fitness."); DecodeReturn d = new DecodeReturn(s,
-		 * FITNESS_PREAMBLE.length()); Code.decode(d); if
-		 * (d.type!=DecodeReturn.T_FLOAT) state.output.fatal("Reading Line " +
-		 * linenumber + ": " + "Bad Fitness.");
-		 * setFitness(state,(float)d.d,false);
-		 */
-	}
+        /*
+         * int linenumber = reader.getLineNumber(); String s =
+         * reader.readLine(); if (s==null || s.length() <
+         * FITNESS_PREAMBLE.length()) // uh oh
+         * state.output.fatal("Reading Line " + linenumber + ": " +
+         * "Bad Fitness."); DecodeReturn d = new DecodeReturn(s,
+         * FITNESS_PREAMBLE.length()); Code.decode(d); if
+         * (d.type!=DecodeReturn.T_FLOAT) state.output.fatal("Reading Line " +
+         * linenumber + ": " + "Bad Fitness.");
+         * setFitness(state,(float)d.d,false);
+         */
+    }
 
-	public void writeFitness(final EvolutionState state, final DataOutput dataOutput) throws IOException {
-		dataOutput.writeFloat(fitness);
-		dataOutput.writeBoolean(isIdeal);
-	}
+    public void writeFitness(final EvolutionState state, final DataOutput dataOutput) throws IOException {
+        dataOutput.writeFloat(fitness);
+        dataOutput.writeBoolean(isIdeal);
+    }
 
-	public void readFitness(final EvolutionState state, final DataInput dataInput) throws IOException {
-		fitness = dataInput.readFloat();
-		isIdeal = dataInput.readBoolean();
-	}
+    public void readFitness(final EvolutionState state, final DataInput dataInput) throws IOException {
+        fitness = dataInput.readFloat();
+        isIdeal = dataInput.readBoolean();
+    }
 
-	public void setToMeanOf(EvolutionState state, Fitness[] fitnesses) {
-		// this is not numerically stable. Perhaps we should have a numerically
-		// stable algorithm for sums
-		// we're presuming it's not a very large number of elements, so it's
-		// probably not a big deal,
-		// since this function is meant to be used mostly for gathering trials
-		// together.
-		double f = 0;
-		boolean ideal = true;
-		for (int i = 0; i < fitnesses.length; i++) {
-			SimpleFitness fit = (SimpleFitness) (fitnesses[i]);
-			f += fit.fitness;
-			ideal = ideal && fit.isIdeal;
-		}
-		f /= fitnesses.length;
-		fitness = (float) f;
-		isIdeal = ideal;
-	}
+    public void setToMeanOf(EvolutionState state, Fitness[] fitnesses) {
+        // this is not numerically stable. Perhaps we should have a numerically
+        // stable algorithm for sums
+        // we're presuming it's not a very large number of elements, so it's
+        // probably not a big deal,
+        // since this function is meant to be used mostly for gathering trials
+        // together.
+        double f = 0;
+        boolean ideal = true;
+        for (int i = 0; i < fitnesses.length; i++) {
+            SimpleFitness fit = (SimpleFitness) (fitnesses[i]);
+            f += fit.fitness;
+            ideal = ideal && fit.isIdeal;
+        }
+        f /= fitnesses.length;
+        fitness = (float) f;
+        isIdeal = ideal;
+    }
 }

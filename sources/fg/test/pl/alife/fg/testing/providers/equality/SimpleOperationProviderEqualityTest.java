@@ -18,41 +18,41 @@ import functiongenerator.core.gp.providers.SimpleOperationProvider;
  */
 public class SimpleOperationProviderEqualityTest {
 
-	@Test
-	public void two_operations_are_equal() {
-		SimpleOperationProvider s1 = new SimpleOperationProvider(Add.class, "Foo", true);
-		SimpleOperationProvider s2 = new SimpleOperationProvider(Add.class, "Foo", true);
-		Assert.assertEquals(s1, s2);
+    @Test
+    public void two_operations_are_equal() {
+        SimpleOperationProvider s1 = new SimpleOperationProvider(Add.class, "Foo", true);
+        SimpleOperationProvider s2 = new SimpleOperationProvider(Add.class, "Foo", true);
+        Assert.assertEquals(s1, s2);
 
-		SimpleOperationProvider s0 = new SimpleOperationProvider(Add.class, "Foo", "", true);
-		Assert.assertEquals(s1, s0);
+        SimpleOperationProvider s0 = new SimpleOperationProvider(Add.class, "Foo", "", true);
+        Assert.assertEquals(s1, s0);
 
-		String name = "Foo2";
-		Class<? extends GPNode> cls = Mul.class;
-		String comment = "Comment1";
-		SimpleOperationProvider s3 = new SimpleOperationProvider(cls, name, comment, false);
-		SimpleOperationProvider s4 = new SimpleOperationProvider(cls, name, comment, false);
+        String name = "Foo2";
+        Class<? extends GPNode> cls = Mul.class;
+        String comment = "Comment1";
+        SimpleOperationProvider s3 = new SimpleOperationProvider(cls, name, comment, false);
+        SimpleOperationProvider s4 = new SimpleOperationProvider(cls, name, comment, false);
 
-		Assert.assertEquals(s3, s4);
+        Assert.assertEquals(s3, s4);
 
-	}
+    }
 
-	@Test
-	public void two_operations_are_not_euqal() {
-		SimpleOperationProvider s1 = new SimpleOperationProvider(Add.class, "Foo", true);
-		SimpleOperationProvider s2 = new SimpleOperationProvider(Add.class, "Foo", false);
-		Assert.assertFalse(s1.equals(s2));
+    @Test
+    public void two_operations_are_not_euqal() {
+        SimpleOperationProvider s1 = new SimpleOperationProvider(Add.class, "Foo", true);
+        SimpleOperationProvider s2 = new SimpleOperationProvider(Add.class, "Foo", false);
+        Assert.assertFalse(s1.equals(s2));
 
-		SimpleOperationProvider s3 = new SimpleOperationProvider(Add.class, "Foo", true);
-		SimpleOperationProvider s4 = new SimpleOperationProvider(Add.class, "Foo1", true);
-		Assert.assertFalse(s3.equals(s4));
+        SimpleOperationProvider s3 = new SimpleOperationProvider(Add.class, "Foo", true);
+        SimpleOperationProvider s4 = new SimpleOperationProvider(Add.class, "Foo1", true);
+        Assert.assertFalse(s3.equals(s4));
 
-		SimpleOperationProvider s5 = new SimpleOperationProvider(Sub.class, "Foo", true);
-		SimpleOperationProvider s6 = new SimpleOperationProvider(Add.class, "Foo", true);
-		Assert.assertFalse(s5.equals(s6));
+        SimpleOperationProvider s5 = new SimpleOperationProvider(Sub.class, "Foo", true);
+        SimpleOperationProvider s6 = new SimpleOperationProvider(Add.class, "Foo", true);
+        Assert.assertFalse(s5.equals(s6));
 
-		SimpleOperationProvider s7 = new SimpleOperationProvider(Add.class, "Foo", "comment 1", true);
-		SimpleOperationProvider s8 = new SimpleOperationProvider(Add.class, "Foo", "comment 2", true);
-		Assert.assertFalse(s7.equals(s8));
-	}
+        SimpleOperationProvider s7 = new SimpleOperationProvider(Add.class, "Foo", "comment 1", true);
+        SimpleOperationProvider s8 = new SimpleOperationProvider(Add.class, "Foo", "comment 2", true);
+        Assert.assertFalse(s7.equals(s8));
+    }
 }

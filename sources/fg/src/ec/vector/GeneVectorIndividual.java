@@ -95,253 +95,253 @@ import ec.util.Parameter;
  */
 
 public class GeneVectorIndividual extends VectorIndividual {
-	public static final String P_GENEVECTORINDIVIDUAL = "gene-vect-ind";
-	public VectorGene[] genome;
+    public static final String P_GENEVECTORINDIVIDUAL = "gene-vect-ind";
+    public VectorGene[] genome;
 
-	public Parameter defaultBase() {
-		return VectorDefaults.base().push(P_GENEVECTORINDIVIDUAL);
-	}
+    public Parameter defaultBase() {
+        return VectorDefaults.base().push(P_GENEVECTORINDIVIDUAL);
+    }
 
-	public Object clone() {
-		GeneVectorIndividual myobj = (GeneVectorIndividual) (super.clone());
+    public Object clone() {
+        GeneVectorIndividual myobj = (GeneVectorIndividual) (super.clone());
 
-		// must clone the genome
-		myobj.genome = (VectorGene[]) (genome.clone());
-		for (int x = 0; x < genome.length; x++)
-			myobj.genome[x] = (VectorGene) (genome[x].clone());
+        // must clone the genome
+        myobj.genome = (VectorGene[]) (genome.clone());
+        for (int x = 0; x < genome.length; x++)
+            myobj.genome[x] = (VectorGene) (genome[x].clone());
 
-		return myobj;
-	}
+        return myobj;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base); // actually unnecessary (Individual.setup() is
-									// empty)
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base); // actually unnecessary (Individual.setup() is
+                                  // empty)
 
-		// since VectorSpecies set its constraint values BEFORE it called
-		// super.setup(...) [which in turn called our setup(...)], we know that
-		// stuff like genomeSize has already been set...
+        // since VectorSpecies set its constraint values BEFORE it called
+        // super.setup(...) [which in turn called our setup(...)], we know that
+        // stuff like genomeSize has already been set...
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		if (!(species instanceof GeneVectorSpecies))
-			state.output.fatal("GeneVectorIndividual requires a GeneVectorSpecies", base, def);
-		GeneVectorSpecies s = (GeneVectorSpecies) species;
+        if (!(species instanceof GeneVectorSpecies))
+            state.output.fatal("GeneVectorIndividual requires a GeneVectorSpecies", base, def);
+        GeneVectorSpecies s = (GeneVectorSpecies) species;
 
-		// note that genome isn't initialized with any genes yet -- they're all
-		// null.
-		// reset() needs
-		genome = new VectorGene[s.genomeSize];
-		reset(state, 0);
-	}
+        // note that genome isn't initialized with any genes yet -- they're all
+        // null.
+        // reset() needs
+        genome = new VectorGene[s.genomeSize];
+        reset(state, 0);
+    }
 
-	public void defaultCrossover(EvolutionState state, int thread, VectorIndividual ind) {
-		GeneVectorSpecies s = (GeneVectorSpecies) species;
-		GeneVectorIndividual i = (GeneVectorIndividual) ind;
-		VectorGene tmp;
-		int point;
+    public void defaultCrossover(EvolutionState state, int thread, VectorIndividual ind) {
+        GeneVectorSpecies s = (GeneVectorSpecies) species;
+        GeneVectorIndividual i = (GeneVectorIndividual) ind;
+        VectorGene tmp;
+        int point;
 
-		if (genome.length != i.genome.length)
-			state.output.fatal("Genome lengths are not the same for fixed-length vector crossover");
-		switch (s.crossoverType) {
-		case VectorSpecies.C_ONE_POINT:
-			point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			for (int x = 0; x < point * s.chunksize; x++) {
-				tmp = i.genome[x];
-				i.genome[x] = genome[x];
-				genome[x] = tmp;
-			}
-			break;
-		case VectorSpecies.C_TWO_POINT:
-			int point0 = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			if (point0 > point) {
-				int p = point0;
-				point0 = point;
-				point = p;
-			}
-			for (int x = point0 * s.chunksize; x < point * s.chunksize; x++) {
-				tmp = i.genome[x];
-				i.genome[x] = genome[x];
-				genome[x] = tmp;
-			}
-			break;
-		case VectorSpecies.C_ANY_POINT:
-			for (int x = 0; x < genome.length / s.chunksize; x++)
-				if (state.random[thread].nextBoolean(s.crossoverProbability))
-					for (int y = x * s.chunksize; y < (x + 1) * s.chunksize; y++) {
-						tmp = i.genome[y];
-						i.genome[y] = genome[y];
-						genome[y] = tmp;
-					}
-			break;
-		}
-	}
+        if (genome.length != i.genome.length)
+            state.output.fatal("Genome lengths are not the same for fixed-length vector crossover");
+        switch (s.crossoverType) {
+        case VectorSpecies.C_ONE_POINT:
+            point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            for (int x = 0; x < point * s.chunksize; x++) {
+                tmp = i.genome[x];
+                i.genome[x] = genome[x];
+                genome[x] = tmp;
+            }
+            break;
+        case VectorSpecies.C_TWO_POINT:
+            int point0 = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            if (point0 > point) {
+                int p = point0;
+                point0 = point;
+                point = p;
+            }
+            for (int x = point0 * s.chunksize; x < point * s.chunksize; x++) {
+                tmp = i.genome[x];
+                i.genome[x] = genome[x];
+                genome[x] = tmp;
+            }
+            break;
+        case VectorSpecies.C_ANY_POINT:
+            for (int x = 0; x < genome.length / s.chunksize; x++)
+                if (state.random[thread].nextBoolean(s.crossoverProbability))
+                    for (int y = x * s.chunksize; y < (x + 1) * s.chunksize; y++) {
+                        tmp = i.genome[y];
+                        i.genome[y] = genome[y];
+                        genome[y] = tmp;
+                    }
+            break;
+        }
+    }
 
-	/**
-	 * Splits the genome into n pieces, according to points, which *must* be
-	 * sorted. pieces.length must be 1 + points.length
-	 */
-	public void split(int[] points, Object[] pieces) {
-		int point0, point1;
-		point0 = 0;
-		point1 = points[0];
-		for (int x = 0; x < pieces.length; x++) {
-			pieces[x] = new VectorGene[point1 - point0];
-			System.arraycopy(genome, point0, pieces[x], 0, point1 - point0);
-			point0 = point1;
-			if (x >= pieces.length - 2)
-				point1 = genome.length;
-			else
-				point1 = points[x + 1];
-		}
-	}
+    /**
+     * Splits the genome into n pieces, according to points, which *must* be
+     * sorted. pieces.length must be 1 + points.length
+     */
+    public void split(int[] points, Object[] pieces) {
+        int point0, point1;
+        point0 = 0;
+        point1 = points[0];
+        for (int x = 0; x < pieces.length; x++) {
+            pieces[x] = new VectorGene[point1 - point0];
+            System.arraycopy(genome, point0, pieces[x], 0, point1 - point0);
+            point0 = point1;
+            if (x >= pieces.length - 2)
+                point1 = genome.length;
+            else
+                point1 = points[x + 1];
+        }
+    }
 
-	/** Joins the n pieces and sets the genome to their concatenation. */
-	public void join(Object[] pieces) {
-		int sum = 0;
-		for (int x = 0; x < pieces.length; x++)
-			sum += ((VectorGene[]) (pieces[x])).length;
+    /** Joins the n pieces and sets the genome to their concatenation. */
+    public void join(Object[] pieces) {
+        int sum = 0;
+        for (int x = 0; x < pieces.length; x++)
+            sum += ((VectorGene[]) (pieces[x])).length;
 
-		int runningsum = 0;
-		VectorGene[] newgenome = new VectorGene[sum];
-		for (int x = 0; x < pieces.length; x++) {
-			System.arraycopy(pieces[x], 0, newgenome, runningsum, ((VectorGene[]) (pieces[x])).length);
-			runningsum += ((VectorGene[]) (pieces[x])).length;
-		}
-		// set genome
-		genome = newgenome;
-	}
+        int runningsum = 0;
+        VectorGene[] newgenome = new VectorGene[sum];
+        for (int x = 0; x < pieces.length; x++) {
+            System.arraycopy(pieces[x], 0, newgenome, runningsum, ((VectorGene[]) (pieces[x])).length);
+            runningsum += ((VectorGene[]) (pieces[x])).length;
+        }
+        // set genome
+        genome = newgenome;
+    }
 
-	/**
-	 * Destructively mutates the individual in some default manner. The default
-	 * form simply randomizes genes to a uniform distribution from the min and
-	 * max of the gene values.
-	 */
-	public void defaultMutate(EvolutionState state, int thread) {
-		GeneVectorSpecies s = (GeneVectorSpecies) species;
-		if (s.mutationProbability > 0.0)
-			for (int x = 0; x < genome.length; x++)
-				if (state.random[thread].nextBoolean(s.mutationProbability))
-					genome[x].mutate(state, thread);
-	}
+    /**
+     * Destructively mutates the individual in some default manner. The default
+     * form simply randomizes genes to a uniform distribution from the min and
+     * max of the gene values.
+     */
+    public void defaultMutate(EvolutionState state, int thread) {
+        GeneVectorSpecies s = (GeneVectorSpecies) species;
+        if (s.mutationProbability > 0.0)
+            for (int x = 0; x < genome.length; x++)
+                if (state.random[thread].nextBoolean(s.mutationProbability))
+                    genome[x].mutate(state, thread);
+    }
 
-	/** Initializes the individual by calling reset(...) on each gene. */
-	public void reset(EvolutionState state, int thread) {
-		GeneVectorSpecies s = (GeneVectorSpecies) species;
+    /** Initializes the individual by calling reset(...) on each gene. */
+    public void reset(EvolutionState state, int thread) {
+        GeneVectorSpecies s = (GeneVectorSpecies) species;
 
-		for (int x = 0; x < genome.length; x++) {
-			// first create the gene if it doesn't exist
-			if (genome[x] == null)
-				genome[x] = (VectorGene) (s.genePrototype.clone());
-			// now reset it
-			genome[x].reset(state, thread);
-		}
+        for (int x = 0; x < genome.length; x++) {
+            // first create the gene if it doesn't exist
+            if (genome[x] == null)
+                genome[x] = (VectorGene) (s.genePrototype.clone());
+            // now reset it
+            genome[x].reset(state, thread);
+        }
 
-	}
+    }
 
-	public int hashCode() {
-		// stolen from GPIndividual. It's a decent algorithm.
-		int hash = this.getClass().hashCode();
+    public int hashCode() {
+        // stolen from GPIndividual. It's a decent algorithm.
+        int hash = this.getClass().hashCode();
 
-		for (int x = 0; x < genome.length; x++)
-			hash = (hash << 1 | hash >>> 31) ^ genome[x].hashCode();
+        for (int x = 0; x < genome.length; x++)
+            hash = (hash << 1 | hash >>> 31) ^ genome[x].hashCode();
 
-		return hash;
-	}
+        return hash;
+    }
 
-	public String genotypeToStringForHumans() {
-		StringBuffer s = new StringBuffer();
-		for (int i = 0; i < genome.length; i++) {
-			s.append(" ");
-			s.append(genome[i].printGeneToStringForHumans());
-		}
-		return s.toString();
-	}
+    public String genotypeToStringForHumans() {
+        StringBuffer s = new StringBuffer();
+        for (int i = 0; i < genome.length; i++) {
+            s.append(" ");
+            s.append(genome[i].printGeneToStringForHumans());
+        }
+        return s.toString();
+    }
 
-	public String genotypeToString() {
-		StringBuffer s = new StringBuffer();
-		for (int i = 0; i < genome.length; i++) {
-			s.append(" ");
-			s.append(genome[i].printGeneToString());
-		}
-		return s.toString();
-	}
+    public String genotypeToString() {
+        StringBuffer s = new StringBuffer();
+        for (int i = 0; i < genome.length; i++) {
+            s.append(" ");
+            s.append(genome[i].printGeneToString());
+        }
+        return s.toString();
+    }
 
-	protected void parseGenotype(final EvolutionState state, final LineNumberReader reader) throws IOException {
-		// read in the next line. The first item is the number of genes
-		String s = reader.readLine();
-		DecodeReturn d = new DecodeReturn(s);
-		Code.decode(d);
-		int lll = (int) (d.l);
+    protected void parseGenotype(final EvolutionState state, final LineNumberReader reader) throws IOException {
+        // read in the next line. The first item is the number of genes
+        String s = reader.readLine();
+        DecodeReturn d = new DecodeReturn(s);
+        Code.decode(d);
+        int lll = (int) (d.l);
 
-		genome = new VectorGene[lll];
+        genome = new VectorGene[lll];
 
-		GeneVectorSpecies _species = (GeneVectorSpecies) species;
-		for (int i = 0; i < genome.length; i++) {
-			genome[i] = (VectorGene) (_species.genePrototype.clone());
-			genome[i].readGene(state, reader);
-		}
-	}
+        GeneVectorSpecies _species = (GeneVectorSpecies) species;
+        for (int i = 0; i < genome.length; i++) {
+            genome[i] = (VectorGene) (_species.genePrototype.clone());
+            genome[i].readGene(state, reader);
+        }
+    }
 
-	public boolean equals(Object ind) {
-		if (!(this.getClass().equals(ind.getClass())))
-			return false;
-		GeneVectorIndividual i = (GeneVectorIndividual) ind;
-		if (genome.length != i.genome.length)
-			return false;
-		for (int j = 0; j < genome.length; j++)
-			if (!(genome[j].equals(i.genome[j])))
-				return false;
-		return true;
-	}
+    public boolean equals(Object ind) {
+        if (!(this.getClass().equals(ind.getClass())))
+            return false;
+        GeneVectorIndividual i = (GeneVectorIndividual) ind;
+        if (genome.length != i.genome.length)
+            return false;
+        for (int j = 0; j < genome.length; j++)
+            if (!(genome[j].equals(i.genome[j])))
+                return false;
+        return true;
+    }
 
-	public Object getGenome() {
-		return genome;
-	}
+    public Object getGenome() {
+        return genome;
+    }
 
-	public void setGenome(Object gen) {
-		genome = (VectorGene[]) gen;
-	}
+    public void setGenome(Object gen) {
+        genome = (VectorGene[]) gen;
+    }
 
-	public int genomeLength() {
-		return genome.length;
-	}
+    public int genomeLength() {
+        return genome.length;
+    }
 
-	// clone all the genes
-	public void cloneGenes(Object piece) {
-		VectorGene[] genes = (VectorGene[]) piece;
-		for (int i = 0; i < genes.length; i++) {
-			if (genes[i] != null)
-				genes[i] = (VectorGene) (genes[i].clone());
-		}
-	}
+    // clone all the genes
+    public void cloneGenes(Object piece) {
+        VectorGene[] genes = (VectorGene[]) piece;
+        for (int i = 0; i < genes.length; i++) {
+            if (genes[i] != null)
+                genes[i] = (VectorGene) (genes[i].clone());
+        }
+    }
 
-	public void writeGenotype(final EvolutionState state, final DataOutput dataOutput) throws IOException {
-		dataOutput.writeInt(genome.length);
-		for (int x = 0; x < genome.length; x++)
-			genome[x].writeGene(state, dataOutput);
-	}
+    public void writeGenotype(final EvolutionState state, final DataOutput dataOutput) throws IOException {
+        dataOutput.writeInt(genome.length);
+        for (int x = 0; x < genome.length; x++)
+            genome[x].writeGene(state, dataOutput);
+    }
 
-	public void setGenomeLength(int len) {
-		GeneVectorSpecies s = (GeneVectorSpecies) species;
-		VectorGene[] newGenome = new VectorGene[len];
-		System.arraycopy(genome, 0, newGenome, 0, genome.length < newGenome.length ? genome.length : newGenome.length);
-		for (int x = genome.length; x < newGenome.length; x++)
-			if (genome[x] == null)
-				genome[x] = (VectorGene) (s.genePrototype.clone()); // not reset
-		genome = newGenome;
-	}
+    public void setGenomeLength(int len) {
+        GeneVectorSpecies s = (GeneVectorSpecies) species;
+        VectorGene[] newGenome = new VectorGene[len];
+        System.arraycopy(genome, 0, newGenome, 0, genome.length < newGenome.length ? genome.length : newGenome.length);
+        for (int x = genome.length; x < newGenome.length; x++)
+            if (genome[x] == null)
+                genome[x] = (VectorGene) (s.genePrototype.clone()); // not reset
+        genome = newGenome;
+    }
 
-	public void readGenotype(final EvolutionState state, final DataInput dataInput) throws IOException {
-		int len = dataInput.readInt();
-		if (genome == null || genome.length != len)
-			genome = new VectorGene[len];
-		GeneVectorSpecies _species = (GeneVectorSpecies) species;
+    public void readGenotype(final EvolutionState state, final DataInput dataInput) throws IOException {
+        int len = dataInput.readInt();
+        if (genome == null || genome.length != len)
+            genome = new VectorGene[len];
+        GeneVectorSpecies _species = (GeneVectorSpecies) species;
 
-		for (int x = 0; x < genome.length; x++) {
-			genome[x] = (VectorGene) (_species.genePrototype.clone());
-			genome[x].readGene(state, dataInput);
-		}
-	}
+        for (int x = 0; x < genome.length; x++) {
+            genome[x] = (VectorGene) (_species.genePrototype.clone());
+            genome[x].readGene(state, dataInput);
+        }
+    }
 
 }

@@ -20,76 +20,76 @@ import functiongenerator.ui.PointsTableModel;
  * 
  * @author Piotr Jessa
  * 
- */	
+ */
 public class CSVDataLoader implements IDataLoader {
 
-	static public final String SEPARATOR = ";";
+    static public final String SEPARATOR = ";";
 
-	public CSVDataLoader() {
+    public CSVDataLoader() {
 
-	}
+    }
 
-	@Override
-	public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException {
+    @Override
+    public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException {
 
-		PointsTableModel model = new PointsTableModel(fieldType);
+        PointsTableModel model = new PointsTableModel(fieldType);
 
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(file));
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				String[] parts = line.split(SEPARATOR);
-				HashMap<Integer, Number> myRow = new HashMap<Integer, Number>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(SEPARATOR);
+                HashMap<Integer, Number> myRow = new HashMap<Integer, Number>();
 
-				while (model.getColumnCount() < parts.length)
-					model.addX();
+                while (model.getColumnCount() < parts.length)
+                    model.addX();
 
-				for (int i = 0; i < parts.length - 1; ++i) {
-					if (fieldType.equals(Double.class))
-						myRow.put(i, Double.parseDouble(parts[i]));
-					else
-						myRow.put(i, (int) Double.parseDouble(parts[i]));
-				}
+                for (int i = 0; i < parts.length - 1; ++i) {
+                    if (fieldType.equals(Double.class))
+                        myRow.put(i, Double.parseDouble(parts[i]));
+                    else
+                        myRow.put(i, (int) Double.parseDouble(parts[i]));
+                }
 
-				if (fieldType.equals(Double.class))
-					myRow.put(-1, Double.parseDouble(parts[parts.length - 1]));
-				else
-					myRow.put(-1, (int) Double.parseDouble(parts[parts.length - 1]));
+                if (fieldType.equals(Double.class))
+                    myRow.put(-1, Double.parseDouble(parts[parts.length - 1]));
+                else
+                    myRow.put(-1, (int) Double.parseDouble(parts[parts.length - 1]));
 
-				model.addRow(myRow);
-			}
+                model.addRow(myRow);
+            }
 
-		} finally {
-			if (reader != null)
-				reader.close();
-		}
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
 
-		if (model.getColumnCount() == 1)
-			model.addX();
+        if (model.getColumnCount() == 1)
+            model.addX();
 
-		return model;
-	}
+        return model;
+    }
 
-	@Override
-	public void saveToFile(File file, PointsTableModel model) throws IOException {
-		FileWriter writer = null;
-		try {
-			writer = new FileWriter(file);
+    @Override
+    public void saveToFile(File file, PointsTableModel model) throws IOException {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(file);
 
-			List<Number[]> rows = model.getRows();
-			for (Number[] row : rows) {
-				for (Number n : row) {
-					writer.write(n + SEPARATOR);
-				}
-				writer.append('\n');
-			}
+            List<Number[]> rows = model.getRows();
+            for (Number[] row : rows) {
+                for (Number n : row) {
+                    writer.write(n + SEPARATOR);
+                }
+                writer.append('\n');
+            }
 
-		} finally {
-			if (writer != null)
-				writer.close();
-		}
-	}
+        } finally {
+            if (writer != null)
+                writer.close();
+        }
+    }
 
 }

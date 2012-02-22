@@ -20,7 +20,7 @@ package ec.util;
  */
 
 public class BadParameterException extends RuntimeException {
-	public BadParameterException(String s) {
-		super("\n" + s);
-	}
+    public BadParameterException(String s) {
+        super("\n" + s);
+    }
 }

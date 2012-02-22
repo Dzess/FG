@@ -12,9 +12,9 @@ import ec.gp.GPIndividual;
  */
 public interface IDataSetProvider {
 
-	/**
-	 * Create the data set from the passed best individual
-	 */
-	public abstract AbstractDataset getDataSet(GPIndividual individual);
+    /**
+     * Create the data set from the passed best individual
+     */
+    public abstract AbstractDataset getDataSet(GPIndividual individual);
 
 }

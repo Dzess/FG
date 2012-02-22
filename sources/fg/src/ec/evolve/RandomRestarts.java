@@ -44,84 +44,84 @@ import ec.util.Parameter;
  */
 
 public class RandomRestarts extends Statistics implements SteadyStateStatisticsForm {
-	/**
-	 * Two options available here: "fixed" and "random"; "fixed" will initate
-	 * the restart timer at the value specified for <i>restart-upper-bound</i>,
-	 * "random" will initiate the restart timer somewhere below the value
-	 * specified for <i>restart-upper-bound</i>
-	 */
-	public static final String P_RESTART_TYPE = "restart-type";
+    /**
+     * Two options available here: "fixed" and "random"; "fixed" will initate
+     * the restart timer at the value specified for <i>restart-upper-bound</i>,
+     * "random" will initiate the restart timer somewhere below the value
+     * specified for <i>restart-upper-bound</i>
+     */
+    public static final String P_RESTART_TYPE = "restart-type";
 
-	/**
-	 * This is the highest value at which the "ticking" restart clock can
-	 * initiate at.
-	 */
-	public static final String P_RESTART_UPPERBOUND = "restart-upper-bound";
+    /**
+     * This is the highest value at which the "ticking" restart clock can
+     * initiate at.
+     */
+    public static final String P_RESTART_UPPERBOUND = "restart-upper-bound";
 
-	public int countdown; // what we'll use for the "ticking" clock
-	public int upperbound; // highest possible value on the clock
+    public int countdown; // what we'll use for the "ticking" clock
+    public int upperbound; // highest possible value on the clock
 
-	String restartType; // are we doing random or fixed?
+    String restartType; // are we doing random or fixed?
 
-	/** Gets the clock ticking. */
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    /** Gets the clock ticking. */
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		restartType = state.parameters.getString(base.push(P_RESTART_TYPE), null);
-		upperbound = state.parameters.getInt(base.push(P_RESTART_UPPERBOUND), null, 1);
+        restartType = state.parameters.getString(base.push(P_RESTART_TYPE), null);
+        upperbound = state.parameters.getInt(base.push(P_RESTART_UPPERBOUND), null, 1);
 
-		if (upperbound < 1)
-			state.output.fatal("Parameter either not found or invalid (<1).", base.push(P_RESTART_UPPERBOUND));
+        if (upperbound < 1)
+            state.output.fatal("Parameter either not found or invalid (<1).", base.push(P_RESTART_UPPERBOUND));
 
-		if (!restartType.equals("random") && !restartType.equals("fixed"))
-			state.output.fatal("Parameter must be either 'fixed' or 'random'.", base.push(P_RESTART_TYPE));
+        if (!restartType.equals("random") && !restartType.equals("fixed"))
+            state.output.fatal("Parameter must be either 'fixed' or 'random'.", base.push(P_RESTART_TYPE));
 
-		// start counting down
-		this.resetClock(state);
-	}
+        // start counting down
+        this.resetClock(state);
+    }
 
-	/**
-	 * Checks the clock; if it's time to restart, we repopulate the population.
-	 * Afterwards, we reset the clock.
-	 * 
-	 * If it's not time yet, the clock goes tick.
-	 */
-	public void preEvaluationStatistics(final EvolutionState state) {
-		super.preEvaluationStatistics(state);
-		possiblyRestart(state);
-	}
+    /**
+     * Checks the clock; if it's time to restart, we repopulate the population.
+     * Afterwards, we reset the clock.
+     * 
+     * If it's not time yet, the clock goes tick.
+     */
+    public void preEvaluationStatistics(final EvolutionState state) {
+        super.preEvaluationStatistics(state);
+        possiblyRestart(state);
+    }
 
-	public void generationBoundaryStatistics(final EvolutionState state) {
-		super.generationBoundaryStatistics(state);
-		possiblyRestart(state);
-	}
+    public void generationBoundaryStatistics(final EvolutionState state) {
+        super.generationBoundaryStatistics(state);
+        possiblyRestart(state);
+    }
 
-	void possiblyRestart(EvolutionState state) {
+    void possiblyRestart(EvolutionState state) {
 
-		Subpopulation currentSubp;
-		File tempFile;
-		// time to restart!
-		if (countdown == 0) {
-			System.out.println("Restarting the population!");
-			// for each subpopulation
-			for (int subp = 0; subp < state.population.subpops.length; subp++) {
-				currentSubp = state.population.subpops[subp];
-				tempFile = currentSubp.loadInds;
-				// disable loadInds so we generate candidates randomly
-				currentSubp.loadInds = null;
-				currentSubp.populate(state, 0);
-				currentSubp.loadInds = tempFile;
-			}
-			this.resetClock(state);
-		} else
-			countdown--;
-	}
+        Subpopulation currentSubp;
+        File tempFile;
+        // time to restart!
+        if (countdown == 0) {
+            System.out.println("Restarting the population!");
+            // for each subpopulation
+            for (int subp = 0; subp < state.population.subpops.length; subp++) {
+                currentSubp = state.population.subpops[subp];
+                tempFile = currentSubp.loadInds;
+                // disable loadInds so we generate candidates randomly
+                currentSubp.loadInds = null;
+                currentSubp.populate(state, 0);
+                currentSubp.loadInds = tempFile;
+            }
+            this.resetClock(state);
+        } else
+            countdown--;
+    }
 
-	void resetClock(final EvolutionState state) {
-		if (restartType.equals("fixed"))
-			countdown = upperbound;
-		else
-			// might need to fix random index to support multithreading
-			countdown = state.random[0].nextInt(upperbound + 1);
-	}
+    void resetClock(final EvolutionState state) {
+        if (restartType.equals("fixed"))
+            countdown = upperbound;
+        else
+            // might need to fix random index to support multithreading
+            countdown = state.random[0].nextInt(upperbound + 1);
+    }
 }

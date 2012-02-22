@@ -82,109 +82,109 @@ import ec.util.RandomChoice;
  */
 
 public class SUSSelection extends SelectionMethod {
-	/** Default base */
-	public static final String P_SUS = "sus";
-	public static final String P_SHUFFLE = "shuffle";
+    /** Default base */
+    public static final String P_SUS = "sus";
+    public static final String P_SHUFFLE = "shuffle";
 
-	/**
-	 * An array of pointers to individuals in the population, shuffled along
-	 * with the fitnesses array.
-	 */
-	public int[] indices;
-	/** The distribution of fitnesses. */
-	public float[] fitnesses;
+    /**
+     * An array of pointers to individuals in the population, shuffled along
+     * with the fitnesses array.
+     */
+    public int[] indices;
+    /** The distribution of fitnesses. */
+    public float[] fitnesses;
 
-	/** Should we shuffle first? */
-	public boolean shuffle = true;
-	/** The floating point value to consider for the next selected individual. */
-	public float offset = 0.0f;
-	/** The index in the array of the last individual selected. */
-	public int lastIndex;
-	/** How many samples have been done? */
-	public int steps;
+    /** Should we shuffle first? */
+    public boolean shuffle = true;
+    /** The floating point value to consider for the next selected individual. */
+    public float offset = 0.0f;
+    /** The index in the array of the last individual selected. */
+    public int lastIndex;
+    /** How many samples have been done? */
+    public int steps;
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_SUS);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_SUS);
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
-		shuffle = state.parameters.getBoolean(base.push(P_SHUFFLE), def.push(P_SHUFFLE), true);
-	}
+        Parameter def = defaultBase();
+        shuffle = state.parameters.getBoolean(base.push(P_SHUFFLE), def.push(P_SHUFFLE), true);
+    }
 
-	/*
-	 * Largely stolen from sim.util.Bag. Shuffles both the indices and the
-	 * floats
-	 */
-	void shuffle(MersenneTwisterFast random) {
-		int numObjs = fitnesses.length;
-		float[] fitnesses = this.fitnesses;
-		int[] indices = this.indices;
+    /*
+     * Largely stolen from sim.util.Bag. Shuffles both the indices and the
+     * floats
+     */
+    void shuffle(MersenneTwisterFast random) {
+        int numObjs = fitnesses.length;
+        float[] fitnesses = this.fitnesses;
+        int[] indices = this.indices;
 
-		float f;
-		int i;
-		int rand;
+        float f;
+        int i;
+        int rand;
 
-		for (int x = numObjs - 1; x >= 1; x--) {
-			rand = random.nextInt(x + 1);
-			f = fitnesses[x];
-			fitnesses[x] = fitnesses[rand];
-			fitnesses[rand] = f;
+        for (int x = numObjs - 1; x >= 1; x--) {
+            rand = random.nextInt(x + 1);
+            f = fitnesses[x];
+            fitnesses[x] = fitnesses[rand];
+            fitnesses[rand] = f;
 
-			i = indices[x];
-			indices[x] = indices[rand];
-			indices[rand] = i;
-		}
-	}
+            i = indices[x];
+            indices[x] = indices[rand];
+            indices[rand] = i;
+        }
+    }
 
-	// don't need clone etc.
-	public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
-		lastIndex = 0;
-		steps = 0;
+    // don't need clone etc.
+    public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
+        lastIndex = 0;
+        steps = 0;
 
-		// compute offset
-		offset = (float) (s.random[thread].nextDouble() / fitnesses.length);
+        // compute offset
+        offset = (float) (s.random[thread].nextDouble() / fitnesses.length);
 
-		// load fitnesses but don't build distribution yet
-		fitnesses = new float[s.population.subpops[subpopulation].individuals.length];
-		for (int x = 0; x < fitnesses.length; x++) {
-			fitnesses[x] = ((Individual) (s.population.subpops[subpopulation].individuals[x])).fitness.fitness();
-			if (fitnesses[x] < 0) // uh oh
-				s.output.fatal("Discovered a negative fitness value.  SUSSelection requires that all fitness values be non-negative(offending subpopulation #"
-						+ subpopulation + ")");
-		}
+        // load fitnesses but don't build distribution yet
+        fitnesses = new float[s.population.subpops[subpopulation].individuals.length];
+        for (int x = 0; x < fitnesses.length; x++) {
+            fitnesses[x] = ((Individual) (s.population.subpops[subpopulation].individuals[x])).fitness.fitness();
+            if (fitnesses[x] < 0) // uh oh
+                s.output.fatal("Discovered a negative fitness value.  SUSSelection requires that all fitness values be non-negative(offending subpopulation #"
+                        + subpopulation + ")");
+        }
 
-		// construct and optionally shuffle fitness distribution and indices
-		indices = new int[s.population.subpops[subpopulation].individuals.length];
-		for (int i = 0; i < indices.length; i++)
-			indices[i] = i;
-		if (shuffle)
-			shuffle(s.random[thread]);
+        // construct and optionally shuffle fitness distribution and indices
+        indices = new int[s.population.subpops[subpopulation].individuals.length];
+        for (int i = 0; i < indices.length; i++)
+            indices[i] = i;
+        if (shuffle)
+            shuffle(s.random[thread]);
 
-		// organize the distribution. All zeros in fitness is fine
-		RandomChoice.organizeDistribution(fitnesses, true);
-	}
+        // organize the distribution. All zeros in fitness is fine
+        RandomChoice.organizeDistribution(fitnesses, true);
+    }
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		if (steps >= fitnesses.length) // we've gone too far, clearly an error
-		{
-			state.output
-					.warning("SUSSelection was asked for too many individuals, so we're re-shuffling.  This will give you proper results, but it might suggest an error in your code.");
-			boolean s = shuffle;
-			shuffle = true;
-			prepareToProduce(state, subpopulation, thread); // rebuild
-			shuffle = s; // just in case
-		}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        if (steps >= fitnesses.length) // we've gone too far, clearly an error
+        {
+            state.output
+                    .warning("SUSSelection was asked for too many individuals, so we're re-shuffling.  This will give you proper results, but it might suggest an error in your code.");
+            boolean s = shuffle;
+            shuffle = true;
+            prepareToProduce(state, subpopulation, thread); // rebuild
+            shuffle = s; // just in case
+        }
 
-		// find the next index
-		for ( /* empty */; lastIndex < fitnesses.length - 1; lastIndex++)
-			if ((lastIndex == 0 || offset >= fitnesses[lastIndex - 1]) && offset < fitnesses[lastIndex])
-				break;
+        // find the next index
+        for ( /* empty */; lastIndex < fitnesses.length - 1; lastIndex++)
+            if ((lastIndex == 0 || offset >= fitnesses[lastIndex - 1]) && offset < fitnesses[lastIndex])
+                break;
 
-		offset += (float) (1.0 / fitnesses.length); // update for next time
-		steps++;
-		return indices[lastIndex];
-	}
+        offset += (float) (1.0 / fitnesses.length); // update for next time
+        steps++;
+        return indices[lastIndex];
+    }
 }

@@ -50,64 +50,64 @@ import ec.gp.GPNode;
  */
 public interface IOperationProvider {
 
-	/**
-	 * <i>Creates</i> the class and makes it loadable to the JVM class pool. If
-	 * class is already available then its {@linkplain Class} is returned.
-	 * 
-	 * @return list representation of classes which extends the
-	 *         {@linkplain GPNode}.
-	 * @throws ClassNotFoundException
-	 *             when the loading of the class is not successful.
-	 * 
-	 * @throws IllegalArgumentException
-	 *             when not all the parameters has been successfully set.
-	 */
-	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException;
+    /**
+     * <i>Creates</i> the class and makes it loadable to the JVM class pool. If
+     * class is already available then its {@linkplain Class} is returned.
+     * 
+     * @return list representation of classes which extends the
+     *         {@linkplain GPNode}.
+     * @throws ClassNotFoundException
+     *             when the loading of the class is not successful.
+     * 
+     * @throws IllegalArgumentException
+     *             when not all the parameters has been successfully set.
+     */
+    public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException;
 
-	/**
-	 * Gets the Human Readable name of the operation.
-	 */
-	public String getName();
+    /**
+     * Gets the Human Readable name of the operation.
+     */
+    public String getName();
 
-	/**
-	 * Returns the additional information about the operation. What the
-	 * operation will be doing when it will act as {@linkplain GPNode}
-	 */
-	public String getComment();
+    /**
+     * Returns the additional information about the operation. What the
+     * operation will be doing when it will act as {@linkplain GPNode}
+     */
+    public String getComment();
 
-	/**
-	 * Returns the information if this operation provider should be enabled by
-	 * default.
-	 */
-	public boolean isEnableByDefault();
+    /**
+     * Returns the information if this operation provider should be enabled by
+     * default.
+     */
+    public boolean isEnableByDefault();
 
-	/**
-	 * The term which identifies if the element should be visible.
-	 */
-	public void setEnabled(boolean isEnabled);
+    /**
+     * The term which identifies if the element should be visible.
+     */
+    public void setEnabled(boolean isEnabled);
 
-	/**
-	 * Gets the {@linkplain SortedMap} with the key being name of the parameter
-	 * and value being the type of the element.
-	 */
-	public Map<String, Class<?>> getParametersTypes();
+    /**
+     * Gets the {@linkplain SortedMap} with the key being name of the parameter
+     * and value being the type of the element.
+     */
+    public Map<String, Class<?>> getParametersTypes();
 
-	/**
-	 * Parameterizes the object of {@linkplain IOperationProvider} with the same
-	 * map concept, but values here are exact <i>values</i> of parameters.
-	 */
-	public void setParameters(Map<String, Object> params);
+    /**
+     * Parameterizes the object of {@linkplain IOperationProvider} with the same
+     * map concept, but values here are exact <i>values</i> of parameters.
+     */
+    public void setParameters(Map<String, Object> params);
 
-	/**
-	 * Get the already saved collections of parameters.
-	 */
-	public Map<String, Object> getParameters();
+    /**
+     * Get the already saved collections of parameters.
+     */
+    public Map<String, Object> getParameters();
 
-	/**
-	 * Gets the default values for each of the parameter. The {@linkplain Map}
-	 * returned here should be equal to the {@linkplain Map} of method
-	 * {@code getParameters()} in the field of available keys.
-	 */
-	public Map<String, Object> getParametersDefault();
+    /**
+     * Gets the default values for each of the parameter. The {@linkplain Map}
+     * returned here should be equal to the {@linkplain Map} of method
+     * {@code getParameters()} in the field of available keys.
+     */
+    public Map<String, Object> getParametersDefault();
 
 }

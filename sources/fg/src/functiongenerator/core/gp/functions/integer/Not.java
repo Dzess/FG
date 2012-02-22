@@ -10,18 +10,19 @@ import functiongenerator.core.gp.functions.UnaryOperation;
 
 public class Not extends UnaryOperation {
 
-	@Override
-	public String toString() {
-		return "~";
-	}
+    @Override
+    public String toString() {
+        return "~";
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
 
-		IntegerData rd = ((IntegerData) (input));
+        IntegerData rd = ((IntegerData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);
-		rd.Y = ~rd.Y;
-	}
+        children[0].eval(state, thread, input, stack, individual, problem);
+        rd.Y = ~rd.Y;
+    }
 
 }

@@ -28,28 +28,28 @@ import ec.util.Parameter;
  */
 
 public class SimpleInitializer extends Initializer {
-	public void setup(final EvolutionState state, final Parameter base) {
-	}
+    public void setup(final EvolutionState state, final Parameter base) {
+    }
 
-	/**
-	 * Creates, populates, and returns a new population by making a new
-	 * population, calling setup(...) on it, and calling populate(...) on it,
-	 * assuming an unthreaded environment (thread 0). Obviously, this is an
-	 * expensive method. It should only be called once typically in a run.
-	 */
+    /**
+     * Creates, populates, and returns a new population by making a new
+     * population, calling setup(...) on it, and calling populate(...) on it,
+     * assuming an unthreaded environment (thread 0). Obviously, this is an
+     * expensive method. It should only be called once typically in a run.
+     */
 
-	public Population initialPopulation(final EvolutionState state, int thread) {
-		Population p = setupPopulation(state, thread);
-		p.populate(state, thread);
-		return p;
-	}
+    public Population initialPopulation(final EvolutionState state, int thread) {
+        Population p = setupPopulation(state, thread);
+        p.populate(state, thread);
+        return p;
+    }
 
-	public Population setupPopulation(final EvolutionState state, int thread) {
-		Parameter base = new Parameter(P_POP);
-		Population p = (Population) state.parameters.getInstanceForParameterEq(base, null, Population.class); // Population.class
-																												// is
-																												// fine
-		p.setup(state, base);
-		return p;
-	}
+    public Population setupPopulation(final EvolutionState state, int thread) {
+        Parameter base = new Parameter(P_POP);
+        Population p = (Population) state.parameters.getInstanceForParameterEq(base, null, Population.class); // Population.class
+                                                                                                              // is
+                                                                                                              // fine
+        p.setup(state, base);
+        return p;
+    }
 }

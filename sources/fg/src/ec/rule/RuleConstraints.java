@@ -42,43 +42,45 @@ import ec.util.Parameter;
  *          </table>
  */
 public class RuleConstraints implements Clique {
-	// public static final int SIZE_OF_BYTE = 256;
-	public final static String P_NAME = "name";
-	// public final static String P_SIZE = "size";
+    // public static final int SIZE_OF_BYTE = 256;
+    public final static String P_NAME = "name";
+    // public final static String P_SIZE = "size";
 
-	/** The byte value of the constraints -- we can only have 256 of them */
-	public byte constraintNumber;
+    /** The byte value of the constraints -- we can only have 256 of them */
+    public byte constraintNumber;
 
-	/** The name of the RuleConstraints object */
-	public String name;
+    /** The name of the RuleConstraints object */
+    public String name;
 
-	/** Converting the rule to a string ( the name ) */
-	public String toString() {
-		return name;
-	}
+    /** Converting the rule to a string ( the name ) */
+    public String toString() {
+        return name;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		// What's my name?
-		name = state.parameters.getString(base.push(P_NAME), null);
-		if (name == null)
-			state.output.fatal("No name was given for this Rule Constraints.", base.push(P_NAME));
+    public void setup(final EvolutionState state, final Parameter base) {
+        // What's my name?
+        name = state.parameters.getString(base.push(P_NAME), null);
+        if (name == null)
+            state.output.fatal("No name was given for this Rule Constraints.", base.push(P_NAME));
 
-		// Register me
-		RuleConstraints old_constraints = (RuleConstraints) (((RuleInitializer) state.initializer).ruleConstraintRepository.put(name, this));
-		if (old_constraints != null)
-			state.output.fatal("The rule constraints \"" + name + "\" has been defined multiple times.", base.push(P_NAME));
-	}
+        // Register me
+        RuleConstraints old_constraints = (RuleConstraints) (((RuleInitializer) state.initializer).ruleConstraintRepository
+                .put(name, this));
+        if (old_constraints != null)
+            state.output.fatal("The rule constraints \"" + name + "\" has been defined multiple times.",
+                    base.push(P_NAME));
+    }
 
-	/**
-	 * You must guarantee that after calling constraintsFor(...) one or several
-	 * times, you call state.output.exitIfErrors() once.
-	 */
+    /**
+     * You must guarantee that after calling constraintsFor(...) one or several
+     * times, you call state.output.exitIfErrors() once.
+     */
 
-	public static RuleConstraints constraintsFor(final String constraintsName, final EvolutionState state) {
-		RuleConstraints myConstraints = (RuleConstraints) (((RuleInitializer) state.initializer).ruleConstraintRepository
-				.get(constraintsName));
-		if (myConstraints == null)
-			state.output.error("The rule constraints \"" + constraintsName + "\" could not be found.");
-		return myConstraints;
-	}
+    public static RuleConstraints constraintsFor(final String constraintsName, final EvolutionState state) {
+        RuleConstraints myConstraints = (RuleConstraints) (((RuleInitializer) state.initializer).ruleConstraintRepository
+                .get(constraintsName));
+        if (myConstraints == null)
+            state.output.error("The rule constraints \"" + constraintsName + "\" could not be found.");
+        return myConstraints;
+    }
 }

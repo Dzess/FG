@@ -28,11 +28,11 @@ import ec.simple.SimpleBreeder;
 // This all assumes that the archive is the LAST N INDIVIDUALS in the
 // individuals array
 public class SPEA2TournamentSelection extends TournamentSelection {
-	public int getRandomIndividual(int number, int subpopulation, EvolutionState state, int thread) {
-		Individual[] oldinds = state.population.subpops[subpopulation].individuals;
-		int archiveSize = ((SimpleBreeder) (state.breeder)).elite[subpopulation];
-		int archiveStart = state.population.subpops[subpopulation].individuals.length - archiveSize;
+    public int getRandomIndividual(int number, int subpopulation, EvolutionState state, int thread) {
+        Individual[] oldinds = state.population.subpops[subpopulation].individuals;
+        int archiveSize = ((SimpleBreeder) (state.breeder)).elite[subpopulation];
+        int archiveStart = state.population.subpops[subpopulation].individuals.length - archiveSize;
 
-		return archiveStart + state.random[thread].nextInt(archiveSize);
-	}
+        return archiveStart + state.random[thread].nextInt(archiveSize);
+    }
 }

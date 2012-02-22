@@ -21,9 +21,9 @@ package ec.util;
  */
 
 public interface RandomChoiceChooserD {
-	/** Returns obj's probability */
-	public double getProbability(final Object obj);
+    /** Returns obj's probability */
+    public double getProbability(final Object obj);
 
-	/** Sets obj's probability */
-	public void setProbability(final Object obj, final double prob);
+    /** Sets obj's probability */
+    public void setProbability(final Object obj, final double prob);
 }

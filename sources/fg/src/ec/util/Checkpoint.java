@@ -45,41 +45,45 @@ import ec.EvolutionState;
 
 public class Checkpoint {
 
-	/** Writes the evolution state out to a file. */
+    /** Writes the evolution state out to a file. */
 
-	public static void setCheckpoint(EvolutionState state) {
-		try {
-			ObjectOutputStream s = new ObjectOutputStream(new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(""
-					+ state.checkpointPrefix + "." + state.generation + ".gz"))));
-			s.writeObject(state);
-			s.close();
-			state.output.message("Wrote out checkpoint file " + state.checkpointPrefix + "." + state.generation + ".gz");
-		} catch (IOException e) {
-			state.output.warning("Unable to create the checkpoint file " + state.checkpointPrefix + "." + state.generation + ".gz"
-					+ "because of an IOException:\n--EXCEPTION--\n" + e + "\n--EXCEPTION-END--\n");
-		}
-	}
+    public static void setCheckpoint(EvolutionState state) {
+        try {
+            ObjectOutputStream s = new ObjectOutputStream(new GZIPOutputStream(new BufferedOutputStream(
+                    new FileOutputStream("" + state.checkpointPrefix + "." + state.generation + ".gz"))));
+            s.writeObject(state);
+            s.close();
+            state.output
+                    .message("Wrote out checkpoint file " + state.checkpointPrefix + "." + state.generation + ".gz");
+        } catch (IOException e) {
+            state.output.warning("Unable to create the checkpoint file " + state.checkpointPrefix + "."
+                    + state.generation + ".gz" + "because of an IOException:\n--EXCEPTION--\n" + e
+                    + "\n--EXCEPTION-END--\n");
+        }
+    }
 
-	/**
-	 * Returns an EvolutionState object read from a checkpoint file whose
-	 * filename is <i>checkpoint</i>
-	 * 
-	 * @exception java.lang.ClassNotFoundException
-	 *                thrown when the checkpoint file contains a class reference
-	 *                which doesn't exist in your class hierarchy.
-	 **/
-	public static EvolutionState restoreFromCheckpoint(String checkpoint) throws IOException, ClassNotFoundException, OptionalDataException
-	/* must throw something if error -- NEVER return null */
-	{
-		// load from the file
-		ObjectInputStream s = new ObjectInputStream(new GZIPInputStream(new BufferedInputStream(new FileInputStream(checkpoint))));
+    /**
+     * Returns an EvolutionState object read from a checkpoint file whose
+     * filename is <i>checkpoint</i>
+     * 
+     * @exception java.lang.ClassNotFoundException
+     *                thrown when the checkpoint file contains a class reference
+     *                which doesn't exist in your class hierarchy.
+     **/
+    public static EvolutionState restoreFromCheckpoint(String checkpoint) throws IOException, ClassNotFoundException,
+            OptionalDataException
+    /* must throw something if error -- NEVER return null */
+    {
+        // load from the file
+        ObjectInputStream s = new ObjectInputStream(new GZIPInputStream(new BufferedInputStream(new FileInputStream(
+                checkpoint))));
 
-		EvolutionState e = (EvolutionState) s.readObject();
-		s.close();
+        EvolutionState e = (EvolutionState) s.readObject();
+        s.close();
 
-		// restart from the checkpoint
+        // restart from the checkpoint
 
-		e.resetFromCheckpoint();
-		return e;
-	}
+        e.resetFromCheckpoint();
+        return e;
+    }
 }

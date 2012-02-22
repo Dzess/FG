@@ -49,18 +49,19 @@ import ec.util.Parameter;
  */
 
 public class GeneVectorSpecies extends VectorSpecies {
-	public static final String P_GENE = "gene";
-	public VectorGene genePrototype;
+    public static final String P_GENE = "gene";
+    public VectorGene genePrototype;
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		Parameter def = defaultBase();
+    public void setup(final EvolutionState state, final Parameter base) {
+        Parameter def = defaultBase();
 
-		genePrototype = (VectorGene) (state.parameters.getInstanceForParameterEq(base.push(P_GENE), def.push(P_GENE), VectorGene.class));
-		genePrototype.setup(state, base.push(P_GENE));
+        genePrototype = (VectorGene) (state.parameters.getInstanceForParameterEq(base.push(P_GENE), def.push(P_GENE),
+                VectorGene.class));
+        genePrototype.setup(state, base.push(P_GENE));
 
-		// make sure that super.setup is done AFTER we've loaded our gene
-		// prototype.
-		super.setup(state, base);
-	}
+        // make sure that super.setup is done AFTER we've loaded our gene
+        // prototype.
+        super.setup(state, base);
+    }
 
 }

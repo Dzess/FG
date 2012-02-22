@@ -1,6 +1,5 @@
 package functiongenerator.core;
 
-
 public interface IProgressListener {
-	void update(String message, EvolutionStateHelper individual);
+    void update(String message, EvolutionStateHelper individual);
 }

@@ -57,62 +57,63 @@ import ec.util.Parameter;
  */
 
 public class ForceBreedingPipeline extends BreedingPipeline {
-	public static final String P_NUMINDS = "num-inds";
-	public static final String P_FORCE = "force";
+    public static final String P_NUMINDS = "num-inds";
+    public static final String P_FORCE = "force";
 
-	public int numInds;
+    public int numInds;
 
-	public Parameter defaultBase() {
-		return BreedDefaults.base().push(P_FORCE);
-	}
+    public Parameter defaultBase() {
+        return BreedDefaults.base().push(P_FORCE);
+    }
 
-	public int numSources() {
-		return 1;
-	}
+    public int numSources() {
+        return 1;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
-		Parameter def = defaultBase();
-		numInds = state.parameters.getInt(base.push(P_NUMINDS), def.push(P_NUMINDS), 1);
-		if (numInds == 0)
-			state.output.fatal("ForceBreedingPipeline must produce at least 1 child at a time", base.push(P_NUMINDS), def.push(P_NUMINDS));
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
+        Parameter def = defaultBase();
+        numInds = state.parameters.getInt(base.push(P_NUMINDS), def.push(P_NUMINDS), 1);
+        if (numInds == 0)
+            state.output.fatal("ForceBreedingPipeline must produce at least 1 child at a time", base.push(P_NUMINDS),
+                    def.push(P_NUMINDS));
 
-		// declare that likelihood isn't used
-		if (likelihood < 1.0f)
-			state.output.warning("ForceBreedingPipeline does not respond to the 'likelihood' parameter.", base.push(P_LIKELIHOOD),
-					def.push(P_LIKELIHOOD));
-	}
+        // declare that likelihood isn't used
+        if (likelihood < 1.0f)
+            state.output.warning("ForceBreedingPipeline does not respond to the 'likelihood' parameter.",
+                    base.push(P_LIKELIHOOD), def.push(P_LIKELIHOOD));
+    }
 
-	/** Returns the max of typicalIndsProduced() of all its children */
-	public int typicalIndsProduced() {
-		return numInds;
-	}
+    /** Returns the max of typicalIndsProduced() of all its children */
+    public int typicalIndsProduced() {
+        return numInds;
+    }
 
-	public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
-			final EvolutionState state, final int thread)
+    public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
+            final EvolutionState state, final int thread)
 
-	{
-		int n = numInds;
-		if (n < min)
-			n = min;
-		if (n > max)
-			n = max;
+    {
+        int n = numInds;
+        if (n < min)
+            n = min;
+        if (n > max)
+            n = max;
 
-		int total;
-		int numToProduce;
-		for (total = 0; total < n;) {
-			numToProduce = n - total;
-			if (numToProduce > numInds)
-				numToProduce = numInds;
+        int total;
+        int numToProduce;
+        for (total = 0; total < n;) {
+            numToProduce = n - total;
+            if (numToProduce > numInds)
+                numToProduce = numInds;
 
-			total += sources[0].produce(numToProduce, numToProduce, start + total, subpopulation, inds, state, thread);
-		}
+            total += sources[0].produce(numToProduce, numToProduce, start + total, subpopulation, inds, state, thread);
+        }
 
-		// clone if necessary
-		if (sources[0] instanceof SelectionMethod)
-			for (int q = start; q < total + start; q++)
-				inds[q] = (Individual) (inds[q].clone());
+        // clone if necessary
+        if (sources[0] instanceof SelectionMethod)
+            for (int q = start; q < total + start; q++)
+                inds[q] = (Individual) (inds[q].clone());
 
-		return total;
-	}
+        return total;
+    }
 }

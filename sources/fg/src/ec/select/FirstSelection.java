@@ -35,44 +35,45 @@ import ec.util.Parameter;
  */
 
 public class FirstSelection extends SelectionMethod implements SteadyStateBSourceForm {
-	/** default base */
-	public static final String P_FIRST = "first";
+    /** default base */
+    public static final String P_FIRST = "first";
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_FIRST);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_FIRST);
+    }
 
-	// I hard-code both produce(...) methods for efficiency's sake
+    // I hard-code both produce(...) methods for efficiency's sake
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		return 0;
-	}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        return 0;
+    }
 
-	// I hard-code both produce(...) methods for efficiency's sake
+    // I hard-code both produce(...) methods for efficiency's sake
 
-	public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
-			final EvolutionState state, final int thread) {
-		int n = 1;
-		if (n > max)
-			n = max;
-		if (n < min)
-			n = min;
+    public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
+            final EvolutionState state, final int thread) {
+        int n = 1;
+        if (n > max)
+            n = max;
+        if (n < min)
+            n = min;
 
-		for (int q = 0; q < n; q++) {
-			// pick size random individuals, then pick the best.
-			Individual[] oldinds = state.population.subpops[subpopulation].individuals;
-			inds[start + q] = oldinds[0]; // note it's a pointer transfer, not a
-											// copy!
-		}
-		return n;
-	}
+        for (int q = 0; q < n; q++) {
+            // pick size random individuals, then pick the best.
+            Individual[] oldinds = state.population.subpops[subpopulation].individuals;
+            inds[start + q] = oldinds[0]; // note it's a pointer transfer, not a
+                                          // copy!
+        }
+        return n;
+    }
 
-	public void individualReplaced(final SteadyStateEvolutionState state, final int subpopulation, final int thread, final int individual) {
-		return;
-	}
+    public void individualReplaced(final SteadyStateEvolutionState state, final int subpopulation, final int thread,
+            final int individual) {
+        return;
+    }
 
-	public void sourcesAreProperForm(final SteadyStateEvolutionState state) {
-		return;
-	}
+    public void sourcesAreProperForm(final SteadyStateEvolutionState state) {
+        return;
+    }
 
 }

@@ -34,153 +34,153 @@ import functiongenerator.core.gp.rt.RuntimeFunctionGenerator;
  */
 public class RuntimeOperationProvider implements IOperationProvider {
 
-	static public final String ATTR_VALUE = "Value";
+    static public final String ATTR_VALUE = "Value";
 
-	private final SortedMap<String, Class<?>> parameters;
-	private final SortedMap<String, Object> defaultParameters;
+    private final SortedMap<String, Class<?>> parameters;
+    private final SortedMap<String, Object> defaultParameters;
 
-	private Map<String, Object> values;
+    private Map<String, Object> values;
 
-	private RuntimeFunctionGenerator fg;
+    private RuntimeFunctionGenerator fg;
 
-	private boolean isEnableByDefault;
+    private boolean isEnableByDefault;
 
-	private final Class<? extends Number> type;
-	
-	/**
-	 * 
-	 * @param typeOfData
-	 *            : {@code Integer.class} or {@code Double.class}
-	 */
-	public RuntimeOperationProvider(Class<? extends Number> typeOfData, boolean isEnableByDefault) {
+    private final Class<? extends Number> type;
 
-		this.type = typeOfData;
-		this.isEnableByDefault = isEnableByDefault;
-		this.parameters = new TreeMap<String, Class<?>>();
-		this.parameters.put(ATTR_VALUE, typeOfData);
+    /**
+     * 
+     * @param typeOfData
+     *            : {@code Integer.class} or {@code Double.class}
+     */
+    public RuntimeOperationProvider(Class<? extends Number> typeOfData, boolean isEnableByDefault) {
 
-		this.defaultParameters = new TreeMap<String, Object>();
+        this.type = typeOfData;
+        this.isEnableByDefault = isEnableByDefault;
+        this.parameters = new TreeMap<String, Class<?>>();
+        this.parameters.put(ATTR_VALUE, typeOfData);
 
-		if (typeOfData == Integer.class) {
-			this.defaultParameters.put(ATTR_VALUE, 1);
-		} else if (typeOfData == Double.class) {
-			this.defaultParameters.put(ATTR_VALUE, 1.0);
-		} else {
-			throw new IllegalArgumentException("The type of data must be Integer or Double");
-		}
+        this.defaultParameters = new TreeMap<String, Object>();
 
-		setParameters(defaultParameters);
-	}
+        if (typeOfData == Integer.class) {
+            this.defaultParameters.put(ATTR_VALUE, 1);
+        } else if (typeOfData == Double.class) {
+            this.defaultParameters.put(ATTR_VALUE, 1.0);
+        } else {
+            throw new IllegalArgumentException("The type of data must be Integer or Double");
+        }
 
-	public Class<? extends Number> getOperationType(){
-		return this.type;
-	}
-	
-	@Override
-	public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException {
+        setParameters(defaultParameters);
+    }
 
-		// check if all parameters are set
-		if (this.fg == null)
-			throw new IllegalArgumentException("The the value parameter is missing");
+    public Class<? extends Number> getOperationType() {
+        return this.type;
+    }
 
-		List<Class<? extends GPNode>> list = new LinkedList<Class<? extends GPNode>>();
-		list.add(fg.generateClassAndLoad());
-		return list;
-	}
+    @Override
+    public List<Class<? extends GPNode>> getOperations() throws ClassNotFoundException, IllegalArgumentException {
 
-	@Override
-	public String getName() {
-		return "Literal Value";
-	}
+        // check if all parameters are set
+        if (this.fg == null)
+            throw new IllegalArgumentException("The the value parameter is missing");
 
-	@Override
-	public String getComment() {
-		return "Places the literal value as the Node";
-	}
+        List<Class<? extends GPNode>> list = new LinkedList<Class<? extends GPNode>>();
+        list.add(fg.generateClassAndLoad());
+        return list;
+    }
 
-	@Override
-	public Map<String, Class<?>> getParametersTypes() {
-		return parameters;
-	}
+    @Override
+    public String getName() {
+        return "Literal Value";
+    }
 
-	@Override
-	public void setParameters(Map<String, Object> params) {
-		values = params;
+    @Override
+    public String getComment() {
+        return "Places the literal value as the Node";
+    }
 
-		if (!values.containsKey(ATTR_VALUE)) {
-			throw new IllegalArgumentException("The passed params map has to have " + ATTR_VALUE);
-		}
+    @Override
+    public Map<String, Class<?>> getParametersTypes() {
+        return parameters;
+    }
 
-		if (type.equals(Integer.class)) {
-			Integer numberValue = (Integer) values.get(ATTR_VALUE);
-			this.fg = new IntegerValueRuntimeFunctionGenerator(numberValue);
-		} else if (type.equals(Double.class)) {
-			Double numberValu = (Double) values.get(ATTR_VALUE);
-			this.fg = new DoubleValueRuntimeFunctionGenerator(numberValu);
-		} else {
-			throw new IllegalArgumentException("The class cannot be found");
-		}
-	}
+    @Override
+    public void setParameters(Map<String, Object> params) {
+        values = params;
 
-	@Override
-	public boolean isEnableByDefault() {
-		return isEnableByDefault;
-	}
+        if (!values.containsKey(ATTR_VALUE)) {
+            throw new IllegalArgumentException("The passed params map has to have " + ATTR_VALUE);
+        }
 
-	@Override
-	public Map<String, Object> getParametersDefault() {
-		return defaultParameters;
-	}
+        if (type.equals(Integer.class)) {
+            Integer numberValue = (Integer) values.get(ATTR_VALUE);
+            this.fg = new IntegerValueRuntimeFunctionGenerator(numberValue);
+        } else if (type.equals(Double.class)) {
+            Double numberValu = (Double) values.get(ATTR_VALUE);
+            this.fg = new DoubleValueRuntimeFunctionGenerator(numberValu);
+        } else {
+            throw new IllegalArgumentException("The class cannot be found");
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (isEnableByDefault ? 1231 : 1237);
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((values == null) ? 0 : values.hashCode());
-		return result;
-	}
+    @Override
+    public boolean isEnableByDefault() {
+        return isEnableByDefault;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof RuntimeOperationProvider)) {
-			return false;
-		}
-		RuntimeOperationProvider other = (RuntimeOperationProvider) obj;
-		if (isEnableByDefault != other.isEnableByDefault) {
-			return false;
-		}
-		if (type == null) {
-			if (other.type != null) {
-				return false;
-			}
-		} else if (!type.equals(other.type)) {
-			return false;
-		}
-		if (values == null) {
-			if (other.values != null) {
-				return false;
-			}
-		} else if (!values.equals(other.values)) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public Map<String, Object> getParametersDefault() {
+        return defaultParameters;
+    }
 
-	@Override
-	public Map<String, Object> getParameters() {
-		return values;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (isEnableByDefault ? 1231 : 1237);
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + ((values == null) ? 0 : values.hashCode());
+        return result;
+    }
 
-	@Override
-	public void setEnabled(boolean isEnabled) {
-		isEnableByDefault = isEnabled;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof RuntimeOperationProvider)) {
+            return false;
+        }
+        RuntimeOperationProvider other = (RuntimeOperationProvider) obj;
+        if (isEnableByDefault != other.isEnableByDefault) {
+            return false;
+        }
+        if (type == null) {
+            if (other.type != null) {
+                return false;
+            }
+        } else if (!type.equals(other.type)) {
+            return false;
+        }
+        if (values == null) {
+            if (other.values != null) {
+                return false;
+            }
+        } else if (!values.equals(other.values)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Map<String, Object> getParameters() {
+        return values;
+    }
+
+    @Override
+    public void setEnabled(boolean isEnabled) {
+        isEnableByDefault = isEnabled;
+    }
 }

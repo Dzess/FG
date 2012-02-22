@@ -53,112 +53,112 @@ import ec.util.Parameter;
  */
 
 public interface Prototype extends Cloneable, Setup {
-	/**
-	 * Creates a new individual cloned from a prototype, and suitable to begin
-	 * use in its own evolutionary context.
-	 * 
-	 * <p>
-	 * Typically this should be a full "deep" clone. However, you may share
-	 * certain elements with other objects rather than clone hem, depending on
-	 * the situation:
-	 * 
-	 * <p>
-	 * <ul>
-	 * <li>If you hold objects which are shared with other instances, don't
-	 * clone them.
-	 * <li>If you hold objects which must be unique, clone them.
-	 * <li>If you hold objects which were given to you as a gesture of kindness,
-	 * and aren't owned by you, you probably shouldn't clone them.
-	 * <li>DON'T attempt to clone: Singletons, Cliques, or Groups.
-	 * <li>Arrays are not cloned automatically; you may need to clone an array
-	 * if you're not sharing it with other instances. Arrays have the nice
-	 * feature of being copyable by calling clone() on them.
-	 * </ul>
-	 * 
-	 * <p>
-	 * <b>Implementations.</b>
-	 * 
-	 * <ul>
-	 * <li>If no ancestor of yours implements clone(), and you have no need to
-	 * do clone deeply, and you are abstract, then you should not declare
-	 * clone().
-	 * 
-	 * <li>If no ancestor of yours implements clone(), and you have no need to
-	 * do clone deeply, and you are <b>not</b> abstract, then you should
-	 * implement it as follows:
-	 * 
-	 * <p>
-	 * <tt><pre>
-	 * public Object clone() 
-	 *     {
-	 *     try
-	 *         { 
-	 *         return super.clone();
-	 *         }
-	 *     catch ((CloneNotSupportedException e)
-	 *         { throw new InternalError(); } // never happens
-	 *     }
+    /**
+     * Creates a new individual cloned from a prototype, and suitable to begin
+     * use in its own evolutionary context.
+     * 
+     * <p>
+     * Typically this should be a full "deep" clone. However, you may share
+     * certain elements with other objects rather than clone hem, depending on
+     * the situation:
+     * 
+     * <p>
+     * <ul>
+     * <li>If you hold objects which are shared with other instances, don't
+     * clone them.
+     * <li>If you hold objects which must be unique, clone them.
+     * <li>If you hold objects which were given to you as a gesture of kindness,
+     * and aren't owned by you, you probably shouldn't clone them.
+     * <li>DON'T attempt to clone: Singletons, Cliques, or Groups.
+     * <li>Arrays are not cloned automatically; you may need to clone an array
+     * if you're not sharing it with other instances. Arrays have the nice
+     * feature of being copyable by calling clone() on them.
+     * </ul>
+     * 
+     * <p>
+     * <b>Implementations.</b>
+     * 
+     * <ul>
+     * <li>If no ancestor of yours implements clone(), and you have no need to
+     * do clone deeply, and you are abstract, then you should not declare
+     * clone().
+     * 
+     * <li>If no ancestor of yours implements clone(), and you have no need to
+     * do clone deeply, and you are <b>not</b> abstract, then you should
+     * implement it as follows:
+     * 
+     * <p>
+     * <tt><pre>
+     * public Object clone() 
+     *     {
+     *     try
+     *         { 
+     *         return super.clone();
+     *         }
+     *     catch ((CloneNotSupportedException e)
+     *         { throw new InternalError(); } // never happens
+     *     }
         </pre></tt>
-	 * 
-	 * <li>If no ancestor of yours implements clone(), but you need to
-	 * deep-clone some things, then you should implement it as follows:
-	 * 
-	 * <p>
-	 * <tt><pre>
-	 * public Object clone() 
-	 *     {
-	 *     try
-	 *         { 
-	 *         MyObject myobj = (MyObject) (super.clone());
-	 * 
-	 *         // put your deep-cloning code here...
-	 *         }
-	 *     catch ((CloneNotSupportedException e)
-	 *         { throw new InternalError(); } // never happens
-	 *     return myobj;
-	 *     } 
+     * 
+     * <li>If no ancestor of yours implements clone(), but you need to
+     * deep-clone some things, then you should implement it as follows:
+     * 
+     * <p>
+     * <tt><pre>
+     * public Object clone() 
+     *     {
+     *     try
+     *         { 
+     *         MyObject myobj = (MyObject) (super.clone());
+     * 
+     *         // put your deep-cloning code here...
+     *         }
+     *     catch ((CloneNotSupportedException e)
+     *         { throw new InternalError(); } // never happens
+     *     return myobj;
+     *     } 
         </pre></tt>
-	 * 
-	 * <li>If an ancestor has implemented clone(), and you also need to deep
-	 * clone some things, then you should implement it as follows:
-	 * 
-	 * <p>
-	 * <tt><pre>
-	 * public Object clone() 
-	 *     { 
-	 *     MyObject myobj = (MyObject) (super.clone());
-	 * 
-	 *     // put your deep-cloning code here...
-	 * 
-	 *     return myobj;
-	 *     } 
+     * 
+     * <li>If an ancestor has implemented clone(), and you also need to deep
+     * clone some things, then you should implement it as follows:
+     * 
+     * <p>
+     * <tt><pre>
+     * public Object clone() 
+     *     { 
+     *     MyObject myobj = (MyObject) (super.clone());
+     * 
+     *     // put your deep-cloning code here...
+     * 
+     *     return myobj;
+     *     } 
         </pre></tt>
-	 * </ul>
-	 */
+     * </ul>
+     */
 
-	public Object clone();
+    public Object clone();
 
-	/**
-	 * Sets up the object by reading it from the parameters stored in
-	 * <i>state</i>, built off of the parameter base <i>base</i>. If an ancestor
-	 * implements this method, be sure to call super.setup(state,base); before
-	 * you do anything else.
-	 * 
-	 * <p>
-	 * For prototypes, setup(...) is typically called once for the prototype
-	 * instance; cloned instances do not receive the setup(...) call. setup(...)
-	 * <i>may</i> be called more than once; the only guarantee is that it will
-	 * get called at least once on an instance or some "parent" object from
-	 * which it was ultimately cloned.
-	 */
+    /**
+     * Sets up the object by reading it from the parameters stored in
+     * <i>state</i>, built off of the parameter base <i>base</i>. If an ancestor
+     * implements this method, be sure to call super.setup(state,base); before
+     * you do anything else.
+     * 
+     * <p>
+     * For prototypes, setup(...) is typically called once for the prototype
+     * instance; cloned instances do not receive the setup(...) call. setup(...)
+     * <i>may</i> be called more than once; the only guarantee is that it will
+     * get called at least once on an instance or some "parent" object from
+     * which it was ultimately cloned.
+     */
 
-	public void setup(final EvolutionState state, final Parameter base);
+    public void setup(final EvolutionState state, final Parameter base);
 
-	/**
-	 * Returns the default base for this prototype. This should generally be
-	 * implemented by building off of the static base() method on the
-	 * DefaultsForm object for the prototype's package. This should be callable
-	 * during setup(...).
-	 */
-	public Parameter defaultBase();
+    /**
+     * Returns the default base for this prototype. This should generally be
+     * implemented by building off of the static base() method on the
+     * DefaultsForm object for the prototype's package. This should be callable
+     * during setup(...).
+     */
+    public Parameter defaultBase();
 }

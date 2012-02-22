@@ -31,19 +31,19 @@ import ec.Prototype;
  */
 
 public interface GPNodeSelector extends Prototype {
-	/**
-	 * Picks a node at random from tree and returns it. The tree is located in
-	 * ind, which is located in s.population[subpopulation]. This method will be
-	 * preceded with a call to reset(); afterwards, pickNode(...) may be called
-	 * several times for the same tree.
-	 */
+    /**
+     * Picks a node at random from tree and returns it. The tree is located in
+     * ind, which is located in s.population[subpopulation]. This method will be
+     * preceded with a call to reset(); afterwards, pickNode(...) may be called
+     * several times for the same tree.
+     */
 
-	public abstract GPNode pickNode(final EvolutionState s, final int subpopulation, final int thread, final GPIndividual ind,
-			final GPTree tree);
+    public abstract GPNode pickNode(final EvolutionState s, final int subpopulation, final int thread,
+            final GPIndividual ind, final GPTree tree);
 
-	/**
-	 * Resets the Node Selector before a new series of pickNode() if need be.
-	 */
-	public abstract void reset();
+    /**
+     * Resets the Node Selector before a new series of pickNode() if need be.
+     */
+    public abstract void reset();
 
 }

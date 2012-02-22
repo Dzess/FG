@@ -19,15 +19,15 @@ import java.util.ArrayList;
  */
 
 public abstract class GrammarNode {
-	String head;
-	protected ArrayList children = new ArrayList(); // may be empty but it's not
-													// very expensive
+    String head;
+    protected ArrayList children = new ArrayList(); // may be empty but it's not
+                                                    // very expensive
 
-	public GrammarNode(String head) {
-		this.head = head;
-	}
+    public GrammarNode(String head) {
+        this.head = head;
+    }
 
-	public String getHead() {
-		return head;
-	}
+    public String getHead() {
+        return head;
+    }
 }

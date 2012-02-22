@@ -10,16 +10,17 @@ import functiongenerator.core.gp.functions.NullaryOperation;
 
 public class Zero extends NullaryOperation {
 
-	@Override
-	public String toString() {
-		return "0";
-	}
+    @Override
+    public String toString() {
+        return "0";
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
 
-		DoubleData rd = ((DoubleData) (input));
-		rd.Y = 0;
-	}
+        DoubleData rd = ((DoubleData) (input));
+        rd.Y = 0;
+    }
 
 }

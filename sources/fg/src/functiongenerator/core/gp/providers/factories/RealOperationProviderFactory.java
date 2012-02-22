@@ -37,38 +37,40 @@ import functiongenerator.core.gp.providers.SimpleOperationProvider;
  */
 public class RealOperationProviderFactory implements IOperationProviderFactory {
 
-	private final List<IOperationProvider> avaliable;
+    private final List<IOperationProvider> avaliable;
 
-	public RealOperationProviderFactory() {
-		avaliable = new ArrayList<IOperationProvider>();
+    public RealOperationProviderFactory() {
+        avaliable = new ArrayList<IOperationProvider>();
 
-		// NOTE: add here any types of providers
-		// NOTE: add here next supported operations
-		avaliable.add(new SimpleOperationProvider(Add.class, "Add", true));
-		avaliable.add(new SimpleOperationProvider(Sub.class, "Subtract", true));
-		avaliable.add(new SimpleOperationProvider(Mul.class, "Mulitply", true));
-		avaliable.add(new SimpleOperationProvider(Div.class, "Divide", false));
-		avaliable.add(new SimpleOperationProvider(ProtectedDiv.class, "Protected Divide", "Returns 0 when divisor is 0.", true));
-		avaliable.add(new SimpleOperationProvider(Min.class, "Min", false));
-		avaliable.add(new SimpleOperationProvider(Max.class, "Max", false));
+        // NOTE: add here any types of providers
+        // NOTE: add here next supported operations
+        avaliable.add(new SimpleOperationProvider(Add.class, "Add", true));
+        avaliable.add(new SimpleOperationProvider(Sub.class, "Subtract", true));
+        avaliable.add(new SimpleOperationProvider(Mul.class, "Mulitply", true));
+        avaliable.add(new SimpleOperationProvider(Div.class, "Divide", false));
+        avaliable.add(new SimpleOperationProvider(ProtectedDiv.class, "Protected Divide",
+                "Returns 0 when divisor is 0.", true));
+        avaliable.add(new SimpleOperationProvider(Min.class, "Min", false));
+        avaliable.add(new SimpleOperationProvider(Max.class, "Max", false));
 
-		// real alike
-		avaliable.add(new SimpleOperationProvider(Exp.class, "Exp", false));
-		avaliable.add(new SimpleOperationProvider(Pow.class, "Pow", false));
-		avaliable.add(new SimpleOperationProvider(Log.class, "Log", false));
-		avaliable.add(new SimpleOperationProvider(ProtectedLog.class, "Protected Log", "Returns 0 when argument is less or equal 0.", false));
-		avaliable.add(new SimpleOperationProvider(Sin.class, "Sin", false));
-		avaliable.add(new SimpleOperationProvider(Cos.class, "Cos", false));
+        // real alike
+        avaliable.add(new SimpleOperationProvider(Exp.class, "Exp", false));
+        avaliable.add(new SimpleOperationProvider(Pow.class, "Pow", false));
+        avaliable.add(new SimpleOperationProvider(Log.class, "Log", false));
+        avaliable.add(new SimpleOperationProvider(ProtectedLog.class, "Protected Log",
+                "Returns 0 when argument is less or equal 0.", false));
+        avaliable.add(new SimpleOperationProvider(Sin.class, "Sin", false));
+        avaliable.add(new SimpleOperationProvider(Cos.class, "Cos", false));
 
-		// additional literals
-		avaliable.add(new RuntimeOperationProvider(Double.class, false));
-		avaliable.add(new RangeRuntimeOperationProvider(Double.class, false));
+        // additional literals
+        avaliable.add(new RuntimeOperationProvider(Double.class, false));
+        avaliable.add(new RangeRuntimeOperationProvider(Double.class, false));
 
-	}
+    }
 
-	@Override
-	public List<IOperationProvider> getAvaliable() {
-		return avaliable;
-	}
+    @Override
+    public List<IOperationProvider> getAvaliable() {
+        return avaliable;
+    }
 
 }

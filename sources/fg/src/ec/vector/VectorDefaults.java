@@ -24,10 +24,10 @@ import ec.util.Parameter;
  */
 
 public final class VectorDefaults implements DefaultsForm {
-	public static final String P_VECTOR = "vector";
+    public static final String P_VECTOR = "vector";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_VECTOR);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_VECTOR);
+    }
 }

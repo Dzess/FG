@@ -35,42 +35,44 @@ import ec.util.Parameter;
  */
 
 public class RandomSelection extends SelectionMethod implements SteadyStateBSourceForm {
-	/** default base */
-	public static final String P_RANDOM = "random";
+    /** default base */
+    public static final String P_RANDOM = "random";
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_RANDOM);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_RANDOM);
+    }
 
-	// I hard-code both produce(...) methods for efficiency's sake
+    // I hard-code both produce(...) methods for efficiency's sake
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		return state.random[thread].nextInt(state.population.subpops[subpopulation].individuals.length);
-	}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        return state.random[thread].nextInt(state.population.subpops[subpopulation].individuals.length);
+    }
 
-	// I hard-code both produce(...) methods for efficiency's sake
+    // I hard-code both produce(...) methods for efficiency's sake
 
-	public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
-			final EvolutionState state, final int thread) {
-		int n = 1;
-		if (n > max)
-			n = max;
-		if (n < min)
-			n = min;
+    public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
+            final EvolutionState state, final int thread) {
+        int n = 1;
+        if (n > max)
+            n = max;
+        if (n < min)
+            n = min;
 
-		for (int q = 0; q < n; q++) {
-			Individual[] oldinds = state.population.subpops[subpopulation].individuals;
-			inds[start + q] = oldinds[state.random[thread].nextInt(state.population.subpops[subpopulation].individuals.length)];
-		}
-		return n;
-	}
+        for (int q = 0; q < n; q++) {
+            Individual[] oldinds = state.population.subpops[subpopulation].individuals;
+            inds[start + q] = oldinds[state.random[thread]
+                    .nextInt(state.population.subpops[subpopulation].individuals.length)];
+        }
+        return n;
+    }
 
-	public void individualReplaced(final SteadyStateEvolutionState state, final int subpopulation, final int thread, final int individual) {
-		return;
-	}
+    public void individualReplaced(final SteadyStateEvolutionState state, final int subpopulation, final int thread,
+            final int individual) {
+        return;
+    }
 
-	public void sourcesAreProperForm(final SteadyStateEvolutionState state) {
-		return;
-	}
+    public void sourcesAreProperForm(final SteadyStateEvolutionState state) {
+        return;
+    }
 
 }

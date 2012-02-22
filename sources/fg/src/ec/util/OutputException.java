@@ -20,7 +20,7 @@ package ec.util;
  */
 
 public class OutputException extends RuntimeException {
-	public OutputException(String s) {
-		super(s);
-	}
+    public OutputException(String s) {
+        super(s);
+    }
 }

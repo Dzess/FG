@@ -10,22 +10,22 @@ import functiongenerator.core.EvolutionStateHelper;
  */
 public interface IChartPanel {
 
-	/**
-	 * The drawn content
-	 */
-	public Component getComponent();
+    /**
+     * The drawn content
+     */
+    public Component getComponent();
 
-	/**
-	 * Header of the current chart
-	 */
-	public String getTitle();
+    /**
+     * Header of the current chart
+     */
+    public String getTitle();
 
-	/**
-	 * Recalculate all the stuff with this chart and draw it.
-	 * 
-	 * @param state
-	 *            : currently the best solution
-	 */
-	public void redraw(EvolutionStateHelper state);
+    /**
+     * Recalculate all the stuff with this chart and draw it.
+     * 
+     * @param state
+     *            : currently the best solution
+     */
+    public void redraw(EvolutionStateHelper state);
 
 }

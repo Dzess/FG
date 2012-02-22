@@ -63,101 +63,102 @@ import ec.util.RandomChoice;
  */
 
 public class SigmaScalingSelection extends FitProportionateSelection {
-	/** Default base */
-	public static final String P_SIGMA_SCALING = "sigma-scaling";
+    /** Default base */
+    public static final String P_SIGMA_SCALING = "sigma-scaling";
 
-	/** Scaled fitness floor */
-	// Used as a cut-off point when negative valued scaled fitnesses are
-	// encountered (negative fitness values are not compatible with fitness
-	// proportionate style selection methods)
-	public static final String P_SCALED_FITNESS_FLOOR = "scaled-fitness-floor";
+    /** Scaled fitness floor */
+    // Used as a cut-off point when negative valued scaled fitnesses are
+    // encountered (negative fitness values are not compatible with fitness
+    // proportionate style selection methods)
+    public static final String P_SCALED_FITNESS_FLOOR = "scaled-fitness-floor";
 
-	/** Floor for sigma scaled fitnesses **/
-	private float fitnessFloor;
+    /** Floor for sigma scaled fitnesses **/
+    private float fitnessFloor;
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_SIGMA_SCALING);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_SIGMA_SCALING);
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		fitnessFloor = state.parameters.getFloatWithDefault(base.push(P_SCALED_FITNESS_FLOOR), def.push(P_SCALED_FITNESS_FLOOR), 0.1); // default
-																																		// scaled
-																																		// fitness
-																																		// floor
-																																		// of
-																																		// 0.1
-																																		// according
-																																		// to
-																																		// Tanese
-																																		// (1989)
+        fitnessFloor = state.parameters.getFloatWithDefault(base.push(P_SCALED_FITNESS_FLOOR),
+                def.push(P_SCALED_FITNESS_FLOOR), 0.1); // default
+                                                        // scaled
+                                                        // fitness
+                                                        // floor
+                                                        // of
+                                                        // 0.1
+                                                        // according
+                                                        // to
+                                                        // Tanese
+                                                        // (1989)
 
-		if (fitnessFloor < 0) {
-			// Hey! you gotta cool! Set your cooling rate to a positive value!
-			state.output.fatal("The scaled-fitness-floor must be a non-negative value.", base.push(P_SCALED_FITNESS_FLOOR),
-					def.push(P_SCALED_FITNESS_FLOOR));
-		}
-	}
+        if (fitnessFloor < 0) {
+            // Hey! you gotta cool! Set your cooling rate to a positive value!
+            state.output.fatal("The scaled-fitness-floor must be a non-negative value.",
+                    base.push(P_SCALED_FITNESS_FLOOR), def.push(P_SCALED_FITNESS_FLOOR));
+        }
+    }
 
-	// completely override FitProportionateSelection.prepareToProduce
-	public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
-		// load fitnesses
-		fitnesses = new float[s.population.subpops[subpopulation].individuals.length];
+    // completely override FitProportionateSelection.prepareToProduce
+    public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
+        // load fitnesses
+        fitnesses = new float[s.population.subpops[subpopulation].individuals.length];
 
-		double sigma;
-		double meanFitness;
-		double meanSum = 0;
-		double squaredDeviationsSum = 0;
+        double sigma;
+        double meanFitness;
+        double meanSum = 0;
+        double squaredDeviationsSum = 0;
 
-		for (int x = 0; x < fitnesses.length; x++) {
-			fitnesses[x] = ((Individual) (s.population.subpops[subpopulation].individuals[x])).fitness.fitness();
-			if (fitnesses[x] < 0) // uh oh
-				s.output.fatal("Discovered a negative fitness value.  SigmaScalingSelection requires that all fitness values be non-negative(offending subpopulation #"
-						+ subpopulation + ")");
-		}
+        for (int x = 0; x < fitnesses.length; x++) {
+            fitnesses[x] = ((Individual) (s.population.subpops[subpopulation].individuals[x])).fitness.fitness();
+            if (fitnesses[x] < 0) // uh oh
+                s.output.fatal("Discovered a negative fitness value.  SigmaScalingSelection requires that all fitness values be non-negative(offending subpopulation #"
+                        + subpopulation + ")");
+        }
 
-		// Calculate meanFitness
-		for (int x = 0; x < fitnesses.length; x++) {
-			meanSum = meanSum + fitnesses[x];
-		}
-		meanFitness = meanSum / fitnesses.length;
+        // Calculate meanFitness
+        for (int x = 0; x < fitnesses.length; x++) {
+            meanSum = meanSum + fitnesses[x];
+        }
+        meanFitness = meanSum / fitnesses.length;
 
-		// Calculate sum of squared deviations
-		for (int x = 0; x < fitnesses.length; x++) {
-			squaredDeviationsSum = squaredDeviationsSum + Math.pow(fitnesses[x] - meanFitness, 2);
-		}
-		sigma = Math.sqrt(squaredDeviationsSum / (fitnesses.length - 1));
+        // Calculate sum of squared deviations
+        for (int x = 0; x < fitnesses.length; x++) {
+            squaredDeviationsSum = squaredDeviationsSum + Math.pow(fitnesses[x] - meanFitness, 2);
+        }
+        sigma = Math.sqrt(squaredDeviationsSum / (fitnesses.length - 1));
 
-		// Fill fitnesses[] with sigma scaled fitness values
-		for (int x = 0; x < fitnesses.length; x++) {
-			fitnesses[x] = (float) sigmaScaledValue(fitnesses[x], meanFitness, sigma, s); // adjust
-																							// the
-																							// fitness
-																							// proportion
-																							// according
-																							// to
-																							// sigma
-																							// scaling.
+        // Fill fitnesses[] with sigma scaled fitness values
+        for (int x = 0; x < fitnesses.length; x++) {
+            fitnesses[x] = (float) sigmaScaledValue(fitnesses[x], meanFitness, sigma, s); // adjust
+                                                                                          // the
+                                                                                          // fitness
+                                                                                          // proportion
+                                                                                          // according
+                                                                                          // to
+                                                                                          // sigma
+                                                                                          // scaling.
 
-			// Sigma scaling formula can return negative values, this is
-			// unacceptable for fitness proportionate style selection...
-			// so we must substitute the fitnessFloor (some value >= 0) when a
-			// sigma scaled fitness <= fitnessFloor is encountered.
-			if (fitnesses[x] < fitnessFloor)
-				fitnesses[x] = fitnessFloor;
-		}
+            // Sigma scaling formula can return negative values, this is
+            // unacceptable for fitness proportionate style selection...
+            // so we must substitute the fitnessFloor (some value >= 0) when a
+            // sigma scaled fitness <= fitnessFloor is encountered.
+            if (fitnesses[x] < fitnessFloor)
+                fitnesses[x] = fitnessFloor;
+        }
 
-		// organize the distribution. All zeros in fitness is fine
-		RandomChoice.organizeDistribution(fitnesses, true);
-	}
+        // organize the distribution. All zeros in fitness is fine
+        RandomChoice.organizeDistribution(fitnesses, true);
+    }
 
-	private double sigmaScaledValue(double fitness, double meanFitness, double sigma, final EvolutionState s) {
-		if (sigma != 0)
-			return 1 + (fitness - meanFitness) / (2 * sigma);
-		return 1.0;
-	}
+    private double sigmaScaledValue(double fitness, double meanFitness, double sigma, final EvolutionState s) {
+        if (sigma != 0)
+            return 1 + (fitness - meanFitness) / (2 * sigma);
+        return 1.0;
+    }
 
 }

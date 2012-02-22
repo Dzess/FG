@@ -63,92 +63,93 @@ import ec.util.SortComparatorL;
  */
 
 public class BestSelection extends SelectionMethod {
-	/** Default base */
-	public static final String P_BEST = "best";
-	public static final String P_N = "n";
-	public static final String P_PICKWORST = "pick-worst";
-	/** Sorted, normalized, totalized fitnesses for the population */
-	public float[] sortedFit;
-	/**
-	 * Sorted population -- since I *have* to use an int-sized individual (short
-	 * gives me only 16K), I might as well just have pointers to the population
-	 * itself. :-(
-	 */
-	public int[] sortedPop;
+    /** Default base */
+    public static final String P_BEST = "best";
+    public static final String P_N = "n";
+    public static final String P_PICKWORST = "pick-worst";
+    /** Sorted, normalized, totalized fitnesses for the population */
+    public float[] sortedFit;
+    /**
+     * Sorted population -- since I *have* to use an int-sized individual (short
+     * gives me only 16K), I might as well just have pointers to the population
+     * itself. :-(
+     */
+    public int[] sortedPop;
 
-	/** Do we pick the worst instead of the best? */
-	public boolean pickWorst;
+    /** Do we pick the worst instead of the best? */
+    public boolean pickWorst;
 
-	public int bestn;
+    public int bestn;
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_BEST);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_BEST);
+    }
 
-	// don't need clone etc.
+    // don't need clone etc.
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		bestn = state.parameters.getInt(base.push(P_N), def.push(P_N), 1);
-		if (bestn == 0)
-			state.output.fatal("n must be an integer greater than 0", base.push(P_N), def.push(P_N));
+        bestn = state.parameters.getInt(base.push(P_N), def.push(P_N), 1);
+        if (bestn == 0)
+            state.output.fatal("n must be an integer greater than 0", base.push(P_N), def.push(P_N));
 
-		pickWorst = state.parameters.getBoolean(base.push(P_PICKWORST), def.push(P_PICKWORST), false);
-	}
+        pickWorst = state.parameters.getBoolean(base.push(P_PICKWORST), def.push(P_PICKWORST), false);
+    }
 
-	public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
-		// load sortedPop integers
-		final Individual[] i = s.population.subpops[subpopulation].individuals;
+    public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
+        // load sortedPop integers
+        final Individual[] i = s.population.subpops[subpopulation].individuals;
 
-		sortedPop = new int[i.length];
-		for (int x = 0; x < sortedPop.length; x++)
-			sortedPop[x] = x;
+        sortedPop = new int[i.length];
+        for (int x = 0; x < sortedPop.length; x++)
+            sortedPop[x] = x;
 
-		// sort sortedPop in increasing fitness order
-		QuickSort.qsort(sortedPop, new SortComparatorL() {
-			public boolean lt(long a, long b) {
-				return ((Individual) (i[(int) b])).fitness.betterThan(((Individual) (i[(int) a])).fitness);
-			}
+        // sort sortedPop in increasing fitness order
+        QuickSort.qsort(sortedPop, new SortComparatorL() {
+            public boolean lt(long a, long b) {
+                return ((Individual) (i[(int) b])).fitness.betterThan(((Individual) (i[(int) a])).fitness);
+            }
 
-			public boolean gt(long a, long b) {
-				return ((Individual) (i[(int) a])).fitness.betterThan(((Individual) (i[(int) b])).fitness);
-			}
-		});
+            public boolean gt(long a, long b) {
+                return ((Individual) (i[(int) a])).fitness.betterThan(((Individual) (i[(int) b])).fitness);
+            }
+        });
 
-		// load sortedFit
-		sortedFit = new float[Math.min(sortedPop.length, bestn)];
-		if (pickWorst)
-			for (int x = 0; x < sortedFit.length; x++)
-				sortedFit[x] = ((Individual) (i[sortedPop[x]])).fitness.fitness();
-		else
-			for (int x = 0; x < sortedFit.length; x++)
-				sortedFit[x] = ((Individual) (i[sortedPop[sortedPop.length - x - 1]])).fitness.fitness();
+        // load sortedFit
+        sortedFit = new float[Math.min(sortedPop.length, bestn)];
+        if (pickWorst)
+            for (int x = 0; x < sortedFit.length; x++)
+                sortedFit[x] = ((Individual) (i[sortedPop[x]])).fitness.fitness();
+        else
+            for (int x = 0; x < sortedFit.length; x++)
+                sortedFit[x] = ((Individual) (i[sortedPop[sortedPop.length - x - 1]])).fitness.fitness();
 
-		for (int x = 0; x < sortedFit.length; x++) {
-			if (sortedFit[x] < 0) // uh oh
-				s.output.fatal("Discovered a negative fitness value.  BestSelection requires that all fitness values be non-negative(offending subpopulation #"
-						+ subpopulation + ")");
-		}
+        for (int x = 0; x < sortedFit.length; x++) {
+            if (sortedFit[x] < 0) // uh oh
+                s.output.fatal("Discovered a negative fitness value.  BestSelection requires that all fitness values be non-negative(offending subpopulation #"
+                        + subpopulation + ")");
+        }
 
-		// organize the distributions. All zeros in fitness is fine
-		RandomChoice.organizeDistribution(sortedFit, true);
-	}
+        // organize the distributions. All zeros in fitness is fine
+        RandomChoice.organizeDistribution(sortedFit, true);
+    }
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		// Pick and return an individual from the population
-		if (pickWorst)
-			return sortedPop[RandomChoice.pickFromDistribution(sortedFit, state.random[thread].nextFloat())];
-		else
-			return sortedPop[sortedPop.length - RandomChoice.pickFromDistribution(sortedFit, state.random[thread].nextFloat()) - 1];
-	}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        // Pick and return an individual from the population
+        if (pickWorst)
+            return sortedPop[RandomChoice.pickFromDistribution(sortedFit, state.random[thread].nextFloat())];
+        else
+            return sortedPop[sortedPop.length
+                    - RandomChoice.pickFromDistribution(sortedFit, state.random[thread].nextFloat()) - 1];
+    }
 
-	public void finishProducing(final EvolutionState s, final int subpopulation, final int thread) {
-		// release the distributions so we can quickly
-		// garbage-collect them if necessary
-		sortedFit = null;
-		sortedPop = null;
-	}
+    public void finishProducing(final EvolutionState s, final int subpopulation, final int thread) {
+        // release the distributions so we can quickly
+        // garbage-collect them if necessary
+        sortedFit = null;
+        sortedPop = null;
+    }
 }

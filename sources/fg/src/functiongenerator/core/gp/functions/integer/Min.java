@@ -9,15 +9,16 @@ import functiongenerator.core.gp.data.IntegerData;
 
 public class Min extends functiongenerator.core.gp.functions.real.Min {
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
-		int result;
-		IntegerData rd = ((IntegerData) (input));
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
+        int result;
+        IntegerData rd = ((IntegerData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);
-		result = rd.Y;
+        children[0].eval(state, thread, input, stack, individual, problem);
+        result = rd.Y;
 
-		children[1].eval(state, thread, input, stack, individual, problem);
-		rd.Y = Math.min(result, rd.Y);
-	}
+        children[1].eval(state, thread, input, stack, individual, problem);
+        rd.Y = Math.min(result, rd.Y);
+    }
 }

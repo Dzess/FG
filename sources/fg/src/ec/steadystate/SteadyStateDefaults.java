@@ -22,10 +22,10 @@ import ec.util.Parameter;
  */
 
 public final class SteadyStateDefaults implements DefaultsForm {
-	public static final String P_STEADYSTATE = "steady";
+    public static final String P_STEADYSTATE = "steady";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_STEADYSTATE);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_STEADYSTATE);
+    }
 }

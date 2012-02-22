@@ -6,5 +6,5 @@ package functiongenerator.core;
  * 
  */
 public enum ProblemType {
-	 INTEGER,DOUBLE,
+    INTEGER, DOUBLE,
 }

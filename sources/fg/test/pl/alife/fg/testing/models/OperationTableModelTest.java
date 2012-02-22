@@ -16,22 +16,22 @@ import functiongenerator.ui.OperationsTableModel;
  */
 public class OperationTableModelTest {
 
-	private IOperationProviderFactory factory;
+    private IOperationProviderFactory factory;
 
-	@Test(expected = IllegalArgumentException.class)
-	public void model_throws_exception_without_factory() {
-		new OperationsTableModel(null);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void model_throws_exception_without_factory() {
+        new OperationsTableModel(null);
+    }
 
-	@Test
-	public void model_works_well_with_real_operations_provider() {
-		factory = new RealOperationProviderFactory();
-		new OperationsTableModel(factory);
-	}
+    @Test
+    public void model_works_well_with_real_operations_provider() {
+        factory = new RealOperationProviderFactory();
+        new OperationsTableModel(factory);
+    }
 
-	@Test
-	public void model_works_well_with_integer_operations_provider() {
-		factory = new IntegerOperationProviderFactory();
-		new OperationsTableModel(factory);
-	}	
+    @Test
+    public void model_works_well_with_integer_operations_provider() {
+        factory = new IntegerOperationProviderFactory();
+        new OperationsTableModel(factory);
+    }
 }

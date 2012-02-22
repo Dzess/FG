@@ -21,26 +21,26 @@ import functiongenerator.FGRunnable;
  */
 public class CommandHandler extends AbstractHandler {
 
-	static private final Log logger = LogFactory.getLog(CommandHandler.class);
+    static private final Log logger = LogFactory.getLog(CommandHandler.class);
 
-	static private ExecutorService pool = Executors.newCachedThreadPool();
+    static private ExecutorService pool = Executors.newCachedThreadPool();
 
-	/**
-	 * The constructor.
-	 */
-	public CommandHandler() {
-	}
+    /**
+     * The constructor.
+     */
+    public CommandHandler() {
+    }
 
-	/**
-	 * the command has been executed, so extract extract the needed information
-	 * from the application context.
-	 */
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+    /**
+     * the command has been executed, so extract extract the needed information
+     * from the application context.
+     */
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
-		logger.debug("Starting the execution of the Command Hanlder");
-		pool.execute(new FGRunnable(window));
+        logger.debug("Starting the execution of the Command Hanlder");
+        pool.execute(new FGRunnable(window));
 
-		return null;
-	}
+        return null;
+    }
 }

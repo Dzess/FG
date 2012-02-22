@@ -14,7 +14,7 @@ import functiongenerator.ui.PointsTableModel;
  */
 public interface IDataLoader {
 
-	public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException;
+    public PointsTableModel loadFromFile(File file, Class<?> fieldType) throws IOException;
 
-	public void saveToFile(File file, PointsTableModel model) throws IOException;
+    public void saveToFile(File file, PointsTableModel model) throws IOException;
 }

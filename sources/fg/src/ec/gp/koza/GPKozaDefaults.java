@@ -27,10 +27,10 @@ import ec.util.Parameter;
  */
 
 public final class GPKozaDefaults implements DefaultsForm {
-	public static final String P_KOZA = "koza";
+    public static final String P_KOZA = "koza";
 
-	/** Returns the default base, which is built off of the GPDefaults base. */
-	public static final Parameter base() {
-		return GPDefaults.base().push(P_KOZA);
-	}
+    /** Returns the default base, which is built off of the GPDefaults base. */
+    public static final Parameter base() {
+        return GPDefaults.base().push(P_KOZA);
+    }
 }

@@ -10,21 +10,22 @@ import functiongenerator.core.gp.functions.NullaryOperation;
 
 public class Value extends NullaryOperation {
 
-	private final int value;
+    private final int value;
 
-	public Value(int value) {
-		this.value = value;
-	}
+    public Value(int value) {
+        this.value = value;
+    }
 
-	@Override
-	public String toString() {
-		return Integer.toString(value);
-	}
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
-		IntegerData rd = ((IntegerData) (input));
-		rd.Y = value;
-	}
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
+        IntegerData rd = ((IntegerData) (input));
+        rd.Y = value;
+    }
 
 }

@@ -30,39 +30,39 @@ import ec.Population;
  */
 
 public class MuPlusLambdaBreeder extends MuCommaLambdaBreeder {
-	/**
-	 * Sets all subpopulations in pop to the expected mu+lambda size. Does not
-	 * fill new slots with individuals.
-	 */
-	public Population setToMuPlusLambda(Population pop, EvolutionState state) {
-		for (int x = 0; x < pop.subpops.length; x++) {
-			int s = mu[x] + lambda[x];
+    /**
+     * Sets all subpopulations in pop to the expected mu+lambda size. Does not
+     * fill new slots with individuals.
+     */
+    public Population setToMuPlusLambda(Population pop, EvolutionState state) {
+        for (int x = 0; x < pop.subpops.length; x++) {
+            int s = mu[x] + lambda[x];
 
-			// check to see if the array's big enough
-			if (pop.subpops[x].individuals.length != s)
-			// need to increase
-			{
-				Individual[] newinds = new Individual[s];
-				System.arraycopy(pop.subpops[x].individuals, 0, newinds, 0, s < pop.subpops[x].individuals.length ? s
-						: pop.subpops[x].individuals.length);
-				pop.subpops[x].individuals = newinds;
-			}
-		}
-		return pop;
-	}
+            // check to see if the array's big enough
+            if (pop.subpops[x].individuals.length != s)
+            // need to increase
+            {
+                Individual[] newinds = new Individual[s];
+                System.arraycopy(pop.subpops[x].individuals, 0, newinds, 0, s < pop.subpops[x].individuals.length ? s
+                        : pop.subpops[x].individuals.length);
+                pop.subpops[x].individuals = newinds;
+            }
+        }
+        return pop;
+    }
 
-	public Population postProcess(Population newpop, Population oldpop, EvolutionState state) {
-		// first we need to expand newpop to mu+lambda in size
-		newpop = setToMuPlusLambda(newpop, state);
+    public Population postProcess(Population newpop, Population oldpop, EvolutionState state) {
+        // first we need to expand newpop to mu+lambda in size
+        newpop = setToMuPlusLambda(newpop, state);
 
-		// now we need to dump the old population into the high end of the new
-		// population
+        // now we need to dump the old population into the high end of the new
+        // population
 
-		for (int x = 0; x < newpop.subpops.length; x++) {
-			for (int y = 0; y < mu[x]; y++) {
-				newpop.subpops[x].individuals[y + lambda[x]] = (Individual) (oldpop.subpops[x].individuals[y].clone());
-			}
-		}
-		return newpop;
-	}
+        for (int x = 0; x < newpop.subpops.length; x++) {
+            for (int y = 0; y < mu[x]; y++) {
+                newpop.subpops[x].individuals[y + lambda[x]] = (Individual) (oldpop.subpops[x].individuals[y].clone());
+            }
+        }
+        return newpop;
+    }
 }

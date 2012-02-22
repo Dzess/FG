@@ -27,12 +27,12 @@ import ec.util.Parameter;
 
 public class SimpleFinisher extends Finisher {
 
-	public void setup(final EvolutionState state, final Parameter base) {
-	}
+    public void setup(final EvolutionState state, final Parameter base) {
+    }
 
-	/** Doesn't do anything. */
-	public void finishPopulation(final EvolutionState state, final int result) {
-		// don't care
-		return;
-	}
+    /** Doesn't do anything. */
+    public void finishPopulation(final EvolutionState state, final int result) {
+        // don't care
+        return;
+    }
 }

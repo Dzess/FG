@@ -64,117 +64,120 @@ import ec.util.Parameter;
  */
 
 public class MultiSelection extends SelectionMethod {
-	public static final String P_NUMSELECTS = "num-selects";
-	public static final String P_SELECT = "select";
-	public static final String P_MULTISELECT = "multiselect";
+    public static final String P_NUMSELECTS = "num-selects";
+    public static final String P_SELECT = "select";
+    public static final String P_MULTISELECT = "multiselect";
 
-	/** The MultiSelection's individuals */
-	public SelectionMethod selects[];
+    /** The MultiSelection's individuals */
+    public SelectionMethod selects[];
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_MULTISELECT);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_MULTISELECT);
+    }
 
-	public Object clone() {
-		MultiSelection c = (MultiSelection) (super.clone());
+    public Object clone() {
+        MultiSelection c = (MultiSelection) (super.clone());
 
-		// make a new array
-		c.selects = new SelectionMethod[selects.length];
+        // make a new array
+        c.selects = new SelectionMethod[selects.length];
 
-		// clone the selects -- we won't go through the hassle of
-		// determining if we have a DAG or not -- we'll just clone
-		// it out to a tree. I doubt it's worth it.
+        // clone the selects -- we won't go through the hassle of
+        // determining if we have a DAG or not -- we'll just clone
+        // it out to a tree. I doubt it's worth it.
 
-		for (int x = 0; x < selects.length; x++)
-			c.selects[x] = (SelectionMethod) (selects[x].clone());
+        for (int x = 0; x < selects.length; x++)
+            c.selects[x] = (SelectionMethod) (selects[x].clone());
 
-		return c;
-	}
+        return c;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		int numSelects = state.parameters.getInt(base.push(P_NUMSELECTS), def.push(P_NUMSELECTS), 1);
-		if (numSelects == 0)
-			state.output.fatal("The number of MultiSelection sub-selection methods must be >= 1).", base.push(P_NUMSELECTS),
-					def.push(P_NUMSELECTS));
+        int numSelects = state.parameters.getInt(base.push(P_NUMSELECTS), def.push(P_NUMSELECTS), 1);
+        if (numSelects == 0)
+            state.output.fatal("The number of MultiSelection sub-selection methods must be >= 1).",
+                    base.push(P_NUMSELECTS), def.push(P_NUMSELECTS));
 
-		// make our arrays
-		selects = new SelectionMethod[numSelects];
+        // make our arrays
+        selects = new SelectionMethod[numSelects];
 
-		float total = 0.0f;
+        float total = 0.0f;
 
-		for (int x = 0; x < numSelects; x++) {
-			Parameter p = base.push(P_SELECT).push("" + x);
-			Parameter d = def.push(P_SELECT).push("" + x);
+        for (int x = 0; x < numSelects; x++) {
+            Parameter p = base.push(P_SELECT).push("" + x);
+            Parameter d = def.push(P_SELECT).push("" + x);
 
-			selects[x] = (SelectionMethod) (state.parameters.getInstanceForParameter(p, d, SelectionMethod.class));
-			selects[x].setup(state, p);
+            selects[x] = (SelectionMethod) (state.parameters.getInstanceForParameter(p, d, SelectionMethod.class));
+            selects[x].setup(state, p);
 
-			// now check probability
-			if (selects[x].probability < 0.0)
-				state.output.error("MultiSelection select #" + x + " must have a probability >= 0.0", p.push(P_PROB), d.push(P_PROB));
-			else
-				total += selects[x].probability;
-		}
+            // now check probability
+            if (selects[x].probability < 0.0)
+                state.output.error("MultiSelection select #" + x + " must have a probability >= 0.0", p.push(P_PROB),
+                        d.push(P_PROB));
+            else
+                total += selects[x].probability;
+        }
 
-		state.output.exitIfErrors();
+        state.output.exitIfErrors();
 
-		// Now check for valid probability
-		if (total <= 0.0)
-			state.output.fatal("MultiSelection selects do not sum to a positive probability", base);
+        // Now check for valid probability
+        if (total <= 0.0)
+            state.output.fatal("MultiSelection selects do not sum to a positive probability", base);
 
-		if (total != 1.0) {
-			state.output.message("Must normalize probabilities for " + base);
-			for (int x = 0; x < numSelects; x++)
-				selects[x].probability /= total;
-		}
+        if (total != 1.0) {
+            state.output.message("Must normalize probabilities for " + base);
+            for (int x = 0; x < numSelects; x++)
+                selects[x].probability /= total;
+        }
 
-		// totalize
-		float tmp = 0.0f;
-		for (int x = 0; x < numSelects - 1; x++) // yes, it's off by one
-		{
-			tmp += selects[x].probability;
-			selects[x].probability = tmp;
-		}
-		selects[numSelects - 1].probability = 1.0f;
-	}
+        // totalize
+        float tmp = 0.0f;
+        for (int x = 0; x < numSelects - 1; x++) // yes, it's off by one
+        {
+            tmp += selects[x].probability;
+            selects[x].probability = tmp;
+        }
+        selects[numSelects - 1].probability = 1.0f;
+    }
 
-	public boolean produces(final EvolutionState state, final Population newpop, final int subpopulation, final int thread) {
-		if (!super.produces(state, newpop, subpopulation, thread))
-			return false;
+    public boolean produces(final EvolutionState state, final Population newpop, final int subpopulation,
+            final int thread) {
+        if (!super.produces(state, newpop, subpopulation, thread))
+            return false;
 
-		for (int x = 0; x < selects.length; x++)
-			if (!selects[x].produces(state, newpop, subpopulation, thread))
-				return false;
-		return true;
-	}
+        for (int x = 0; x < selects.length; x++)
+            if (!selects[x].produces(state, newpop, subpopulation, thread))
+                return false;
+        return true;
+    }
 
-	public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
-		for (int x = 0; x < selects.length; x++)
-			selects[x].prepareToProduce(s, subpopulation, thread);
-	}
+    public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
+        for (int x = 0; x < selects.length; x++)
+            selects[x].prepareToProduce(s, subpopulation, thread);
+    }
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		return selects[BreedingSource.pickRandom(selects, state.random[thread].nextFloat())].produce(subpopulation, state, thread);
-	}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        return selects[BreedingSource.pickRandom(selects, state.random[thread].nextFloat())].produce(subpopulation,
+                state, thread);
+    }
 
-	public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
-			final EvolutionState state, final int thread)
+    public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
+            final EvolutionState state, final int thread)
 
-	{
-		return selects[BreedingSource.pickRandom(selects, state.random[thread].nextFloat())].produce(min, max, start, subpopulation, inds,
-				state, thread);
-	}
+    {
+        return selects[BreedingSource.pickRandom(selects, state.random[thread].nextFloat())].produce(min, max, start,
+                subpopulation, inds, state, thread);
+    }
 
-	public void preparePipeline(Object hook) {
-		// the default form calls this on all the selects.
-		// note that it follows all the source paths even if they're
-		// duplicates
-		for (int x = 0; x < selects.length; x++)
-			selects[x].preparePipeline(hook);
-	}
+    public void preparePipeline(Object hook) {
+        // the default form calls this on all the selects.
+        // note that it follows all the source paths even if they're
+        // duplicates
+        for (int x = 0; x < selects.length; x++)
+            selects[x].preparePipeline(hook);
+    }
 
 }

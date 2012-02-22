@@ -14,45 +14,45 @@ import java.util.Map;
  */
 public class MapHelper {
 
-	/**
-	 * 
-	 * @param input
-	 *            : the string containing map in the format
-	 * @return the proper map
-	 */
-	static public Map<String, String> parse(String input) {
+    /**
+     * 
+     * @param input
+     *            : the string containing map in the format
+     * @return the proper map
+     */
+    static public Map<String, String> parse(String input) {
 
-		if (input == null)
-			throw new IllegalArgumentException("Input cannot be null");
+        if (input == null)
+            throw new IllegalArgumentException("Input cannot be null");
 
-		Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>();
 
-		if (!input.startsWith("{")) {
-			throw new IllegalArgumentException("The opening bracket is missing");
-		}
+        if (!input.startsWith("{")) {
+            throw new IllegalArgumentException("The opening bracket is missing");
+        }
 
-		if (!input.endsWith("}")) {
-			throw new IllegalArgumentException("The closing bracket is missing");
-		}
+        if (!input.endsWith("}")) {
+            throw new IllegalArgumentException("The closing bracket is missing");
+        }
 
-		String content = input.substring(1, input.length() - 1);
+        String content = input.substring(1, input.length() - 1);
 
-		if ( (!content.equals("")) && content != null) {
-			String[] pairs = content.split(", ");
+        if ((!content.equals("")) && content != null) {
+            String[] pairs = content.split(", ");
 
-			for (String pair : pairs) {
+            for (String pair : pairs) {
 
-				String[] v = pair.split("=");
+                String[] v = pair.split("=");
 
-				assert v.length == 2;
+                assert v.length == 2;
 
-				String key = v[0];
-				String value = v[1];
+                String key = v[0];
+                String value = v[1];
 
-				map.put(key, value);
-			}
-		}
+                map.put(key, value);
+            }
+        }
 
-		return map;
-	}
+        return map;
+    }
 }

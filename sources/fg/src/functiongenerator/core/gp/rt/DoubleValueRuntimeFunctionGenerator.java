@@ -28,44 +28,44 @@ import functiongenerator.core.gp.functions.NullaryOperation;
  */
 public class DoubleValueRuntimeFunctionGenerator extends RuntimeFunctionGenerator {
 
-	static private final String TEMPLATE = "public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {"
-			+ " DoubleData rd = ((DoubleData) (input)); " + " rd.Y = %value; }";
+    static private final String TEMPLATE = "public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {"
+            + " DoubleData rd = ((DoubleData) (input)); " + " rd.Y = %value; }";
 
-	private final List<Class<?>> usedClasses;
+    private final List<Class<?>> usedClasses;
 
-	private final double value;
+    private final double value;
 
-	public DoubleValueRuntimeFunctionGenerator(double value) {
-		this.value = value;
+    public DoubleValueRuntimeFunctionGenerator(double value) {
+        this.value = value;
 
-		this.usedClasses = new LinkedList<Class<?>>();
-		this.usedClasses.add(DoubleData.class);
-	}
+        this.usedClasses = new LinkedList<Class<?>>();
+        this.usedClasses.add(DoubleData.class);
+    }
 
-	@Override
-	protected List<Class<?>> getUsedClasses() {
-		return this.usedClasses;
-	}
+    @Override
+    protected List<Class<?>> getUsedClasses() {
+        return this.usedClasses;
+    }
 
-	@Override
-	protected Class<?> getSuperClassForOperation() {
-		return NullaryOperation.class;
-	}
+    @Override
+    protected Class<?> getSuperClassForOperation() {
+        return NullaryOperation.class;
+    }
 
-	@Override
-	protected String getEvalSourceCode() {
-		String current = new String(TEMPLATE);
-		return current.replace("%value", Double.toString(value));
-	}
+    @Override
+    protected String getEvalSourceCode() {
+        String current = new String(TEMPLATE);
+        return current.replace("%value", Double.toString(value));
+    }
 
-	@Override
-	protected String getToStringReturnedValue() {
-		return Double.toString(value);
-	}
+    @Override
+    protected String getToStringReturnedValue() {
+        return Double.toString(value);
+    }
 
-	@Override
-	protected String getClassName() {
-		return "Value";
-	}
+    @Override
+    protected String getClassName() {
+        return "Value";
+    }
 
 }

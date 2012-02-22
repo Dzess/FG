@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface IOperationProviderFactory {
 
-	/**
-	 * Gets all the possible operation providers.
-	 * 
-	 * @return
-	 */
-	public List<IOperationProvider> getAvaliable();
+    /**
+     * Gets all the possible operation providers.
+     * 
+     * @return
+     */
+    public List<IOperationProvider> getAvaliable();
 }

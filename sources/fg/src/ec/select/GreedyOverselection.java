@@ -77,114 +77,115 @@ import ec.util.SortComparatorL;
  */
 
 public class GreedyOverselection extends SelectionMethod {
-	public float[] sortedFitOver;
-	public float[] sortedFitUnder;
-	/**
-	 * Sorted population -- since I *have* to use an int-sized individual (short
-	 * gives me only 16K), I might as well just have pointers to the population
-	 * itself. :-(
-	 */
-	public int[] sortedPop;
+    public float[] sortedFitOver;
+    public float[] sortedFitUnder;
+    /**
+     * Sorted population -- since I *have* to use an int-sized individual (short
+     * gives me only 16K), I might as well just have pointers to the population
+     * itself. :-(
+     */
+    public int[] sortedPop;
 
-	public static final String P_GREEDY = "greedy";
-	public static final String P_TOP = "top";
-	public static final String P_GETS = "gets";
+    public static final String P_GREEDY = "greedy";
+    public static final String P_TOP = "top";
+    public static final String P_GETS = "gets";
 
-	public float top_n_percent;
-	public float gets_n_percent;
+    public float top_n_percent;
+    public float gets_n_percent;
 
-	public Parameter defaultBase() {
-		return SelectDefaults.base().push(P_GREEDY);
-	}
+    public Parameter defaultBase() {
+        return SelectDefaults.base().push(P_GREEDY);
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		top_n_percent = state.parameters.getFloatWithMax(base.push(P_TOP), def.push(P_TOP), 0.0, 1.0);
-		if (top_n_percent < 0.0)
-			state.output.fatal("Top-n-percent must be between 0.0 and 1.0", base.push(P_TOP), def.push(P_TOP));
+        top_n_percent = state.parameters.getFloatWithMax(base.push(P_TOP), def.push(P_TOP), 0.0, 1.0);
+        if (top_n_percent < 0.0)
+            state.output.fatal("Top-n-percent must be between 0.0 and 1.0", base.push(P_TOP), def.push(P_TOP));
 
-		gets_n_percent = state.parameters.getFloatWithMax(base.push(P_GETS), def.push(P_GETS), 0.0, 1.0);
-		if (gets_n_percent < 0.0)
-			state.output.fatal("Gets-n-percent must be between 0.0 and 1.0", base.push(P_GETS), def.push(P_GETS));
+        gets_n_percent = state.parameters.getFloatWithMax(base.push(P_GETS), def.push(P_GETS), 0.0, 1.0);
+        if (gets_n_percent < 0.0)
+            state.output.fatal("Gets-n-percent must be between 0.0 and 1.0", base.push(P_GETS), def.push(P_GETS));
 
-	}
+    }
 
-	// don't need clone etc. -- I'll never clone with my arrays intact
+    // don't need clone etc. -- I'll never clone with my arrays intact
 
-	public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
-		// load sortedPop integers
-		final Individual[] i = s.population.subpops[subpopulation].individuals;
+    public void prepareToProduce(final EvolutionState s, final int subpopulation, final int thread) {
+        // load sortedPop integers
+        final Individual[] i = s.population.subpops[subpopulation].individuals;
 
-		sortedPop = new int[i.length];
-		for (int x = 0; x < sortedPop.length; x++)
-			sortedPop[x] = x;
+        sortedPop = new int[i.length];
+        for (int x = 0; x < sortedPop.length; x++)
+            sortedPop[x] = x;
 
-		// sort sortedPop in increasing fitness order
-		QuickSort.qsort(sortedPop, new SortComparatorL() {
-			public boolean lt(long a, long b) {
-				return ((Individual) (i[(int) b])).fitness.betterThan(((Individual) (i[(int) a])).fitness);
-			}
+        // sort sortedPop in increasing fitness order
+        QuickSort.qsort(sortedPop, new SortComparatorL() {
+            public boolean lt(long a, long b) {
+                return ((Individual) (i[(int) b])).fitness.betterThan(((Individual) (i[(int) a])).fitness);
+            }
 
-			public boolean gt(long a, long b) {
-				return ((Individual) (i[(int) a])).fitness.betterThan(((Individual) (i[(int) b])).fitness);
-			}
-		});
+            public boolean gt(long a, long b) {
+                return ((Individual) (i[(int) a])).fitness.betterThan(((Individual) (i[(int) b])).fitness);
+            }
+        });
 
-		// determine my boundary -- must be at least 1 and must leave 1 over
-		int boundary = (int) (sortedPop.length * top_n_percent);
-		if (boundary == 0)
-			boundary = 1;
-		if (boundary == sortedPop.length)
-			boundary = sortedPop.length - 1;
-		if (boundary == 0) // uh oh
-			s.output.fatal("Greedy Overselection can only be done with a population of size 2 or more (offending subpopulation #"
-					+ subpopulation + ")");
+        // determine my boundary -- must be at least 1 and must leave 1 over
+        int boundary = (int) (sortedPop.length * top_n_percent);
+        if (boundary == 0)
+            boundary = 1;
+        if (boundary == sortedPop.length)
+            boundary = sortedPop.length - 1;
+        if (boundary == 0) // uh oh
+            s.output.fatal("Greedy Overselection can only be done with a population of size 2 or more (offending subpopulation #"
+                    + subpopulation + ")");
 
-		// load sortedFitOver
-		sortedFitOver = new float[boundary];
-		int y = 0;
-		for (int x = sortedPop.length - boundary; x < sortedPop.length; x++) {
-			sortedFitOver[y] = (i[sortedPop[x]]).fitness.fitness();
-			if (sortedFitOver[y] < 0) // uh oh
-				s.output.fatal("Discovered a negative fitness value.  Greedy Overselection requires that all fitness values be non-negative (offending subpopulation #"
-						+ subpopulation + ")");
-			y++;
-		}
+        // load sortedFitOver
+        sortedFitOver = new float[boundary];
+        int y = 0;
+        for (int x = sortedPop.length - boundary; x < sortedPop.length; x++) {
+            sortedFitOver[y] = (i[sortedPop[x]]).fitness.fitness();
+            if (sortedFitOver[y] < 0) // uh oh
+                s.output.fatal("Discovered a negative fitness value.  Greedy Overselection requires that all fitness values be non-negative (offending subpopulation #"
+                        + subpopulation + ")");
+            y++;
+        }
 
-		// load sortedFitUnder
-		sortedFitUnder = new float[sortedPop.length - boundary];
-		y = 0;
-		for (int x = 0; x < sortedPop.length - boundary; x++) {
-			sortedFitUnder[y] = (i[sortedPop[x]]).fitness.fitness();
-			if (sortedFitUnder[y] < 0) // uh oh
-				s.output.fatal("Discovered a negative fitness value.  Greedy Overselection requires that all fitness values be non-negative (offending subpopulation #"
-						+ subpopulation + ")");
-			y++;
-		}
+        // load sortedFitUnder
+        sortedFitUnder = new float[sortedPop.length - boundary];
+        y = 0;
+        for (int x = 0; x < sortedPop.length - boundary; x++) {
+            sortedFitUnder[y] = (i[sortedPop[x]]).fitness.fitness();
+            if (sortedFitUnder[y] < 0) // uh oh
+                s.output.fatal("Discovered a negative fitness value.  Greedy Overselection requires that all fitness values be non-negative (offending subpopulation #"
+                        + subpopulation + ")");
+            y++;
+        }
 
-		// organize the distributions. All zeros in fitness is fine
-		RandomChoice.organizeDistribution(sortedFitUnder, true);
-		RandomChoice.organizeDistribution(sortedFitOver, true);
-	}
+        // organize the distributions. All zeros in fitness is fine
+        RandomChoice.organizeDistribution(sortedFitUnder, true);
+        RandomChoice.organizeDistribution(sortedFitOver, true);
+    }
 
-	public int produce(final int subpopulation, final EvolutionState state, final int thread) {
-		// pick a coin toss
-		if (state.random[thread].nextBoolean(gets_n_percent))
-			// over -- sortedFitUnder.length to sortedPop.length
-			return sortedPop[sortedFitUnder.length + RandomChoice.pickFromDistribution(sortedFitOver, state.random[thread].nextFloat())];
-		else
-			// under -- 0 to sortedFitUnder.length
-			return sortedPop[RandomChoice.pickFromDistribution(sortedFitUnder, state.random[thread].nextFloat())];
-	}
+    public int produce(final int subpopulation, final EvolutionState state, final int thread) {
+        // pick a coin toss
+        if (state.random[thread].nextBoolean(gets_n_percent))
+            // over -- sortedFitUnder.length to sortedPop.length
+            return sortedPop[sortedFitUnder.length
+                    + RandomChoice.pickFromDistribution(sortedFitOver, state.random[thread].nextFloat())];
+        else
+            // under -- 0 to sortedFitUnder.length
+            return sortedPop[RandomChoice.pickFromDistribution(sortedFitUnder, state.random[thread].nextFloat())];
+    }
 
-	public void finishProducing(final EvolutionState s, final int subpopulation, final int thread) {
-		// release the distributions so we can quickly
-		// garbage-collect them if necessary
-		sortedFitUnder = null;
-		sortedFitOver = null;
-		sortedPop = null;
-	}
+    public void finishProducing(final EvolutionState s, final int subpopulation, final int thread) {
+        // release the distributions so we can quickly
+        // garbage-collect them if necessary
+        sortedFitUnder = null;
+        sortedFitOver = null;
+        sortedPop = null;
+    }
 }

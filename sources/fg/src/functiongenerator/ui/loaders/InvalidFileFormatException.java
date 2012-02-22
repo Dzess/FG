@@ -14,22 +14,22 @@ import java.io.IOException;
  */
 public class InvalidFileFormatException extends IOException {
 
-	private static final long serialVersionUID = -6738274797646324892L;
+    private static final long serialVersionUID = -6738274797646324892L;
 
-	public InvalidFileFormatException(String message, Throwable e) {
-		super(message, e);
-	}
+    public InvalidFileFormatException(String message, Throwable e) {
+        super(message, e);
+    }
 
-	public InvalidFileFormatException(Throwable e) {
-		super(e);
-	}
+    public InvalidFileFormatException(Throwable e) {
+        super(e);
+    }
 
-	public InvalidFileFormatException(String message) {
-		super(message);
-	}
+    public InvalidFileFormatException(String message) {
+        super(message);
+    }
 
-	public InvalidFileFormatException() {
-		super();
-	}
+    public InvalidFileFormatException() {
+        super();
+    }
 
 }

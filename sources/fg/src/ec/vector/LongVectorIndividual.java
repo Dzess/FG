@@ -96,327 +96,327 @@ import ec.util.Parameter;
  */
 
 public class LongVectorIndividual extends VectorIndividual {
-	public static final String P_LONGVECTORINDIVIDUAL = "long-vect-ind";
-	public long[] genome;
+    public static final String P_LONGVECTORINDIVIDUAL = "long-vect-ind";
+    public long[] genome;
 
-	public Parameter defaultBase() {
-		return VectorDefaults.base().push(P_LONGVECTORINDIVIDUAL);
-	}
+    public Parameter defaultBase() {
+        return VectorDefaults.base().push(P_LONGVECTORINDIVIDUAL);
+    }
 
-	public Object clone() {
-		LongVectorIndividual myobj = (LongVectorIndividual) (super.clone());
+    public Object clone() {
+        LongVectorIndividual myobj = (LongVectorIndividual) (super.clone());
 
-		// must clone the genome
-		myobj.genome = (long[]) (genome.clone());
+        // must clone the genome
+        myobj.genome = (long[]) (genome.clone());
 
-		return myobj;
-	}
+        return myobj;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base); // actually unnecessary (Individual.setup() is
-									// empty)
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base); // actually unnecessary (Individual.setup() is
+                                  // empty)
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		if (!(species instanceof IntegerVectorSpecies))
-			state.output.fatal("LongVectorIndividual requires an IntegerVectorSpecies", base, def);
-		IntegerVectorSpecies s = (IntegerVectorSpecies) species;
+        if (!(species instanceof IntegerVectorSpecies))
+            state.output.fatal("LongVectorIndividual requires an IntegerVectorSpecies", base, def);
+        IntegerVectorSpecies s = (IntegerVectorSpecies) species;
 
-		genome = new long[s.genomeSize];
-	}
+        genome = new long[s.genomeSize];
+    }
 
-	// Because Math.floor only goes within the double integer space
-	long longFloor(double x) {
-		long l = (long) x; // pulls towards zero
+    // Because Math.floor only goes within the double integer space
+    long longFloor(double x) {
+        long l = (long) x; // pulls towards zero
 
-		if (x >= 0) {
-			return l; // NaN will get shunted to 0 apparently
-		} else if (x < Long.MIN_VALUE + 1) // it'll go to Long.MIN_VALUE
-		{
-			return Long.MIN_VALUE;
-		} else if (l == x) // it's exact
-		{
-			return l;
-		} else {
-			return l - 1;
-		}
-	}
+        if (x >= 0) {
+            return l; // NaN will get shunted to 0 apparently
+        } else if (x < Long.MIN_VALUE + 1) // it'll go to Long.MIN_VALUE
+        {
+            return Long.MIN_VALUE;
+        } else if (l == x) // it's exact
+        {
+            return l;
+        } else {
+            return l - 1;
+        }
+    }
 
-	public void defaultCrossover(EvolutionState state, int thread, VectorIndividual ind) {
-		IntegerVectorSpecies s = (IntegerVectorSpecies) species;
-		LongVectorIndividual i = (LongVectorIndividual) ind;
-		long tmp;
-		int point;
+    public void defaultCrossover(EvolutionState state, int thread, VectorIndividual ind) {
+        IntegerVectorSpecies s = (IntegerVectorSpecies) species;
+        LongVectorIndividual i = (LongVectorIndividual) ind;
+        long tmp;
+        int point;
 
-		if (genome.length != i.genome.length)
-			state.output.fatal("Genome lengths are not the same for fixed-length vector crossover");
-		switch (s.crossoverType) {
-		case VectorSpecies.C_ONE_POINT:
-			point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			for (int x = 0; x < point * s.chunksize; x++) {
-				tmp = i.genome[x];
-				i.genome[x] = genome[x];
-				genome[x] = tmp;
-			}
-			break;
-		case VectorSpecies.C_TWO_POINT:
-			int point0 = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
-			if (point0 > point) {
-				int p = point0;
-				point0 = point;
-				point = p;
-			}
-			for (int x = point0 * s.chunksize; x < point * s.chunksize; x++) {
-				tmp = i.genome[x];
-				i.genome[x] = genome[x];
-				genome[x] = tmp;
-			}
-			break;
-		case VectorSpecies.C_ANY_POINT:
-			for (int x = 0; x < genome.length / s.chunksize; x++)
-				if (state.random[thread].nextBoolean(s.crossoverProbability))
-					for (int y = x * s.chunksize; y < (x + 1) * s.chunksize; y++) {
-						tmp = i.genome[y];
-						i.genome[y] = genome[y];
-						genome[y] = tmp;
-					}
-			break;
-		case VectorSpecies.C_LINE_RECOMB: {
-			double alpha = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
-			double beta = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
-			long t, u;
-			long min, max;
-			for (int x = 0; x < genome.length; x++) {
-				min = s.minGene(x);
-				max = s.maxGene(x);
-				t = longFloor(alpha * genome[x] + (1 - alpha) * i.genome[x] + 0.5);
-				u = longFloor(beta * i.genome[x] + (1 - beta) * genome[x] + 0.5);
-				if (!(t < min || t > max || u < min || u > max)) {
-					genome[x] = t;
-					i.genome[x] = u;
-				}
-			}
-		}
-			break;
-		case VectorSpecies.C_INTERMED_RECOMB: {
-			long t, u;
-			long min, max;
-			for (int x = 0; x < genome.length; x++) {
-				do {
-					double alpha = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
-					double beta = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
-					min = s.minGene(x);
-					max = s.maxGene(x);
-					t = longFloor(alpha * genome[x] + (1 - alpha) * i.genome[x] + 0.5);
-					u = longFloor(beta * i.genome[x] + (1 - beta) * genome[x] + 0.5);
-				} while (t < min || t > max || u < min || u > max);
-				genome[x] = t;
-				i.genome[x] = u;
-			}
-		}
-			break;
-		}
-	}
+        if (genome.length != i.genome.length)
+            state.output.fatal("Genome lengths are not the same for fixed-length vector crossover");
+        switch (s.crossoverType) {
+        case VectorSpecies.C_ONE_POINT:
+            point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            for (int x = 0; x < point * s.chunksize; x++) {
+                tmp = i.genome[x];
+                i.genome[x] = genome[x];
+                genome[x] = tmp;
+            }
+            break;
+        case VectorSpecies.C_TWO_POINT:
+            int point0 = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            point = state.random[thread].nextInt((genome.length / s.chunksize) + 1);
+            if (point0 > point) {
+                int p = point0;
+                point0 = point;
+                point = p;
+            }
+            for (int x = point0 * s.chunksize; x < point * s.chunksize; x++) {
+                tmp = i.genome[x];
+                i.genome[x] = genome[x];
+                genome[x] = tmp;
+            }
+            break;
+        case VectorSpecies.C_ANY_POINT:
+            for (int x = 0; x < genome.length / s.chunksize; x++)
+                if (state.random[thread].nextBoolean(s.crossoverProbability))
+                    for (int y = x * s.chunksize; y < (x + 1) * s.chunksize; y++) {
+                        tmp = i.genome[y];
+                        i.genome[y] = genome[y];
+                        genome[y] = tmp;
+                    }
+            break;
+        case VectorSpecies.C_LINE_RECOMB: {
+            double alpha = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
+            double beta = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
+            long t, u;
+            long min, max;
+            for (int x = 0; x < genome.length; x++) {
+                min = s.minGene(x);
+                max = s.maxGene(x);
+                t = longFloor(alpha * genome[x] + (1 - alpha) * i.genome[x] + 0.5);
+                u = longFloor(beta * i.genome[x] + (1 - beta) * genome[x] + 0.5);
+                if (!(t < min || t > max || u < min || u > max)) {
+                    genome[x] = t;
+                    i.genome[x] = u;
+                }
+            }
+        }
+            break;
+        case VectorSpecies.C_INTERMED_RECOMB: {
+            long t, u;
+            long min, max;
+            for (int x = 0; x < genome.length; x++) {
+                do {
+                    double alpha = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
+                    double beta = state.random[thread].nextDouble() * (1 + 2 * s.lineDistance) - s.lineDistance;
+                    min = s.minGene(x);
+                    max = s.maxGene(x);
+                    t = longFloor(alpha * genome[x] + (1 - alpha) * i.genome[x] + 0.5);
+                    u = longFloor(beta * i.genome[x] + (1 - beta) * genome[x] + 0.5);
+                } while (t < min || t > max || u < min || u > max);
+                genome[x] = t;
+                i.genome[x] = u;
+            }
+        }
+            break;
+        }
+    }
 
-	/**
-	 * Splits the genome into n pieces, according to points, which *must* be
-	 * sorted. pieces.length must be 1 + points.length
-	 */
-	public void split(int[] points, Object[] pieces) {
-		int point0, point1;
-		point0 = 0;
-		point1 = points[0];
-		for (int x = 0; x < pieces.length; x++) {
-			pieces[x] = new long[point1 - point0];
-			System.arraycopy(genome, point0, pieces[x], 0, point1 - point0);
-			point0 = point1;
-			if (x >= pieces.length - 2)
-				point1 = genome.length;
-			else
-				point1 = points[x + 1];
-		}
-	}
+    /**
+     * Splits the genome into n pieces, according to points, which *must* be
+     * sorted. pieces.length must be 1 + points.length
+     */
+    public void split(int[] points, Object[] pieces) {
+        int point0, point1;
+        point0 = 0;
+        point1 = points[0];
+        for (int x = 0; x < pieces.length; x++) {
+            pieces[x] = new long[point1 - point0];
+            System.arraycopy(genome, point0, pieces[x], 0, point1 - point0);
+            point0 = point1;
+            if (x >= pieces.length - 2)
+                point1 = genome.length;
+            else
+                point1 = points[x + 1];
+        }
+    }
 
-	/** Joins the n pieces and sets the genome to their concatenation. */
-	public void join(Object[] pieces) {
-		int sum = 0;
-		for (int x = 0; x < pieces.length; x++)
-			sum += ((long[]) (pieces[x])).length;
+    /** Joins the n pieces and sets the genome to their concatenation. */
+    public void join(Object[] pieces) {
+        int sum = 0;
+        for (int x = 0; x < pieces.length; x++)
+            sum += ((long[]) (pieces[x])).length;
 
-		int runningsum = 0;
-		long[] newgenome = new long[sum];
-		for (int x = 0; x < pieces.length; x++) {
-			System.arraycopy(pieces[x], 0, newgenome, runningsum, ((long[]) (pieces[x])).length);
-			runningsum += ((long[]) (pieces[x])).length;
-		}
-		// set genome
-		genome = newgenome;
-	}
+        int runningsum = 0;
+        long[] newgenome = new long[sum];
+        for (int x = 0; x < pieces.length; x++) {
+            System.arraycopy(pieces[x], 0, newgenome, runningsum, ((long[]) (pieces[x])).length);
+            runningsum += ((long[]) (pieces[x])).length;
+        }
+        // set genome
+        genome = newgenome;
+    }
 
-	/**
-	 * Returns a random value from between min and max inclusive. This method
-	 * handles overflows that complicate this computation. Does NOT check that
-	 * min is less than or equal to max. You must check this yourself.
-	 */
-	public long randomValueFromClosedInterval(long min, long max, MersenneTwisterFast random) {
-		if (max - min < 0) // we had an overflow
-		{
-			long l = 0;
-			do
-				l = random.nextLong();
-			while (l < min || l > max);
-			return l;
-		} else
-			return min + random.nextLong(max - min + 1L);
-	}
+    /**
+     * Returns a random value from between min and max inclusive. This method
+     * handles overflows that complicate this computation. Does NOT check that
+     * min is less than or equal to max. You must check this yourself.
+     */
+    public long randomValueFromClosedInterval(long min, long max, MersenneTwisterFast random) {
+        if (max - min < 0) // we had an overflow
+        {
+            long l = 0;
+            do
+                l = random.nextLong();
+            while (l < min || l > max);
+            return l;
+        } else
+            return min + random.nextLong(max - min + 1L);
+    }
 
-	/**
-	 * Destructively mutates the individual in some default manner. The default
-	 * form simply randomizes genes to a uniform distribution from the min and
-	 * max of the gene values.
-	 */
-	public void defaultMutate(EvolutionState state, int thread) {
-		IntegerVectorSpecies s = (IntegerVectorSpecies) species;
-		if (s.mutationProbability > 0.0)
-			for (int x = 0; x < genome.length; x++)
-				if (state.random[thread].nextBoolean(s.mutationProbability))
-					genome[x] = randomValueFromClosedInterval(s.minGene(x), s.maxGene(x), state.random[thread]);
-	}
+    /**
+     * Destructively mutates the individual in some default manner. The default
+     * form simply randomizes genes to a uniform distribution from the min and
+     * max of the gene values.
+     */
+    public void defaultMutate(EvolutionState state, int thread) {
+        IntegerVectorSpecies s = (IntegerVectorSpecies) species;
+        if (s.mutationProbability > 0.0)
+            for (int x = 0; x < genome.length; x++)
+                if (state.random[thread].nextBoolean(s.mutationProbability))
+                    genome[x] = randomValueFromClosedInterval(s.minGene(x), s.maxGene(x), state.random[thread]);
+    }
 
-	/**
-	 * Initializes the individual by randomly choosing Longs uniformly from
-	 * mingene to maxgene.
-	 */
-	public void reset(EvolutionState state, int thread) {
-		IntegerVectorSpecies s = (IntegerVectorSpecies) species;
-		for (int x = 0; x < genome.length; x++)
-			genome[x] = randomValueFromClosedInterval(s.minGene(x), s.maxGene(x), state.random[thread]);
-	}
+    /**
+     * Initializes the individual by randomly choosing Longs uniformly from
+     * mingene to maxgene.
+     */
+    public void reset(EvolutionState state, int thread) {
+        IntegerVectorSpecies s = (IntegerVectorSpecies) species;
+        for (int x = 0; x < genome.length; x++)
+            genome[x] = randomValueFromClosedInterval(s.minGene(x), s.maxGene(x), state.random[thread]);
+    }
 
-	public int hashCode() {
-		// stolen from GPIndividual. It's a decent algorithm.
-		int hash = this.getClass().hashCode();
+    public int hashCode() {
+        // stolen from GPIndividual. It's a decent algorithm.
+        int hash = this.getClass().hashCode();
 
-		hash = (hash << 1 | hash >>> 31);
-		for (int x = 0; x < genome.length; x++)
-			hash = (hash << 1 | hash >>> 31) ^ (int) ((genome[x] >>> 16) & 0xFFFFFFFF) ^ (int) (genome[x] & 0xFFFF);
+        hash = (hash << 1 | hash >>> 31);
+        for (int x = 0; x < genome.length; x++)
+            hash = (hash << 1 | hash >>> 31) ^ (int) ((genome[x] >>> 16) & 0xFFFFFFFF) ^ (int) (genome[x] & 0xFFFF);
 
-		return hash;
-	}
+        return hash;
+    }
 
-	public String genotypeToStringForHumans() {
-		String s = "";
-		for (int i = 0; i < genome.length; i++)
-			s = s + " " + genome[i];
-		return s;
-	}
+    public String genotypeToStringForHumans() {
+        String s = "";
+        for (int i = 0; i < genome.length; i++)
+            s = s + " " + genome[i];
+        return s;
+    }
 
-	public String genotypeToString() {
-		StringBuffer s = new StringBuffer();
-		s.append(Code.encode(genome.length));
-		for (int i = 0; i < genome.length; i++)
-			s.append(Code.encode(genome[i]));
-		return s.toString();
-	}
+    public String genotypeToString() {
+        StringBuffer s = new StringBuffer();
+        s.append(Code.encode(genome.length));
+        for (int i = 0; i < genome.length; i++)
+            s.append(Code.encode(genome[i]));
+        return s.toString();
+    }
 
-	protected void parseGenotype(final EvolutionState state, final LineNumberReader reader) throws IOException {
-		// read in the next line. The first item is the number of genes
-		String s = reader.readLine();
-		DecodeReturn d = new DecodeReturn(s);
-		Code.decode(d);
-		int lll = (int) (d.l);
+    protected void parseGenotype(final EvolutionState state, final LineNumberReader reader) throws IOException {
+        // read in the next line. The first item is the number of genes
+        String s = reader.readLine();
+        DecodeReturn d = new DecodeReturn(s);
+        Code.decode(d);
+        int lll = (int) (d.l);
 
-		genome = new long[lll];
+        genome = new long[lll];
 
-		// read in the genes
-		for (int i = 0; i < genome.length; i++) {
-			Code.decode(d);
-			genome[i] = d.l;
-		}
-	}
+        // read in the genes
+        for (int i = 0; i < genome.length; i++) {
+            Code.decode(d);
+            genome[i] = d.l;
+        }
+    }
 
-	public boolean equals(Object ind) {
-		if (!(this.getClass().equals(ind.getClass())))
-			return false; // SimpleRuleIndividuals are special.
-		LongVectorIndividual i = (LongVectorIndividual) ind;
-		if (genome.length != i.genome.length)
-			return false;
-		for (int j = 0; j < genome.length; j++)
-			if (genome[j] != i.genome[j])
-				return false;
-		return true;
-	}
+    public boolean equals(Object ind) {
+        if (!(this.getClass().equals(ind.getClass())))
+            return false; // SimpleRuleIndividuals are special.
+        LongVectorIndividual i = (LongVectorIndividual) ind;
+        if (genome.length != i.genome.length)
+            return false;
+        for (int j = 0; j < genome.length; j++)
+            if (genome[j] != i.genome[j])
+                return false;
+        return true;
+    }
 
-	public Object getGenome() {
-		return genome;
-	}
+    public Object getGenome() {
+        return genome;
+    }
 
-	public void setGenome(Object gen) {
-		genome = (long[]) gen;
-	}
+    public void setGenome(Object gen) {
+        genome = (long[]) gen;
+    }
 
-	public int genomeLength() {
-		return genome.length;
-	}
+    public int genomeLength() {
+        return genome.length;
+    }
 
-	public void writeGenotype(final EvolutionState state, final DataOutput dataOutput) throws IOException {
-		dataOutput.writeInt(genome.length);
-		for (int x = 0; x < genome.length; x++)
-			dataOutput.writeLong(genome[x]);
-	}
+    public void writeGenotype(final EvolutionState state, final DataOutput dataOutput) throws IOException {
+        dataOutput.writeInt(genome.length);
+        for (int x = 0; x < genome.length; x++)
+            dataOutput.writeLong(genome[x]);
+    }
 
-	public void readGenotype(final EvolutionState state, final DataInput dataInput) throws IOException {
-		int len = dataInput.readInt();
-		if (genome == null || genome.length != len)
-			genome = new long[len];
-		for (int x = 0; x < genome.length; x++)
-			genome[x] = dataInput.readLong();
-	}
+    public void readGenotype(final EvolutionState state, final DataInput dataInput) throws IOException {
+        int len = dataInput.readInt();
+        if (genome == null || genome.length != len)
+            genome = new long[len];
+        for (int x = 0; x < genome.length; x++)
+            genome[x] = dataInput.readLong();
+    }
 
-	/** Clips each gene value to be within its specified [min,max] range. */
-	public void clamp() {
-		IntegerVectorSpecies _species = (IntegerVectorSpecies) species;
-		for (int i = 0; i < genomeLength(); i++) {
-			long minGene = _species.minGene(i);
-			if (genome[i] < minGene)
-				genome[i] = minGene;
-			else {
-				long maxGene = _species.maxGene(i);
-				if (genome[i] > maxGene)
-					genome[i] = maxGene;
-			}
-		}
-	}
+    /** Clips each gene value to be within its specified [min,max] range. */
+    public void clamp() {
+        IntegerVectorSpecies _species = (IntegerVectorSpecies) species;
+        for (int i = 0; i < genomeLength(); i++) {
+            long minGene = _species.minGene(i);
+            if (genome[i] < minGene)
+                genome[i] = minGene;
+            else {
+                long maxGene = _species.maxGene(i);
+                if (genome[i] > maxGene)
+                    genome[i] = maxGene;
+            }
+        }
+    }
 
-	public void setGenomeLength(int len) {
-		long[] newGenome = new long[len];
-		System.arraycopy(genome, 0, newGenome, 0, genome.length < newGenome.length ? genome.length : newGenome.length);
-		genome = newGenome;
-	}
+    public void setGenomeLength(int len) {
+        long[] newGenome = new long[len];
+        System.arraycopy(genome, 0, newGenome, 0, genome.length < newGenome.length ? genome.length : newGenome.length);
+        genome = newGenome;
+    }
 
-	/** Returns true if each gene value is within is specified [min,max] range. */
-	public boolean isInRange() {
-		IntegerVectorSpecies _species = (IntegerVectorSpecies) species;
-		for (int i = 0; i < genomeLength(); i++)
-			if (genome[i] < _species.minGene(i) || genome[i] > _species.maxGene(i))
-				return false;
-		return true;
-	}
+    /** Returns true if each gene value is within is specified [min,max] range. */
+    public boolean isInRange() {
+        IntegerVectorSpecies _species = (IntegerVectorSpecies) species;
+        for (int i = 0; i < genomeLength(); i++)
+            if (genome[i] < _species.minGene(i) || genome[i] > _species.maxGene(i))
+                return false;
+        return true;
+    }
 
-	public double distanceTo(Individual otherInd) {
-		if (!(otherInd instanceof LongVectorIndividual))
-			return super.distanceTo(otherInd); // will return infinity!
+    public double distanceTo(Individual otherInd) {
+        if (!(otherInd instanceof LongVectorIndividual))
+            return super.distanceTo(otherInd); // will return infinity!
 
-		LongVectorIndividual other = (LongVectorIndividual) otherInd;
-		long[] otherGenome = other.genome;
-		double sumSquaredDistance = 0.0;
-		for (int i = 0; i < other.genomeLength(); i++) {
-			// can't subtract two longs and expect a long. Must convert to
-			// doubles :-(
-			double dist = this.genome[i] - (double) otherGenome[i];
-			sumSquaredDistance += dist * dist;
-		}
-		return StrictMath.sqrt(sumSquaredDistance);
-	}
+        LongVectorIndividual other = (LongVectorIndividual) otherInd;
+        long[] otherGenome = other.genome;
+        double sumSquaredDistance = 0.0;
+        for (int i = 0; i < other.genomeLength(); i++) {
+            // can't subtract two longs and expect a long. Must convert to
+            // doubles :-(
+            double dist = this.genome[i] - (double) otherGenome[i];
+            sumSquaredDistance += dist * dist;
+        }
+        return StrictMath.sqrt(sumSquaredDistance);
+    }
 }

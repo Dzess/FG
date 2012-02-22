@@ -25,26 +25,26 @@ package ec.gp.build;
  */
 
 public interface PTCFunctionSetForm {
-	/**
-	 * Returns an organized distribution (see ec.util.RandomChoice) of
-	 * likelihoods that various terminals in the function set will be chosen
-	 * over other terminals with the same return type. The ordering of the array
-	 * is the same as the terminals[type][...] array in GPFunctionSet.
-	 */
-	public float[] terminalProbabilities(final int type);
+    /**
+     * Returns an organized distribution (see ec.util.RandomChoice) of
+     * likelihoods that various terminals in the function set will be chosen
+     * over other terminals with the same return type. The ordering of the array
+     * is the same as the terminals[type][...] array in GPFunctionSet.
+     */
+    public float[] terminalProbabilities(final int type);
 
-	/**
-	 * Returns an organized distribution (see ec.util.RandomChoice) of
-	 * likelihoods that various nonterminals in the function set will be chosen
-	 * over other nonterminals with the same return type. The ordering of the
-	 * array is the same as the nonterminals[type][...] array in GPFunctionSet.
-	 */
-	public float[] nonterminalProbabilities(final int type);
+    /**
+     * Returns an organized distribution (see ec.util.RandomChoice) of
+     * likelihoods that various nonterminals in the function set will be chosen
+     * over other nonterminals with the same return type. The ordering of the
+     * array is the same as the nonterminals[type][...] array in GPFunctionSet.
+     */
+    public float[] nonterminalProbabilities(final int type);
 
-	/**
-	 * Returns an array (by return type) of the probability that PTC1 must pick
-	 * a nonterminal over a terminal in order to guarantee the expectedTreeSize.
-	 * Only used by PTC1, not by PTC2.
-	 */
-	public float[] nonterminalSelectionProbabilities(final int expectedTreeSize);
+    /**
+     * Returns an array (by return type) of the probability that PTC1 must pick
+     * a nonterminal over a terminal in order to guarantee the expectedTreeSize.
+     * Only used by PTC1, not by PTC2.
+     */
+    public float[] nonterminalSelectionProbabilities(final int expectedTreeSize);
 }

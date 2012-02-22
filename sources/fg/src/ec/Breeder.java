@@ -42,10 +42,10 @@ package ec;
  */
 
 public abstract class Breeder implements Singleton {
-	/**
-	 * Breeds state.population, returning a new population. In general,
-	 * state.population should not be modified.
-	 */
+    /**
+     * Breeds state.population, returning a new population. In general,
+     * state.population should not be modified.
+     */
 
-	public abstract Population breedPopulation(final EvolutionState state);
+    public abstract Population breedPopulation(final EvolutionState state);
 }

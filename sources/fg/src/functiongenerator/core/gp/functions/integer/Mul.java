@@ -9,17 +9,18 @@ import functiongenerator.core.gp.data.IntegerData;
 
 public class Mul extends functiongenerator.core.gp.functions.real.Mul {
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
 
-		int result;
-		IntegerData rd = ((IntegerData) (input));
+        int result;
+        IntegerData rd = ((IntegerData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);
-		result = rd.Y;
+        children[0].eval(state, thread, input, stack, individual, problem);
+        result = rd.Y;
 
-		children[1].eval(state, thread, input, stack, individual, problem);
-		rd.Y = result * rd.Y;
+        children[1].eval(state, thread, input, stack, individual, problem);
+        rd.Y = result * rd.Y;
 
-	}
+    }
 }

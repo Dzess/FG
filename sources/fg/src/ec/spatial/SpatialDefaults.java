@@ -22,10 +22,10 @@ import ec.util.Parameter;
  */
 
 public final class SpatialDefaults implements DefaultsForm {
-	public static final String P_SPATIAL = "spatial";
+    public static final String P_SPATIAL = "spatial";
 
-	/** Returns the default base. */
-	public static final Parameter base() {
-		return new Parameter(P_SPATIAL);
-	}
+    /** Returns the default base. */
+    public static final Parameter base() {
+        return new Parameter(P_SPATIAL);
+    }
 }

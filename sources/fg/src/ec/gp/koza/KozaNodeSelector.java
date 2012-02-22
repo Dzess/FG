@@ -80,122 +80,126 @@ import ec.util.Parameter;
  */
 
 public class KozaNodeSelector implements GPNodeSelector {
-	public static final String P_NODESELECTOR = "ns";
-	public static final String P_TERMINAL_PROBABILITY = "terminals";
-	public static final String P_NONTERMINAL_PROBABILITY = "nonterminals";
-	public static final String P_ROOT_PROBABILITY = "root";
+    public static final String P_NODESELECTOR = "ns";
+    public static final String P_TERMINAL_PROBABILITY = "terminals";
+    public static final String P_NONTERMINAL_PROBABILITY = "nonterminals";
+    public static final String P_ROOT_PROBABILITY = "root";
 
-	/** The probability the root must be chosen */
-	public float rootProbability;
+    /** The probability the root must be chosen */
+    public float rootProbability;
 
-	/** The probability a terminal must be chosen */
-	public float terminalProbability;
+    /** The probability a terminal must be chosen */
+    public float terminalProbability;
 
-	/** The probability a nonterminal must be chosen. */
-	public float nonterminalProbability;
+    /** The probability a nonterminal must be chosen. */
+    public float nonterminalProbability;
 
-	/** The number of nonterminals in the tree, -1 if unknown. */
-	public int nonterminals;
-	/** The number of terminals in the tree, -1 if unknown. */
-	public int terminals;
-	/** The number of nodes in the tree, -1 if unknown. */
-	public int nodes;
+    /** The number of nonterminals in the tree, -1 if unknown. */
+    public int nonterminals;
+    /** The number of terminals in the tree, -1 if unknown. */
+    public int terminals;
+    /** The number of nodes in the tree, -1 if unknown. */
+    public int nodes;
 
-	/**
-	 * Used internally to look for a node. This is threadsafe as long as an
-	 * instance of KozaNodeSelector is used by only one thread.
-	 */
-	protected GPNodeGatherer gatherer;
+    /**
+     * Used internally to look for a node. This is threadsafe as long as an
+     * instance of KozaNodeSelector is used by only one thread.
+     */
+    protected GPNodeGatherer gatherer;
 
-	public Parameter defaultBase() {
-		return GPKozaDefaults.base().push(P_NODESELECTOR);
-	}
+    public Parameter defaultBase() {
+        return GPKozaDefaults.base().push(P_NODESELECTOR);
+    }
 
-	public KozaNodeSelector() {
-		gatherer = new GPNodeGatherer();
-		reset();
-	}
+    public KozaNodeSelector() {
+        gatherer = new GPNodeGatherer();
+        reset();
+    }
 
-	public Object clone() {
-		try {
-			KozaNodeSelector s = (KozaNodeSelector) (super.clone());
-			// allocate a new gatherer, so we're always threadsafe
-			s.gatherer = new GPNodeGatherer();
-			s.reset();
-			return s;
-		} catch (CloneNotSupportedException e) {
-			throw new InternalError();
-		} // never happens
-	}
+    public Object clone() {
+        try {
+            KozaNodeSelector s = (KozaNodeSelector) (super.clone());
+            // allocate a new gatherer, so we're always threadsafe
+            s.gatherer = new GPNodeGatherer();
+            s.reset();
+            return s;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        } // never happens
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		Parameter def = defaultBase();
+    public void setup(final EvolutionState state, final Parameter base) {
+        Parameter def = defaultBase();
 
-		terminalProbability = state.parameters.getFloatWithMax(base.push(P_TERMINAL_PROBABILITY), def.push(P_TERMINAL_PROBABILITY), 0.0,
-				1.0);
-		if (terminalProbability == -1.0)
-			state.output.fatal("Invalid terminal probability for KozaNodeSelector ", base.push(P_TERMINAL_PROBABILITY),
-					def.push(P_TERMINAL_PROBABILITY));
+        terminalProbability = state.parameters.getFloatWithMax(base.push(P_TERMINAL_PROBABILITY),
+                def.push(P_TERMINAL_PROBABILITY), 0.0, 1.0);
+        if (terminalProbability == -1.0)
+            state.output.fatal("Invalid terminal probability for KozaNodeSelector ", base.push(P_TERMINAL_PROBABILITY),
+                    def.push(P_TERMINAL_PROBABILITY));
 
-		nonterminalProbability = state.parameters.getFloatWithMax(base.push(P_NONTERMINAL_PROBABILITY),
-				def.push(P_NONTERMINAL_PROBABILITY), 0.0, 1.0);
-		if (nonterminalProbability == -1.0)
-			state.output.fatal("Invalid nonterminal probability for KozaNodeSelector ", base.push(P_NONTERMINAL_PROBABILITY),
-					def.push(P_NONTERMINAL_PROBABILITY));
+        nonterminalProbability = state.parameters.getFloatWithMax(base.push(P_NONTERMINAL_PROBABILITY),
+                def.push(P_NONTERMINAL_PROBABILITY), 0.0, 1.0);
+        if (nonterminalProbability == -1.0)
+            state.output.fatal("Invalid nonterminal probability for KozaNodeSelector ",
+                    base.push(P_NONTERMINAL_PROBABILITY), def.push(P_NONTERMINAL_PROBABILITY));
 
-		rootProbability = state.parameters.getFloatWithMax(base.push(P_ROOT_PROBABILITY), def.push(P_ROOT_PROBABILITY), 0.0, 1.0);
+        rootProbability = state.parameters.getFloatWithMax(base.push(P_ROOT_PROBABILITY), def.push(P_ROOT_PROBABILITY),
+                0.0, 1.0);
 
-		if (rootProbability == -1.0)
-			state.output.fatal("Invalid root probability for KozaNodeSelector ", base.push(P_ROOT_PROBABILITY),
-					def.push(P_ROOT_PROBABILITY));
+        if (rootProbability == -1.0)
+            state.output.fatal("Invalid root probability for KozaNodeSelector ", base.push(P_ROOT_PROBABILITY),
+                    def.push(P_ROOT_PROBABILITY));
 
-		if (rootProbability + terminalProbability + nonterminalProbability > 1.0f)
-			state.output.fatal("The terminal, nonterminal, and root for KozaNodeSelector" + base + " may not sum to more than 1.0. ("
-					+ terminalProbability + " " + nonterminalProbability + " " + rootProbability + ")", base);
+        if (rootProbability + terminalProbability + nonterminalProbability > 1.0f)
+            state.output.fatal("The terminal, nonterminal, and root for KozaNodeSelector" + base
+                    + " may not sum to more than 1.0. (" + terminalProbability + " " + nonterminalProbability + " "
+                    + rootProbability + ")", base);
 
-		reset();
-	}
+        reset();
+    }
 
-	public void reset() {
-		nonterminals = terminals = nodes = -1;
-	}
+    public void reset() {
+        nonterminals = terminals = nodes = -1;
+    }
 
-	public GPNode pickNode(final EvolutionState s, final int subpopulation, final int thread, final GPIndividual ind, final GPTree tree) {
-		float rnd = s.random[thread].nextFloat();
+    public GPNode pickNode(final EvolutionState s, final int subpopulation, final int thread, final GPIndividual ind,
+            final GPTree tree) {
+        float rnd = s.random[thread].nextFloat();
 
-		if (rnd > nonterminalProbability + terminalProbability + rootProbability) // pick
-																					// anyone
-		{
-			if (nodes == -1)
-				nodes = tree.child.numNodes(GPNode.NODESEARCH_ALL);
-			{
-				tree.child.nodeInPosition(s.random[thread].nextInt(nodes), gatherer, GPNode.NODESEARCH_ALL);
-				return gatherer.node;
-			}
-		} else if (rnd > nonterminalProbability + terminalProbability) // pick
-																		// the
-																		// root
-		{
-			return tree.child;
-		} else if (rnd > nonterminalProbability) // pick terminals
-		{
-			if (terminals == -1)
-				terminals = tree.child.numNodes(GPNode.NODESEARCH_TERMINALS);
+        if (rnd > nonterminalProbability + terminalProbability + rootProbability) // pick
+                                                                                  // anyone
+        {
+            if (nodes == -1)
+                nodes = tree.child.numNodes(GPNode.NODESEARCH_ALL);
+            {
+                tree.child.nodeInPosition(s.random[thread].nextInt(nodes), gatherer, GPNode.NODESEARCH_ALL);
+                return gatherer.node;
+            }
+        } else if (rnd > nonterminalProbability + terminalProbability) // pick
+                                                                       // the
+                                                                       // root
+        {
+            return tree.child;
+        } else if (rnd > nonterminalProbability) // pick terminals
+        {
+            if (terminals == -1)
+                terminals = tree.child.numNodes(GPNode.NODESEARCH_TERMINALS);
 
-			tree.child.nodeInPosition(s.random[thread].nextInt(terminals), gatherer, GPNode.NODESEARCH_TERMINALS);
-			return gatherer.node;
-		} else // pick nonterminals if you can
-		{
-			if (nonterminals == -1)
-				nonterminals = tree.child.numNodes(GPNode.NODESEARCH_NONTERMINALS);
-			if (nonterminals > 0) // there are some nonterminals
-			{
-				tree.child.nodeInPosition(s.random[thread].nextInt(nonterminals), gatherer, GPNode.NODESEARCH_NONTERMINALS);
-				return gatherer.node;
-			} else // there ARE no nonterminals! It must be the root node
-			{
-				return tree.child;
-			}
-		}
-	}
+            tree.child.nodeInPosition(s.random[thread].nextInt(terminals), gatherer, GPNode.NODESEARCH_TERMINALS);
+            return gatherer.node;
+        } else // pick nonterminals if you can
+        {
+            if (nonterminals == -1)
+                nonterminals = tree.child.numNodes(GPNode.NODESEARCH_NONTERMINALS);
+            if (nonterminals > 0) // there are some nonterminals
+            {
+                tree.child.nodeInPosition(s.random[thread].nextInt(nonterminals), gatherer,
+                        GPNode.NODESEARCH_NONTERMINALS);
+                return gatherer.node;
+            } else // there ARE no nonterminals! It must be the root node
+            {
+                return tree.child;
+            }
+        }
+    }
 }

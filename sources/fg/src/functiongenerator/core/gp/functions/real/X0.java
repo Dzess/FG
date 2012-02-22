@@ -11,16 +11,17 @@ import functiongenerator.core.gp.problem.AbstractRegressionProblem;
 
 public class X0 extends NullaryOperation {
 
-	@Override
-	public String toString() {
-		return this.getClass().getSimpleName().toLowerCase();
-	}
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
 
-		DoubleData rd = ((DoubleData) (input));
-		rd.Y = (Double) ((AbstractRegressionProblem) problem).X[0];
-	}
+        DoubleData rd = ((DoubleData) (input));
+        rd.Y = (Double) ((AbstractRegressionProblem) problem).X[0];
+    }
 
 }

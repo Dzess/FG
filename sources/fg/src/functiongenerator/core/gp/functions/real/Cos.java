@@ -10,17 +10,18 @@ import functiongenerator.core.gp.functions.UnaryOperation;
 
 public class Cos extends UnaryOperation {
 
-	@Override
-	public String toString() {
-		return "Math.cos";
-	}
+    @Override
+    public String toString() {
+        return "Math.cos";
+    }
 
-	@Override
-	public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual, Problem problem) {
-		DoubleData rd = ((DoubleData) (input));
+    @Override
+    public void eval(EvolutionState state, int thread, GPData input, ADFStack stack, GPIndividual individual,
+            Problem problem) {
+        DoubleData rd = ((DoubleData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);
-		rd.Y = Math.cos(rd.Y);
-	}
+        children[0].eval(state, thread, input, stack, individual, problem);
+        rd.Y = Math.cos(rd.Y);
+    }
 
 }

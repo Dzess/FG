@@ -11,31 +11,31 @@ import ec.simple.SimpleStatistics;
  */
 public class EvolutionStateHelper {
 
-	private final EvolutionState state;
-	private final SimpleStatistics stat;
+    private final EvolutionState state;
+    private final SimpleStatistics stat;
 
-	public EvolutionStateHelper(EvolutionState state) {
-		this.state = state;
-		stat = (SimpleStatistics) state.statistics;
-	}
+    public EvolutionStateHelper(EvolutionState state) {
+        this.state = state;
+        stat = (SimpleStatistics) state.statistics;
+    }
 
-	public GPIndividual getBesIndividual() {
-		return (GPIndividual) stat.best_of_run[0];
-	}
+    public GPIndividual getBesIndividual() {
+        return (GPIndividual) stat.best_of_run[0];
+    }
 
-	public int getGeneration() {
-		return state.generation;
-	}
+    public int getGeneration() {
+        return state.generation;
+    }
 
-	public double getCompletedPercent() {
-		int currentGen = this.getGeneration();
+    public double getCompletedPercent() {
+        int currentGen = this.getGeneration();
 
-		return ((double) (currentGen * 100)) / (double) state.numGenerations;
-	}
+        return ((double) (currentGen * 100)) / (double) state.numGenerations;
+    }
 
-	public double getFitness() {
-		GPIndividual best = this.getBesIndividual();
-		KozaFitness fitness = (KozaFitness) best.fitness;
-		return fitness.standardizedFitness();
-	}
+    public double getFitness() {
+        GPIndividual best = this.getBesIndividual();
+        KozaFitness fitness = (KozaFitness) best.fitness;
+        return fitness.standardizedFitness();
+    }
 }

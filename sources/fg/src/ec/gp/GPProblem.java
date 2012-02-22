@@ -61,41 +61,41 @@ import ec.util.Parameter;
  */
 
 public abstract class GPProblem extends Problem implements SimpleProblemForm {
-	public final static String P_GPPROBLEM = "problem";
-	public final static String P_STACK = "stack";
-	public final static String P_DATA = "data";
+    public final static String P_GPPROBLEM = "problem";
+    public final static String P_STACK = "stack";
+    public final static String P_DATA = "data";
 
-	/** The GPProblem's stack */
-	public ADFStack stack;
+    /** The GPProblem's stack */
+    public ADFStack stack;
 
-	/** The GPProblems' GPData */
-	public GPData data;
+    /** The GPProblems' GPData */
+    public GPData data;
 
-	/**
-	 * GPProblem defines a default base so your subclass doesn't absolutely have
-	 * to.
-	 */
-	public Parameter defaultBase() {
-		return GPDefaults.base().push(P_GPPROBLEM);
-	}
+    /**
+     * GPProblem defines a default base so your subclass doesn't absolutely have
+     * to.
+     */
+    public Parameter defaultBase() {
+        return GPDefaults.base().push(P_GPPROBLEM);
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		Parameter p = base.push(P_STACK);
-		Parameter def = defaultBase();
+    public void setup(final EvolutionState state, final Parameter base) {
+        Parameter p = base.push(P_STACK);
+        Parameter def = defaultBase();
 
-		stack = (ADFStack) (state.parameters.getInstanceForParameterEq(p, def.push(P_STACK), ADFStack.class));
-		stack.setup(state, p);
+        stack = (ADFStack) (state.parameters.getInstanceForParameterEq(p, def.push(P_STACK), ADFStack.class));
+        stack.setup(state, p);
 
-		p = base.push(P_DATA);
-		data = (GPData) (state.parameters.getInstanceForParameter(p, def.push(P_DATA), GPData.class));
-		data.setup(state, p);
-	}
+        p = base.push(P_DATA);
+        data = (GPData) (state.parameters.getInstanceForParameter(p, def.push(P_DATA), GPData.class));
+        data.setup(state, p);
+    }
 
-	public Object clone() {
-		GPProblem prob = (GPProblem) (super.clone());
+    public Object clone() {
+        GPProblem prob = (GPProblem) (super.clone());
 
-		// deep-clone the stack; it's not shared
-		prob.stack = (ADFStack) (stack.clone());
-		return prob;
-	}
+        // deep-clone the stack; it's not shared
+        prob.stack = (ADFStack) (stack.clone());
+        return prob;
+    }
 }

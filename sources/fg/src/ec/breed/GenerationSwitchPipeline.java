@@ -70,76 +70,77 @@ import ec.util.Parameter;
  */
 
 public class GenerationSwitchPipeline extends BreedingPipeline {
-	public static final String P_SWITCHAT = "switch-at";
-	public static final String P_MULTIBREED = "generation-switch";
-	public static final String P_GEN_MAX = "generate-max";
-	public static final int NUM_SOURCES = 2;
+    public static final String P_SWITCHAT = "switch-at";
+    public static final String P_MULTIBREED = "generation-switch";
+    public static final String P_GEN_MAX = "generate-max";
+    public static final int NUM_SOURCES = 2;
 
-	public int maxGeneratable;
-	public boolean generateMax;
-	public int generationSwitch;
+    public int maxGeneratable;
+    public boolean generateMax;
+    public int generationSwitch;
 
-	public Parameter defaultBase() {
-		return BreedDefaults.base().push(P_MULTIBREED);
-	}
+    public Parameter defaultBase() {
+        return BreedDefaults.base().push(P_MULTIBREED);
+    }
 
-	public int numSources() {
-		return NUM_SOURCES;
-	}
+    public int numSources() {
+        return NUM_SOURCES;
+    }
 
-	public void setup(final EvolutionState state, final Parameter base) {
-		super.setup(state, base);
+    public void setup(final EvolutionState state, final Parameter base) {
+        super.setup(state, base);
 
-		Parameter def = defaultBase();
+        Parameter def = defaultBase();
 
-		state.output.exitIfErrors();
+        state.output.exitIfErrors();
 
-		generationSwitch = state.parameters.getInt(base.push(P_SWITCHAT), def.push(P_SWITCHAT), 0);
-		if (generationSwitch < 0)
-			state.output.fatal("GenerationSwitchPipeline must have a switch-at >= 0", base.push(P_SWITCHAT), def.push(P_SWITCHAT));
+        generationSwitch = state.parameters.getInt(base.push(P_SWITCHAT), def.push(P_SWITCHAT), 0);
+        if (generationSwitch < 0)
+            state.output.fatal("GenerationSwitchPipeline must have a switch-at >= 0", base.push(P_SWITCHAT),
+                    def.push(P_SWITCHAT));
 
-		generateMax = state.parameters.getBoolean(base.push(P_GEN_MAX), def.push(P_GEN_MAX), true);
-		maxGeneratable = 0; // indicates that I don't know what it is yet.
+        generateMax = state.parameters.getBoolean(base.push(P_GEN_MAX), def.push(P_GEN_MAX), true);
+        maxGeneratable = 0; // indicates that I don't know what it is yet.
 
-		// declare that likelihood isn't used
-		if (likelihood < 1.0f)
-			state.output.warning("GenerationSwitchPipeline does not respond to the 'likelihood' parameter.", base.push(P_LIKELIHOOD),
-					def.push(P_LIKELIHOOD));
-	}
+        // declare that likelihood isn't used
+        if (likelihood < 1.0f)
+            state.output.warning("GenerationSwitchPipeline does not respond to the 'likelihood' parameter.",
+                    base.push(P_LIKELIHOOD), def.push(P_LIKELIHOOD));
+    }
 
-	/** Returns the max of typicalIndsProduced() of all its children */
-	public int typicalIndsProduced() {
-		if (maxGeneratable == 0) // not determined yet
-			maxGeneratable = maxChildProduction();
-		return maxGeneratable;
-	}
+    /** Returns the max of typicalIndsProduced() of all its children */
+    public int typicalIndsProduced() {
+        if (maxGeneratable == 0) // not determined yet
+            maxGeneratable = maxChildProduction();
+        return maxGeneratable;
+    }
 
-	public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
-			final EvolutionState state, final int thread)
+    public int produce(final int min, final int max, final int start, final int subpopulation, final Individual[] inds,
+            final EvolutionState state, final int thread)
 
-	{
-		BreedingSource s = (state.generation < generationSwitch ? sources[0] : sources[1]);
-		int total;
+    {
+        BreedingSource s = (state.generation < generationSwitch ? sources[0] : sources[1]);
+        int total;
 
-		if (generateMax) {
-			if (maxGeneratable == 0)
-				maxGeneratable = maxChildProduction();
-			int n = maxGeneratable;
-			if (n < min)
-				n = min;
-			if (n > max)
-				n = max;
+        if (generateMax) {
+            if (maxGeneratable == 0)
+                maxGeneratable = maxChildProduction();
+            int n = maxGeneratable;
+            if (n < min)
+                n = min;
+            if (n > max)
+                n = max;
 
-			total = s.produce(n, n, start, subpopulation, inds, state, thread);
-		} else {
-			total = s.produce(min, max, start, subpopulation, inds, state, thread);
-		}
+            total = s.produce(n, n, start, subpopulation, inds, state, thread);
+        } else {
+            total = s.produce(min, max, start, subpopulation, inds, state, thread);
+        }
 
-		// clone if necessary
-		if (s instanceof SelectionMethod)
-			for (int q = start; q < total + start; q++)
-				inds[q] = (Individual) (inds[q].clone());
+        // clone if necessary
+        if (s instanceof SelectionMethod)
+            for (int q = start; q < total + start; q++)
+                inds[q] = (Individual) (inds[q].clone());
 
-		return total;
-	}
+        return total;
+    }
 }
