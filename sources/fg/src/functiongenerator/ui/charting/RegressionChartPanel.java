@@ -43,7 +43,6 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 	private final IDataSetProvider dataSetProvider;
 
 	private ChartPanel chartPanel;
-	private JLayeredPane mainPanel;
 	private JTextArea textArea;
 
 	private String title;
@@ -54,8 +53,6 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 		this.dataSetProvider = dataSetProvider;
 		this.chartMaker = chartMaker;
 		this.title = title;
-
-		mainPanel = new JLayeredPane();
 
 		// chart panel
 		JFreeChart chart = chartMaker.emptyChart();
@@ -70,15 +67,13 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		mainPanel.setLayer(textArea, 1);
-		
+
 		setPreferredSize(new Dimension(400, 300));
 
-		mainPanel.moveToBack(textArea);
-		mainPanel.setLayout(new BorderLayout(0, 0));
-		mainPanel.moveToFront(chartPanel);
-		mainPanel.add(chartPanel, BorderLayout.CENTER);
-		mainPanel.add(textArea, BorderLayout.NORTH);
+		setLayout(new BorderLayout(0, 0));
+
+		add(chartPanel, BorderLayout.CENTER);
+		add(textArea, BorderLayout.NORTH);
 	}
 
 	@Override
@@ -111,9 +106,8 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 
 			textArea.setText(NO_DATA_AVALIABLE);
 			chartPanel.setVisible(false);
-		}
-		finally{
-			mainPanel.repaint();
+		} finally {
+			repaint();
 		}
 	}
 

@@ -6,8 +6,6 @@ import java.util.Locale;
 
 import javax.swing.UIManager;
 
-import com.sun.java.swing.plaf.gtk.*;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -20,6 +18,7 @@ import functiongenerator.ui.MainDialog;
 import functiongenerator.ui.ProgressDialog;
 import functiongenerator.ui.ResultsDialog;
 import functiongenerator.ui.charting.ChartsHolderDialog;
+import functiongenerator.ui.charting.FitnessInTimeChartPanel;
 import functiongenerator.ui.charting.IChartPanel;
 import functiongenerator.ui.charting.RegressionChartPanel;
 import functiongenerator.ui.charting.data.IDataSetProvider;
@@ -58,12 +57,15 @@ public class FGRunnable implements Runnable {
 	 */
 	static public void main(String[] args) {
 
-		// go for GTK look and feel 
+		// TODO: write getting proper look and feel
+		// this part of code for selection should be integrated within eclipse
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			logger.warn("No look and feel", e);
 		}
+		
 
 		FGRunnable runner = new FGRunnable(null);
 		runner.run();
@@ -83,14 +85,8 @@ public class FGRunnable implements Runnable {
 				problem);
 		IChartMaker chartMaker = new RegressionChartMaker();
 
-		// simple
-		IDataSetProvider simpleDataSet = new SimpleDataSetProvider();
-		IChartMaker simpleMaker = new SimpleChartMaker();
-
-		panels.add(new RegressionChartPanel("Visualization", dataSetProvider,
-				chartMaker));
-		panels.add(new RegressionChartPanel("Sample", simpleDataSet,
-				simpleMaker));
+		panels.add(new RegressionChartPanel("Visualization", dataSetProvider,chartMaker));
+		panels.add(new FitnessInTimeChartPanel());
 
 		// NOTE: add other charting options here
 
