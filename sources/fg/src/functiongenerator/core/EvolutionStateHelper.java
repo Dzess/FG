@@ -2,6 +2,7 @@ package functiongenerator.core;
 
 import ec.EvolutionState;
 import ec.gp.GPIndividual;
+import ec.gp.koza.KozaFitness;
 import ec.simple.SimpleStatistics;
 
 /**
@@ -21,14 +22,20 @@ public class EvolutionStateHelper {
 	public GPIndividual getBesIndividual() {
 		return (GPIndividual) stat.best_of_run[0];
 	}
-	
-	public int getGeneration(){
+
+	public int getGeneration() {
 		return state.generation;
 	}
-	
-	public double getCompletedPercent(){
+
+	public double getCompletedPercent() {
 		int currentGen = this.getGeneration();
-		
-		return ((double) (currentGen * 100))/ (double) state.numGenerations;
+
+		return ((double) (currentGen * 100)) / (double) state.numGenerations;
+	}
+
+	public double getFitness() {
+		GPIndividual best = this.getBesIndividual();
+		KozaFitness fitness = (KozaFitness) best.fitness;
+		return fitness.standardizedFitness();
 	}
 }

@@ -27,10 +27,6 @@ import functiongenerator.ui.printing.TreeToStringTranslator;
  * Displays the chart of the symbolic regression in the form of the
  * {@linkplain JDialog}.
  * 
- * <p>
- * Main method used mainly for testing.
- * </p>
- * 
  */
 @SuppressWarnings("serial")
 public class RegressionChartPanel extends JPanel implements IChartPanel {

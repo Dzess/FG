@@ -1,27 +1,76 @@
 package functiongenerator.ui.charting.fitness;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import functiongenerator.core.EvolutionStateHelper;
 import functiongenerator.ui.charting.IChartPanel;
 
 /**
  * Displays the overall aggregated fitness over already passed populations.
+ * 
+ * This class saves the already found best fitness
  */
 @SuppressWarnings("serial")
 public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
-	private JLabel label;
-
-	public FitnessInTimeChartPanel() {
-
-		label = new JLabel("Uber Control Here");
-		add(label);
-	}
 
 	private static final String TITLE = "Quality in Time";
+	private final XYLineAndShapeRenderer renderer;
+
+	private final ChartPanel chartPanel;
+	private XYSeries series;
+
+	public FitnessInTimeChartPanel() {
+		this.renderer = new XYLineAndShapeRenderer();
+		this.series = new XYSeries("Fitness");
+		this.chartPanel = new ChartPanel(this.getEmptyChart());
+
+		setLayout(new BorderLayout(0, 0));
+
+		add(chartPanel);
+		chartPanel.setMouseZoomable(false);
+		chartPanel.setReshowDelay(100);
+	}
+
+	private JFreeChart drawChart(XYDataset dataset) {
+		JFreeChart chart = ChartFactory.createXYLineChart("Fitness", // chart
+				"Generations", // x axis label
+				"Standardized Fitness", // y axis label
+				dataset, PlotOrientation.VERTICAL, false, true, false);
+
+		XYPlot plot = (XYPlot) chart.getPlot();
+		plot.setRenderer(renderer);
+
+		return chart;
+	}
+
+	private JFreeChart getEmptyChart() {
+		XYDataset dataset = new DefaultXYDataset();
+		return drawChart(dataset);
+	}
+
+	private JFreeChart getChart(double fitness, int generation) {
+
+		// the series does not change through time so use field value
+		series.add(generation, fitness);
+
+		XYSeriesCollection dataset = new XYSeriesCollection();
+		dataset.addSeries(series);
+		return drawChart(dataset);
+	}
 
 	@Override
 	public Component getComponent() {
@@ -35,8 +84,12 @@ public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
 
 	@Override
 	public void redraw(EvolutionStateHelper helper) {
-		// actually do nothing for now
-		
-	}
 
+		// actually do nothing for now
+		double fitness = helper.getFitness();
+		int generation = helper.getGeneration();
+
+		JFreeChart chart = this.getChart(fitness, generation);
+		chartPanel.setChart(chart);
+	}
 }
