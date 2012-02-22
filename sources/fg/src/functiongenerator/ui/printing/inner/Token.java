@@ -17,7 +17,7 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.printing;
+package functiongenerator.ui.printing.inner;
 
 import java.io.Serializable;
 

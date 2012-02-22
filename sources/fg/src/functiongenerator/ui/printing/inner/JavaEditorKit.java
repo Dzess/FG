@@ -17,11 +17,12 @@
  * THIS SOFTWARE OR ITS DERIVATIVES.
  *
  */
-package functiongenerator.ui.printing;
+package functiongenerator.ui.printing.inner;
 
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Document;
 import javax.swing.text.ViewFactory;
+
 
 /**
  * This kit supports a fairly minimal handling of editing java text content. It

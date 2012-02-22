@@ -27,7 +27,7 @@
  * redistribute the Software for such purposes.
  */
 
-package functiongenerator.ui;
+package functiongenerator.ui.printing;
 
 import java.text.ParseException;
 import java.util.regex.Matcher;
@@ -39,7 +39,8 @@ import javax.swing.text.DefaultFormatter;
 /**
  * A regular expression based implementation of AbstractFormatter.
  */
-class RegexFormatter extends DefaultFormatter {
+@SuppressWarnings("serial")
+public class RegexFormatter extends DefaultFormatter {
     private Pattern pattern;
 
     private Matcher matcher;

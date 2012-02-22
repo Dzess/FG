@@ -1,4 +1,4 @@
-package functiongenerator.ui;
+package functiongenerator.ui.printing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,9 +27,9 @@ import javax.swing.WindowConstants;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
-import functiongenerator.ui.printing.JavaContext;
-import functiongenerator.ui.printing.JavaEditorKit;
-import functiongenerator.ui.printing.Token;
+import functiongenerator.ui.printing.inner.JavaContext;
+import functiongenerator.ui.printing.inner.JavaEditorKit;
+import functiongenerator.ui.printing.inner.Token;
 
 public class ResultsDialog extends JDialog implements ActionListener {
 
