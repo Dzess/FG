@@ -52,8 +52,15 @@ public class ChartsHolderDialog extends JDialog implements IProgressListener {
 
         // let this only one chart be redrawn
         int index = tabbedPane.getSelectedIndex();
+
+        // update all chart
+        for (IChartPanel chart : charts) {
+            chart.update(helper);
+        }
+
+        // but make only one redraw
         IChartPanel panel = charts.get(index);
-        panel.redraw(helper);
+        panel.redraw();
 
         Component component = tabbedPane.getSelectedComponent();
         component.repaint();

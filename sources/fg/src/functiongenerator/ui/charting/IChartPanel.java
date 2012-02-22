@@ -21,11 +21,16 @@ public interface IChartPanel {
     public String getTitle();
 
     /**
-     * Recalculate all the stuff with this chart and draw it.
+     * Draws the stuff.
+     */
+    public void redraw();
+
+    /**
+     * Recalculate all the stuff with char but <b>not draw</b>
      * 
      * @param state
-     *            : currently the best solution
+     *            : current solutions
      */
-    public void redraw(EvolutionStateHelper state);
+    public void update(EvolutionStateHelper state);
 
 }

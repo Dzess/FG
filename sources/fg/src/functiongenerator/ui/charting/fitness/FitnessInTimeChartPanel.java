@@ -62,14 +62,20 @@ public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
         return drawChart(dataset);
     }
 
-    private JFreeChart getChart(double fitness, int generation) {
-
-        // the series does not change through time so use field value
-        series.add(generation, fitness);
+    private JFreeChart getChart() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
         return drawChart(dataset);
+    }
+
+    private void updateChart(EvolutionStateHelper helper) {
+
+        double fitness = helper.getFitness();
+        int generation = helper.getGeneration();
+
+        // the series does not change through time so use field value
+        series.add(generation, fitness);
     }
 
     @Override
@@ -83,13 +89,13 @@ public class FitnessInTimeChartPanel extends JPanel implements IChartPanel {
     }
 
     @Override
-    public void redraw(EvolutionStateHelper helper) {
+    public void redraw() {
+        // helper is ignored because it should be called with update method first
+        chartPanel.setChart(this.getChart());
+    }
 
-        // actually do nothing for now
-        double fitness = helper.getFitness();
-        int generation = helper.getGeneration();
-
-        JFreeChart chart = this.getChart(fitness, generation);
-        chartPanel.setChart(chart);
+    @Override
+    public void update(EvolutionStateHelper state) {
+        this.updateChart(state);
     }
 }

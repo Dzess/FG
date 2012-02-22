@@ -43,6 +43,8 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
 
     private String title;
 
+    private EvolutionStateHelper state;
+
     public RegressionChartPanel(String title, final IDataSetProvider dataSetProvider, final IChartMaker chartMaker) {
 
         this.dataSetProvider = dataSetProvider;
@@ -76,7 +78,8 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
     }
 
     @Override
-    public void redraw(EvolutionStateHelper state) {
+    public void redraw() {
+
         try {
             JFreeChart chart = null;
             GPIndividual individual = state.getBesIndividual();
@@ -108,5 +111,10 @@ public class RegressionChartPanel extends JPanel implements IChartPanel {
     @Override
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public void update(EvolutionStateHelper state) {
+        this.state = state;
     }
 }
