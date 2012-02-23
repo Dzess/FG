@@ -4,6 +4,7 @@
 # Disable all java files
 *.class
 sources/FunctionGenerator/bin
+sources/fg/bin
 
 
 # Disable all eclipse like files
