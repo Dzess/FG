@@ -3,5 +3,5 @@
    <description name="Function Generator Update Site">
       Allows the instalation of Function Generator using Eclipse Update Site.
    </description>
-   <feature url="features/pl.alife.fg-feature_1.0.0.201202182118.jar" id="pl.alife.fg-feature" version="1.0.0.201202182118"/>
+   <feature url="features/pl.alife.fg-feature_1.0.0.201202232318.jar" id="pl.alife.fg-feature" version="1.0.0.201202232318"/>
 </site>
