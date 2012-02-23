@@ -6,7 +6,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import functiongenerator.utils.MapHelper;
+import pl.alife.fg.utils.MapHelper;
+
 
 public class MapHelperTest {
 

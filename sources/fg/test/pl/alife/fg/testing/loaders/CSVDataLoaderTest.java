@@ -7,8 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import functiongenerator.ui.PointsTableModel;
-import functiongenerator.ui.loaders.data.CSVDataLoader;
+import pl.alife.fg.ui.PointsTableModel;
+import pl.alife.fg.ui.loaders.data.CSVDataLoader;
+
 
 /**
  * Integration level. Works against file system.

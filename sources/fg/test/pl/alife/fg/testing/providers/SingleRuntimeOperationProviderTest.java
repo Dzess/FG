@@ -8,8 +8,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import pl.alife.fg.core.gp.providers.RuntimeOperationProvider;
+
 import ec.gp.GPNode;
-import functiongenerator.core.gp.providers.RuntimeOperationProvider;
 
 public class SingleRuntimeOperationProviderTest extends RuntimeOperationProviderTestBase {
 

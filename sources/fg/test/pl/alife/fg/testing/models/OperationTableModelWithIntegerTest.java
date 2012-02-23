@@ -5,9 +5,10 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import functiongenerator.core.gp.IOperationProvider;
-import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
-import functiongenerator.ui.OperationsTableModel;
+import pl.alife.fg.core.gp.IOperationProvider;
+import pl.alife.fg.core.gp.providers.factories.IntegerOperationProviderFactory;
+import pl.alife.fg.ui.OperationsTableModel;
+
 
 /**
  * Tests the {@linkplain OperationsTableModel} against the problem the factory

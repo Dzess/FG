@@ -6,7 +6,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import functiongenerator.core.gp.providers.RuntimeOperationProvider;
+import pl.alife.fg.core.gp.providers.RuntimeOperationProvider;
+
 
 /**
  * The operations should be matched by

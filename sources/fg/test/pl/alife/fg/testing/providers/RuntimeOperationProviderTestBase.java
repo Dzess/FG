@@ -1,8 +1,8 @@
 package pl.alife.fg.testing.providers;
 
+import pl.alife.fg.core.gp.data.DoubleData;
+import pl.alife.fg.core.gp.data.IntegerData;
 import ec.gp.GPNode;
-import functiongenerator.core.gp.data.DoubleData;
-import functiongenerator.core.gp.data.IntegerData;
 
 public class RuntimeOperationProviderTestBase {
 

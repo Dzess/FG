@@ -4,11 +4,12 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import pl.alife.fg.core.gp.functions.integer.Add;
+import pl.alife.fg.core.gp.functions.integer.Mul;
+import pl.alife.fg.core.gp.functions.integer.Sub;
+import pl.alife.fg.core.gp.providers.SimpleOperationProvider;
+
 import ec.gp.GPNode;
-import functiongenerator.core.gp.functions.integer.Add;
-import functiongenerator.core.gp.functions.integer.Mul;
-import functiongenerator.core.gp.functions.integer.Sub;
-import functiongenerator.core.gp.providers.SimpleOperationProvider;
 
 /**
  * The operations must provide means for equality comparison.

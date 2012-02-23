@@ -12,15 +12,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import functiongenerator.core.ProblemType;
-import functiongenerator.core.Settings;
-import functiongenerator.core.gp.IOperationProvider;
-import functiongenerator.core.gp.functions.integer.Add;
-import functiongenerator.core.gp.providers.RangeRuntimeOperationProvider;
-import functiongenerator.core.gp.providers.RuntimeOperationProvider;
-import functiongenerator.core.gp.providers.SimpleOperationProvider;
-import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
-import functiongenerator.ui.loaders.settings.INISettingsLoader;
+import pl.alife.fg.core.ProblemType;
+import pl.alife.fg.core.Settings;
+import pl.alife.fg.core.gp.IOperationProvider;
+import pl.alife.fg.core.gp.functions.integer.Add;
+import pl.alife.fg.core.gp.providers.RangeRuntimeOperationProvider;
+import pl.alife.fg.core.gp.providers.RuntimeOperationProvider;
+import pl.alife.fg.core.gp.providers.SimpleOperationProvider;
+import pl.alife.fg.core.gp.providers.factories.IntegerOperationProviderFactory;
+import pl.alife.fg.ui.loaders.settings.INISettingsLoader;
+
 
 /**
  * Integration level. Works against file system.

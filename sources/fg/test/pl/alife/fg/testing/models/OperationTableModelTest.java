@@ -2,10 +2,11 @@ package pl.alife.fg.testing.models;
 
 import org.junit.Test;
 
-import functiongenerator.core.gp.IOperationProviderFactory;
-import functiongenerator.core.gp.providers.factories.IntegerOperationProviderFactory;
-import functiongenerator.core.gp.providers.factories.RealOperationProviderFactory;
-import functiongenerator.ui.OperationsTableModel;
+import pl.alife.fg.core.gp.IOperationProviderFactory;
+import pl.alife.fg.core.gp.providers.factories.IntegerOperationProviderFactory;
+import pl.alife.fg.core.gp.providers.factories.RealOperationProviderFactory;
+import pl.alife.fg.ui.OperationsTableModel;
+
 
 /**
  * Integration level testing of the {@linkplain OperationsTableModel}. With
