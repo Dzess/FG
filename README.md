@@ -1,6 +1,6 @@
 ## FG - Function Generator
 
-This is [ECJ](http://cs.gmu.edu/~eclab/projects/ecj/) based program for solving the *symblic regression* problems. The form of the Eclipse plugin which allows generating math functions an include them in Java source code.
+This is [ECJ](http://cs.gmu.edu/~eclab/projects/ecj/) based program for solving the *symbolic regression* problems. The form of the Eclipse plugin which allows generating math functions an include them in Java source code.
 
 #### Instalation
 
